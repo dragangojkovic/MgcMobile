@@ -13,3 +13,4 @@ http://gzmgc.chinacloudapp.cn:5110
 121.33.199.83:
 administrator
 !Mgc2017
+
