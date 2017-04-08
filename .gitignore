@@ -1,0 +1,6 @@
+packages/
+MBoxMobile/MBoxMobile.UWP/obj/
+MBoxMobile/MBoxMobile/obj/
+MBoxMobile/MBoxMobile.iOS/obj/
+MBoxMobile/MBoxMobile.Android/obj/
+*.suo
