@@ -4,3 +4,8 @@ MBoxMobile/MBoxMobile/obj/
 MBoxMobile/MBoxMobile.iOS/obj/
 MBoxMobile/MBoxMobile.Android/obj/
 *.suo
+MBoxMobile/MBoxMobile.Android/bin/
+MBoxMobile/MBoxMobile.iOS/bin/
+MBoxMobile/MBoxMobile/bin/
+MBoxMobile/MBoxMobile.Android/MBoxMobile.Android.csproj.bak
+*.user

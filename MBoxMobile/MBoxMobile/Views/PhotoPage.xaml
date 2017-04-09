@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MBoxMobile.Views.PhotoPage"
+             Title="PhotoPage">
+  <ScrollView>
+    <StackLayout Padding="10">
+      <Label Text="Photo page" FontSize="40"/>
+      <Button Text="Add Photo" Clicked="ButtonAddPhoto_Clicked" />
+      <Button Text="Remove Photo" Clicked="ButtonRemovePhoto_Clicked" />
+      <Image x:Name="ImageTaken" WidthRequest="200" Aspect="AspectFill" />
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

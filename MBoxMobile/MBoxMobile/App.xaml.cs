@@ -13,7 +13,7 @@ namespace MBoxMobile
         {
             InitializeComponent();
 
-            MainPage = new MBoxMobile.MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
