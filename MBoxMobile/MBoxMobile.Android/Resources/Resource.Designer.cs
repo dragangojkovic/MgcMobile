@@ -27,6 +27,12 @@ namespace MBoxMobile.Droid
 		public static void UpdateIdValues()
 		{
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::MBoxMobile.Droid.Resource.Attribute.actionBarSize;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscanneractivitylayout = global::MBoxMobile.Droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscannerfragmentlayout = global::MBoxMobile.Droid.Resource.Layout.zxingscannerfragmentlayout;
+			global::ZXing.Net.Mobile.Forms.Android.Resource.String.library_name = global::MBoxMobile.Droid.Resource.String.library_name;
+			global::ZXing.Mobile.Resource.Id.contentFrame = global::MBoxMobile.Droid.Resource.Id.contentFrame;
+			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::MBoxMobile.Droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::MBoxMobile.Droid.Resource.Layout.zxingscannerfragmentlayout;
 		}
 		
 		public partial class Animation
@@ -2850,6 +2856,9 @@ namespace MBoxMobile.Droid
 			// aapt resource value: 0x7f0d003d
 			public const int collapseActionView = 2131558461;
 			
+			// aapt resource value: 0x7f0d00b2
+			public const int contentFrame = 2131558578;
+			
 			// aapt resource value: 0x7f0d004e
 			public const int contentPanel = 2131558478;
 			
@@ -2961,8 +2970,8 @@ namespace MBoxMobile.Droid
 			// aapt resource value: 0x7f0d0048
 			public const int list_item = 2131558472;
 			
-			// aapt resource value: 0x7f0d00b3
-			public const int masked = 2131558579;
+			// aapt resource value: 0x7f0d00b4
+			public const int masked = 2131558580;
 			
 			// aapt resource value: 0x7f0d009f
 			public const int media_actions = 2131558559;
@@ -3267,8 +3276,8 @@ namespace MBoxMobile.Droid
 			// aapt resource value: 0x7f0d0002
 			public const int view_offset_helper = 2131558402;
 			
-			// aapt resource value: 0x7f0d00b2
-			public const int visible = 2131558578;
+			// aapt resource value: 0x7f0d00b3
+			public const int visible = 2131558579;
 			
 			// aapt resource value: 0x7f0d0091
 			public const int volume_item_container = 2131558545;
@@ -3564,6 +3573,12 @@ namespace MBoxMobile.Droid
 			// aapt resource value: 0x7f030043
 			public const int Toolbar = 2130903107;
 			
+			// aapt resource value: 0x7f030044
+			public const int zxingscanneractivitylayout = 2130903108;
+			
+			// aapt resource value: 0x7f030045
+			public const int zxingscannerfragmentlayout = 2130903109;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -3678,6 +3693,9 @@ namespace MBoxMobile.Droid
 			
 			// aapt resource value: 0x7f080016
 			public const int character_counter_pattern = 2131230742;
+			
+			// aapt resource value: 0x7f08003d
+			public const int library_name = 2131230781;
 			
 			// aapt resource value: 0x7f080000
 			public const int mr_button_content_description = 2131230720;

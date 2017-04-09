@@ -1,9 +1,5 @@
 ﻿using MBoxMobile.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MBoxMobile
@@ -15,9 +11,14 @@ namespace MBoxMobile
             InitializeComponent();
         }
 
-        private async void Button_Photo_Clicked(object sender, EventArgs e)
+        private async void ButtonPhoto_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new PhotoPage());
+        }
+
+        private async void ButtonBarcode_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BarcodePage());
         }
     }
 }

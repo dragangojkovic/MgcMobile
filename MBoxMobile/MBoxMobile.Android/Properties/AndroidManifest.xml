@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mgc.mbox" android:installLocation="auto" android:versionCode="1" android:versionName="1.0">
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.FLASHLIGHT" />
 	<uses-sdk android:minSdkVersion="15" />
 	<application android:label="MBoxMobile.Android" android:icon="@drawable/icon">
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.mgc.mbox.fileprovider" android:exported="false" android:grantUriPermissions="true">

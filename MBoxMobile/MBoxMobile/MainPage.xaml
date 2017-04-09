@@ -5,6 +5,7 @@
              x:Class="MBoxMobile.MainPage">
   <StackLayout Padding="10">
     <Label Text="Demo MBox 2.0" VerticalOptions="Center" HorizontalOptions="Center" />
-    <Button Text="Photo" Clicked="Button_Photo_Clicked" />
+    <Button Text="Photo" Clicked="ButtonPhoto_Clicked" />
+    <Button Text="BarCode Scanner" Clicked="ButtonBarcode_Clicked" />
   </StackLayout>
 </ContentPage>
