@@ -7,5 +7,9 @@
     <Label Text="Demo MBox 2.0" VerticalOptions="Center" HorizontalOptions="Center" />
     <Button Text="Photo" Clicked="ButtonPhoto_Clicked" />
     <Button Text="BarCode Scanner" Clicked="ButtonBarcode_Clicked" />
+    <Button Text="English" Clicked="ButtonEnglish_Clicked" />
+    <Button Text="Srpski" Clicked="ButtonSrpski_Clicked" />
+    <Button Text="User Type 1" Clicked="ButtonUserType1_Clicked" />
+    <Button Text="User Type 2" Clicked="ButtonUserType2_Clicked" />
   </StackLayout>
 </ContentPage>

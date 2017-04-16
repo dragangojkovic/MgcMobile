@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MBoxMobile.Views.TestMainPage"
+             Title="TestMainPage">
+  <ScrollView>
+    <StackLayout Padding="10">
+      <Grid x:Name="GridButtons" HorizontalOptions="Center" ColumnSpacing="1" RowSpacing="1">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="200" />
+          <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+      </Grid>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

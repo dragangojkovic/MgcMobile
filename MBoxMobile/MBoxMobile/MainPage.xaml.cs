@@ -20,5 +20,29 @@ namespace MBoxMobile
         {
             await Navigation.PushAsync(new BarcodePage());
         }
+
+        private async void ButtonEnglish_Clicked(object sender, EventArgs e)
+        {
+            App.CurrentLanguage = Helpers.Languages.English;
+            await Navigation.PushAsync(new TestMultiLanguagePage());
+        }
+
+        private async void ButtonSrpski_Clicked(object sender, EventArgs e)
+        {
+            App.CurrentLanguage = Helpers.Languages.LabelCheck;
+            await Navigation.PushAsync(new TestMultiLanguagePage());
+        }
+
+        private async void ButtonUserType1_Clicked(object sender, EventArgs e)
+        {
+            App.UserType = 1;
+            await Navigation.PushAsync(new TestMainPage());
+        }
+
+        private async void ButtonUserType2_Clicked(object sender, EventArgs e)
+        {
+            App.UserType = 2;
+            await Navigation.PushAsync(new TestMainPage());
+        }
     }
 }
