@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MBoxMobile.Helpers
 {
     public static class UserTypesSupport
     {
         #region Buttons
-        private const string BUTTON_1 = "Efficiency";
-        private const string BUTTON_2 = "Electricity usage";
-        private const string BUTTON_3 = "Production";
-        private const string BUTTON_4 = "Notifications";
-        private const string BUTTON_5 = "Auxiliary equipment";
+        private const string BUTTON_1 = "Main_Efficiency";
+        private const string BUTTON_2 = "Main_ElectricityUsage";
+        private const string BUTTON_3 = "Main_Production";
+        private const string BUTTON_4 = "Main_Notifications";
+        private const string BUTTON_5 = "Main_AuxiliaryEquipment";
         #endregion
 
         #region MenuItem
-        private const string MENUITEM_1 = "Home";
-        private const string MENUITEM_2 = "Exit";
-        private const string MENUITEM_3 = "Language";
-        private const string MENUITEM_4 = "Logout";
+        private const string MENUITEM_1 = "Menu_Home";
+        private const string MENUITEM_2 = "Menu_Exit";
+        private const string MENUITEM_3 = "Menu_Language";
+        private const string MENUITEM_4 = "Menu_Logout";
         #endregion
 
         public static Dictionary<int, string> GetButtons(int userType)

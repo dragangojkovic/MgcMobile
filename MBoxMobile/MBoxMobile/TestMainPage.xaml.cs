@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace MBoxMobile
 {
-    public partial class MainPage : ContentPage
+    public partial class TestMainPage : ContentPage
     {
-        public MainPage()
+        public TestMainPage()
         {
             InitializeComponent();
         }
@@ -36,13 +36,13 @@ namespace MBoxMobile
         private async void ButtonUserType1_Clicked(object sender, EventArgs e)
         {
             App.UserType = 1;
-            await Navigation.PushAsync(new TestMainPage());
+            await Navigation.PushAsync(new Views.TestMainPage());
         }
 
         private async void ButtonUserType2_Clicked(object sender, EventArgs e)
         {
             App.UserType = 2;
-            await Navigation.PushAsync(new TestMainPage());
+            await Navigation.PushAsync(new Views.TestMainPage());
         }
     }
 }

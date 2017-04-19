@@ -1,6 +1,6 @@
 ﻿using MBoxMobile.Helpers;
+using MBoxMobile.Views;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 
 namespace MBoxMobile
@@ -11,22 +11,24 @@ namespace MBoxMobile
         public static Languages CurrentLanguage
         {
             get { return _currentLanguage; }
-            set
-            {
-                _currentLanguage = value;
-                CurrentTranslation = MultiLanguageSupport.GetTranslations(CurrentLanguage);
-            }
+            set { _currentLanguage = value; CurrentTranslation = MultiLanguageSupport.GetTranslations(CurrentLanguage); }
         }
         public static Dictionary<string, string> CurrentTranslation { get; set; }
-
         public static int UserType { get; set; }
+        public static Dictionary<int, string> Servers { get; set; }
 
         public App()
         {
             InitializeComponent();
+
             CurrentLanguage = Languages.English;
-                        
-            MainPage = new NavigationPage(new MainPage());
+            UserType = 1;
+
+            Servers = new Dictionary<int, string>();
+            Servers.Add(1, "Server1");
+            Servers.Add(2, "Server2");
+
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

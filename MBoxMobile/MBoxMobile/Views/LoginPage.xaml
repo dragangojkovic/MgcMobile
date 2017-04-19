@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
+             x:Class="MBoxMobile.Views.LoginPage"
+             Title="{DynamicResource Login_Title}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="LogoWidth">0</x:Double>
+      <x:Double x:Key="LogoHeight">0</x:Double>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource BlueBackground}">
+      <Image Source="logo.png" HorizontalOptions="CenterAndExpand" WidthRequest="{DynamicResource LogoWidth}" HeightRequest="{DynamicResource LogoHeight}" Margin="0, 15, 0, 5" />
+      <ActivityIndicator IsVisible="{DynamicResource IsLoading}" IsRunning="{DynamicResource IsLoading}" Color="White" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"></ActivityIndicator>
+      <StackLayout VerticalOptions="CenterAndExpand" IsVisible="{DynamicResource IsFormVisible}">
+        <local:RectangularPicker Title="{DynamicResource Login_SelectServer}" x:Name="ServerPicker" Style="{StaticResource PickerStyle}" Margin="0, 0, 0, 10" />
+        <Grid HorizontalOptions="Center" ColumnSpacing="0" RowSpacing="0" BackgroundColor="{StaticResource BlueLight}" Margin="0, 0, 0, 10">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Image Source="user48.png" Aspect="AspectFit" WidthRequest="{DynamicResource IconAreaWidth}" Grid.Row="0" Grid.Column="0" />
+          <local:RectangularEntry x:Name="Username" Placeholder="{DynamicResource Login_Username}" Text="{Binding Username}" Style="{StaticResource EntryStyle}" Keyboard="Email" Grid.Row="0" Grid.Column="1" />
+        </Grid>
+        <Grid HorizontalOptions="Center" ColumnSpacing="0" RowSpacing="10" BackgroundColor="{StaticResource BlueLight}" Margin="0, 0, 0, 10">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Image Source="lock48.png" Aspect="AspectFit" WidthRequest="{DynamicResource IconAreaWidth}" Grid.Row="0" Grid.Column="0" />
+          <local:RectangularEntry x:Name="Password" Placeholder="{DynamicResource Login_Password}" Text="{Binding Password}" Style="{StaticResource EntryStyle}" IsPassword="true" Grid.Row="0" Grid.Column="1" />
+        </Grid>
+        <StackLayout Orientation="Horizontal" Margin="0, 0, 0, 10">
+          <Image Source="{DynamicResource CheckboxSource}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="{DynamicResource CheckboxAreaWidth}">
+            <Image.GestureRecognizers>
+              <TapGestureRecognizer Tapped="RememberMeTapped" />
+            </Image.GestureRecognizers>
+          </Image>
+          <Label Text="{DynamicResource Login_RememberMe}" Style="{StaticResource LabelMediumStyle}" Margin="-7, 3, 0, 10" />
+        </StackLayout>
+        <Button Text="{DynamicResource Login_Login}" Style="{StaticResource ButtonBlueStyle}" Clicked="LoginClicked" Margin="0, -5, 0, 10" />
+        <StackLayout HorizontalOptions="Start" Padding="0">
+          <Label Text="{DynamicResource Login_ForgotPassword}" Style="{StaticResource LabelMediumStyle}" >
+            <Label.GestureRecognizers>
+              <TapGestureRecognizer Tapped="ForgotTapped"/>
+            </Label.GestureRecognizers>
+          </Label>
+        </StackLayout>
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

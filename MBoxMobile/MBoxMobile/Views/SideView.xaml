@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage	xmlns="http://xamarin.com/schemas/2014/forms"
+					xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+					x:Class="MBoxMobile.Views.SideView">
+  <MasterDetailPage.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="HeaderHeight">0</x:Double>
+      <x:Boolean x:Key="ItemHomeVisible">false</x:Boolean>
+      <x:Boolean x:Key="ItemLanguageVisible">false</x:Boolean>
+      <x:Boolean x:Key="ItemLogoutVisible">false</x:Boolean>
+      <x:Boolean x:Key="ItemExitVisible">false</x:Boolean>
+    </ResourceDictionary>
+  </MasterDetailPage.Resources>
+
+  <MasterDetailPage.Master>
+    <ContentPage Title="Navigation" Icon="menu.png">
+      <ScrollView Orientation="Vertical" BackgroundColor="White">
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0">
+
+          <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeightRequest="{DynamicResource HeaderHeight}" BackgroundColor="{StaticResource BlueBackground}" Spacing="0">
+              <Label Text="{DynamicResource UserFullName}" Style="{StaticResource LabelSmallStyle}" Margin="0,10,0,10" />
+            </StackLayout>
+
+            <!--Menu Items-->
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" Orientation="Vertical">
+              <StackLayout x:Name="itemHome" IsVisible="{DynamicResource ItemHomeVisible}" Padding="10,15,0,10">
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="HomeTapped"/>
+                </StackLayout.GestureRecognizers>
+                <StackLayout Orientation="Horizontal">
+                  <Image Source="home50.png" WidthRequest="{DynamicResource IconWidthHeight}" HeightRequest="{DynamicResource IconWidthHeight}" Margin="0, 0, 10, 0"/>
+                  <Label Text="{DynamicResource Menu_Home}" Style="{StaticResource LabelMediumStyleBlack}" Margin="0,2,0,0" />
+                </StackLayout>
+              </StackLayout>
+              <StackLayout x:Name="itemLanguage" IsVisible="{DynamicResource ItemLanguageVisible}" Padding="10">
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="LanguageTapped"/>
+                </StackLayout.GestureRecognizers>
+                <StackLayout Orientation="Horizontal">
+                  <Image Source="language50.png" WidthRequest="{DynamicResource IconWidthHeight}" HeightRequest="{DynamicResource IconWidthHeight}" Margin="0, 0, 10, 0"/>
+                  <Label Text="{DynamicResource Menu_Language}" Style="{StaticResource LabelMediumStyleBlack}" Margin="0,2,0,0" />
+                </StackLayout>
+              </StackLayout>
+              <StackLayout x:Name="itemLogout" IsVisible="{DynamicResource ItemLogoutVisible}" Padding="10">
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="LogoutTapped"/>
+                </StackLayout.GestureRecognizers>
+                <StackLayout Orientation="Horizontal">
+                  <Image Source="logout50.png" WidthRequest="{DynamicResource IconWidthHeight}" HeightRequest="{DynamicResource IconWidthHeight}" Margin="0, 0, 10, 0"/>
+                  <Label Text="{DynamicResource Menu_Logout}" Style="{StaticResource LabelMediumStyleBlack}" Margin="0,2,0,0" />
+                </StackLayout>
+              </StackLayout>
+              <StackLayout x:Name="itemExit" IsVisible="{DynamicResource ItemExitVisible}" Padding="10">
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="ExitTapped"/>
+                </StackLayout.GestureRecognizers>
+                <StackLayout Orientation="Horizontal">
+                  <Image Source="exit50.png" WidthRequest="{DynamicResource IconWidthHeight}" HeightRequest="{DynamicResource IconWidthHeight}" Margin="0, 0, 10, 0"/>
+                  <Label Text="{DynamicResource Menu_Exit}" Style="{StaticResource LabelMediumStyleBlack}" Margin="0,2,0,0" />
+                </StackLayout>
+              </StackLayout>
+            </StackLayout>
+
+          </StackLayout>
+        </StackLayout>
+      </ScrollView>
+    </ContentPage>
+  </MasterDetailPage.Master>
+
+  <MasterDetailPage.Detail>
+
+  </MasterDetailPage.Detail>
+
+</MasterDetailPage>

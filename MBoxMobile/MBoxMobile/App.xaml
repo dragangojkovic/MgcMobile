@@ -2,9 +2,73 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MBoxMobile.App">
-	<Application.Resources>
+  <Application.Resources>
+    <ResourceDictionary>
 
-		<!-- Application resource dictionary -->
+      <!-- Fonts -->
+      <OnPlatform x:Key="FontFamilyDosis" x:TypeArguments="x:String" iOS="Dosis-Medium" Android="Dosis-Medium.ttf#Dosis-Medium" WinPhone="" />
+      <OnPlatform x:Key="FontFamilyOpenSans" x:TypeArguments="x:String" iOS="OpenSans-Regular" Android="OpenSans-Regular.ttf#OpenSans-Regular" WinPhone="" />
+            
+      <!-- Colors -->
+      <Color x:Key="BlueBackground">#60C0E0</Color>
+      <Color x:Key="BlueLight">#99CCFF</Color>
+      <Color x:Key="BlueMedium">#30A0FF</Color>
+      <Color x:Key="BlueDark">#0066CC</Color>
+      <Color x:Key="GrayColor">#CCCCCC</Color>
 
-	</Application.Resources>
+      <!-- Label styles -->
+      <Style x:Key="LabelFontFamily" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
+      
+      <Style x:Key="LabelMediumStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
+      <Style x:Key="LabelMediumStyleBlack" TargetType="Label">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
+      <Style x:Key="LabelSmallStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
+
+      <!-- Entry styles -->
+      <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BlueLight}" />  <!-- for Android change color in custom renderer as well -->
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
+
+      <!-- Button styles -->
+      <Style x:Key="ButtonBlueStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource BlueDark}" />
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDosis}" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="BorderRadius" Value="90" />
+      </Style>
+      <Style x:Key="ButtonWhiteStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource BlueDark}" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDosis}" />
+        <Setter Property="HeightRequest" Value="70" />
+        <Setter Property="BorderRadius" Value="70" />
+      </Style>
+
+      <!-- Other styles -->
+      <Style x:Key="PickerStyle" TargetType="Picker">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BlueMedium}"/> <!-- for Android change color and font in custom renderer as well -->
+      </Style>
+
+    </ResourceDictionary>
+  </Application.Resources>
 </Application>

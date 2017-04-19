@@ -1,4 +1,5 @@
 ﻿using MBoxMobile.Helpers;
+using MBoxMobile.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -8,11 +9,20 @@ using Xamarin.Forms.Xaml;
 namespace MBoxMobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TestMainPage : ContentPage
+    public partial class MainPage : ContentPage
     {
-        public TestMainPage()
+        double screenWidth = 0.0;
+        double screenHeight = 0.0;
+
+        public MainPage()
         {
             InitializeComponent();
+
+            screenWidth = DependencyService.Get<IDisplay>().Width;
+            screenHeight = DependencyService.Get<IDisplay>().Height;
+
+            Resources["LogoWidth"] = screenWidth * 0.5;
+            Resources["LogoHeight"] = screenHeight * 0.22;
 
             Dictionary<int, string> dictButtons = UserTypesSupport.GetButtons(App.UserType);
 
@@ -33,8 +43,8 @@ namespace MBoxMobile.Views
                 else
                     left = 1;
 
-                Button b = new Button { Text = pair.Value };
-                switch(pair.Key)
+                Button b = new Button { Text = App.CurrentTranslation[pair.Value], Style = (Style)Application.Current.Resources["ButtonWhiteStyle"] };
+                switch (pair.Key)
                 {
                     case 1:
                         b.Clicked += Button1_Clicked; break;
@@ -47,7 +57,7 @@ namespace MBoxMobile.Views
                     case 5:
                         b.Clicked += Button5_Clicked; break;
                 }
-                
+
                 GridButtons.Children.Add(b, left, rowOrdinal);
                 dictOrdinal++;
             }

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
+             x:Class="MBoxMobile.Views.LanguagePage"
+             Title="{DynamicResource Language_Title}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="LogoWidth">0</x:Double>
+      <x:Double x:Key="LogoHeight">0</x:Double>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource BlueBackground}">
+      <Image Source="logo.png" HorizontalOptions="CenterAndExpand" WidthRequest="{DynamicResource LogoWidth}" HeightRequest="{DynamicResource LogoHeight}" Margin="0, 20, 0, 25" />
+      <StackLayout VerticalOptions="CenterAndExpand">
+        <Label Text="{DynamicResource Language_InfoText}" Style="{StaticResource LabelSmallStyle}" Margin="0,0,0,10" />
+        <local:RectangularPicker Title="{DynamicResource Language_SelectLanguage}" x:Name="LanguagePicker" Style="{StaticResource PickerStyle}" Margin="0, 0, 0, 10" />
+        <Button Text="{DynamicResource Language_Update}" Style="{StaticResource ButtonBlueStyle}" Clicked="UpdateClicked" Margin="0, 0, 0, 10" />
+        <Button Text="{DynamicResource Language_Cancel}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" />
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>
