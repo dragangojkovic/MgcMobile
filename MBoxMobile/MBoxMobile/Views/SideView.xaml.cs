@@ -65,7 +65,7 @@ namespace MBoxMobile.Views
             Resources["HeaderHeight"] = (int)(screenHeight / 5);
             Resources["IconWidthHeight"] = 28;
 
-            Detail = new NavigationPage(new MainPage()) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueDark"] };
+            Detail = new NavigationPage(new MainPage()) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueMedium"] };
         }
 
         public void HomeTapped(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace MBoxMobile.Views
             if (!(MasterBehavior == MasterBehavior.SplitOnLandscape) && Device.Idiom != TargetIdiom.Tablet)
                 IsPresented = isPresented;
 
-            Detail = new NavigationPage(new MainPage()) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueDark"] };
+            Detail = new NavigationPage(new MainPage()) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueMedium"] };
         }
 
         public void LanguageTapped(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace MBoxMobile.Views
                 IsPresented = isPresented;
 
             Page currentDetailPage = Detail;
-            Detail = new NavigationPage(new LanguagePage(this, currentDetailPage)) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueDark"] };
+            Detail = new NavigationPage(new LanguagePage(this, currentDetailPage)) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueMedium"] };
         }
 
         public async void LogoutTapped(object sender, EventArgs e)

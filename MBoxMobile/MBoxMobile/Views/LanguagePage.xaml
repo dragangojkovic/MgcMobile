@@ -11,13 +11,13 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <ScrollView>
-    <StackLayout Padding="10" BackgroundColor="{StaticResource BlueBackground}">
+    <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}">
       <Image Source="logo.png" HorizontalOptions="CenterAndExpand" WidthRequest="{DynamicResource LogoWidth}" HeightRequest="{DynamicResource LogoHeight}" Margin="0, 20, 0, 25" />
       <StackLayout VerticalOptions="CenterAndExpand">
         <Label Text="{DynamicResource Language_InfoText}" Style="{StaticResource LabelSmallStyle}" Margin="0,0,0,10" />
         <local:RectangularPicker Title="{DynamicResource Language_SelectLanguage}" x:Name="LanguagePicker" Style="{StaticResource PickerStyle}" Margin="0, 0, 0, 10" />
-        <Button Text="{DynamicResource Language_Update}" Style="{StaticResource ButtonBlueStyle}" Clicked="UpdateClicked" Margin="0, 0, 0, 10" />
-        <Button Text="{DynamicResource Language_Cancel}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" />
+        <Button Text="{DynamicResource Language_Update}" Style="{StaticResource ButtonBlackStyle}" Clicked="UpdateClicked" Margin="0, 0, 0, 10" />
+        <Button Text="{DynamicResource Language_Cancel}" Style="{StaticResource ButtonBlackStyle}" Clicked="CancelClicked" />
       </StackLayout>
     </StackLayout>
   </ScrollView>

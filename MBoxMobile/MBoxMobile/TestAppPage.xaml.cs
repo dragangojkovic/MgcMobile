@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace MBoxMobile
 {
-    public partial class TestMainPage : ContentPage
+    public partial class TestAppPage : ContentPage
     {
-        public TestMainPage()
+        public TestAppPage()
         {
             InitializeComponent();
         }

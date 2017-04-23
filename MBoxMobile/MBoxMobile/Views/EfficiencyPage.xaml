@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
+             x:Class="MBoxMobile.Views.EfficiencyPage"
+             Title="{DynamicResource Efficiency_Title}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}">
+    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}">
+      <StackLayout>
+        <!-- Filter area -->
+        <StackLayout Orientation="Horizontal">
+          <StackLayout Orientation="Horizontal">
+            <Button Text="{DynamicResource Efficiency_FilterOn}" Style="{DynamicResource FilterOnStyle}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+            <Button Text="{DynamicResource Efficiency_FilterOff}" Style="{StaticResource FilterOffStyle}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+          </StackLayout>
+          <StackLayout>
+            <!-- MGC donguan-->
+          </StackLayout>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+          <Button Text="{DynamicResource Efficiency_FilterTime}" Style="{DynamicResource FilterTimeStyle}" Clicked="FilterTimeClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+        </StackLayout>
+      </StackLayout>
+      <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
+      <StackLayout>
+        <!-- Content (tables) area -->
+        <StackLayout HorizontalOptions="CenterAndExpand">
+          <ctrl:Accordion x:Name="EfficiencyAccordion" />
+        </StackLayout>
+      </StackLayout>
+    </StackLayout>
+    <Button Text="{DynamicResource Efficiency_ViewDetail}" Style="{StaticResource ButtonBlueStyle}" Clicked="ViewDetailClicked" VerticalOptions="End" />
+  </StackLayout>
+</ContentPage>

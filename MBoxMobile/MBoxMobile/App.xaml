@@ -10,11 +10,14 @@
       <OnPlatform x:Key="FontFamilyOpenSans" x:TypeArguments="x:String" iOS="OpenSans-Regular" Android="OpenSans-Regular.ttf#OpenSans-Regular" WinPhone="" />
             
       <!-- Colors -->
-      <Color x:Key="BlueBackground">#60C0E0</Color>
+      <!--<Color x:Key="BlueBackground">#60C0E0</Color>-->
+      <Color x:Key="PageBackground">#B3B3B3</Color>
+      <Color x:Key="BlueVeryLight">#E0EFF5</Color>
       <Color x:Key="BlueLight">#99CCFF</Color>
       <Color x:Key="BlueMedium">#30A0FF</Color>
       <Color x:Key="BlueDark">#0066CC</Color>
       <Color x:Key="GrayColor">#CCCCCC</Color>
+      <Color x:Key="GrayDark">#191919</Color>
 
       <!-- Label styles -->
       <Style x:Key="LabelFontFamily" TargetType="Label">
@@ -46,12 +49,20 @@
       </Style>
 
       <!-- Button styles -->
+      <Style x:Key="ButtonBlackStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource GrayDark}" />
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDosis}" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="BorderRadius" Value="90" />
+      </Style>
       <Style x:Key="ButtonBlueStyle" TargetType="Button">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="{StaticResource BlueDark}" />
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyDosis}" />
-        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="HeightRequest" Value="70" />
         <Setter Property="BorderRadius" Value="90" />
       </Style>
       <Style x:Key="ButtonWhiteStyle" TargetType="Button">

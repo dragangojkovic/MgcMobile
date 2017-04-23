@@ -11,7 +11,7 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <ScrollView>
-    <StackLayout Padding="10" BackgroundColor="{StaticResource BlueBackground}">
+    <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}">
       <Image Source="logo.png" HorizontalOptions="CenterAndExpand" WidthRequest="{DynamicResource LogoWidth}" HeightRequest="{DynamicResource LogoHeight}" Margin="0, 15, 0, 5" />
       <ActivityIndicator IsVisible="{DynamicResource IsLoading}" IsRunning="{DynamicResource IsLoading}" Color="White" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"></ActivityIndicator>
       <StackLayout VerticalOptions="CenterAndExpand" IsVisible="{DynamicResource IsFormVisible}">
@@ -46,7 +46,7 @@
           </Image>
           <Label Text="{DynamicResource Login_RememberMe}" Style="{StaticResource LabelMediumStyle}" Margin="-7, 3, 0, 10" />
         </StackLayout>
-        <Button Text="{DynamicResource Login_Login}" Style="{StaticResource ButtonBlueStyle}" Clicked="LoginClicked" Margin="0, -5, 0, 10" />
+        <Button Text="{DynamicResource Login_Login}" Style="{StaticResource ButtonBlackStyle}" Clicked="LoginClicked" Margin="0, -5, 0, 10" />
         <StackLayout HorizontalOptions="Start" Padding="0">
           <Label Text="{DynamicResource Login_ForgotPassword}" Style="{StaticResource LabelMediumStyle}" >
             <Label.GestureRecognizers>

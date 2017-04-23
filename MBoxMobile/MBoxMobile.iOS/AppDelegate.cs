@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using XFShapeView.iOS;
 
 namespace MBoxMobile.iOS
 {
@@ -24,6 +25,8 @@ namespace MBoxMobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             global::ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+            var shape = new ShapeRenderer();
+            shape.Init();
 
             LoadApplication(new App());
 

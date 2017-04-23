@@ -18,7 +18,7 @@
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0">
 
           <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeightRequest="{DynamicResource HeaderHeight}" BackgroundColor="{StaticResource BlueBackground}" Spacing="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start" HeightRequest="{DynamicResource HeaderHeight}" BackgroundColor="{StaticResource PageBackground}" Spacing="0">
               <Label Text="{DynamicResource UserFullName}" Style="{StaticResource LabelSmallStyle}" Margin="0,10,0,10" />
             </StackLayout>
 

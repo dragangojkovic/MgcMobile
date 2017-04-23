@@ -43,7 +43,7 @@ namespace MBoxMobile.Views
                 else
                     left = 1;
 
-                Button b = new Button { Text = App.CurrentTranslation[pair.Value], Style = (Style)Application.Current.Resources["ButtonWhiteStyle"] };
+                Button b = new Button { Text = App.CurrentTranslation[pair.Value], Style = (Style)Application.Current.Resources["ButtonBlueStyle"] };
                 switch (pair.Key)
                 {
                     case 1:
@@ -65,7 +65,7 @@ namespace MBoxMobile.Views
 
         private async void Button1_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Alert", "You have clicked Efficiency", "OK");
+            await Navigation.PushAsync(new EfficiencyPage());
         }
 
         private async void Button2_Clicked(object sender, EventArgs e)

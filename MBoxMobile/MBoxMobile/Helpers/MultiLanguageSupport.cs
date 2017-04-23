@@ -109,6 +109,16 @@ namespace MBoxMobile.Helpers
             translation.Add("Language_Cancel", "Cancel");
             translation.Add("Language_AlertMessage", "Nothing selected!");
 
+            //Efficiency page
+            translation.Add("Efficiency_Title", "Efficiency");
+            translation.Add("Efficiency_ViewDetail", "View Detail");
+            translation.Add("Efficiency_Locations", "Locations");
+            translation.Add("Efficiency_Departments", "Departments");
+            translation.Add("Efficiency_SubDepartments", "Sub departments");
+            translation.Add("Efficiency_Equipment", "Equipment");
+            translation.Add("Efficiency_EquipmentGroup", "Equipment group");
+            translation.Add("Efficiency_AuxiliaryEquipment", "Auxiliary equipment");
+
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");
             translation.Add("TestMultiLanguage_Label1", "ContentPage");

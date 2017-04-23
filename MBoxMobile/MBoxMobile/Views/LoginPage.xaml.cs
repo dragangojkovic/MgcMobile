@@ -58,6 +58,7 @@ namespace MBoxMobile.Views
         public void LoginClicked(object sender, EventArgs e)
         {
             Application.Current.MainPage = new SideView();
+            //Application.Current.MainPage = new TestAccordionPage();
         }
 
         public void RememberMeTapped(object sender, EventArgs e)
