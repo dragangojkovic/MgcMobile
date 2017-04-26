@@ -112,12 +112,27 @@ namespace MBoxMobile.Helpers
             //Efficiency page
             translation.Add("Efficiency_Title", "Efficiency");
             translation.Add("Efficiency_ViewDetail", "View Detail");
+            translation.Add("Efficiency_FilterOn", "Filter On");
+            translation.Add("Efficiency_FilterOff", "Filter Off");
+            translation.Add("Efficiency_Filter", "Select Filter");
+            translation.Add("Efficiency_WorkingTimeOnly", "Working Time Only");
             translation.Add("Efficiency_Locations", "Locations");
             translation.Add("Efficiency_Departments", "Departments");
             translation.Add("Efficiency_SubDepartments", "Sub departments");
             translation.Add("Efficiency_Equipment", "Equipment");
             translation.Add("Efficiency_EquipmentGroup", "Equipment group");
             translation.Add("Efficiency_AuxiliaryEquipment", "Auxiliary equipment");
+            //
+            translation.Add("Efficiency_FilterTimeTitle", "Personal Filter");
+            translation.Add("Efficiency_FilterTimeDescription", "Please choose a personal filter");
+            translation.Add("Efficiency_FilterTimeToday", "Today");
+            translation.Add("Efficiency_FilterTimeLast24Hours", "Last 24 Hours");
+            translation.Add("Efficiency_FilterTimeYesterday", "Yesterday");
+            translation.Add("Efficiency_FilterTimeCurrentWeek", "Current Week");
+            translation.Add("Efficiency_FilterTimeLastWeek", "Last Week");
+            translation.Add("Efficiency_FilterTimeCurrentMonth", "Current Month");
+            translation.Add("Efficiency_FilterTimeLastMonth", "Last Month");
+            translation.Add("Efficiency_FilterTimeCancel", "Cancel");
 
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");

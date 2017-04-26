@@ -6,33 +6,54 @@
              Title="{DynamicResource Efficiency_Title}">
   <ContentPage.Resources>
     <ResourceDictionary>
+      <x:Double x:Key="Filter2ButtonWidth">0</x:Double>
+      <x:Double x:Key="Filter2ButtonHeight">0</x:Double>
+      <x:Double x:Key="FilterButtonWidth">0</x:Double>
+      <x:Double x:Key="FilterButtonHeight">0</x:Double>
+      <x:Double x:Key="FilterTimeButtonWidth">0</x:Double>
+      <x:Double x:Key="FilterTimeButtonHeight">0</x:Double>
     </ResourceDictionary>
   </ContentPage.Resources>
-  <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}">
-    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}">
-      <StackLayout>
-        <!-- Filter area -->
-        <StackLayout Orientation="Horizontal">
-          <StackLayout Orientation="Horizontal">
-            <Button Text="{DynamicResource Efficiency_FilterOn}" Style="{DynamicResource FilterOnStyle}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
-            <Button Text="{DynamicResource Efficiency_FilterOff}" Style="{StaticResource FilterOffStyle}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+  <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
+    <Grid VerticalOptions="FillAndExpand">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="{DynamicResource ContentMinHeight}" />
+        <RowDefinition Height="60" />
+      </Grid.RowDefinitions>
+      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}" Grid.Row="0" Grid.Column="0">
+        <ScrollView>
+          <StackLayout VerticalOptions="FillAndExpand" Padding="5">
+            <StackLayout>
+              <!-- Filter area -->
+              <StackLayout Orientation="Horizontal" Margin="0,0,0,2">
+                <Button Text="{DynamicResource Efficiency_FilterOn}" Style="{DynamicResource FilterOnStyle}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+                <Button Text="{DynamicResource Efficiency_FilterOff}" Style="{DynamicResource FilterOffStyle}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" Margin="-11,0,0,0"/>
+                <Button Text="{DynamicResource Efficiency_Filter}" Style="{StaticResource FilterStyle}" Clicked="FilterClicked" WidthRequest="{DynamicResource FilterButtonWidth}" HeightRequest="{DynamicResource FilterButtonHeight}" />
+              </StackLayout>
+              <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                <Button Text="{DynamicResource Efficiency_FilterTime}" Style="{StaticResource FilterStyle}" Clicked="FilterTimeClicked" WidthRequest="{DynamicResource FilterTimeButtonWidth}" HeightRequest="{DynamicResource FilterTimeButtonHeight}" />
+                <Image Source="{DynamicResource CheckboxSource}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="{DynamicResource CheckboxAreaWidth}">
+                  <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="WorkingTimeTapped" />
+                  </Image.GestureRecognizers>
+                </Image>
+                <Label Text="{DynamicResource Efficiency_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" Margin="-2, 10, 0, 0" />
+              </StackLayout>
+            </StackLayout>
+            <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
+            <StackLayout>
+              <!-- Content (tables) area -->
+              <StackLayout HorizontalOptions="CenterAndExpand">
+                <ctrl:Accordion x:Name="EfficiencyAccordion" />
+              </StackLayout>
+            </StackLayout>
           </StackLayout>
-          <StackLayout>
-            <!-- MGC donguan-->
-          </StackLayout>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-          <Button Text="{DynamicResource Efficiency_FilterTime}" Style="{DynamicResource FilterTimeStyle}" Clicked="FilterTimeClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
-        </StackLayout>
+        </ScrollView>
       </StackLayout>
-      <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
-      <StackLayout>
-        <!-- Content (tables) area -->
-        <StackLayout HorizontalOptions="CenterAndExpand">
-          <ctrl:Accordion x:Name="EfficiencyAccordion" />
-        </StackLayout>
-      </StackLayout>
-    </StackLayout>
-    <Button Text="{DynamicResource Efficiency_ViewDetail}" Style="{StaticResource ButtonBlueStyle}" Clicked="ViewDetailClicked" VerticalOptions="End" />
+      <Button Text="{DynamicResource Efficiency_ViewDetail}" Style="{StaticResource ButtonBlueStyle}" Clicked="ViewDetailClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
+    </Grid>
   </StackLayout>
 </ContentPage>

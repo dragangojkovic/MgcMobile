@@ -2,12 +2,6 @@
 using MBoxMobile.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -19,6 +13,7 @@ namespace MBoxMobile.Views
     {
         double screenWidth = 0.0;
         double screenHeight = 0.0;
+        bool workingTimeOnly = false;
 
         public EfficiencyPage()
         {
@@ -27,8 +22,19 @@ namespace MBoxMobile.Views
             screenWidth = DependencyService.Get<IDisplay>().Width;
             screenHeight = DependencyService.Get<IDisplay>().Height;
 
-            EfficiencyAccordion.AccordionWidth = DependencyService.Get<IDisplay>().Width * 0.94;
-            EfficiencyAccordion.AccordionHeight = 60.0;
+            Resources["CheckboxAreaWidth"] = screenWidth * 0.1;
+            Resources["CheckboxSource"] = "emptyroundcheck50.png";
+
+            Resources["Filter2ButtonWidth"] = screenWidth * 0.25;
+            Resources["Filter2ButtonHeight"] = screenWidth * 0.12;
+            Resources["FilterButtonWidth"] = screenWidth * 0.42;
+            Resources["FilterButtonHeight"] = screenWidth * 0.12;
+            Resources["FilterTimeButtonWidth"] = screenWidth * 0.4;
+            Resources["FilterTimeButtonHeight"] = screenWidth * 0.1;
+            Resources["ContentMinHeight"] = screenHeight - 60.0;
+
+            EfficiencyAccordion.AccordionWidth = screenWidth * 0.94;
+            EfficiencyAccordion.AccordionHeight = 55.0;
             EfficiencyAccordion.DataSource = GetAccordionData();
             EfficiencyAccordion.DataBind();
         }
@@ -39,6 +45,17 @@ namespace MBoxMobile.Views
 
             Resources["Efficiency_Title"] = App.CurrentTranslation["Efficiency_Title"];
             Resources["Efficiency_ViewDetail"] = App.CurrentTranslation["Efficiency_ViewDetail"];
+            Resources["Efficiency_FilterOn"] = App.CurrentTranslation["Efficiency_FilterOn"];
+            Resources["Efficiency_FilterOff"] = App.CurrentTranslation["Efficiency_FilterOff"];
+            Resources["Efficiency_Filter"] = App.CurrentTranslation["Efficiency_Filter"];
+            Resources["Efficiency_FilterTime"] = App.CurrentTranslation["Efficiency_FilterTimeLast24Hours"];
+            Resources["Efficiency_WorkingTimeOnly"] = App.CurrentTranslation["Efficiency_WorkingTimeOnly"];
+            Resources["Efficiency_Locations"] = App.CurrentTranslation["Efficiency_Locations"];
+            Resources["Efficiency_Departments"] = App.CurrentTranslation["Efficiency_Departments"];
+            Resources["Efficiency_SubDepartments"] = App.CurrentTranslation["Efficiency_SubDepartments"];
+            Resources["Efficiency_Equipment"] = App.CurrentTranslation["Efficiency_Equipment"];
+            Resources["Efficiency_EquipmentGroup"] = App.CurrentTranslation["Efficiency_EquipmentGroup"];
+            Resources["Efficiency_AuxiliaryEquipment"] = App.CurrentTranslation["Efficiency_AuxiliaryEquipment"];
         }
 
         public void ViewDetailClicked(object sender, EventArgs e)
@@ -56,9 +73,23 @@ namespace MBoxMobile.Views
 
         }
 
+        public void FilterClicked(object sender, EventArgs e)
+        {
+
+        }
+
         public void FilterTimeClicked(object sender, EventArgs e)
         {
 
+        }
+
+        public void WorkingTimeTapped(object sender, EventArgs e)
+        {
+            workingTimeOnly = !workingTimeOnly;
+            if (workingTimeOnly)
+                Resources["CheckboxSource"] = "fullroundcheck50.png";
+            else
+                Resources["CheckboxSource"] = "emptyroundcheck50.png";
         }
 
         private List<AccordionSource> GetAccordionData()

@@ -64,7 +64,7 @@ namespace MBoxMobile.CustomControls
                         BackgroundColor = (Color)Application.Current.Resources["BlueMedium"], // vSingleItem.HeaderBackGroundColor,
                         WidthRequest = this.AccordionWidth,
                         HeightRequest = this.AccordionHeight,
-                        Margin = new Thickness(0, 0, 0, -5)
+                        Margin = new Thickness(0, 0, 0, -7)
                     };
 
                     var vAccordionContent = new ContentView()
