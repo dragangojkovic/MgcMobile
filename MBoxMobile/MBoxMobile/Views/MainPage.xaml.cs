@@ -65,7 +65,7 @@ namespace MBoxMobile.Views
 
         private async void Button1_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EfficiencyPage());
+            await Navigation.PushAsync(new UptimePage());
         }
 
         private async void Button2_Clicked(object sender, EventArgs e)

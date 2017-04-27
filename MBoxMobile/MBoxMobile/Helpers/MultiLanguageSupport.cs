@@ -95,7 +95,7 @@ namespace MBoxMobile.Helpers
             translation.Add("Forgot_Send", "Request new password");
 
             //Main page
-            translation.Add("Main_Efficiency", "Efficiency");
+            translation.Add("Main_Uptime", "Uptime");
             translation.Add("Main_ElectricityUsage", "Electricity usage");
             translation.Add("Main_Production", "Production");
             translation.Add("Main_Notifications", "Notifications");
@@ -109,30 +109,42 @@ namespace MBoxMobile.Helpers
             translation.Add("Language_Cancel", "Cancel");
             translation.Add("Language_AlertMessage", "Nothing selected!");
 
-            //Efficiency page
-            translation.Add("Efficiency_Title", "Efficiency");
-            translation.Add("Efficiency_ViewDetail", "View Detail");
-            translation.Add("Efficiency_FilterOn", "Filter On");
-            translation.Add("Efficiency_FilterOff", "Filter Off");
-            translation.Add("Efficiency_Filter", "Select Filter");
-            translation.Add("Efficiency_WorkingTimeOnly", "Working Time Only");
-            translation.Add("Efficiency_Locations", "Locations");
-            translation.Add("Efficiency_Departments", "Departments");
-            translation.Add("Efficiency_SubDepartments", "Sub departments");
-            translation.Add("Efficiency_Equipment", "Equipment");
-            translation.Add("Efficiency_EquipmentGroup", "Equipment group");
-            translation.Add("Efficiency_AuxiliaryEquipment", "Auxiliary equipment");
+            //Uptime page
+            translation.Add("Uptime_Title", "Uptime");
+            translation.Add("Uptime_ViewDetail", "View Detail");
+            translation.Add("Uptime_FilterOn", "Filter On");
+            translation.Add("Uptime_FilterOff", "Filter Off");
+            translation.Add("Uptime_Filter", "Select Filter");
+            translation.Add("Uptime_WorkingTimeOnly", "Working Time Only");
+            translation.Add("Uptime_Locations", "Locations");
+            translation.Add("Uptime_Departments", "Departments");
+            translation.Add("Uptime_SubDepartments", "Sub departments");
+            translation.Add("Uptime_Equipment", "Equipment");
+            translation.Add("Uptime_EquipmentGroup", "Equipment group");
+            translation.Add("Uptime_AuxiliaryEquipment", "Auxiliary equipment");
             //
-            translation.Add("Efficiency_FilterTimeTitle", "Personal Filter");
-            translation.Add("Efficiency_FilterTimeDescription", "Please choose a personal filter");
-            translation.Add("Efficiency_FilterTimeToday", "Today");
-            translation.Add("Efficiency_FilterTimeLast24Hours", "Last 24 Hours");
-            translation.Add("Efficiency_FilterTimeYesterday", "Yesterday");
-            translation.Add("Efficiency_FilterTimeCurrentWeek", "Current Week");
-            translation.Add("Efficiency_FilterTimeLastWeek", "Last Week");
-            translation.Add("Efficiency_FilterTimeCurrentMonth", "Current Month");
-            translation.Add("Efficiency_FilterTimeLastMonth", "Last Month");
-            translation.Add("Efficiency_FilterTimeCancel", "Cancel");
+            translation.Add("Uptime_FilterTimeTitle", "Personal Filter");
+            translation.Add("Uptime_FilterTimeDescription", "Please choose a personal filter");
+            translation.Add("Uptime_FilterTimeToday", "Today");
+            translation.Add("Uptime_FilterTimeLast24Hours", "Last 24 Hours");
+            translation.Add("Uptime_FilterTimeYesterday", "Yesterday");
+            translation.Add("Uptime_FilterTimeCurrentWeek", "Current Week");
+            translation.Add("Uptime_FilterTimeLastWeek", "Last Week");
+            translation.Add("Uptime_FilterTimeCurrentMonth", "Current Month");
+            translation.Add("Uptime_FilterTimeLastMonth", "Last Month");
+            translation.Add("Uptime_FilterTimeCurrentQuarter", "Current Quarter");
+            translation.Add("Uptime_FilterTimeLastQuarter", "Last Quarter");
+            translation.Add("Uptime_FilterTimeCurrentYear", "Qurent Year");
+            translation.Add("Uptime_FilterTimeCancel", "Cancel");
+            //Uptime detail page
+            translation.Add("UptimeDetails_FilterLabel", "Filter:");
+            translation.Add("UptimeDetails_FilterAll", "All");
+            translation.Add("UptimeDetails_FilterOn", "On");
+            translation.Add("UptimeDetails_FilterOff", "Off");
+            translation.Add("UptimeDetails_FilterErrors", "Errors");
+            translation.Add("UptimeDetails_Detail", "Detail");
+            translation.Add("UptimeDetails_AuxiliaryEquipment", "Auxiliary equipment");
+            translation.Add("UptimeDetails_Close", "Close");
 
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");

@@ -5,7 +5,7 @@ namespace MBoxMobile.Helpers
     public static class UserTypesSupport
     {
         #region Buttons
-        private const string BUTTON_1 = "Main_Efficiency";
+        private const string BUTTON_1 = "Main_Uptime";
         private const string BUTTON_2 = "Main_ElectricityUsage";
         private const string BUTTON_3 = "Main_Production";
         private const string BUTTON_4 = "Main_Notifications";
