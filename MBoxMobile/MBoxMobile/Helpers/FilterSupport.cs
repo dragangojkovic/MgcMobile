@@ -56,6 +56,14 @@ namespace MBoxMobile.Helpers
                 return 14;
         }
 
+        public static double GetWorkingHoursLabelFontSize(double screenWidth)
+        {
+            if (screenWidth <= 353)
+                return 12;
+            else
+                return 15;
+        }
+
         public static double GetFilterLabelMarginTop(double screenWidth)
         {
             if (screenWidth <= 353)

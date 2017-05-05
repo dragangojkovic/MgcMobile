@@ -13,6 +13,11 @@ namespace MBoxMobile.Droid.CustomRenderers
     {
         private GradientDrawable _normal, _pressed;
 
+        protected override void OnDraw(Android.Graphics.Canvas canvas)
+        {
+            base.OnDraw(canvas);
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Button> e)
         {
             base.OnElementChanged(e);
@@ -36,12 +41,14 @@ namespace MBoxMobile.Droid.CustomRenderers
                         _normal.SetColor(button.BackgroundColor.ToAndroid());
 
                     _normal.SetCornerRadius(radius);
+                    _normal.SetStroke((int)button.BorderWidth, button.BorderColor.ToAndroid());
 
                     // Create a drawable for the button's pressed state
                     _pressed = new Android.Graphics.Drawables.GradientDrawable();
                     var highlight = Context.ObtainStyledAttributes(new int[] { Android.Resource.Attribute.ColorActivatedHighlight }).GetColor(0, Android.Graphics.Color.Gray);
                     _pressed.SetColor(highlight);
                     _pressed.SetCornerRadius(radius);
+                    _pressed.SetStroke((int)button.BorderWidth, button.BorderColor.ToAndroid());
 
                     // Add the drawables to a state list and assign the state list to the button
                     var sld = new StateListDrawable();

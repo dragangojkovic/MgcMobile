@@ -60,7 +60,7 @@
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyDosis}" />
         <Setter Property="HeightRequest" Value="60" />
-        <Setter Property="BorderRadius" Value="30" />
+        <Setter Property="BorderRadius" Value="20" />
       </Style>
       <Style x:Key="ButtonBlueStyle" TargetType="Button">
         <Setter Property="TextColor" Value="White" />
@@ -68,15 +68,15 @@
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyDosis}" />
         <Setter Property="HeightRequest" Value="60" />
-        <Setter Property="BorderRadius" Value="20" />
+        <Setter Property="BorderRadius" Value="10" />
       </Style>
       <Style x:Key="ButtonWhiteStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource BlueDark}" />
         <Setter Property="BackgroundColor" Value="White" />
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyDosis}" />
-        <Setter Property="HeightRequest" Value="70" />
-        <Setter Property="BorderRadius" Value="30" />
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="BorderRadius" Value="10" />
       </Style>
 
       <Style x:Key="FilterNotSelectedStyle" TargetType="Button">
@@ -84,21 +84,25 @@
         <Setter Property="BackgroundColor" Value="{StaticResource BlueVeryLight}" />
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
-        <Setter Property="BorderRadius" Value="30" />
+        <Setter Property="BorderRadius" Value="10" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="BorderColor" Value="{StaticResource BlueMedium}" />
       </Style>
       <Style x:Key="FilterSelectedStyle" TargetType="Button">
         <Setter Property="TextColor" Value="White" />
         <Setter Property="BackgroundColor" Value="{StaticResource BlueMedium}" />
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
-        <Setter Property="BorderRadius" Value="30" />
+        <Setter Property="BorderRadius" Value="10" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="BorderColor" Value="{StaticResource BlueMedium}" />
       </Style>
       <Style x:Key="FilterStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource BlueMedium}" />
         <Setter Property="BackgroundColor" Value="{StaticResource BlueVeryLight}" />
         <Setter Property="FontSize" Value="Small" />
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
-        <Setter Property="BorderRadius" Value="30" />
+        <Setter Property="BorderRadius" Value="10" />
         <Setter Property="BorderWidth" Value="1" />
         <Setter Property="BorderColor" Value="{StaticResource BlueMedium}" />
       </Style>

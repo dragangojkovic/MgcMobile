@@ -30,5 +30,10 @@
         public string LoginID { get; set; }
         public string MachineGroupFilter { get; set; }
         public string MainFilter { get; set; }
+        //
+        public string NotificationFilter { get; set; }
+        public string SelectedNotificationFilter { get; set; }
+        public string SelectedPersonalFilter { get; set; }
+        public string ServerIPAddress { get; set; }
     }
 }

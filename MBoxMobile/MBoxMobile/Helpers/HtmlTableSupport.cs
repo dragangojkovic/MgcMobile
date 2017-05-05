@@ -1,5 +1,6 @@
 ﻿using MBoxMobile.Models;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MBoxMobile.Helpers
 {
@@ -91,9 +92,11 @@ table th {
         public static string Uptime_Locations_TableBody(List<EfficiencyLocation> source)
         {
             string html = string.Empty;
-            foreach (EfficiencyLocation el in source)
+            if (source != null)
             {
-                string template = @"
+                foreach (EfficiencyLocation el in source)
+                {
+                    string template = @"
 <tr>
     <td style=""display:none"">{#0}</td>
 	<td style=""white-space:nowrap"">{#1}</td>
@@ -102,16 +105,17 @@ table th {
 	<td class=""right-text"">{#4}</td>
 	<td class=""right-text"">{#5}</td>
 </tr>";
-                template = template.Replace("{#0}", el.ID.ToString());
-                template = template.Replace("{#1}", el.Name);
-                template = template.Replace("{#2}", el.EfficiencyPercent.ToString() + "%");
-                template = template.Replace("{#3}", el.On.ToString());
-                template = template.Replace("{#4}", el.Off.ToString());
-                template = template.Replace("{#5}", el.Errors.ToString());
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.Name);
+                    template = template.Replace("{#2}", el.EfficiencyPercent.ToString() + "%");
+                    template = template.Replace("{#3}", el.On.ToString());
+                    template = template.Replace("{#4}", el.Off.ToString());
+                    template = template.Replace("{#5}", el.Errors.ToString());
 
-                html += template;
+                    html += template;
+                }
+
             }
-
             return html;
         }
 
@@ -119,10 +123,11 @@ table th {
 
         public static string InsertHeaderAndBodyToHtmlTable(string headerHtml, string bodyHtml)
         {
-            HtmlTableMarkup = HtmlTableMarkup.Replace("[#TableHeader]", headerHtml);
-            HtmlTableMarkup = HtmlTableMarkup.Replace("[#TableBody]", bodyHtml);
+            StringBuilder html = new StringBuilder(HtmlTableMarkup);
+            html = html.Replace("[#TableHeader]", headerHtml);
+            html = html.Replace("[#TableBody]", bodyHtml);
 
-            return HtmlTableMarkup;
+            return html.ToString();
         }
     }
 }
