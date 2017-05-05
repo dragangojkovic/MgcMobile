@@ -34,6 +34,9 @@ namespace MBoxMobile.Views
             Resources["Filter4ButtonHeight"] = screenWidth * 0.10;
             Resources["ContentMinHeight"] = screenHeight - 60.0;
 
+            Resources["FilterLabelMargin"] = new Thickness(5, FilterSupport.GetFilterLabelMarginTop(screenWidth), 0, 0);
+            Resources["Filter4FontSize"] = FilterSupport.GetFilter4FontSize(screenWidth);
+
             switch (filterState)
             {
                 case Filter4State.All:
@@ -62,10 +65,10 @@ namespace MBoxMobile.Views
                     break;
             }
             
-            UsageDetailsAccordion.AccordionWidth = screenWidth * 0.94;
-            UsageDetailsAccordion.AccordionHeight = 55.0;
-            UsageDetailsAccordion.DataSource = GetAccordionData();
-            UsageDetailsAccordion.DataBind();
+            UptimeDetailsAccordion.AccordionWidth = screenWidth - 30;
+            UptimeDetailsAccordion.AccordionHeight = 55.0;
+            UptimeDetailsAccordion.DataSource = GetAccordionData();
+            UptimeDetailsAccordion.DataBind();
         }
 
         protected override void OnAppearing()

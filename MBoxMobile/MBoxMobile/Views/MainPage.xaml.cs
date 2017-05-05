@@ -1,4 +1,5 @@
-﻿using MBoxMobile.Helpers;
+﻿using MBoxMobile.CustomControls;
+using MBoxMobile.Helpers;
 using MBoxMobile.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace MBoxMobile.Views
 
             Resources["LogoWidth"] = screenWidth * 0.5;
             Resources["LogoHeight"] = screenHeight * 0.22;
+            Resources["ButtonWidth"] = (screenWidth - 26) / 2.0;
 
             Dictionary<int, string> dictButtons = UserTypesSupport.GetButtons(App.UserType);
 
@@ -43,7 +45,8 @@ namespace MBoxMobile.Views
                 else
                     left = 1;
 
-                Button b = new Button { Text = App.CurrentTranslation[pair.Value], Style = (Style)Application.Current.Resources["ButtonBlueStyle"] };
+                //Button b = new Button { Text = App.CurrentTranslation[pair.Value], Style = (Style)Application.Current.Resources["ButtonBlueStyle"] };
+                RoundedButton b = new RoundedButton { Text = App.CurrentTranslation[pair.Value], Style = (Style)Application.Current.Resources["ButtonBlueStyle"] };
                 switch (pair.Key)
                 {
                     case 1:

@@ -29,25 +29,26 @@
             <StackLayout>
               <!-- Filter area -->
               <StackLayout Orientation="Horizontal" Margin="0,0,0,2">
-                <Button Text="{DynamicResource Uptime_FilterOn}" Style="{DynamicResource FilterOnStyle}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
-                <Button Text="{DynamicResource Uptime_FilterOff}" Style="{DynamicResource FilterOffStyle}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" Margin="-11,0,0,0"/>
-                <Button x:Name="FilterButton" Text="{DynamicResource Uptime_Filter}" IsEnabled = "{DynamicResource FilterIsEnabled}" Style="{StaticResource FilterStyle}" Clicked="FilterClicked" WidthRequest="{DynamicResource FilterButtonWidth}" HeightRequest="{DynamicResource FilterButtonHeight}" />
+                <Button Text="{DynamicResource Uptime_FilterOn}" Style="{DynamicResource FilterOnStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+                <Button Text="{DynamicResource Uptime_FilterOff}" Style="{DynamicResource FilterOffStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" Margin="-11,0,0,0"/>
+                <Button x:Name="FilterButton" Text="{DynamicResource Uptime_Filter}" IsEnabled="{DynamicResource FilterIsEnabled}" Style="{StaticResource FilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="FilterClicked" WidthRequest="{DynamicResource FilterButtonWidth}" HeightRequest="{DynamicResource FilterButtonHeight}" />
               </StackLayout>
               <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
-                <Button x:Name="FilterTimeButton" Text="{DynamicResource Uptime_FilterTime}" Style="{StaticResource FilterStyle}" Clicked="FilterTimeClicked" WidthRequest="{DynamicResource FilterTimeButtonWidth}" HeightRequest="{DynamicResource FilterTimeButtonHeight}" />
-                <Image Source="{DynamicResource CheckboxSource}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="{DynamicResource CheckboxAreaWidth}">
+                <Button x:Name="FilterTimeButton" Text="{DynamicResource Uptime_FilterTime}" Style="{StaticResource FilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="FilterTimeClicked" WidthRequest="{DynamicResource FilterTimeButtonWidth}" HeightRequest="{DynamicResource FilterTimeButtonHeight}" />
+                <Image Source="{DynamicResource CheckboxSource}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="{DynamicResource CheckboxAreaWidth}" Margin="0, 5, 0, 0">
                   <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="WorkingTimeTapped" />
                   </Image.GestureRecognizers>
                 </Image>
-                <Label Text="{DynamicResource Uptime_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" Margin="-2, 10, 0, 0" />
+                <Label Text="{DynamicResource Uptime_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Margin="-2, 10, 0, 0" />
               </StackLayout>
             </StackLayout>
             <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
             <StackLayout>
               <!-- Content (tables) area -->
+              <ActivityIndicator IsVisible="{DynamicResource IsLoading}" IsRunning="{DynamicResource IsLoading}" Color="White" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"></ActivityIndicator>
               <StackLayout HorizontalOptions="CenterAndExpand">
-                <ctrl:Accordion x:Name="UsageAccordion" />
+                <ctrl:Accordion x:Name="UptimeAccordion" />
               </StackLayout>
             </StackLayout>
           </StackLayout>

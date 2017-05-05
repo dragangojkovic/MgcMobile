@@ -1,4 +1,5 @@
 ﻿using MBoxMobile.Helpers;
+using MBoxMobile.Models;
 using MBoxMobile.Views;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -16,6 +17,9 @@ namespace MBoxMobile
         public static Dictionary<string, string> CurrentTranslation { get; set; }
         public static int UserType { get; set; }
         public static Dictionary<int, string> Servers { get; set; }
+
+        public static UserInfo LoggedUser { get; set; }
+        public static string LastErrorMessage { get; set; }
 
         public App()
         {

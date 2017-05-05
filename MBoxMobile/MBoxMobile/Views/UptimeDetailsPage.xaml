@@ -24,13 +24,13 @@
             <StackLayout>
               <!-- Filter area -->
               <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
-                <Label Text="{DynamicResource UptimeDetails_FilterLabel}" Style="{StaticResource LabelMediumStyleBlack}" Margin="5,8,0,0" />
+                <Label Text="{DynamicResource UptimeDetails_FilterLabel}" Style="{StaticResource LabelMediumStyleBlack}" Margin="{DynamicResource FilterLabelMargin}" />
                 <StackLayout HorizontalOptions="CenterAndExpand"></StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                  <Button Text="{DynamicResource UptimeDetails_FilterAll}" Style="{DynamicResource FilterAllStyle}" Clicked="FilterAllClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="10,0,0,0"/>
-                  <Button Text="{DynamicResource UptimeDetails_FilterOn}" Style="{DynamicResource FilterOnStyle}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-12,0,0,0"/>
-                  <Button Text="{DynamicResource UptimeDetails_FilterOff}" Style="{DynamicResource FilterOffStyle}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-12,0,0,0"/>
-                  <Button Text="{DynamicResource UptimeDetails_FilterErrors}" Style="{DynamicResource FilterErrorsStyle}" Clicked="FilterErrorsClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-12,0,0,0"/>
+                  <Button Text="{DynamicResource UptimeDetails_FilterAll}" Style="{DynamicResource FilterAllStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterAllClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="10,0,0,0"/>
+                  <Button Text="{DynamicResource UptimeDetails_FilterOn}" Style="{DynamicResource FilterOnStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-12,0,0,0"/>
+                  <Button Text="{DynamicResource UptimeDetails_FilterOff}" Style="{DynamicResource FilterOffStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-12,0,0,0"/>
+                  <Button Text="{DynamicResource UptimeDetails_FilterErrors}" Style="{DynamicResource FilterErrorsStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterErrorsClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-12,0,0,0"/>
                 </StackLayout>
               </StackLayout>
             </StackLayout>
@@ -38,7 +38,7 @@
             <StackLayout>
               <!-- Content (tables) area -->
               <StackLayout HorizontalOptions="CenterAndExpand">
-                <ctrl:Accordion x:Name="UsageDetailsAccordion" />
+                <ctrl:Accordion x:Name="UptimeDetailsAccordion" />
               </StackLayout>
             </StackLayout>
           </StackLayout>

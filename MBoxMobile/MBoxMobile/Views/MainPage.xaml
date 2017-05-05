@@ -12,10 +12,10 @@
   <ScrollView>
     <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}">
       <Image Source="logo.png" HorizontalOptions="CenterAndExpand" WidthRequest="{DynamicResource LogoWidth}" HeightRequest="{DynamicResource LogoHeight}" Margin="0, 20, 0, 40"/>
-      <Grid x:Name="GridButtons" HorizontalOptions="Center" ColumnSpacing="1" RowSpacing="1">
+      <Grid x:Name="GridButtons" HorizontalOptions="Center" ColumnSpacing="6" RowSpacing="6">
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="180" />
-          <ColumnDefinition Width="180" />
+          <ColumnDefinition Width="{DynamicResource ButtonWidth}" />
+          <ColumnDefinition Width="{DynamicResource ButtonWidth}" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
           <RowDefinition Height="*" />

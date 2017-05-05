@@ -67,7 +67,7 @@ namespace MBoxMobile.Helpers
 
         #region Translations
 
-        // Dictionary key have format PageName_ElementName
+        // Dictionary key has format PageName_ElementName
 
         private static Dictionary<string, string> GetTranslation_English()
         {            
@@ -134,8 +134,15 @@ namespace MBoxMobile.Helpers
             translation.Add("Uptime_FilterTimeLastMonth", "Last Month");
             translation.Add("Uptime_FilterTimeCurrentQuarter", "Current Quarter");
             translation.Add("Uptime_FilterTimeLastQuarter", "Last Quarter");
-            translation.Add("Uptime_FilterTimeCurrentYear", "Qurent Year");
+            translation.Add("Uptime_FilterTimeCurrentYear", "Current Year");
             translation.Add("Uptime_FilterTimeCancel", "Cancel");
+            //
+            translation.Add("Uptime_LocationsTableEquipment", "Equipment (current status)");
+            translation.Add("Uptime_LocationsTableLocations", "Locations");
+            translation.Add("Uptime_LocationsTableUptime", "Uptime");
+            translation.Add("Uptime_LocationsTableOn", "On");
+            translation.Add("Uptime_LocationsTableOff", "Off");
+            translation.Add("Uptime_LocationsTableErrors", "Errors");
             //Uptime detail page
             translation.Add("UptimeDetails_FilterLabel", "Filter:");
             translation.Add("UptimeDetails_FilterAll", "All");
@@ -145,7 +152,7 @@ namespace MBoxMobile.Helpers
             translation.Add("UptimeDetails_Detail", "Detail");
             translation.Add("UptimeDetails_AuxiliaryEquipment", "Auxiliary equipment");
             translation.Add("UptimeDetails_Close", "Close");
-
+            
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");
             translation.Add("TestMultiLanguage_Label1", "ContentPage");

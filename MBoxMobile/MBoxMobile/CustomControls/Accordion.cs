@@ -140,7 +140,7 @@ namespace MBoxMobile.CustomControls
             HorizontalOptions = LayoutOptions.FillAndExpand;
             BorderColor = Color.Black;
             BorderRadius = 5;
-            BorderWidth = 0;
+            BorderWidth = 1;
             ContentLayout = new ButtonContentLayout(ButtonContentLayout.ImagePosition.Right, 10);
             Image = "arrow_down.png";
         }

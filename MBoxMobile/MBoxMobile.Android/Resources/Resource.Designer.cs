@@ -26,6 +26,7 @@ namespace MBoxMobile.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::ModernHttpClient.Resource.String.library_name = global::MBoxMobile.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::MBoxMobile.Droid.Resource.Attribute.actionBarSize;
 			global::XFShapeView.Droid.Resource.Animation.abc_fade_in = global::MBoxMobile.Droid.Resource.Animation.abc_fade_in;
 			global::XFShapeView.Droid.Resource.Animation.abc_fade_out = global::MBoxMobile.Droid.Resource.Animation.abc_fade_out;
