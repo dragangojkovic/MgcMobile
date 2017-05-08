@@ -17,11 +17,21 @@ namespace MBoxMobile.Views
     {
         double screenWidth = 0.0;
         double screenHeight = 0.0;
+        bool AreTablesPopulated = false;
 
         bool filterOn = false;
-        int personalFilter = 1;
+        int? personalFilter = null;
         int timeFilter = 6274;
         bool workingTimeOnly = false;
+
+        int? locationId = null;
+        int? departmentId = null;
+        int? subDepartmentId = null;
+        int? equipmentId = null;
+        int? equipmentGroupId = null;
+        int? auxiliaryEquipmentId = null;
+
+        WebView wvLocations, wvDepartments, wvSubDepartments, wvEquipments, wvEquipmentGroups, wvAuxiliaryEquipments;
 
         public UptimePage()
         {
@@ -56,6 +66,11 @@ namespace MBoxMobile.Views
                 Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
                 Resources["FilterIsEnabled"] = false;
             }
+
+            UptimeAccordion.AccordionWidth = screenWidth - 30;
+            UptimeAccordion.AccordionHeight = 55.0;
+            UptimeAccordion.DataSource = GetEmptyAccordion();
+            UptimeAccordion.DataBind();
         }
 
         protected async override void OnAppearing()
@@ -78,17 +93,23 @@ namespace MBoxMobile.Views
             Resources["Uptime_EquipmentGroup"] = App.CurrentTranslation["Uptime_EquipmentGroup"];
             Resources["Uptime_AuxiliaryEquipment"] = App.CurrentTranslation["Uptime_AuxiliaryEquipment"];
 
-            Resources["IsLoading"] = true;
-            UptimeAccordion.AccordionWidth = screenWidth - 30;
-            UptimeAccordion.AccordionHeight = 55.0;
-            UptimeAccordion.DataSource = await GetAccordionData();
-            UptimeAccordion.DataBind();
-            Resources["IsLoading"] = false;
+            if (!AreTablesPopulated)
+            {
+                Resources["IsLoading"] = true;
+                UptimeAccordion.AccordionWidth = screenWidth - 30;
+                UptimeAccordion.AccordionHeight = 55.0;
+                UptimeAccordion.DataSource = await GetAccordionData();
+                UptimeAccordion.DataBind();
+                Resources["IsLoading"] = false;
+
+                AreTablesPopulated = true;
+            }
         }
 
         public async void ViewDetailClicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new UptimeDetailsPage());
+            if ((bool)Resources["IsLoading"] == false)
+                await Navigation.PushModalAsync(new UptimeDetailsPage(timeFilter, personalFilter, locationId, departmentId, subDepartmentId, equipmentId, equipmentGroupId, auxiliaryEquipmentId));
         }
 
         public void FilterOnClicked(object sender, EventArgs e)
@@ -141,68 +162,294 @@ namespace MBoxMobile.Views
                 Resources["CheckboxSource"] = "emptyroundcheck50.png";
         }
 
+        private List<AccordionSource> GetEmptyAccordion()
+        {
+            var result = new List<AccordionSource>();
+
+            #region Locations
+            var asLocations = new AccordionSource()
+            {
+                HeaderText = App.CurrentTranslation["Uptime_Locations"]
+            };
+            result.Add(asLocations);
+            #endregion
+
+            #region Departments
+            var asDepartments = new AccordionSource()
+            {
+                HeaderText = App.CurrentTranslation["Uptime_Departments"]
+            };
+            result.Add(asDepartments);
+            #endregion
+
+            #region SubDepartments
+            var asSubDepartments = new AccordionSource()
+            {
+                HeaderText = App.CurrentTranslation["Uptime_SubDepartments"]
+            };
+            result.Add(asSubDepartments);
+            #endregion
+
+            #region Equipments
+            var asEquipment = new AccordionSource()
+            {
+                HeaderText = App.CurrentTranslation["Uptime_Equipment"]
+            };
+            result.Add(asEquipment);
+            #endregion
+
+            #region EquipmentGroups
+            var asEquipmentGroup = new AccordionSource()
+            {
+                HeaderText = App.CurrentTranslation["Uptime_EquipmentGroup"]
+            };
+            result.Add(asEquipmentGroup);
+            #endregion
+
+            #region AuxiliaryEquipments
+            var asAuxiliaryEquipment = new AccordionSource()
+            {
+                HeaderText = App.CurrentTranslation["Uptime_AuxiliaryEquipment"]
+            };
+            result.Add(asAuxiliaryEquipment);
+            #endregion
+                        
+            return result;
+        }
+
         private async Task<List<AccordionSource>> GetAccordionData()
         {
             var result = new List<AccordionSource>();
 
             #region Locations
-            WebView wvLocations = new WebView();
+            wvLocations = new WebView();
             wvLocations.WidthRequest = screenWidth - 35;
             wvLocations.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvLocations.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
-
-            //List<EfficiencyLocation> locationList = await MBoxApiCalls.GetEfficiencyByLocation("853,885,913,1981", "1", "1");
-            List<EfficiencyLocation> locationList = await MBoxApiCalls.GetEfficiencyByLocation(App.LoggedUser.login.BelongToLocationID, personalFilter.ToString(), timeFilter.ToString());
-
-            string htmlHeaderLocations = HtmlTableSupport.Uptime_Locations_TableHeader();
-            string htmlBodyLocations = HtmlTableSupport.Uptime_Locations_TableBody(locationList);
-            string htmlHtmlLocations = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderLocations, htmlBodyLocations);
-            wvLocations.Source = new HtmlWebViewSource { Html = htmlHtmlLocations };
-            
+                        
             var asLocations = new AccordionSource()
             {
                 HeaderText = App.CurrentTranslation["Uptime_Locations"],
-                ContentItems = wvLocations
+                ContentItems = wvLocations,
+                ContentHeight = await PopulateWebView("wvLocations")
             };
             result.Add(asLocations);
             #endregion
 
+            #region Departments
+            wvDepartments = new WebView();
+            wvDepartments.WidthRequest = screenWidth - 35;
+            wvDepartments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+            wvDepartments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+
             var asDepartments = new AccordionSource()
             {
                 HeaderText = App.CurrentTranslation["Uptime_Departments"],
-                ContentItems = new Label() { Text = "Put something here!" }
+                ContentItems = wvDepartments,
+                ContentHeight = await PopulateWebView("wvDepartments")
             };
             result.Add(asDepartments);
+            #endregion
+
+            #region SubDepartments
+            wvSubDepartments = new WebView();
+            wvSubDepartments.WidthRequest = screenWidth - 35;
+            wvSubDepartments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+            wvSubDepartments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
             var asSubDepartments = new AccordionSource()
             {
                 HeaderText = App.CurrentTranslation["Uptime_SubDepartments"],
-                ContentItems = new Label() { Text = "Put something here!" }
+                ContentItems = wvSubDepartments,
+                ContentHeight = await PopulateWebView("wvSubDepartments")
             };
             result.Add(asSubDepartments);
+            #endregion
+
+            #region Equipments
+            wvEquipments = new WebView();
+            wvEquipments.WidthRequest = screenWidth - 35;
+            wvEquipments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+            wvEquipments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
             var asEquipment = new AccordionSource()
             {
                 HeaderText = App.CurrentTranslation["Uptime_Equipment"],
-                ContentItems = new Label() { Text = "Put something here!" }
+                ContentItems = wvEquipments,
+                ContentHeight = await PopulateWebView("wvEquipments")
             };
             result.Add(asEquipment);
+            #endregion
+
+            #region EquipmentGroups
+            wvEquipmentGroups = new WebView();
+            wvEquipmentGroups.WidthRequest = screenWidth - 35;
+            wvEquipmentGroups.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+            wvEquipmentGroups.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
             var asEquipmentGroup = new AccordionSource()
             {
                 HeaderText = App.CurrentTranslation["Uptime_EquipmentGroup"],
-                ContentItems = new Label() { Text = "Put something here!" }
+                ContentItems = wvEquipmentGroups,
+                ContentHeight = await PopulateWebView("wvEquipmentGroups")
             };
             result.Add(asEquipmentGroup);
+            #endregion
+
+            #region AuxiliaryEquipments
+            wvAuxiliaryEquipments = new WebView();
+            wvAuxiliaryEquipments.WidthRequest = screenWidth - 35;
+            wvAuxiliaryEquipments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+            wvAuxiliaryEquipments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
             var asAuxiliaryEquipment = new AccordionSource()
             {
                 HeaderText = App.CurrentTranslation["Uptime_AuxiliaryEquipment"],
-                ContentItems = new Label() { Text = "Put something here!" }
+                ContentItems = wvAuxiliaryEquipments,
+                ContentHeight = await PopulateWebView("wvAuxiliaryEquipments")
             };
             result.Add(asAuxiliaryEquipment);
+            #endregion
+
+            #region Navigating handlers
+
+            wvLocations.Navigating += async (s, e) =>
+            {
+                if (e.Url != string.Empty)
+                {
+                    locationId = int.Parse(e.Url.Split('=').LastOrDefault());
+                }
+                e.Cancel = true;
+
+                Resources["IsLoading"] = true;
+                asDepartments.ContentHeight = await PopulateWebView("wvDepartments");
+                asSubDepartments.ContentHeight = await PopulateWebView("wvSubDepartments");
+                asEquipment.ContentHeight = await PopulateWebView("wvEquipments");
+                asEquipmentGroup.ContentHeight = await PopulateWebView("wvEquipmentGroups");
+                asAuxiliaryEquipment.ContentHeight = await PopulateWebView("wvAuxiliaryEquipments");
+                Resources["IsLoading"] = false;
+            };
+
+            wvDepartments.Navigating += async (s, e) =>
+            {
+                if (e.Url != string.Empty)
+                {
+                    departmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                }
+                e.Cancel = true;
+
+                Resources["IsLoading"] = true;
+                asSubDepartments.ContentHeight = await PopulateWebView("wvSubDepartments");
+                asEquipment.ContentHeight = await PopulateWebView("wvEquipments");
+                asEquipmentGroup.ContentHeight = await PopulateWebView("wvEquipmentGroups");
+                asAuxiliaryEquipment.ContentHeight = await PopulateWebView("wvAuxiliaryEquipments");
+                Resources["IsLoading"] = false;
+            };
+
+            wvSubDepartments.Navigating += async (s, e) =>
+            {
+                if (e.Url != string.Empty)
+                {
+                    subDepartmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                }
+                e.Cancel = true;
+
+                Resources["IsLoading"] = true;
+                asEquipment.ContentHeight = await PopulateWebView("wvEquipments");
+                asEquipmentGroup.ContentHeight = await PopulateWebView("wvEquipmentGroups");
+                asAuxiliaryEquipment.ContentHeight = await PopulateWebView("wvAuxiliaryEquipments");
+                Resources["IsLoading"] = false;
+            };
+
+            wvEquipments.Navigating += (s, e) =>
+            {
+                if (e.Url != string.Empty)
+                {
+                    equipmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                }
+                e.Cancel = true;
+            };
+            
+            wvEquipmentGroups.Navigating += (s, e) =>
+            {
+                if (e.Url != string.Empty)
+                {
+                    equipmentGroupId = int.Parse(e.Url.Split('=').LastOrDefault());
+                }
+                e.Cancel = true;
+            };
+
+            wvAuxiliaryEquipments.Navigating += (s, e) =>
+            {
+                if (e.Url != string.Empty)
+                {
+                    auxiliaryEquipmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                }
+                e.Cancel = true;
+            };
+            #endregion
 
             return result;
+        }
+
+        private async Task<double> PopulateWebView(string webViewName)
+        {
+            double wvHeight = 0;
+            const double WV_ROW_Height = 31.75;
+
+            switch (webViewName)
+            {
+                case "wvLocations":
+                    IEnumerable<EfficiencyModel> locationList = await MBoxApiCalls.GetEfficiencyByLocation(personalFilter, timeFilter);
+                    string htmlHeaderLocations = HtmlTableSupport.Uptime_Locations_TableHeader();
+                    string htmlBodyLocations = HtmlTableSupport.Uptime_Large_TableBody(locationList);
+                    string htmlHtmlLocations = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderLocations, htmlBodyLocations);
+                    wvLocations.Source = new HtmlWebViewSource { Html = htmlHtmlLocations };
+                    wvHeight = (locationList.Count() + 2) * WV_ROW_Height + 7;
+                    break;
+                case "wvDepartments":
+                    IEnumerable<EfficiencyModel> departmentsList = await MBoxApiCalls.GetEfficiencyByDepartment(locationId, personalFilter, timeFilter);
+                    string htmlHeaderDepartments = HtmlTableSupport.Uptime_Large_TableHeader("Department");
+                    string htmlBodyDepartments = HtmlTableSupport.Uptime_Large_TableBody(departmentsList);
+                    string htmlHtmlDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDepartments, htmlBodyDepartments);
+                    wvDepartments.Source = new HtmlWebViewSource { Html = htmlHtmlDepartments };
+                    wvHeight = (departmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    break;
+                case "wvSubDepartments":
+                    IEnumerable<EfficiencyModel> subDepartmentsList = await MBoxApiCalls.GetEfficiencyBySubDepartment(locationId, departmentId, personalFilter, timeFilter);
+                    string htmlHeaderSubDepartments = HtmlTableSupport.Uptime_Large_TableHeader("SubDepartment");
+                    string htmlBodySubDepartments = HtmlTableSupport.Uptime_Large_TableBody(subDepartmentsList);
+                    string htmlHtmlSubDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderSubDepartments, htmlBodySubDepartments);
+                    wvSubDepartments.Source = new HtmlWebViewSource { Html = htmlHtmlSubDepartments };
+                    wvHeight = (subDepartmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    break;
+                case "wvEquipments":
+                    IEnumerable<EfficiencyModel> equipmentsList = await MBoxApiCalls.GetEfficiencyByEquipmentType(locationId, departmentId, subDepartmentId, personalFilter, timeFilter);
+                    string htmlHeaderEquipments = HtmlTableSupport.Uptime_Large_TableHeader("Equipment");
+                    string htmlBodyEquipments = HtmlTableSupport.Uptime_Large_TableBody(equipmentsList);
+                    string htmlHtmlEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipments, htmlBodyEquipments);
+                    wvEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlEquipments };
+                    wvHeight = (equipmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    break;
+                case "wvEquipmentGroups":
+                    IEnumerable<EfficiencyModel> equipmentGroupsList = await MBoxApiCalls.GetEfficiencyByEquipmentGroup(locationId, departmentId, subDepartmentId, personalFilter, timeFilter);
+                    string htmlHeaderEquipmentGroups = HtmlTableSupport.Uptime_Large_TableHeader("EquipmentGroup");
+                    string htmlBodyEquipmentGroups = HtmlTableSupport.Uptime_Large_TableBody(equipmentGroupsList);
+                    string htmlHtmlEquipmentGroups = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipmentGroups, htmlBodyEquipmentGroups);
+                    wvEquipmentGroups.Source = new HtmlWebViewSource { Html = htmlHtmlEquipmentGroups };
+                    wvHeight = (equipmentGroupsList.Count() + 1) * WV_ROW_Height + 7;
+                    break;
+                case "wvAuxiliaryEquipments":
+                    IEnumerable<EfficiencyModel> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyByAuxiliaryType(locationId, departmentId, subDepartmentId, personalFilter, timeFilter);
+                    string htmlHeaderAuxiliaryEquipments = HtmlTableSupport.Uptime_Small_TableHeader();
+                    string htmlBodyAuxiliaryEquipments = HtmlTableSupport.Uptime_Small_TableBody(auxiliaryEquipmentsList);
+                    string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlBodyAuxiliaryEquipments);
+                    wvAuxiliaryEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlAuxiliaryEquipments };
+                    wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    break;
+            }
+
+            return wvHeight;
         }
     }
 }

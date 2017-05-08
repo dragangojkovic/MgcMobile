@@ -46,7 +46,6 @@
             <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
             <StackLayout>
               <!-- Content (tables) area -->
-              <ActivityIndicator IsVisible="{DynamicResource IsLoading}" IsRunning="{DynamicResource IsLoading}" Color="White" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"></ActivityIndicator>
               <StackLayout HorizontalOptions="CenterAndExpand">
                 <ctrl:Accordion x:Name="UptimeAccordion" />
               </StackLayout>
@@ -55,6 +54,12 @@
         </ScrollView>
       </StackLayout>
       <ctrl:RoundedButton Text="{DynamicResource Uptime_ViewDetail}" Style="{StaticResource ButtonBlueStyle}" Clicked="ViewDetailClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
+      <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
+      <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
+        <StackLayout>
+          <ActivityIndicator BackgroundColor="Transparent" IsRunning="{DynamicResource IsLoading}" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand" Color="#000000" />
+        </StackLayout>
+      </Frame>
     </Grid>
   </StackLayout>
 </ContentPage>

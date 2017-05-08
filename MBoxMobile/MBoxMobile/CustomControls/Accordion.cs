@@ -70,8 +70,10 @@ namespace MBoxMobile.CustomControls
                     var vAccordionContent = new ContentView()
                     {
                         Content = vSingleItem.ContentItems,
-                        IsVisible = false
+                        IsVisible = false,
+                        HeightRequest = vSingleItem.ContentHeight
                     };
+
                     if (vFirst)
                     {
                         vHeaderButton.IsExpanded = mFirstExpanded;
@@ -96,6 +98,11 @@ namespace MBoxMobile.CustomControls
             }
             mMainLayout = vMainLayout;
             Content = mMainLayout;
+        }
+
+        public void DataUpdate()
+        {
+
         }
 
         void OnAccordionButtonClicked(object sender, EventArgs args)
@@ -124,6 +131,7 @@ namespace MBoxMobile.CustomControls
             {
                 vSenderButton.IsExpanded = true;
                 vSenderButton.Image = "arrow_up.png";
+                vSenderButton.AssosiatedContent.HeightRequest = DataSource.Find(x => x.HeaderText == vSenderButton.Text).ContentHeight;
             }
             vSenderButton.AssosiatedContent.IsVisible = vSenderButton.IsExpanded;
         }
@@ -160,6 +168,7 @@ namespace MBoxMobile.CustomControls
         public Color HeaderTextColor { get; set; }
         public Color HeaderBackGroundColor { get; set; }
         public View ContentItems { get; set; }
+        public double ContentHeight { get; set; }
     }
 
     public class SimpleObject

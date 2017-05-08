@@ -26,6 +26,7 @@ namespace MBoxMobile.Models
     public class EfficiencyEquipmentType : EfficiencyModel { }
     public class EfficiencyEquipmentGroup : EfficiencyModel { }
     public class EfficiencyAuxiliary : EfficiencyModel { }
+
     public class EfficiencyMachine
     {
         public string MachineNumber { get; set; }
@@ -46,7 +47,7 @@ namespace MBoxMobile.Models
         public string Location { get; set; }
         public string Department { get; set; }
         public string DepartmentSubName { get; set; }
-        public string Uptime { get; set; }
+        public string SystemData { get; set; }
 
     }
 
@@ -67,13 +68,59 @@ namespace MBoxMobile.Models
         public string Location { get; set; }
         public string Department { get; set; }
         public string SubDepartment { get; set; }
-        public int? Uptime { get; set; }
+        public string SystemData { get; set; }
         public string Stoptime { get; set; }
     }
+
+    #region ListClasses
 
     public class EfficiencyLocationList
     {
         [JsonProperty("d")]
         public List<EfficiencyLocation> EfficiencyLocations { get; set; }
     }
+
+    public class EfficiencyDepartmentList
+    {
+        [JsonProperty("d")]
+        public List<EfficiencyDepartment> EfficiencyDepartments { get; set; }
+    }
+
+    public class EfficiencySubDepartmentList
+    {
+        [JsonProperty("d")]
+        public List<EfficiencySubDepartment> EfficiencySubDepartments { get; set; }
+    }
+
+    public class EfficiencyEquipmentTypeList
+    {
+        [JsonProperty("d")]
+        public List<EfficiencyEquipmentType> EfficiencyEquipmentTypes { get; set; }
+    }
+
+    public class EfficiencyEquipmentGroupList
+    {
+        [JsonProperty("d")]
+        public List<EfficiencyEquipmentGroup> EfficiencyEquipmentGroups { get; set; }
+    }
+
+    public class EfficiencyAuxiliaryList
+    {
+        [JsonProperty("d")]
+        public List<EfficiencyAuxiliary> EfficiencyAuxiliaries { get; set; }
+    }
+
+    public class EfficiencyMachineList
+    {
+        [JsonProperty("d")]
+        public List<EfficiencyMachine> EfficiencyMachines { get; set; }
+    }
+
+    public class EfficiencyAuxiliaryEquipmentList
+    {
+        [JsonProperty("d")]
+        public List<EfficiencyAuxiliaryEquipment> EfficiencyAuxiliaryEquipments { get; set; }
+    }
+
+    #endregion
 }

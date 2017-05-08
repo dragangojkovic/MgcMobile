@@ -45,6 +45,12 @@
         </ScrollView>
       </StackLayout>
       <ctrl:RoundedButton Text="{DynamicResource UptimeDetails_Close}" Style="{StaticResource ButtonBlueStyle}" Clicked="DetailCloseClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
+      <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
+      <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
+        <StackLayout>
+          <ActivityIndicator BackgroundColor="Transparent" IsRunning="{DynamicResource IsLoading}" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand" Color="#000000" />
+        </StackLayout>
+      </Frame>
     </Grid>
   </StackLayout>
 </ContentPage>

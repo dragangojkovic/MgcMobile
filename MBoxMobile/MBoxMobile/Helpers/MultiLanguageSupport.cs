@@ -123,6 +123,13 @@ namespace MBoxMobile.Helpers
             translation.Add("Uptime_EquipmentGroup", "Equipment group");
             translation.Add("Uptime_AuxiliaryEquipment", "Auxiliary equipment");
             //
+            translation.Add("Uptime_LocationsTableEquipment", "Equipment (current status)");
+            translation.Add("Uptime_Location", "Location");
+            translation.Add("Uptime_Uptime", "Uptime");
+            translation.Add("Uptime_On", "On");
+            translation.Add("Uptime_Off", "Off");
+            translation.Add("Uptime_Errors", "Errors");
+            //
             translation.Add("Uptime_FilterTimeTitle", "Personal Filter");
             translation.Add("Uptime_FilterTimeDescription", "Please choose a personal filter");
             translation.Add("Uptime_FilterTimeToday", "Today");
@@ -136,13 +143,6 @@ namespace MBoxMobile.Helpers
             translation.Add("Uptime_FilterTimeLastQuarter", "Last Quarter");
             translation.Add("Uptime_FilterTimeCurrentYear", "Current Year");
             translation.Add("Uptime_FilterTimeCancel", "Cancel");
-            //
-            translation.Add("Uptime_LocationsTableEquipment", "Equipment (current status)");
-            translation.Add("Uptime_LocationsTableLocations", "Locations");
-            translation.Add("Uptime_LocationsTableUptime", "Uptime");
-            translation.Add("Uptime_LocationsTableOn", "On");
-            translation.Add("Uptime_LocationsTableOff", "Off");
-            translation.Add("Uptime_LocationsTableErrors", "Errors");
             //Uptime detail page
             translation.Add("UptimeDetails_FilterLabel", "Filter:");
             translation.Add("UptimeDetails_FilterAll", "All");
@@ -152,7 +152,22 @@ namespace MBoxMobile.Helpers
             translation.Add("UptimeDetails_Detail", "Detail");
             translation.Add("UptimeDetails_AuxiliaryEquipment", "Auxiliary equipment");
             translation.Add("UptimeDetails_Close", "Close");
-            
+            //
+            translation.Add("UptimeDetails_Current", "Current");
+            translation.Add("UptimeDetails_OffTime", "Off Time");
+            translation.Add("UptimeDetails_Status", "Status");
+            translation.Add("UptimeDetails_RunTime", "Time(DD:HH:MM)");
+            translation.Add("UptimeDetails_Stops", "Stops");
+            translation.Add("UptimeDetails_StopTime", "Time(DD:HH:MM)");
+            translation.Add("UptimeDetails_Group", "Group");
+            translation.Add("UptimeDetails_Department", "Department");
+            translation.Add("UptimeDetails_SubDepartment", "Sub Department");
+            translation.Add("UptimeDetails_Type", "Type");
+            translation.Add("UptimeDetails_Remark", "Remark");
+            translation.Add("UptimeDetails_SystemData", "System Data");
+            //
+            translation.Add("UptimeDetails_Name", "Name");
+
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");
             translation.Add("TestMultiLanguage_Label1", "ContentPage");
