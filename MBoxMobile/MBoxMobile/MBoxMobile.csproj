@@ -42,15 +42,18 @@
     <Compile Include="CustomControls\RectangularEntry.cs" />
     <Compile Include="CustomControls\RectangularPicker.cs" />
     <Compile Include="CustomControls\RoundedButton.cs" />
+    <Compile Include="CustomControls\RoundedEditor.cs" />
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\FilterSupport.cs" />
     <Compile Include="Helpers\HtmlTableSupport.cs" />
     <Compile Include="Helpers\MultiLanguageSupport.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\UserTypesSupport.cs" />
     <Compile Include="Interfaces\ICloseApplication.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Models\CustomerDetail.cs" />
     <Compile Include="Models\Efficiency.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Services\MBoxApiCalls.cs" />
     <Compile Include="TestAppPage.xaml.cs">
@@ -59,6 +62,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\BarcodePage.xaml.cs">
       <DependentUpon>BarcodePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InputNotificationsAcknowledgePage.xaml.cs">
+      <DependentUpon>InputNotificationsAcknowledgePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InputNotificationsDescriptionPage.xaml.cs">
+      <DependentUpon>InputNotificationsDescriptionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InputNotificationsKWhPage.xaml.cs">
+      <DependentUpon>InputNotificationsKWhPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InputNotificationsSolutionPage.xaml.cs">
+      <DependentUpon>InputNotificationsSolutionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UptimeDetailsPage.xaml.cs">
       <DependentUpon>UptimeDetailsPage.xaml</DependentUpon>
@@ -127,6 +142,14 @@
     </Reference>
     <Reference Include="Plugin.Permissions.Abstractions, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Plugin.Permissions.1.2.1\lib\portable-net45+wp80+win+wpa81\Plugin.Permissions.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Settings, Version=2.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions, Version=2.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.4\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -249,7 +272,30 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InputNotificationsKWhPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InputNotificationsAcknowledgePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InputNotificationsDescriptionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InputNotificationsSolutionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

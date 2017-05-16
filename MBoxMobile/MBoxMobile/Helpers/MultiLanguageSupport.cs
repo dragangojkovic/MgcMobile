@@ -153,6 +153,7 @@ namespace MBoxMobile.Helpers
             translation.Add("UptimeDetails_AuxiliaryEquipment", "Auxiliary equipment");
             translation.Add("UptimeDetails_Close", "Close");
             //
+            translation.Add("UptimeDetails_Name", "Name");
             translation.Add("UptimeDetails_Current", "Current");
             translation.Add("UptimeDetails_OffTime", "Off Time");
             translation.Add("UptimeDetails_Status", "Status");
@@ -165,8 +166,34 @@ namespace MBoxMobile.Helpers
             translation.Add("UptimeDetails_Type", "Type");
             translation.Add("UptimeDetails_Remark", "Remark");
             translation.Add("UptimeDetails_SystemData", "System Data");
+
+            //Electricity Usage
+            translation.Add("ElectricityUsage_Title", "Electricity usage");
+            translation.Add("ElectricityUsage_Areas", "Areas");
+            translation.Add("ElectricityUsage_ConsumingPower", "Equipment off but consuming electricity");
+
+            //InputNotificationsKWH page
+            translation.Add("InputNotificationsKWH_Title", "KWH");
+            translation.Add("InputNotificationsKWH_CauseButtonText", "Tap to choose a cause");
+            translation.Add("InputNotificationsKWH_OpinionPlaceholder", "Please describe your opinion");
+            translation.Add("InputNotificationsKWH_SubmitButtonText", "Submit");
+            translation.Add("InputNotificationsKWH_CancelButtonText", "Cancel");
+            translation.Add("InputNotificationsKWH_MachineNumberTitle", "M#");          ///fixed???
+            translation.Add("InputNotificationsKWH_MachineNameTitle", "Machine name");
+            translation.Add("InputNotificationsKWH_EquipTypeNameTitle", "Equipment type");
+            translation.Add("InputNotificationsKWH_EquipGroupNameTitle", "Equipment group");
+            translation.Add("InputNotificationsKWH_KwhTitle", "kWh");
+            translation.Add("InputNotificationsKWH_OperatorTitle", "Operator");
+            translation.Add("InputNotificationsKWH_ProductTitle", "Product");
+            translation.Add("InputNotificationsKWH_DateTimeTitle", "Date time");
+            translation.Add("InputNotificationsKWH_NotificationTitle", "Notification");
+            translation.Add("InputNotificationsKWH_LocationTitle", "Location");
+            translation.Add("InputNotificationsKWH_DepartmentTitle", "Department");
+            translation.Add("InputNotificationsKWH_SubDepartmentTitle", "Subdepartment");
             //
-            translation.Add("UptimeDetails_Name", "Name");
+            translation.Add("InputNotificationsKWH_CauseASTitle", "Cause");
+            translation.Add("InputNotificationsKWH_CauseASDescription", "Tap to choose a cause");
+            translation.Add("InputNotificationsKWH_CauseASCancel", "Cancel");
 
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");

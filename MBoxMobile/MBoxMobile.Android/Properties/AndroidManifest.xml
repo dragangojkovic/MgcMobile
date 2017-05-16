@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mgc.mboxtest" android:installLocation="auto" android:versionCode="7" android:versionName="0.1.6">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.mgc.mbox" android:installLocation="auto" android:versionCode="8" android:versionName="0.1.7">
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
 	<uses-sdk android:minSdkVersion="15" />
@@ -7,5 +7,14 @@
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.mgc.mbox.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>
 		</provider>
+  
+    <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
+    <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+      <intent-filter>
+          <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+          <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+          <category android:name="com.mgc.mbox" />
+      </intent-filter>
+    </receiver>
 	</application>
 </manifest>

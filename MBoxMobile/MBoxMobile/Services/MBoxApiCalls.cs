@@ -93,7 +93,6 @@ namespace MBoxMobile.Services
         }
 
         #region Uptime
-
         public static async Task<List<EfficiencyLocation>> GetEfficiencyByLocation(int? filterId, int periodId)
         {
             string sFilterId = (filterId == null) ? "" : filterId.ToString();
@@ -210,7 +209,17 @@ namespace MBoxMobile.Services
             else
                 return returnedObj.EfficiencyAuxiliaryEquipments;
         }
+        #endregion
 
+        #region InputNotification
+        public static async Task<List<MaterialModel>> GetElectricityWasteCauseList()
+        {
+            MaterialModelList returnedObj = await GetObjectOrObjectList<MaterialModelList>("", BaseUri + "MgcApi.svc/GetElectricityWasteCauseList");
+            if (returnedObj == null)
+                return new List<MaterialModel>();
+            else
+                return returnedObj.Materials;
+        }
         #endregion
     }
 }

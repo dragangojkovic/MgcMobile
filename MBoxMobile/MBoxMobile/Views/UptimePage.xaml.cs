@@ -86,12 +86,12 @@ namespace MBoxMobile.Views
             Resources["Uptime_Filter"] = App.CurrentTranslation["Uptime_Filter"];                     //this can be any value from GetPersonalFilters()
             Resources["Uptime_FilterTime"] = App.CurrentTranslation[currentTimeFilter];
             Resources["Uptime_WorkingTimeOnly"] = App.CurrentTranslation["Uptime_WorkingTimeOnly"];
-            Resources["Uptime_Locations"] = App.CurrentTranslation["Uptime_Locations"];
-            Resources["Uptime_Departments"] = App.CurrentTranslation["Uptime_Departments"];
-            Resources["Uptime_SubDepartments"] = App.CurrentTranslation["Uptime_SubDepartments"];
-            Resources["Uptime_Equipment"] = App.CurrentTranslation["Uptime_Equipment"];
-            Resources["Uptime_EquipmentGroup"] = App.CurrentTranslation["Uptime_EquipmentGroup"];
-            Resources["Uptime_AuxiliaryEquipment"] = App.CurrentTranslation["Uptime_AuxiliaryEquipment"];
+            //Resources["Uptime_Locations"] = App.CurrentTranslation["Uptime_Locations"];
+            //Resources["Uptime_Departments"] = App.CurrentTranslation["Uptime_Departments"];
+            //Resources["Uptime_SubDepartments"] = App.CurrentTranslation["Uptime_SubDepartments"];
+            //Resources["Uptime_Equipment"] = App.CurrentTranslation["Uptime_Equipment"];
+            //Resources["Uptime_EquipmentGroup"] = App.CurrentTranslation["Uptime_EquipmentGroup"];
+            //Resources["Uptime_AuxiliaryEquipment"] = App.CurrentTranslation["Uptime_AuxiliaryEquipment"];
 
             if (!AreTablesPopulated)
             {

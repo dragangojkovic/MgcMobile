@@ -52,6 +52,12 @@
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
       </Style>
+      <Style x:Key="EntryNotificationStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource BlueLight}" />
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
 
       <!-- Button styles -->
       <Style x:Key="ButtonBlackStyle" TargetType="Button">

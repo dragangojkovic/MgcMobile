@@ -83,7 +83,8 @@ namespace MBoxMobile.Views
 
         private async void Button4_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Alert", "You have clicked Notifications", "OK");
+            //await DisplayAlert("Alert", "You have clicked Notifications", "OK");
+            await Navigation.PushModalAsync(new InputNotificationsKWhPage(new Models.NotificationModel()));
         }
 
         private async void Button5_Clicked(object sender, EventArgs e)
