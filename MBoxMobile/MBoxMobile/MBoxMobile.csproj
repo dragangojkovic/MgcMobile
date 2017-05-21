@@ -51,17 +51,32 @@
     <Compile Include="Helpers\UserTypesSupport.cs" />
     <Compile Include="Interfaces\ICloseApplication.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
+    <Compile Include="Models\Auxiliary.cs" />
     <Compile Include="Models\CustomerDetail.cs" />
     <Compile Include="Models\Efficiency.cs" />
+    <Compile Include="Models\Electricity.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\Production.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Services\MBoxApiCalls.cs" />
     <Compile Include="TestAppPage.xaml.cs">
       <DependentUpon>TestAppPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\AuxiliaryEquipmentDetailsPage.xaml.cs">
+      <DependentUpon>AuxiliaryEquipmentDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AuxiliaryEquipmentPage.xaml.cs">
+      <DependentUpon>AuxiliaryEquipmentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BarcodePage.xaml.cs">
       <DependentUpon>BarcodePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ElectricityUsageDetailsPage.xaml.cs">
+      <DependentUpon>ElectricityUsageDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ElectricityUsagePage.xaml.cs">
+      <DependentUpon>ElectricityUsagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InputNotificationsAcknowledgePage.xaml.cs">
       <DependentUpon>InputNotificationsAcknowledgePage.xaml</DependentUpon>
@@ -74,6 +89,12 @@
     </Compile>
     <Compile Include="Views\InputNotificationsSolutionPage.xaml.cs">
       <DependentUpon>InputNotificationsSolutionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductionDetailsPage.xaml.cs">
+      <DependentUpon>ProductionDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductionPage.xaml.cs">
+      <DependentUpon>ProductionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UptimeDetailsPage.xaml.cs">
       <DependentUpon>UptimeDetailsPage.xaml</DependentUpon>
@@ -292,6 +313,42 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\InputNotificationsSolutionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AuxiliaryEquipmentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AuxiliaryEquipmentDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ProductionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ProductionDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ElectricityUsagePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ElectricityUsageDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

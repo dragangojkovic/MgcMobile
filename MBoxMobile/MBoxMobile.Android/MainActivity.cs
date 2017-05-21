@@ -65,7 +65,6 @@ namespace MBoxMobile.Droid
                 else
                 {
                     Log.Info("Main Activity", "This device is not supported");
-                    //Finish();
                 }
                 return false;
             }

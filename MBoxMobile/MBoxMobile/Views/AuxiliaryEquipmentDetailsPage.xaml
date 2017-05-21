@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
+             x:Class="MBoxMobile.Views.AuxiliaryEquipmentDetailsPage"
+             Title="AuxiliaryEquipmentDetailsPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="Filter4ButtonWidth">0</x:Double>
+      <x:Double x:Key="Filter4ButtonHeight">0</x:Double>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
+    <Grid VerticalOptions="FillAndExpand">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="{DynamicResource ContentMinHeight}" />
+        <RowDefinition Height="60" />
+      </Grid.RowDefinitions>
+      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}" Grid.Row="0" Grid.Column="0">
+        <StackLayout VerticalOptions="FillAndExpand" Padding="5">
+          <StackLayout>
+            <!-- Content (tables) area -->
+            <StackLayout HorizontalOptions="CenterAndExpand">
+              <WebView x:Name="AuxiliaryDetailsWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="{DynamicResource WebViewWidth}" HeightRequest="{DynamicResource WebViewHeight}" />
+            </StackLayout>
+          </StackLayout>
+        </StackLayout>
+      </StackLayout>
+      <ctrl:RoundedButton Text="{DynamicResource Common_Close}" Style="{StaticResource ButtonBlueStyle}" FontSize="Medium" Clicked="DetailCloseClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
+      <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
+      <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
+        <StackLayout>
+          <ActivityIndicator BackgroundColor="Transparent" IsRunning="{DynamicResource IsLoading}" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand" Color="#000000" />
+        </StackLayout>
+      </Frame>
+    </Grid>
+  </StackLayout>
+</ContentPage>

@@ -1,5 +1,4 @@
-﻿using MBoxMobile.CustomControls;
-using MBoxMobile.Helpers;
+﻿using MBoxMobile.Helpers;
 using MBoxMobile.Interfaces;
 using MBoxMobile.Models;
 using MBoxMobile.Services;
@@ -14,42 +13,39 @@ using Xamarin.Forms.Xaml;
 namespace MBoxMobile.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UptimeDetailsPage : ContentPage
+    public partial class ProductionDetailsPage : ContentPage
     {
         double screenWidth = 0.0;
         double screenHeight = 0.0;
-        bool AreTablesPopulated = false;
+        bool IsTablePopulated = false;
 
         int periodId;
         int? filterId = null;
-        int? locationId = null;
-        int? departmentId = null;
-        int? subDepartmentId = null;
-        int? equipmentTypeId = null;
-        int? equipmentGroupId = null;
-        int? auxiliaryTypeId = null;
+        int equipmentTypeId;
+        string equipmentName = string.Empty;
+        string descCN = string.Empty;
         Filter4State mode = Filter4State.All;
 
-        WebView wvDetails, wvAuxiliaryEquipments;
-
-        public UptimeDetailsPage(int perid, int? filtid, int? locid, int? depid, int? subdid, int? equipid, int? equipgroupid, int? auxid)
+        public ProductionDetailsPage(int perid, int? filtid, int equipid, string equipname, string desccn)
         {
             InitializeComponent();
 
             periodId = perid;
             filterId = filtid;
-            locationId = locid;
-            departmentId = depid;
-            subDepartmentId = subdid;
             equipmentTypeId = equipid;
-            equipmentGroupId = equipgroupid;
-            auxiliaryTypeId = auxid;
+            equipmentName = equipname;
+            descCN = desccn;
 
             screenWidth = DependencyService.Get<IDisplay>().Width;
             screenHeight = DependencyService.Get<IDisplay>().Height;
 
-            Resources["Filter4ButtonWidth"] = screenWidth * 0.18;
+            Resources["ProductionDetails_Title"] = equipmentName;
+
+            Resources["Filter4ButtonWidth"] = (screenWidth - 20) * 0.23;
             Resources["Filter4ButtonHeight"] = screenWidth * 0.10;
+
+            Resources["WebViewWidth"] = screenWidth - 35;
+            Resources["WebViewHeight"] = screenHeight - 70;
             Resources["ContentMinHeight"] = screenHeight - 60.0;
 
             Resources["FilterLabelMargin"] = new Thickness(5, FilterSupport.GetFilterLabelMarginTop(screenWidth), 0, 0);
@@ -82,17 +78,8 @@ namespace MBoxMobile.Views
                     Resources["FilterErrorsStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
                     break;
             }
-            
-            UptimeDetailsAccordion.AccordionWidth = screenWidth - 30;
-            UptimeDetailsAccordion.AccordionHeight = 55.0;
-            UptimeDetailsAccordion.DataSource = GetEmptyAccordion();
-            UptimeDetailsAccordion.DataBind();
 
-            wvDetails.Navigating += (s, e) =>
-            {
-                e.Cancel = true;
-            };
-            wvAuxiliaryEquipments.Navigating += (s, e) =>
+            ProductionDetailsWebView.Navigating += (s, e) =>
             {
                 e.Cancel = true;
             };
@@ -102,25 +89,19 @@ namespace MBoxMobile.Views
         {
             base.OnAppearing();
 
-            Resources["UptimeDetails_FilterLabel"] = App.CurrentTranslation["UptimeDetails_FilterLabel"];
             Resources["Common_FilterAll"] = App.CurrentTranslation["Common_FilterAll"];
             Resources["Common_FilterOn"] = App.CurrentTranslation["Common_FilterOn"];
             Resources["Common_FilterOff"] = App.CurrentTranslation["Common_FilterOff"];
             Resources["Common_FilterErrors"] = App.CurrentTranslation["Common_FilterErrors"];
-            Resources["UptimeDetails_Detail"] = App.CurrentTranslation["UptimeDetails_Detail"];
-            Resources["UptimeDetails_AuxiliaryEquipment"] = App.CurrentTranslation["UptimeDetails_AuxiliaryEquipment"];
             Resources["Common_Close"] = App.CurrentTranslation["Common_Close"];
 
-            if (!AreTablesPopulated)
+            if (!IsTablePopulated)
             {
                 Resources["IsLoading"] = true;
-                UptimeDetailsAccordion.AccordionWidth = screenWidth - 30;
-                UptimeDetailsAccordion.AccordionHeight = 55.0;
-                UptimeDetailsAccordion.DataSource = await GetAccordionData();
-                UptimeDetailsAccordion.DataBind();
+                await PopulateWebView();
                 Resources["IsLoading"] = false;
 
-                AreTablesPopulated = true;
+                IsTablePopulated = true;
             }
         }
 
@@ -176,94 +157,39 @@ namespace MBoxMobile.Views
         private async void DoFiltering()
         {
             Resources["IsLoading"] = true;
-            UptimeDetailsAccordion.DataSource = await GetAccordionData();
-            UptimeDetailsAccordion.DataBind();
+            await PopulateWebView();
             Resources["IsLoading"] = false;
         }
 
-        private List<AccordionSource> GetEmptyAccordion()
+        private async Task PopulateWebView()
         {
-            var result = new List<AccordionSource>();
-
-            wvDetails = new WebView();
-            wvAuxiliaryEquipments = new WebView();
-
-            var asDetails = new AccordionSource()
+            IEnumerable<ProductionDetail> detailList = await MBoxApiCalls.GetProductionPerMachine(filterId, periodId, descCN, equipmentTypeId, (int)mode);
+            string htmlHeaderDetails, htmlContentDetails;
+            switch (descCN)
             {
-                HeaderText = App.CurrentTranslation["UptimeDetails_Detail"]
-            };
-            result.Add(asDetails);
-
-            var asAuxiliaryEquipment = new AccordionSource()
-            {
-                HeaderText = App.CurrentTranslation["UptimeDetails_AuxiliaryEquipment"]
-            };
-            result.Add(asAuxiliaryEquipment);
-
-            return result;
-        }
-
-        private async Task<List<AccordionSource>> GetAccordionData()
-        {
-            var result = new List<AccordionSource>();
-
-            #region Details
-            wvDetails.WidthRequest = screenWidth - 35;
-            wvDetails.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
-            wvDetails.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
-
-            var asDetails = new AccordionSource()
-            {
-                HeaderText = App.CurrentTranslation["UptimeDetails_Detail"],
-                ContentItems = wvDetails,
-                ContentHeight = await PopulateWebView("wvDetails")
-            };
-            result.Add(asDetails);
-            #endregion
-
-            #region AuxiliaryEquipment
-            wvAuxiliaryEquipments.WidthRequest = screenWidth - 35;
-            wvAuxiliaryEquipments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
-            wvAuxiliaryEquipments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
-
-            var asAuxiliaryEquipment = new AccordionSource()
-            {
-                HeaderText = App.CurrentTranslation["UptimeDetails_AuxiliaryEquipment"],
-                ContentItems = wvAuxiliaryEquipments,
-                ContentHeight = await PopulateWebView("wvAuxiliaryEquipments")
-            };
-            result.Add(asAuxiliaryEquipment);
-            #endregion
-
-            return result;
-        }
-
-        private async Task<double> PopulateWebView(string webViewName)
-        {
-            double wvHeight = 0;
-            const double WV_ROW_Height = 31.75;
-
-            switch (webViewName)
-            {
-                case "wvDetails":
-                    IEnumerable<EfficiencyMachine> detailList = await MBoxApiCalls.GetEfficiencyPerMachine(locationId, departmentId, subDepartmentId, filterId, periodId, equipmentTypeId, equipmentGroupId, (int)mode);
-                    string htmlHeaderDetails = HtmlTableSupport.Uptime_Details_TableHeader();
-                    string htmlContentDetails = HtmlTableSupport.Uptime_Details_TableContent(detailList);
-                    string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDetails, htmlContentDetails);
-                    wvDetails.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
-                    wvHeight = (detailList.Count() + 2) * WV_ROW_Height + 7;
+                case "Moulding":
+                    htmlHeaderDetails = HtmlTableSupport.ProductionDetail_Moulding_TableHeader();
+                    htmlContentDetails = HtmlTableSupport.ProductionDetail_Moulding_TableContent(detailList);
                     break;
-                case "wvAuxiliaryEquipments":
-                    IEnumerable<EfficiencyAuxiliaryEquipment> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxMachine(locationId, departmentId, subDepartmentId, filterId, periodId, auxiliaryTypeId);
-                    string htmlHeaderAuxiliaryEquipments = HtmlTableSupport.Uptime_AuxiliaryEquipments_TableHeader();
-                    string htmlContentAuxiliaryEquipments = HtmlTableSupport.Uptime_AuxiliaryEquipments_TableContent(auxiliaryEquipmentsList);
-                    string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlContentAuxiliaryEquipments);
-                    wvAuxiliaryEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlAuxiliaryEquipments };
-                    wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 10;
+                case "CNC":
+                    htmlHeaderDetails = HtmlTableSupport.ProductionDetail_CNC_TableHeader();
+                    htmlContentDetails = HtmlTableSupport.ProductionDetail_CNC_TableContent(detailList);
+                    break;
+                case "Welding":
+                    htmlHeaderDetails = HtmlTableSupport.ProductionDetail_Welding_TableHeader();
+                    htmlContentDetails = HtmlTableSupport.ProductionDetail_Welding_TableContent(detailList);
+                    break;
+                case "EDM wire cut":
+                    htmlHeaderDetails = HtmlTableSupport.ProductionDetail_EDMWireCut_TableHeader();
+                    htmlContentDetails = HtmlTableSupport.ProductionDetail_EDMWireCut_TableContent(detailList);
+                    break;
+                default:
+                    htmlHeaderDetails = "";
+                    htmlContentDetails = "";
                     break;
             }
-
-            return wvHeight;
+            string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDetails, htmlContentDetails);
+            ProductionDetailsWebView.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
         }
     }
 }

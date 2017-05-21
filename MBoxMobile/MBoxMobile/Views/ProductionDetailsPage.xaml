@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
-             x:Class="MBoxMobile.Views.UptimeDetailsPage">
+             x:Class="MBoxMobile.Views.ProductionDetailsPage"
+             Title="{DynamicResource ProductionDetails_Title}">
   <ContentPage.Resources>
     <ResourceDictionary>
       <x:Double x:Key="Filter4ButtonWidth">0</x:Double>
@@ -23,22 +24,18 @@
           <StackLayout VerticalOptions="FillAndExpand" Padding="5">
             <StackLayout>
               <!-- Filter area -->
-              <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
-                <Label Text="{DynamicResource UptimeDetails_FilterLabel}" Style="{StaticResource LabelMediumStyleBlack}" Margin="{DynamicResource FilterLabelMargin}" />
-                <StackLayout HorizontalOptions="CenterAndExpand"></StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                  <ctrl:RoundedButton Text="{DynamicResource Common_FilterAll}" Style="{DynamicResource FilterAllStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterAllClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="10,0,0,0"/>
-                  <ctrl:RoundedButton Text="{DynamicResource Common_FilterOn}" Style="{DynamicResource FilterOnStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-8,0,0,0"/>
-                  <ctrl:RoundedButton Text="{DynamicResource Common_FilterOff}" Style="{DynamicResource FilterOffStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-8,0,0,0"/>
-                  <ctrl:RoundedButton Text="{DynamicResource Common_FilterErrors}" Style="{DynamicResource FilterErrorsStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterErrorsClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-8,0,0,0"/>
-                </StackLayout>
+              <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,5,0,5">
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterAll}" Style="{DynamicResource FilterAllStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterAllClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="5,0,0,0"/>
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterOn}" Style="{DynamicResource FilterOnStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-7,0,0,0"/>
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterOff}" Style="{DynamicResource FilterOffStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-7,0,0,0"/>
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterErrors}" Style="{DynamicResource FilterErrorsStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterErrorsClicked" WidthRequest="{DynamicResource Filter4ButtonWidth}" HeightRequest="{DynamicResource Filter4ButtonHeight}" Margin="-7,0,0,0"/>
               </StackLayout>
             </StackLayout>
             <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
             <StackLayout>
               <!-- Content (tables) area -->
               <StackLayout HorizontalOptions="CenterAndExpand">
-                <ctrl:Accordion x:Name="UptimeDetailsAccordion" />
+                <WebView x:Name="ProductionDetailsWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="{DynamicResource WebViewWidth}" HeightRequest="{DynamicResource WebViewHeight}" />
               </StackLayout>
             </StackLayout>
           </StackLayout>

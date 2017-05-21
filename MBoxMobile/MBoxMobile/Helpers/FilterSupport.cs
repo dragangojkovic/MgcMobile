@@ -8,16 +8,16 @@ namespace MBoxMobile.Helpers
         {
             Dictionary<int, string> dict = new Dictionary<int, string>();
 
-            //dict.Add(1, "Uptime_FilterTimeToday");
-            //dict.Add(2, "Uptime_FilterTimeLast24Hours");
-            //dict.Add(3, "Uptime_FilterTimeYesterday");
-            //dict.Add(4, "Uptime_FilterTimeCurrentWeek");
-            //dict.Add(5, "Uptime_FilterTimeLastWeek");
-            //dict.Add(6, "Uptime_FilterTimeCurrentMonth");
-            //dict.Add(7, "Uptime_FilterTimeLastMonth");
-            //dict.Add(8, "Uptime_FilterTimeCurrentQuarter");
-            //dict.Add(9, "Uptime_FilterTimeLastQuarter");
-            //dict.Add(10, "Uptime_FilterTimeCurrentYear");
+            //dict.Add(1, "Common_FilterTimeToday");
+            //dict.Add(2, "Common_FilterTimeLast24Hours");
+            //dict.Add(3, "Common_FilterTimeYesterday");
+            //dict.Add(4, "Common_FilterTimeCurrentWeek");
+            //dict.Add(5, "Common_FilterTimeLastWeek");
+            //dict.Add(6, "Common_FilterTimeCurrentMonth");
+            //dict.Add(7, "Common_FilterTimeLastMonth");
+            //dict.Add(8, "Common_FilterTimeCurrentQuarter");
+            //dict.Add(9, "Common_FilterTimeLastQuarter");
+            //dict.Add(10, "Common_FilterTimeCurrentYear");
 
             return dict;
         }
@@ -26,16 +26,16 @@ namespace MBoxMobile.Helpers
         {
             Dictionary<int, string> dict = new Dictionary<int, string>();
 
-            dict.Add(6275, "Uptime_FilterTimeToday");
-            dict.Add(6274, "Uptime_FilterTimeLast24Hours");
-            dict.Add(6276, "Uptime_FilterTimeYesterday");
-            dict.Add(6277, "Uptime_FilterTimeCurrentWeek");
-            dict.Add(6278, "Uptime_FilterTimeLastWeek");
-            dict.Add(6279, "Uptime_FilterTimeCurrentMonth");
-            dict.Add(6280, "Uptime_FilterTimeLastMonth");
-            dict.Add(6350, "Uptime_FilterTimeCurrentQuarter");
-            dict.Add(6351, "Uptime_FilterTimeLastQuarter");
-            dict.Add(6352, "Uptime_FilterTimeCurrentYear");
+            dict.Add(6275, "Common_FilterTimeToday");
+            dict.Add(6274, "Common_FilterTimeLast24Hours");
+            dict.Add(6276, "Common_FilterTimeYesterday");
+            dict.Add(6277, "Common_FilterTimeCurrentWeek");
+            dict.Add(6278, "Common_FilterTimeLastWeek");
+            dict.Add(6279, "Common_FilterTimeCurrentMonth");
+            dict.Add(6280, "Common_FilterTimeLastMonth");
+            dict.Add(6350, "Common_FilterTimeCurrentQuarter");
+            dict.Add(6351, "Common_FilterTimeLastQuarter");
+            dict.Add(6352, "Common_FilterTimeCurrentYear");
 
             return dict;
         }

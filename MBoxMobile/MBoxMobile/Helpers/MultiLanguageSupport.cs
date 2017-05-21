@@ -73,6 +73,30 @@ namespace MBoxMobile.Helpers
         {            
             Dictionary<string, string> translation = new Dictionary<string, string>();
 
+            //Common elements
+            translation.Add("Common_Filter", "Select Filter");
+            translation.Add("Common_FilterTimeTitle", "Personal Filter");
+            translation.Add("Common_FilterTimeDescription", "Please choose a personal filter");
+            translation.Add("Common_FilterTimeToday", "Today");
+            translation.Add("Common_FilterTimeLast24Hours", "Last 24 Hours");
+            translation.Add("Common_FilterTimeYesterday", "Yesterday");
+            translation.Add("Common_FilterTimeCurrentWeek", "Current Week");
+            translation.Add("Common_FilterTimeLastWeek", "Last Week");
+            translation.Add("Common_FilterTimeCurrentMonth", "Current Month");
+            translation.Add("Common_FilterTimeLastMonth", "Last Month");
+            translation.Add("Common_FilterTimeCurrentQuarter", "Current Quarter");
+            translation.Add("Common_FilterTimeLastQuarter", "Last Quarter");
+            translation.Add("Common_FilterTimeCurrentYear", "Current Year");
+            translation.Add("Common_FilterTimeCancel", "Cancel");
+            translation.Add("Common_FilterFilterOn", "Filter On");
+            translation.Add("Common_FilterFilterOff", "Filter Off");
+            translation.Add("Common_FilterAll", "All");
+            translation.Add("Common_FilterOn", "On");
+            translation.Add("Common_FilterOff", "Off");
+            translation.Add("Common_FilterErrors", "Errors");
+            translation.Add("Common_ViewDetail", "View Detail");
+            translation.Add("Common_Close", "Close");
+
             //Menu - Side view
             translation.Add("Menu_Home", "Home");
             translation.Add("Menu_Language", "Language");
@@ -111,10 +135,6 @@ namespace MBoxMobile.Helpers
 
             //Uptime page
             translation.Add("Uptime_Title", "Uptime");
-            translation.Add("Uptime_ViewDetail", "View Detail");
-            translation.Add("Uptime_FilterOn", "Filter On");
-            translation.Add("Uptime_FilterOff", "Filter Off");
-            translation.Add("Uptime_Filter", "Select Filter");
             translation.Add("Uptime_WorkingTimeOnly", "Working Time Only");
             translation.Add("Uptime_Locations", "Locations");
             translation.Add("Uptime_Departments", "Departments");
@@ -122,37 +142,15 @@ namespace MBoxMobile.Helpers
             translation.Add("Uptime_Equipment", "Equipment");
             translation.Add("Uptime_EquipmentGroup", "Equipment group");
             translation.Add("Uptime_AuxiliaryEquipment", "Auxiliary equipment");
-            //
             translation.Add("Uptime_LocationsTableEquipment", "Equipment (current status)");
             translation.Add("Uptime_Location", "Location");
             translation.Add("Uptime_Uptime", "Uptime");
             translation.Add("Uptime_On", "On");
             translation.Add("Uptime_Off", "Off");
             translation.Add("Uptime_Errors", "Errors");
-            //
-            translation.Add("Uptime_FilterTimeTitle", "Personal Filter");
-            translation.Add("Uptime_FilterTimeDescription", "Please choose a personal filter");
-            translation.Add("Uptime_FilterTimeToday", "Today");
-            translation.Add("Uptime_FilterTimeLast24Hours", "Last 24 Hours");
-            translation.Add("Uptime_FilterTimeYesterday", "Yesterday");
-            translation.Add("Uptime_FilterTimeCurrentWeek", "Current Week");
-            translation.Add("Uptime_FilterTimeLastWeek", "Last Week");
-            translation.Add("Uptime_FilterTimeCurrentMonth", "Current Month");
-            translation.Add("Uptime_FilterTimeLastMonth", "Last Month");
-            translation.Add("Uptime_FilterTimeCurrentQuarter", "Current Quarter");
-            translation.Add("Uptime_FilterTimeLastQuarter", "Last Quarter");
-            translation.Add("Uptime_FilterTimeCurrentYear", "Current Year");
-            translation.Add("Uptime_FilterTimeCancel", "Cancel");
-            //Uptime detail page
             translation.Add("UptimeDetails_FilterLabel", "Filter:");
-            translation.Add("UptimeDetails_FilterAll", "All");
-            translation.Add("UptimeDetails_FilterOn", "On");
-            translation.Add("UptimeDetails_FilterOff", "Off");
-            translation.Add("UptimeDetails_FilterErrors", "Errors");
             translation.Add("UptimeDetails_Detail", "Detail");
             translation.Add("UptimeDetails_AuxiliaryEquipment", "Auxiliary equipment");
-            translation.Add("UptimeDetails_Close", "Close");
-            //
             translation.Add("UptimeDetails_Name", "Name");
             translation.Add("UptimeDetails_Current", "Current");
             translation.Add("UptimeDetails_OffTime", "Off Time");
@@ -169,8 +167,64 @@ namespace MBoxMobile.Helpers
 
             //Electricity Usage
             translation.Add("ElectricityUsage_Title", "Electricity usage");
+            translation.Add("ElectricityUsage_Locations", "Locations");
             translation.Add("ElectricityUsage_Areas", "Areas");
-            translation.Add("ElectricityUsage_ConsumingPower", "Equipment off but consuming electricity");
+            translation.Add("ElectricityUsage_Departments", "Departments");
+            translation.Add("ElectricityUsage_SubDepartments", "Sub departments");
+            translation.Add("ElectricityUsage_ConsumingPower", "Equipment off but consuming power");
+            translation.Add("ElectricityUsage_Current", "Current");
+            translation.Add("ElectricityUsage_Total", "Total");
+            translation.Add("ElectricityUsage_NoDetails", "No details");
+            translation.Add("ElectricityUsage_Waste", "Waste");
+            translation.Add("ElectricityUsage_Eff", "Eff.");
+            translation.Add("ElectricityUsage_On", "On");
+            translation.Add("ElectricityUsage_Off", "Off");
+            translation.Add("ElectricityUsage_Errors", "Errors");
+            translation.Add("ElectricityUsage_Group", "Group");
+            translation.Add("ElectricityUsage_Status", "Status");
+            translation.Add("ElectricityUsage_Location", "Location");
+            translation.Add("ElectricityUsage_Department", "Department");
+            translation.Add("ElectricityUsage_SubDepartment", "Sub Department");
+            translation.Add("ElectricityUsage_SystemData", "System Data");
+
+            //Production page
+            translation.Add("Production_Title", "Production");
+            translation.Add("Production_Equipment", "Equipment");
+            translation.Add("Production_Eff", "Eff.");
+            translation.Add("Production_On", "On");
+            translation.Add("Production_Off", "Off");
+            translation.Add("ProductionDetails_Current", "Current");
+            translation.Add("ProductionDetails_OffTime", "Off time");
+            translation.Add("ProductionDetails_EqGroup", "Equipment group");
+            translation.Add("ProductionDetails_ProductionType", "Production type");
+            translation.Add("ProductionDetails_Eff", "Eff.");
+            translation.Add("ProductionDetails_Mould", "Mould");
+            translation.Add("ProductionDetails_CycleTime", "Cycle time(s)");
+            translation.Add("ProductionDetails_Status", "Status");
+            translation.Add("ProductionDetails_RunTime", "Time (DD:HH:MM)");
+            translation.Add("ProductionDetails_Stops", "Stops");
+            translation.Add("ProductionDetails_StopTime", "Time (DD:HH:MM)");
+            translation.Add("ProductionDetails_kWH", "kWH");
+            translation.Add("ProductionDetails_Operator", "Operator");
+            translation.Add("ProductionDetails_Location", "Location");
+            translation.Add("ProductionDetails_Department", "Department");
+            translation.Add("ProductionDetails_SubDepartment", "Sub department");
+            translation.Add("ProductionDetails_SystemData", "System data");
+            translation.Add("ProductionDetails_AverageWelds", "Average welds per hour");
+            translation.Add("ProductionDetails_AverageTime", "Average time of weld(s)");
+            translation.Add("ProductionDetails_Product", "Product");
+            translation.Add("ProductionDetails_WireUseUnit", "Wire use unit");
+
+            //Auxiliary equipment page
+            translation.Add("AuxiliaryEquipment_Title", "Auxiliary equipment");
+            translation.Add("AuxiliaryEquipment_Equipment", "Equipment");
+            translation.Add("AuxiliaryEquipment_On", "On");
+            translation.Add("AuxiliaryEquipment_QTY", "QTY");
+            translation.Add("AuxiliaryEquipmentDetails_Group", "Equipment group");
+            translation.Add("AuxiliaryEquipmentDetails_Location", "Location");
+            translation.Add("AuxiliaryEquipmentDetails_Department", "Department");
+            translation.Add("AuxiliaryEquipmentDetails_SubDepartment", "Sub department");
+            translation.Add("AuxiliaryEquipmentDetails_SystemData", "System data");
 
             //InputNotificationsKWH page
             translation.Add("InputNotificationsKWH_Title", "KWH");

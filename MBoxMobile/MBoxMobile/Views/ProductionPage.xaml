@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
-             x:Class="MBoxMobile.Views.UptimePage"
-             Title="{DynamicResource Uptime_Title}">
+             x:Class="MBoxMobile.Views.ProductionPage"
+             Title="{DynamicResource Production_Title}">
   <ContentPage.Resources>
     <ResourceDictionary>
       <x:Double x:Key="Filter2ButtonWidth">0</x:Double>
@@ -21,7 +21,6 @@
       </Grid.ColumnDefinitions>
       <Grid.RowDefinitions>
         <RowDefinition Height="{DynamicResource ContentMinHeight}" />
-        <RowDefinition Height="60" />
       </Grid.RowDefinitions>
       <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}" Grid.Row="0" Grid.Column="0">
         <ScrollView>
@@ -47,13 +46,12 @@
             <StackLayout>
               <!-- Content (tables) area -->
               <StackLayout HorizontalOptions="CenterAndExpand">
-                <ctrl:Accordion x:Name="UptimeAccordion" />
+                <WebView x:Name="ProductionWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="{DynamicResource WebViewWidth}" HeightRequest="{DynamicResource WebViewHeight}" />
               </StackLayout>
             </StackLayout>
           </StackLayout>
         </ScrollView>
       </StackLayout>
-      <ctrl:RoundedButton Text="{DynamicResource Common_ViewDetail}" Style="{StaticResource ButtonBlueStyle}" FontSize="Medium" Clicked="ViewDetailClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
       <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
       <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
         <StackLayout>

@@ -93,7 +93,7 @@ namespace MBoxMobile.Services
         }
 
         #region Uptime
-        public static async Task<List<EfficiencyLocation>> GetEfficiencyByLocation(int? filterId, int periodId)
+        public static async Task<List<EfficiencyLocation>> GetEfficiencyPerLocation(int? filterId, int periodId)
         {
             string sFilterId = (filterId == null) ? "" : filterId.ToString();
 
@@ -105,7 +105,7 @@ namespace MBoxMobile.Services
                 return returnedObj.EfficiencyLocations;
         }
 
-        public static async Task<List<EfficiencyDepartment>> GetEfficiencyByDepartment(int? locationId, int? filterId, int periodId)
+        public static async Task<List<EfficiencyDepartment>> GetEfficiencyPerDepartment(int? locationId, int? filterId, int periodId)
         {
             string sLocationId = (locationId == null) ? "" : locationId.ToString();
             string sFilterId = (filterId == null) ? "" : filterId.ToString();
@@ -118,7 +118,7 @@ namespace MBoxMobile.Services
                 return returnedObj.EfficiencyDepartments;
         }
 
-        public static async Task<List<EfficiencySubDepartment>> GetEfficiencyBySubDepartment(int? locationId, int? departmentId, int? filterId, int periodId)
+        public static async Task<List<EfficiencySubDepartment>> GetEfficiencyPerSubDepartment(int? locationId, int? departmentId, int? filterId, int periodId)
         {
             string sLocationId = (locationId == null) ? "" : locationId.ToString();
             string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
@@ -132,7 +132,7 @@ namespace MBoxMobile.Services
                 return returnedObj.EfficiencySubDepartments;
         }
 
-        public static async Task<List<EfficiencyEquipmentType>> GetEfficiencyByEquipmentType(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId)
+        public static async Task<List<EfficiencyEquipmentType>> GetEfficiencyPerEquipmentType(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId)
         {
             string sLocationId = (locationId == null) ? "" : locationId.ToString();
             string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
@@ -147,7 +147,7 @@ namespace MBoxMobile.Services
                 return returnedObj.EfficiencyEquipmentTypes;
         }
 
-        public static async Task<List<EfficiencyEquipmentGroup>> GetEfficiencyByEquipmentGroup(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId)
+        public static async Task<List<EfficiencyEquipmentGroup>> GetEfficiencyPerEquipmentGroup(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId)
         {
             string sLocationId = (locationId == null) ? "" : locationId.ToString();
             string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
@@ -162,7 +162,7 @@ namespace MBoxMobile.Services
                 return returnedObj.EfficiencyEquipmentGroups;
         }
 
-        public static async Task<List<EfficiencyAuxiliary>> GetEfficiencyByAuxiliaryType(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId)
+        public static async Task<List<EfficiencyAuxiliary>> GetEfficiencyPerAuxiliaryType(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId)
         {
             string sLocationId = (locationId == null) ? "" : locationId.ToString();
             string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
@@ -177,7 +177,7 @@ namespace MBoxMobile.Services
                 return returnedObj.EfficiencyAuxiliaries;
         }
 
-        public static async Task<List<EfficiencyMachine>> GetEfficiencyByMachine(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId, int? equipmentTypeId, int? equipmentGroupId, int mode)
+        public static async Task<List<EfficiencyMachine>> GetEfficiencyPerMachine(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId, int? equipmentTypeId, int? equipmentGroupId, int mode)
         {
             string sLocationId = (locationId == null) ? "" : locationId.ToString();
             string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
@@ -194,7 +194,7 @@ namespace MBoxMobile.Services
                 return returnedObj.EfficiencyMachines;
         }
 
-        public static async Task<List<EfficiencyAuxiliaryEquipment>> GetEfficiencyByAuxMachine(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId, int? auxType)
+        public static async Task<List<EfficiencyAuxiliaryEquipment>> GetEfficiencyPerAuxMachine(int? locationId, int? departmentId, int? subDepartmentId, int? filterId, int periodId, int? auxType)
         {
             string sLocationId = (locationId == null) ? "" : locationId.ToString();
             string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
@@ -208,6 +208,142 @@ namespace MBoxMobile.Services
                 return new List<EfficiencyAuxiliaryEquipment>();
             else
                 return returnedObj.EfficiencyAuxiliaryEquipments;
+        }
+        #endregion
+
+        #region ElectricityUsage
+        public static async Task<List<ElectricityLocation>> GetElectricityUsagePerLocation(int? filterId)
+        {
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ElectricityLocationList returnedObj =
+                await GetObjectOrObjectList<ElectricityLocationList>("", BaseUri + string.Format("MgcApi.svc/GetElectricityByLocation?belongToLocationID={0}&filterid={1}", App.LoggedUser.login.BelongToLocationID, sFilterId));
+            if (returnedObj == null)
+                return new List<ElectricityLocation>();
+            else
+                return returnedObj.ElectricityLocations;
+        }
+
+        public static async Task<List<ElectricityArea>> GetElectricityUsagePerArea(int? locationId, int? filterId)
+        {
+            string sLocationId = (locationId == null) ? "" : locationId.ToString();
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ElectricityAreaList returnedObj =
+                await GetObjectOrObjectList<ElectricityAreaList>("", BaseUri + string.Format("MgcApi.svc/GetElectricityByArea?belongToLocationID={0}&locid={1}&filterid={2}", App.LoggedUser.login.BelongToLocationID, sLocationId, sFilterId));
+            if (returnedObj == null)
+                return new List<ElectricityArea>();
+            else
+                return returnedObj.ElectricityAreas;
+        }
+
+        public static async Task<List<ElectricityDepartment>> GetElectricityUsagePerDepartment(int? locationId, int? filterId)
+        {
+            string sLocationId = (locationId == null) ? "" : locationId.ToString();
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ElectricityDepartmentList returnedObj =
+                await GetObjectOrObjectList<ElectricityDepartmentList>("", BaseUri + string.Format("MgcApi.svc/GetElectricityByDepartment?belongToLocationID={0}&locid={1}&filterid={2}", App.LoggedUser.login.BelongToLocationID, sLocationId, sFilterId));
+            if (returnedObj == null)
+                return new List<ElectricityDepartment>();
+            else
+                return returnedObj.ElectricityDepartments;
+        }
+
+        public static async Task<List<ElectricitySubDepartment>> GetElectricityUsagePerSubDepartment(int? locationId, int? departmentId, int? filterId)
+        {
+            string sLocationId = (locationId == null) ? "" : locationId.ToString();
+            string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ElectricitySubDepartmentList returnedObj =
+                await GetObjectOrObjectList<ElectricitySubDepartmentList>("", BaseUri + string.Format("MgcApi.svc/GetElectricityBySubDepartment?belongToLocationID={0}&locid={1}&depid={2}&filterid={3}", App.LoggedUser.login.BelongToLocationID, sLocationId, sDepartmentId, sFilterId));
+            if (returnedObj == null)
+                return new List<ElectricitySubDepartment>();
+            else
+                return returnedObj.ElectricitySubDepartments;
+        }
+
+        public static async Task<List<ElectricityMachine>> GetElectricityUsagePerWasting(int? locationId, int? departmentId, int? subDepartmentId, int? filterId)
+        {
+            string sLocationId = (locationId == null) ? "" : locationId.ToString();
+            string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
+            string sSubDepartmentId = (subDepartmentId == null) ? "" : subDepartmentId.ToString();
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ElectricityMachineList returnedObj =
+                await GetObjectOrObjectList<ElectricityMachineList>("", BaseUri + string.Format("MgcApi.svc/GetElectricityWasting?belongToLocationID={0}&locid={1}&depid={2}&subdepid={3}&filterid={4}", App.LoggedUser.login.BelongToLocationID, sLocationId, sDepartmentId, sSubDepartmentId, sFilterId));
+            if (returnedObj == null)
+                return new List<ElectricityMachine>();
+            else
+                return returnedObj.ElectricityMachines;
+        }
+
+        public static async Task<List<ElectricityMachine>> GetElectricityUsagePerMachine(int mode, int? locationId, int? departmentId, int? subDepartmentId, int? filterId)
+        {
+            string sLocationId = (locationId == null) ? "" : locationId.ToString();
+            string sDepartmentId = (departmentId == null) ? "" : departmentId.ToString();
+            string sSubDepartmentId = (subDepartmentId == null) ? "" : subDepartmentId.ToString();
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ElectricityMachineList returnedObj =
+                await GetObjectOrObjectList<ElectricityMachineList>("", BaseUri + string.Format("MgcApi.svc/GetElectricityByMachine?mode={0}&belongToLocationID={1}&locid={2}&depid={3}&subdepid={4}&filterid={5}", mode, App.LoggedUser.login.BelongToLocationID, sLocationId, sDepartmentId, sSubDepartmentId, sFilterId));
+            if (returnedObj == null)
+                return new List<ElectricityMachine>();
+            else
+                return returnedObj.ElectricityMachines;            
+        }
+        #endregion
+
+        #region Production
+        public static async Task<List<ProductionGeneral>> GetProductionPerEquipmentType(int? filterId, int periodId)
+        {
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ProductionGeneralList returnedObj =
+                await GetObjectOrObjectList<ProductionGeneralList>("", BaseUri + string.Format("MgcApi.svc/GetProductionByEquipType?belongToLocationID={0}&filterid={1}&periodid={2}", App.LoggedUser.login.BelongToLocationID, sFilterId, periodId));
+            if (returnedObj == null)
+                return new List<ProductionGeneral>();
+            else
+                return returnedObj.ProductionGenerals;
+        }
+
+        public static async Task<List<ProductionDetail>> GetProductionPerMachine(int? filterId, int periodId, string descCN, int eqType, int mode)
+        {
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            ProductionDetailList returnedObj =
+                await GetObjectOrObjectList<ProductionDetailList>("", BaseUri + string.Format("MgcApi.svc/GetProductionByMachine?belongToLocationID={0}&filterid={1}&periodid={2}&descch={3}&eqtype={4}&mode={5}", App.LoggedUser.login.BelongToLocationID, sFilterId, periodId, descCN, eqType, mode));
+            if (returnedObj == null)
+                return new List<ProductionDetail>();
+            else
+                return returnedObj.ProductionDetails;
+        }
+        #endregion
+
+        #region AuxiliaryEquipment
+        public static async Task<List<AuxiliaryType>> GetAuxiliaryTypes(int? filterId)
+        {
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            AuxiliaryTypeList returnedObj =
+                await GetObjectOrObjectList<AuxiliaryTypeList>("", BaseUri + string.Format("MgcApi.svc/GetAuxiliaryTypes?belongToLocationID={0}&filterid={1}", App.LoggedUser.login.BelongToLocationID, sFilterId));
+            if (returnedObj == null)
+                return new List<AuxiliaryType>();
+            else
+                return returnedObj.AuxiliaryTypes;
+        }
+
+        public static async Task<List<AuxiliaryEquipment>> GetAuxiliaryEquipments(int? filterId, int equipmentTypeId)
+        {
+            string sFilterId = (filterId == null) ? "" : filterId.ToString();
+
+            AuxiliaryEquipmentList returnedObj =
+                await GetObjectOrObjectList<AuxiliaryEquipmentList>("", BaseUri + string.Format("MgcApi.svc/GetAuxiliaryEquips?belongToLocationID={0}&filterid={1}&equiptype={2}", App.LoggedUser.login.BelongToLocationID, sFilterId, equipmentTypeId));
+            if (returnedObj == null)
+                return new List<AuxiliaryEquipment>();
+            else
+                return returnedObj.AuxiliaryEquipments;
         }
         #endregion
 

@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
-             x:Class="MBoxMobile.Views.UptimePage"
-             Title="{DynamicResource Uptime_Title}">
+             x:Class="MBoxMobile.Views.ElectricityUsagePage"
+             Title="{DynamicResource ElectricityUsage_Title}">
   <ContentPage.Resources>
     <ResourceDictionary>
       <x:Double x:Key="Filter2ButtonWidth">0</x:Double>
@@ -40,14 +40,14 @@
                     <TapGestureRecognizer Tapped="WorkingTimeTapped" />
                   </Image.GestureRecognizers>
                 </Image>
-                <Label Text="{DynamicResource Uptime_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource FilterWorkingHoursLabelFontSize}" Margin="-2, 10, 0, 0" />
+                <Label Text="{DynamicResource ElectricityUsage_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource FilterWorkingHoursLabelFontSize}" Margin="-2, 10, 0, 0" />
               </StackLayout>
             </StackLayout>
             <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
             <StackLayout>
               <!-- Content (tables) area -->
               <StackLayout HorizontalOptions="CenterAndExpand">
-                <ctrl:Accordion x:Name="UptimeAccordion" />
+                <ctrl:Accordion x:Name="ElectricityUsageAccordion" />
               </StackLayout>
             </StackLayout>
           </StackLayout>
