@@ -18,7 +18,9 @@ namespace MBoxMobile.Views
         public SideView()
         {
             NavigationPage.SetHasNavigationBar(this, false);
-            InitializeComponent();       
+            InitializeComponent();
+
+            Resources["UserFullName"] = App.LoggedUser.login.FirstName;
                         
             Dictionary<int, string> dictMenuItems = UserTypesSupport.GetMenuItems(App.UserType);
             foreach (KeyValuePair<int, string> pair in dictMenuItems)
@@ -63,6 +65,7 @@ namespace MBoxMobile.Views
             double screenWidth = DependencyService.Get<IDisplay>().Width;
             double screenHeight = DependencyService.Get<IDisplay>().Height;
             Resources["HeaderHeight"] = (int)(screenHeight / 5);
+            Resources["LabelNameMargin"] = new Thickness(0, screenHeight / 10, 0, 0);
             Resources["IconWidthHeight"] = 28;
 
             Detail = new NavigationPage(new MainPage()) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueMedium"] };
@@ -85,18 +88,15 @@ namespace MBoxMobile.Views
             Detail = new NavigationPage(new LanguagePage(this, currentDetailPage)) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueMedium"] };
         }
 
-        public async void LogoutTapped(object sender, EventArgs e)
+        public void LogoutTapped(object sender, EventArgs e)
         {
             App.Current.MainPage = new NavigationPage(new LoginPage());
 
-            //App.Instance.NavigateToLandingPage();
-            //await MBoxApi.Logout();
+            App.IsNotificationHandling = false;
+            App.LoggedUser = null;
+            App.LastErrorMessage = string.Empty;
 
-            //clear local user info
-            //CrossSettings.Current.AddOrUpdateValue<string>(Constants.APP_USER_ID, string.Empty);
-            //CrossSettings.Current.AddOrUpdateValue<string>(Constants.APP_USERNAME, string.Empty);
-            //CrossSettings.Current.AddOrUpdateValue<string>(Constants.APP_FIRST_NAME, string.Empty);
-            //CrossSettings.Current.AddOrUpdateValue<string>(Constants.APP_LAST_NAME, string.Empty);
+            DependencyService.Get<ISecureStorage>().Delete();
         }
 
         public void ExitTapped(object sender, EventArgs e)

@@ -94,8 +94,11 @@ namespace MBoxMobile.Helpers
             translation.Add("Common_FilterOn", "On");
             translation.Add("Common_FilterOff", "Off");
             translation.Add("Common_FilterErrors", "Errors");
+            translation.Add("Common_FilterHasWaste", "Has waste");
+            translation.Add("Common_WorkingTimeOnly", "Working Time Only");
             translation.Add("Common_ViewDetail", "View Detail");
             translation.Add("Common_Close", "Close");
+            translation.Add("Common_OK", "OK");
 
             //Menu - Side view
             translation.Add("Menu_Home", "Home");
@@ -111,6 +114,13 @@ namespace MBoxMobile.Helpers
             translation.Add("Login_RememberMe", "Remember me");
             translation.Add("Login_Login", "Login");
             translation.Add("Login_ForgotPassword", "Forgot password?");
+            translation.Add("Login_ErrorUsername", "Username is required!");
+            translation.Add("Login_ErrorPassword", "Password is required!");
+            translation.Add("Login_ErrorPlatform", "Platform is required!");
+            translation.Add("Login_ErrorDeviceToken", "Device token is required!");
+            translation.Add("Login_ErrorInvalidLogin", "Invalid login!");
+            translation.Add("Login_ErrorServer", "Server is required!");
+            translation.Add("Login_ErrorInvalidServer", "Invalid server!");
 
             //ForgotPassword page
             translation.Add("Forgot_Title", "Forgot password?");
@@ -135,7 +145,6 @@ namespace MBoxMobile.Helpers
 
             //Uptime page
             translation.Add("Uptime_Title", "Uptime");
-            translation.Add("Uptime_WorkingTimeOnly", "Working Time Only");
             translation.Add("Uptime_Locations", "Locations");
             translation.Add("Uptime_Departments", "Departments");
             translation.Add("Uptime_SubDepartments", "Sub departments");
@@ -226,28 +235,38 @@ namespace MBoxMobile.Helpers
             translation.Add("AuxiliaryEquipmentDetails_SubDepartment", "Sub department");
             translation.Add("AuxiliaryEquipmentDetails_SystemData", "System data");
 
-            //InputNotificationsKWH page
+            //InputNotifications pages
             translation.Add("InputNotificationsKWH_Title", "KWH");
-            translation.Add("InputNotificationsKWH_CauseButtonText", "Tap to choose a cause");
-            translation.Add("InputNotificationsKWH_OpinionPlaceholder", "Please describe your opinion");
-            translation.Add("InputNotificationsKWH_SubmitButtonText", "Submit");
-            translation.Add("InputNotificationsKWH_CancelButtonText", "Cancel");
-            translation.Add("InputNotificationsKWH_MachineNumberTitle", "M#");          ///fixed???
-            translation.Add("InputNotificationsKWH_MachineNameTitle", "Machine name");
-            translation.Add("InputNotificationsKWH_EquipTypeNameTitle", "Equipment type");
-            translation.Add("InputNotificationsKWH_EquipGroupNameTitle", "Equipment group");
-            translation.Add("InputNotificationsKWH_KwhTitle", "kWh");
-            translation.Add("InputNotificationsKWH_OperatorTitle", "Operator");
-            translation.Add("InputNotificationsKWH_ProductTitle", "Product");
-            translation.Add("InputNotificationsKWH_DateTimeTitle", "Date time");
-            translation.Add("InputNotificationsKWH_NotificationTitle", "Notification");
-            translation.Add("InputNotificationsKWH_LocationTitle", "Location");
-            translation.Add("InputNotificationsKWH_DepartmentTitle", "Department");
-            translation.Add("InputNotificationsKWH_SubDepartmentTitle", "Subdepartment");
+            translation.Add("InputNotificationsDescription_Title", "Description");
+            translation.Add("InputNotificationsSolution_Title", "Solution");
+            translation.Add("InputNotificationsAcknowledge_Title", "Acknowledge");
+            translation.Add("InputNotifications_CauseButtonText", "Tap to choose a cause");
+            translation.Add("InputNotifications_OpinionPlaceholder", "Please describe your opinion");
+            translation.Add("InputNotifications_SolutionPlaceholder", "Please describe your solution");
+            translation.Add("InputNotifications_SubmitButtonText", "Submit");
+            translation.Add("InputNotificationsAcknowledge_SubmitButtonText", "Acknowledge");
+            translation.Add("InputNotifications_CancelButtonText", "Cancel");
+            translation.Add("InputNotifications_CloseButtonText", "Close");
+            translation.Add("InputNotifications_MachineNumberTitle", "M#");          ///fixed???
+            translation.Add("InputNotifications_MachineNameTitle", "Machine name");
+            translation.Add("InputNotifications_EquipTypeNameTitle", "Equipment type");
+            translation.Add("InputNotifications_EquipGroupNameTitle", "Equipment group");
+            translation.Add("InputNotifications_KwhTitle", "kWh");
+            translation.Add("InputNotifications_OperatorTitle", "Operator");
+            translation.Add("InputNotifications_ProductTitle", "Product");
+            translation.Add("InputNotifications_DateTimeTitle", "Date time");
+            translation.Add("InputNotifications_NotificationTitle", "Notification");
+            translation.Add("InputNotifications_LocationTitle", "Location");
+            translation.Add("InputNotifications_DepartmentTitle", "Department");
+            translation.Add("InputNotifications_SubDepartmentTitle", "Subdepartment");
             //
-            translation.Add("InputNotificationsKWH_CauseASTitle", "Cause");
-            translation.Add("InputNotificationsKWH_CauseASDescription", "Tap to choose a cause");
-            translation.Add("InputNotificationsKWH_CauseASCancel", "Cancel");
+            translation.Add("InputNotifications_CauseASTitle", "Cause");
+            translation.Add("InputNotifications_CauseASDescription", "Tap to choose a cause");
+            translation.Add("InputNotifications_CauseASCancel", "Cancel");
+            //
+            translation.Add("InputNotifications_ErrorMsgChooseCause", "Please choose a cause!");
+            translation.Add("InputNotifications_ErrorMsgChooseOpinion", "Please input an description!");
+            translation.Add("InputNotifications_ErrorMsgSubmitFailed", "Sending data to server is failed!");
 
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");

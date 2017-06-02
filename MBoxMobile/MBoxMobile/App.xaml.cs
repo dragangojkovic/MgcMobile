@@ -1,4 +1,5 @@
 ﻿using MBoxMobile.Helpers;
+using MBoxMobile.Interfaces;
 using MBoxMobile.Models;
 using MBoxMobile.Views;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace MBoxMobile
         public static UserInfo LoggedUser { get; set; }
         public static string LastErrorMessage { get; set; }
 
+        public static bool IsNotificationHandling { get; set; }
+        public static List<NotificationModel> NotificationsForHandling { get; set; }
+
         public App()
         {
             InitializeComponent();
@@ -29,10 +33,26 @@ namespace MBoxMobile
             UserType = 1;
 
             Servers = new Dictionary<int, string>();
-            Servers.Add(1, "Server1");
-            Servers.Add(2, "Server2");
+            Servers.Add(1, "s10.monitor-box.com");
+            Servers.Add(2, "s12.monitor-box.com");
 
-            MainPage = new NavigationPage(new LoginPage());
+            IsNotificationHandling = false;
+
+            CheckUserLoginStatus();
+        }
+
+        private void CheckUserLoginStatus()
+        {
+            string savedCredentials = DependencyService.Get<ISecureStorage>().Get();
+            if (savedCredentials == null)
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
+            else
+            {
+                string[] credentials = savedCredentials.Split('#');
+                MainPage = new LoginCheckPage(credentials[2], credentials[0], credentials[1]);
+            }
         }
 
         protected override void OnStart()

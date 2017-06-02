@@ -42,7 +42,7 @@ namespace MBoxMobile.Helpers
 
         public static double GetFilter4FontSize(double screenWidth)
         {
-            if (screenWidth <= 353)
+            if (screenWidth <= 360)
                 return 10;
             else
                 return 14;
@@ -50,7 +50,7 @@ namespace MBoxMobile.Helpers
 
         public static double GetFilter2FontSize(double screenWidth)
         {
-            if (screenWidth <= 353)
+            if (screenWidth <= 360)
                 return 12;
             else
                 return 14;
@@ -58,7 +58,7 @@ namespace MBoxMobile.Helpers
 
         public static double GetWorkingHoursLabelFontSize(double screenWidth)
         {
-            if (screenWidth <= 353)
+            if (screenWidth <= 360)
                 return 12;
             else
                 return 15;
@@ -66,7 +66,7 @@ namespace MBoxMobile.Helpers
 
         public static double GetFilterLabelMarginTop(double screenWidth)
         {
-            if (screenWidth <= 353)
+            if (screenWidth <= 360)
                 return 5;
             else
                 return 8;
@@ -79,5 +79,12 @@ namespace MBoxMobile.Helpers
         On,
         Off,
         Errors
+    }
+
+    public enum Filter3State
+    {
+        All = 1,
+        On,
+        HasWaste
     }
 }

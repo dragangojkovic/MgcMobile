@@ -64,4 +64,27 @@ namespace MBoxMobile.Models
         public List<MaterialModel> Materials { get; set; }
     }
     #endregion
+
+    public class NotificationPayload
+    {
+        public string machine_num { get; set; }
+        public string at { get; set; }
+        public string record_date { get; set; }
+        public string material { get; set; }
+        public string Inputstable_AlterID { get; set; }
+        public string AlterEquipType { get; set; }
+        public string MachineName { get; set; }
+        public string EquipTypeName { get; set; }
+        public string EquipGroupName { get; set; }
+        public string Kwh { get; set; }
+        public string Operator { get; set; }
+        public string Product { get; set; }
+        public string Notification { get; set; }
+        public string Location { get; set; }
+        public string Department { get; set; }
+        public string SubDepartment { get; set; }
+        public string AlterType { get; set; }
+        public string NotType { get; set; }
+        public string AlterReply { get; set; }
+    }
 }

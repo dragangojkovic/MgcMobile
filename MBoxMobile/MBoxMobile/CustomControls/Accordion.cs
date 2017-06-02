@@ -56,7 +56,9 @@ namespace MBoxMobile.CustomControls
                         VerticalTextAlignment = TextAlignment.Center,
                         Style = (Style)Application.Current.Resources["LabelMediumStyle"]
                     };
-                    
+                    if (vSingleItem.HeaderFontSize != 0)
+                        vHeaderLabel.FontSize = vSingleItem.HeaderFontSize;
+
                     var vHeaderButton = new AccordionButton()
                     {
                         Text = vSingleItem.HeaderText,
@@ -89,7 +91,7 @@ namespace MBoxMobile.CustomControls
                     relativeLayout.Children.Add(vHeaderLabel,
                         Constraint.RelativeToView(vHeaderButton, (parent, sibling) => { return sibling.X + 20; }),
                         Constraint.RelativeToView(vHeaderButton, (parent, sibling) => { return sibling.Y + 10; }),
-                        Constraint.RelativeToView(vHeaderButton, (parent, sibling) => { return sibling.Width * .7; }),
+                        Constraint.RelativeToView(vHeaderButton, (parent, sibling) => { return sibling.Width * .8; }),
                         Constraint.RelativeToView(vHeaderButton, (parent, sibling) => { return sibling.Height - 20; }));
 
                     vMainLayout.Children.Add(relativeLayout);
@@ -167,6 +169,7 @@ namespace MBoxMobile.CustomControls
         public string HeaderText { get; set; }
         public Color HeaderTextColor { get; set; }
         public Color HeaderBackGroundColor { get; set; }
+        public int HeaderFontSize { get; set; }
         public View ContentItems { get; set; }
         public double ContentHeight { get; set; }
     }

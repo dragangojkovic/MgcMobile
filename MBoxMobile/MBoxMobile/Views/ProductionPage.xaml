@@ -39,7 +39,7 @@
                     <TapGestureRecognizer Tapped="WorkingTimeTapped" />
                   </Image.GestureRecognizers>
                 </Image>
-                <Label Text="{DynamicResource Uptime_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource FilterWorkingHoursLabelFontSize}" Margin="-2, 10, 0, 0" />
+                <Label Text="{DynamicResource Common_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource FilterWorkingHoursLabelFontSize}" Margin="-2, 10, 0, 0" />
               </StackLayout>
             </StackLayout>
             <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
              x:Class="MBoxMobile.Views.InputNotificationsKWhPage"
-             Title="KWH">
+             Title="{DynamicResource InputNotificationsKWH_Title}">
   <ContentPage.Resources>
     <ResourceDictionary>
       <x:Double x:Key="ContentMinHeight">0</x:Double>
@@ -36,44 +36,45 @@
               <StackLayout VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource BlueMedium}">
                 <ScrollView>
                   <StackLayout Padding="5">
-                    <Label Text="{DynamicResource InputNotificationsKWH_MachineNumberTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" Margin="0, 5, 0, 0" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_MachineNumberValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_MachineNameTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_MachineNameValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_EquipTypeNameTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_EquipTypeNameValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_EquipGroupNameTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_EquipGroupNameValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_MachineNumberTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" Margin="0, 5, 0, 0" />
+                    <Label Text="{DynamicResource InputNotifications_MachineNumberValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_MachineNameTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_MachineNameValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_EquipTypeNameTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_EquipTypeNameValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_EquipGroupNameTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_EquipGroupNameValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
 
-                    <Label Text="{DynamicResource InputNotificationsKWH_KwhTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_KwhValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_OperatorTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_OperatorValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_ProductTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_ProductValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_DateTimeTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_DateTimeValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_KwhTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_KwhValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_OperatorTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_OperatorValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_ProductTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_ProductValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_DateTimeTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_DateTimeValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
 
-                    <Label Text="{DynamicResource InputNotificationsKWH_NotificationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_NotificationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_LocationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_LocationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_DepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_DepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_SubDepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource InputNotificationsKWH_SubDepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_NotificationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_NotificationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_LocationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_LocationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_DepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_DepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label Text="{DynamicResource InputNotifications_SubDepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{DynamicResource InputNotifications_SubDepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
                   </StackLayout>
                 </ScrollView>
               </StackLayout>
-              <ctrl:RoundedButton x:Name="CauseButton" Text="{DynamicResource InputNotificationsKWH_CauseButtonText}" Style="{StaticResource ButtonBlueStyle}" TextColor="{StaticResource BlueMedium}" BackgroundColor="{StaticResource BlueVeryLight}" Clicked="CauseClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
-              <ctrl:RoundedEditor x:Name="Opinion" Text="{Binding Opinion}" Placeholder="{DynamicResource InputNotificationsKWH_OpinionPlaceholder}" Grid.Row="2" Grid.Column="0" />
+              <ctrl:RoundedButton x:Name="CauseButton" Text="{DynamicResource InputNotifications_CauseButtonText}" Style="{StaticResource ButtonBlueStyle}" TextColor="{StaticResource BlueMedium}" BackgroundColor="{StaticResource BlueVeryLight}" Clicked="CauseClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
+              <ctrl:RoundedEditor x:Name="Opinion" Text="{Binding Opinion}" Placeholder="{DynamicResource InputNotifications_OpinionPlaceholder}" Grid.Row="2" Grid.Column="0" />
             </Grid>
           </StackLayout>
         </StackLayout>
       </StackLayout>
       <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-        <ctrl:RoundedButton x:Name="SubmitButton" Text="{DynamicResource InputNotificationsKWH_SubmitButtonText}" Style="{StaticResource ButtonBlueStyle}" BackgroundColor="Green" Clicked="SubmitClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
-        <ctrl:RoundedButton x:Name="CancelButton" Text="{DynamicResource InputNotificationsKWH_CancelButtonText}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
+        <ctrl:RoundedButton x:Name="SubmitButton" Text="{DynamicResource InputNotifications_SubmitButtonText}" Style="{StaticResource ButtonBlueStyle}" BackgroundColor="Green" Clicked="SubmitClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
+        <ctrl:RoundedButton x:Name="CancelButton" Text="{DynamicResource InputNotifications_CancelButtonText}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
+        <ctrl:RoundedButton x:Name="CloseButton" Text="{DynamicResource InputNotifications_CloseButtonText}" Style="{StaticResource ButtonBlueStyle}" Clicked="CloseClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonLargeWidth}" />
       </StackLayout>
       <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
       <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">

@@ -1,16 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
              x:Class="MBoxMobile.Views.ElectricityUsageDetailsPage"
              Title="ElectricityUsageDetailsPage">
-  <ScrollView>
-    <StackLayout Padding="10">
-      <Label Text="ContentPage" FontSize="40"/>
-      <Label Text="ContentPage is the simplest type of page."/>
-      <Label Text="The content of the ContentPage is generally a layout of some sort that can be a parent to multiple children."/>
-      <Label Text="This contant page contains a StackLayout, which in turn contains a few Label views (including the large one on the top and an example of handling click commands and data binding to a Label below)."/>
-      <Button Text="Click Me" Command="{Binding IncreaseCountCommand}"/>
-      <Label Text="{Binding CountDisplay}"/>
-    </StackLayout>
-  </ScrollView>
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="Filter3ButtonWidth">0</x:Double>
+      <x:Double x:Key="Filter3ButtonHeight">0</x:Double>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
+    <Grid VerticalOptions="FillAndExpand">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="{DynamicResource ContentMinHeight}" />
+        <RowDefinition Height="60" />
+      </Grid.RowDefinitions>
+      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}" Grid.Row="0" Grid.Column="0">
+        <ScrollView>
+          <StackLayout VerticalOptions="FillAndExpand" Padding="5">
+            <StackLayout>
+              <!-- Filter area -->
+              <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                  <ctrl:RoundedButton Text="{DynamicResource Common_FilterAll}" Style="{DynamicResource FilterAllStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterAllClicked" WidthRequest="{DynamicResource Filter3ButtonWidth}" HeightRequest="{DynamicResource Filter3ButtonHeight}" Margin="10,0,0,0"/>
+                  <ctrl:RoundedButton Text="{DynamicResource Common_FilterOn}" Style="{DynamicResource FilterOnStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOnClicked" WidthRequest="{DynamicResource Filter3ButtonWidth}" HeightRequest="{DynamicResource Filter3ButtonHeight}" Margin="-8,0,0,0"/>
+                  <ctrl:RoundedButton Text="{DynamicResource Common_FilterHasWaste}" Style="{DynamicResource FilterHasWasteStyle}" FontSize="{DynamicResource Filter4FontSize}" Clicked="FilterOffClicked" WidthRequest="{DynamicResource Filter3ButtonWidth}" HeightRequest="{DynamicResource Filter3ButtonHeight}" Margin="-8,0,0,0"/>
+                </StackLayout>
+              </StackLayout>
+            </StackLayout>
+            <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
+            <StackLayout>
+              <!-- Content (tables) area -->
+              <StackLayout HorizontalOptions="CenterAndExpand">
+                <WebView x:Name="ElectricityUsageDetailsWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="{DynamicResource WebViewWidth}" HeightRequest="{DynamicResource WebViewHeight}" />
+              </StackLayout>
+            </StackLayout>
+          </StackLayout>
+        </ScrollView>
+      </StackLayout>
+      <ctrl:RoundedButton Text="{DynamicResource Common_Close}" Style="{StaticResource ButtonBlueStyle}" FontSize="Medium" Clicked="DetailCloseClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
+      <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
+      <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
+        <StackLayout>
+          <ActivityIndicator BackgroundColor="Transparent" IsRunning="{DynamicResource IsLoading}" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand" Color="#000000" />
+        </StackLayout>
+      </Frame>
+    </Grid>
+  </StackLayout>
 </ContentPage>

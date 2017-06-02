@@ -97,7 +97,7 @@ namespace MBoxMobile.Views
             Resources["Common_FilterFilterOff"] = App.CurrentTranslation["Common_FilterFilterOff"];
             Resources["Common_Filter"] = App.CurrentTranslation["Common_Filter"];                     //this can be any value from GetPersonalFilters()
             Resources["Common_FilterTime"] = App.CurrentTranslation[currentTimeFilter];
-            Resources["Uptime_WorkingTimeOnly"] = App.CurrentTranslation["Uptime_WorkingTimeOnly"];
+            Resources["Common_WorkingTimeOnly"] = App.CurrentTranslation["Common_WorkingTimeOnly"];
 
             if (!IsTablePopulated)
             {

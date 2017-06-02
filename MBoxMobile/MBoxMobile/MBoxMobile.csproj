@@ -46,15 +46,19 @@
     <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\FilterSupport.cs" />
     <Compile Include="Helpers\HtmlTableSupport.cs" />
+    <Compile Include="Helpers\LoginCustomer.cs" />
     <Compile Include="Helpers\MultiLanguageSupport.cs" />
+    <Compile Include="Helpers\NotificationSupport.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\UserTypesSupport.cs" />
     <Compile Include="Interfaces\ICloseApplication.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
+    <Compile Include="Interfaces\ISecureStorage.cs" />
     <Compile Include="Models\Auxiliary.cs" />
     <Compile Include="Models\CustomerDetail.cs" />
     <Compile Include="Models\Efficiency.cs" />
     <Compile Include="Models\Electricity.cs" />
+    <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Production.cs" />
     <Compile Include="Models\UserInfo.cs" />
@@ -89,6 +93,9 @@
     </Compile>
     <Compile Include="Views\InputNotificationsSolutionPage.xaml.cs">
       <DependentUpon>InputNotificationsSolutionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginCheckPage.xaml.cs">
+      <DependentUpon>LoginCheckPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProductionDetailsPage.xaml.cs">
       <DependentUpon>ProductionDetailsPage.xaml</DependentUpon>
@@ -149,6 +156,10 @@
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\portable-net45+win8+wpa81+wp8\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Plugin.Media, Version=2.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
       <Private>True</Private>
@@ -183,6 +194,14 @@
     </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Validation, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Validation.2.2.8\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Auth, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Xamarin.Auth.1.5.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+XamarinIOS10\Xamarin.Auth.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -349,6 +368,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ElectricityUsageDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginCheckPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

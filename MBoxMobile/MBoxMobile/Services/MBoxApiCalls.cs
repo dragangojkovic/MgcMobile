@@ -57,40 +57,80 @@ namespace MBoxMobile.Services
 
         public static async Task Authenticate(CustomerDetail customer)
         {
-            string localToken = AccessToken;
+            UserInfoWrapper returnedObj =
+                await GetObjectOrObjectList<UserInfoWrapper>("", BaseUri + string.Format("MgcApi.svc/Login?serverid={0}&username={1}&password={2}&platform={3}&devicetoken={4}", customer.ServerId, customer.Username, customer.Password, customer.Platform, customer.DeviceToken));
+            if (returnedObj == null)
+                App.LoggedUser = new UserInfo();
+            else
+                App.LoggedUser = returnedObj.LoggedUser;
 
-            NativeMessageHandler handler = new NativeMessageHandler();
-            handler.AllowAutoRedirect = true;
-            handler.UseCookies = true;
-            HttpClient client = new HttpClient(handler);
-            client.BaseAddress = BaseUri;
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + localToken);
-            var j = JsonConvert.SerializeObject(new { serverid = customer.ServerId, username = customer.Username, password = customer.Password, platform = customer.Platform, devicetoken = customer.DeviceToken });
-            var stringContent = new StringContent(j.ToString(), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = new HttpResponseMessage();
-            try
-            {
-                response = await client.PostAsync(BaseUri + "MgcApi.svc/Login", stringContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    HttpContent content = response.Content;
-                    var result = await content.ReadAsStringAsync();
-                    UserInfo returnedObj = JsonConvert.DeserializeObject<UserInfo>(result);
-                    App.LoggedUser = returnedObj;
-                    App.LastErrorMessage = string.Empty;
-                }
-                else
-                {
-                    App.LastErrorMessage = response.StatusCode.ToString();
-                }
-            }
-            catch (Exception e)
-            {
-                App.LastErrorMessage = e.ToString();
-            }
+            //string localToken = AccessToken;
+
+            //NativeMessageHandler handler = new NativeMessageHandler();
+            //handler.AllowAutoRedirect = true;
+            //handler.UseCookies = true;
+            //HttpClient client = new HttpClient(handler);
+            //client.BaseAddress = BaseUri;
+            //client.DefaultRequestHeaders.Accept.Clear();
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //client.DefaultRequestHeaders.Add("Authorization", "Bearer " + localToken);
+            //var j = JsonConvert.SerializeObject(new { serverid = customer.ServerId, username = customer.Username, password = customer.Password, platform = customer.Platform, devicetoken = customer.DeviceToken });
+            //var stringContent = new StringContent(j.ToString(), Encoding.UTF8, "application/json");
+            //HttpResponseMessage response = new HttpResponseMessage();
+            //try
+            //{
+            //    response = await client.PostAsync(BaseUri + "MgcApi.svc/Login", stringContent);
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        HttpContent content = response.Content;
+            //        var result = await content.ReadAsStringAsync();
+            //        UserInfo returnedObj = JsonConvert.DeserializeObject<UserInfo>(result);
+            //        App.LoggedUser = returnedObj;
+            //        App.LastErrorMessage = string.Empty;
+            //    }
+            //    else
+            //    {
+            //        App.LastErrorMessage = response.StatusCode.ToString();
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    App.LastErrorMessage = e.ToString();
+            //}
         }
+
+        #region Filter
+        public static async Task<List<PersonalFilter>> GetPersonalFilter()
+        {
+            PersonalFilterList returnedObj =
+                await GetObjectOrObjectList<PersonalFilterList>("", BaseUri + string.Format("MgcApi.svc/GetPersonalFilterList?userid={0}", App.LoggedUser.login.RecordId));
+            if (returnedObj == null)
+                return new List<PersonalFilter>();
+            else
+                return returnedObj.PersonalFilters;
+        }
+
+        public static async Task<bool> SetSelectedPersonalFilter(int filterid)
+        {
+            int returnedObj =
+                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetSelectedPersonalFilter?userid={0}&filterid={1}", App.LoggedUser.login.RecordId, filterid));
+            if (returnedObj == 0)
+                return false;
+            else
+                return true;
+        }
+                
+        public static async Task<bool> SetPersonalFilterOnOff(bool bOnOff)
+        {
+            int returnedObj =
+                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetPersonalFilterOnOff?userid={0}&bOn={1}", App.LoggedUser.login.RecordId, bOnOff));
+            if (returnedObj == 0)
+                return false;
+            else
+                return true;
+        }
+
+        #endregion
 
         #region Uptime
         public static async Task<List<EfficiencyLocation>> GetEfficiencyPerLocation(int? filterId, int periodId)
@@ -356,6 +396,226 @@ namespace MBoxMobile.Services
             else
                 return returnedObj.Materials;
         }
+
+        public static async Task<List<MaterialModel>> GetNotificationTypeList(int alterEquipmentType)
+        {
+            MaterialModelList returnedObj = await GetObjectOrObjectList<MaterialModelList>("", BaseUri + string.Format("MgcApi.svc/GetNotificationTypeList?alterEquipmentType={0}", alterEquipmentType));
+            if (returnedObj == null)
+                return new List<MaterialModel>();
+            else
+                return returnedObj.Materials;
+        }
+
+        public static async Task<List<MaterialModel>> GetSolutionCauseList(int notificationId)
+        {
+            MaterialModelList returnedObj = await GetObjectOrObjectList<MaterialModelList>("", BaseUri + string.Format("MgcApi.svc/GetSolutionCauseList?notificationID={0}", notificationId));
+            if (returnedObj == null)
+                return new List<MaterialModel>();
+            else
+                return returnedObj.Materials;
+        }
+
+        public static async Task<bool> InputAcknowledge(int notificationId, string description)
+        {
+            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputAcknowledge?notificationID={0}&userID={1}&description={2}", notificationId, App.LoggedUser.login.RecordId, description));
+            if (returnedObj == 10000)
+                return true;
+            else
+                return false;
+        }
+
+        public static async Task<bool> InputKwh(int notificationId, string description, int causeId)
+        {
+            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputKwh?notificationID={0}&userID={1}&description={2}&causeID={3}", notificationId, App.LoggedUser.login.RecordId, description, causeId));
+            if (returnedObj == 10000)
+                return true;
+            else
+                return false;
+        }
+
+        public static async Task<bool> InputDescription(int notificationId, string description, int alterDescription, int alterEquipType)
+        {
+            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputDescription?notificationID={0}&userID={1}&description={2}&alterDescription={3}&alterEquipType={4}", notificationId, App.LoggedUser.login.RecordId, description, alterDescription, alterEquipType));
+            if (returnedObj == 10000)
+                return true;
+            else
+                return false;
+        }
+
+        public static async Task<bool> InputSolution(int notificationId, string solution, int? solutionCauseId)
+        {
+            string sSolutionCauseId = (solutionCauseId == null) ? "" : solutionCauseId.ToString();
+
+            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputSolution?notificationID={0}&userID={1}&solution={2}&solutionCauseID={3}", notificationId, App.LoggedUser.login.RecordId, solution, sSolutionCauseId));
+            if (returnedObj == 10000)
+                return true;
+            else
+                return false;
+        }
+
+        //public async void InputAcknowledge(int notificationID, string desc, StatusResponse status)
+        //{
+        //    string url = "MgcApi.svc/InputAcknowledge?notificationID={notificationID}&userID={userID}&description={description}";
+        //    var request = new RestRequest(url, Method.GET);
+
+        //    request.AddHeader("Content-Type", "application/json");
+
+        //    try
+        //    {
+        //        var authInfo = LocalDataStore.authInfo;
+        //        if (authInfo != null)
+        //        {
+        //            request.AddUrlSegment("notificationID", notificationID);
+        //            request.AddUrlSegment("userID", authInfo.RecordId);
+        //            request.AddUrlSegment("description", desc);
+
+        //            IRestResponse response = await restClient.Execute(request);
+        //            var result = response.Content;
+        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
+
+        //            if (res.d == 10000)
+        //            {
+        //                status(true, "success");
+        //            }
+        //            else
+        //            {
+        //                status(false, "failed");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            status(false, "User not found");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        status(false, ex.Message);
+        //    }
+        //}
+
+        //public async void InputKwh(int notificationID, string desc, int causeID, StatusResponse status)
+        //{
+        //    string url = "MgcApi.svc/InputKwh?notificationID={notificationID}&userID={userID}&description={description}&causeID={causeID}";
+        //    var request = new RestRequest(url, Method.GET);
+
+        //    request.AddHeader("Content-Type", "application/json");
+
+        //    try
+        //    {
+        //        var authInfo = LocalDataStore.authInfo;
+        //        if (authInfo != null)
+        //        {
+        //            request.AddUrlSegment("notificationID", notificationID);
+        //            request.AddUrlSegment("userID", authInfo.RecordId);
+        //            request.AddUrlSegment("description", desc);
+        //            request.AddUrlSegment("causeID", causeID);
+
+        //            IRestResponse response = await restClient.Execute(request);
+        //            var result = response.Content;
+        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
+
+        //            if (res.d == 10000)
+        //            {
+        //                status(true, "success");
+        //            }
+        //            else
+        //            {
+        //                status(false, "failed");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            status(false, "User not found");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        status(false, ex.Message);
+        //    }
+        //}
+
+        //public async void InputDescription(int notificationID, string desc, int alterDesc, int equiptype, StatusResponse status)
+        //{
+        //    string url = "MgcApi.svc/InputDescription?notificationID={notificationID}&userID={userID}&description={description}&alterDescription={alterDescription}&alterEquipType={alterEquipType}";
+        //    var request = new RestRequest(url, Method.GET);
+
+        //    request.AddHeader("Content-Type", "application/json");
+
+        //    try
+        //    {
+        //        var authInfo = LocalDataStore.authInfo;
+        //        if (authInfo != null)
+        //        {
+        //            request.AddUrlSegment("notificationID", notificationID);
+        //            request.AddUrlSegment("userID", authInfo.RecordId);
+        //            request.AddUrlSegment("description", desc);
+        //            request.AddUrlSegment("alterDescription", alterDesc);
+        //            request.AddUrlSegment("alterEquipType", equiptype);
+
+        //            IRestResponse response = await restClient.Execute(request);
+        //            var result = response.Content;
+        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
+
+        //            if (res.d == 10000)
+        //            {
+        //                status(true, "success");
+        //            }
+        //            else
+        //            {
+        //                status(false, "failed");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            status(false, "User not found");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        status(false, ex.Message);
+        //    }
+        //}
+
+        //public async void InputSolution(int notificationID, string solution, int? solutionCauseID, StatusResponse status)
+        //{
+        //    string url = "MgcApi.svc/InputSolution?notificationID={notificationID}&userID={userID}&solution={solution}&solutionCauseID={solutionCauseID}";
+        //    var request = new RestRequest(url, Method.GET);
+
+        //    request.AddHeader("Content-Type", "application/json");
+
+        //    try
+        //    {
+        //        var authInfo = LocalDataStore.authInfo;
+        //        if (authInfo != null)
+        //        {
+        //            request.AddUrlSegment("notificationID", notificationID);
+        //            request.AddUrlSegment("userID", authInfo.RecordId);
+        //            request.AddUrlSegment("solution", solution);
+        //            request.AddUrlSegment("solutionCauseID", solutionCauseID);
+
+        //            IRestResponse response = await restClient.Execute(request);
+        //            var result = response.Content;
+        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
+
+        //            if (res.d == 10000)
+        //            {
+        //                status(true, "success");
+        //            }
+        //            else
+        //            {
+        //                status(false, "failed");
+        //            }
+        //        }
+        //        else
+        //        {
+        //            status(false, "User not found");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        status(false, ex.Message);
+        //    }
+        //}
         #endregion
     }
 }

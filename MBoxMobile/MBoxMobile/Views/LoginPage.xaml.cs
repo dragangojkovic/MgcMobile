@@ -1,8 +1,12 @@
-﻿using MBoxMobile.Interfaces;
+﻿using MBoxMobile.Helpers;
+using MBoxMobile.Interfaces;
 using MBoxMobile.Models;
+using MBoxMobile.Services;
+using Plugin.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
@@ -15,12 +19,15 @@ namespace MBoxMobile.Views
     {
         double screenWidth = 0.0;
         double screenHeight = 0.0;
+        int serverId = -1;
         bool rememberMe = false;
+
+        LoginPageViewModel loginViewModel = new LoginPageViewModel();
 
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = new LoginPageViewModel();
+            BindingContext = loginViewModel;
 
             screenWidth = DependencyService.Get<IDisplay>().Width;
             screenHeight = DependencyService.Get<IDisplay>().Height;
@@ -56,36 +63,43 @@ namespace MBoxMobile.Views
             Resources["Login_ForgotPassword"] = App.CurrentTranslation["Login_ForgotPassword"];
         }
 
-        public void LoginClicked(object sender, EventArgs e)
+        public async void LoginClicked(object sender, EventArgs e)
         {
-            //ToDo: remove this static data and replace with response from Authenticate method
-            UserInfo uInfo = new UserInfo();
-            uInfo.status = 10000;
-            uInfo.login = new UserLogin()
+            if (ServerPicker.SelectedIndex != -1)
             {
-                BelongToLocationID = "853,885,913,1981",
-                BelongToTableID = 539,
-                EfficiencyWorkHours = false.ToString(),
-                EquipmentDepartmentFilter = "0",
-                EquipmentLocationFilter = "0",
-                FirstName = "Saša",
-                FunctionFilter = "6069",
-                IsFreeze1 = "4644",
-                LoginID = "salemih@gmail.com",
-                MainFilter = true.ToString(),
-                MenuLanguage = "1",
-                NotificationFilter = true.ToString(),
-                RecordId = 9148,
-                SelectedNotificationFilter = "0",
-                SelectedPersonalFilter = "0",
-                ServerIPAddress = "121.33.199.84",
-                TInitials = "Mbox_developer",
-                Title = "Customer",
-                UserGroup = "Customer"
-            };
-            App.LoggedUser = uInfo;
+                string selectedServer = ServerPicker.Items[ServerPicker.SelectedIndex];
+                serverId = App.Servers.FirstOrDefault(x => x.Value == selectedServer).Key;
+            }
+            else
+            {
+                serverId = -1;
+            }
 
-            Application.Current.MainPage = new SideView();
+            CustomerDetail customer = new CustomerDetail();
+            customer.ServerId = serverId;
+            customer.Username = loginViewModel.Username != null ? loginViewModel.Username.Trim() : string.Empty;
+            customer.Password = loginViewModel.Password != null ? loginViewModel.Password.Trim() : string.Empty;
+            customer.Platform = "Android";
+            customer.DeviceToken = CrossSettings.Current.GetValueOrDefault("DEVICE_TOKEN", string.Empty);
+
+            int status = await LoginCustomer.GetLoginStatus(customer);
+
+            if (status == 10000)
+            {
+                if (rememberMe)
+                {
+                    DependencyService.Get<ISecureStorage>().Save(serverId.ToString(), customer.Username, customer.Password);
+                }
+                Application.Current.MainPage = new SideView();
+            }
+            else if (status == 0)
+            {
+                await DisplayAlert(App.CurrentTranslation["Login_Title"], App.LastErrorMessage, App.CurrentTranslation["Common_OK"]);
+            }
+            else
+            {
+                await DisplayAlert(App.CurrentTranslation["Login_Title"], App.LastErrorMessage, App.CurrentTranslation["Common_OK"]);
+            }
         }
 
         public void RememberMeTapped(object sender, EventArgs e)
@@ -105,9 +119,73 @@ namespace MBoxMobile.Views
 
     class LoginPageViewModel : INotifyPropertyChanged
     {
+        private int serverId;
+        public int ServerId
+        {
+            get { return serverId; }
+            set
+            {
+                if (serverId != value)
+                {
+                    serverId = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged.Invoke(this, new PropertyChangedEventArgs("ServerId"));
+                    }
+                }
+            }
+        }
 
-        
+        private string username;
+        public string Username
+        {
+            get { return username; }
+            set
+            {
+                if (username != value)
+                {
+                    username = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Username"));
+                    }
+                }
+            }
+        }
 
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                if (password != value)
+                {
+                    password = value;
+                    if (PropertyChanged != null)
+                    {
+                        PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Password"));
+                    }
+                }
+            }
+        }
+
+        //private bool rememberMe;
+        //public bool RememberMe
+        //{
+        //    get { return rememberMe; }
+        //    set
+        //    {
+        //        if (rememberMe != value)
+        //        {
+        //            rememberMe = value;
+        //            if (PropertyChanged != null)
+        //            {
+        //                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("RememberMe"));
+        //            }
+        //        }
+        //    }
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName]string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

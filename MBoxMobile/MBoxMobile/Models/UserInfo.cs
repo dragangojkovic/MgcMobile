@@ -1,9 +1,17 @@
-﻿namespace MBoxMobile.Models
+﻿using Newtonsoft.Json;
+
+namespace MBoxMobile.Models
 {
     public class UserInfo
     {
         public UserLogin login { get; set; }
         public int status { get; set; }
+    }
+
+    public class UserInfoWrapper
+    {
+        [JsonProperty("d")]
+        public UserInfo LoggedUser { get; set; }
     }
 
     public class UserLogin

@@ -1,6 +1,7 @@
 ﻿using MBoxMobile.CustomControls;
 using MBoxMobile.Helpers;
 using MBoxMobile.Interfaces;
+using MBoxMobile.Models;
 using System;
 using System.Collections.Generic;
 
@@ -64,6 +65,20 @@ namespace MBoxMobile.Views
                 GridButtons.Children.Add(b, left, rowOrdinal);
                 dictOrdinal++;
             }
+                        
+            MessagingCenter.Subscribe<string>(this, "NotificationPopupClosed", (sender) => {
+                App.IsNotificationHandling = false;
+                App.NotificationsForHandling.Remove(App.NotificationsForHandling[0]);
+
+                HandleReceivedNotifications();
+            });
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            HandleReceivedNotifications();
         }
 
         private async void Button1_Clicked(object sender, EventArgs e)
@@ -73,7 +88,7 @@ namespace MBoxMobile.Views
 
         private async void Button2_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Alert", "You have clicked Electricity usage", "OK");
+            await Navigation.PushAsync(new ElectricityUsagePage());
         }
 
         private async void Button3_Clicked(object sender, EventArgs e)
@@ -84,12 +99,40 @@ namespace MBoxMobile.Views
         private async void Button4_Clicked(object sender, EventArgs e)
         {
             await DisplayAlert("Alert", "You have clicked Notifications", "OK");
-            //await Navigation.PushModalAsync(new InputNotificationsKWhPage(new Models.NotificationModel()));
         }
 
         private async void Button5_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AuxiliaryEquipmentPage());
         }
+
+        private void HandleReceivedNotifications()
+        {
+            if (App.NotificationsForHandling != null && App.NotificationsForHandling.Count > 0 && !App.IsNotificationHandling)
+            {
+                NotificationModel currentNotification = App.NotificationsForHandling[0];
+                string notificationHandlerPageName = NotificationSupport.HandleNotification(currentNotification);
+
+                if (notificationHandlerPageName != string.Empty)
+                {
+                    switch (notificationHandlerPageName)
+                    {
+                        case "InputNotificationsAcknowledgePage":
+                            Navigation.PushModalAsync(new InputNotificationsAcknowledgePage(currentNotification));
+                            break;
+                        case "InputNotificationsDescriptionPage":
+                            Navigation.PushModalAsync(new InputNotificationsDescriptionPage(currentNotification));
+                            break;
+                        case "InputNotificationsKWhPage":
+                            Navigation.PushModalAsync(new InputNotificationsKWhPage(currentNotification));
+                            break;
+                        case "InputNotificationsSolutionPage":
+                            Navigation.PushModalAsync(new InputNotificationsSolutionPage(currentNotification));
+                            break;
+                    }
+                }
+            }
+        }
+
     }
 }

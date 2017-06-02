@@ -18,15 +18,15 @@ namespace MBoxMobile.Helpers
         var rows = document.getElementById('mbox').getElementsByTagName('tr');
         for(i = 0; i < rows.length; i++)
         {
-            rows{i].onclick = function() {
+            rows[i].onclick = function() {
                 HighLightTR(this,'#30a0ff','#ffffff');
-                var id = this.cells{0].innerText;
+                var id = this.cells[0].innerText;
 			    window.open('http://localhost?id='+id);
             }
         }
         for(var i = 0; i < rows.length; i++)
 	    {
-		    rows{i].bgColor = (i%2==0) ? '#f1f4f7' : '#e9eaec' ;
+		    rows[i].bgColor = (i%2==0) ? '#f1f4f7' : '#e9eaec' ;
 	    }
     }
     var preEl;
@@ -82,10 +82,10 @@ table th {
 
 <table>
     <thead>
-        {#TableHeader]
+        {#TableHeader}
     </thead>
     <tbody id='mbox'>
-        {#TableBody]
+        {#TableBody}
     </tbody>
 </table>
 
@@ -412,11 +412,11 @@ table th {
                     html = html.Replace("{#NoDetailsVisibility}", string.Empty);
                     break;
                 case "Department":
-                    html = html.Replace("{#Name}", App.CurrentTranslation["Uptime_Departments"]);
+                    html = html.Replace("{#Name}", App.CurrentTranslation["ElectricityUsage_Departments"]);
                     html = html.Replace("{#NoDetailsVisibility}", @" style=""display: none; """);
                     break;
                 case "SubDepartment":
-                    html = html.Replace("{#Name}", App.CurrentTranslation["Uptime_SubDepartments"]);
+                    html = html.Replace("{#Name}", App.CurrentTranslation["ElectricityUsage_SubDepartments"]);
                     html = html.Replace("{#NoDetailsVisibility}", @" style=""display: none; """);
                     break;
             }
@@ -518,13 +518,13 @@ table th {
 <td class=""right-text"">{#EfficiencyPer}</td>
 <td style=""white-space:nowrap"">{#StatusText}</td>
 <td class=""right-text"">{#Current}</td>
-<td style=""white-space:nowrap"">{#Total}</td>
-<td style=""white-space:nowrap"">{#Waste}</td>
-<td style=""white-space:nowrap"">{#WastePer}</td>
-<td class=""right-text"">{#Location}</td>
-<td class=""right-text"">{#DepartmentName}</td>
-<td class=""right-text"">{#SubDepartmentName}</td>
-<td class=""right-text"">{#SystemData}</td>
+<td class=""right-text"">{#Total}</td>
+<td class=""right-text"">{#Waste}</td>
+<td class=""right-text"">{#WastePer}</td>
+<td style=""white-space:nowrap"">{#Location}</td>
+<td style=""white-space:nowrap"">{#DepartmentName}</td>
+<td style=""white-space:nowrap"">{#SubDepartmentName}</td>
+<td style=""white-space:nowrap"">{#SystemData}</td>
 </tr>";
                     template = template.Replace("{#MachineNumber}", el.MachineNumber.ToString());
                     template = template.Replace("{#MachineGroupName}", el.MachineGroupName);

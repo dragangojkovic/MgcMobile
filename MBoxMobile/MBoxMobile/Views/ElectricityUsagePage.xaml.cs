@@ -25,10 +25,10 @@ namespace MBoxMobile.Views
         bool workingTimeOnly = false;
 
         int? locationId = null;
+        int? areaId = null;
         int? departmentId = null;
         int? subDepartmentId = null;
         int? consumingPowerEquipmentId = null;
-        int? areaId = null;
 
         WebView wvLocations, wvAreas, wvDepartments, wvSubDepartments, wvConsumingPowerEquipments;
 
@@ -79,12 +79,12 @@ namespace MBoxMobile.Views
             string currentTimeFilter = FilterSupport.GetTimeFilters()[timeFilter];
 
             Resources["ElectricityUsage_Title"] = App.CurrentTranslation["ElectricityUsage_Title"];
-            Resources["ElectricityUsage_ViewDetail"] = App.CurrentTranslation["ElectricityUsage_ViewDetail"];
+            Resources["Common_ViewDetail"] = App.CurrentTranslation["Common_ViewDetail"];
             Resources["Common_FilterFilterOn"] = App.CurrentTranslation["Common_FilterFilterOn"];
             Resources["Common_FilterFilterOff"] = App.CurrentTranslation["Common_FilterFilterOff"];
             Resources["Common_Filter"] = App.CurrentTranslation["Common_Filter"];                     //this can be any value from GetPersonalFilters()
             Resources["Common_FilterTime"] = App.CurrentTranslation[currentTimeFilter];
-            Resources["ElectricityUsage_WorkingTimeOnly"] = App.CurrentTranslation["ElectricityUsage_WorkingTimeOnly"];
+            Resources["Common_WorkingTimeOnly"] = App.CurrentTranslation["Common_WorkingTimeOnly"];
 
             if (!AreTablesPopulated)
             {
@@ -102,7 +102,7 @@ namespace MBoxMobile.Views
         public async void ViewDetailClicked(object sender, EventArgs e)
         {
             if ((bool)Resources["IsLoading"] == false)
-                await Navigation.PushModalAsync(new ElectricityUsageDetailsPage(timeFilter, personalFilter, locationId, departmentId, subDepartmentId, consumingPowerEquipmentId, areaId));
+                await Navigation.PushModalAsync(new ElectricityUsageDetailsPage(locationId, departmentId, subDepartmentId, personalFilter));
         }
 
         public void FilterOnClicked(object sender, EventArgs e)
@@ -173,7 +173,7 @@ namespace MBoxMobile.Views
             #region Areas
             var asArea = new AccordionSource()
             {
-                HeaderText = App.CurrentTranslation["ElectricityUsage_Area"]
+                HeaderText = App.CurrentTranslation["ElectricityUsage_Areas"]
             };
             result.Add(asArea);
             #endregion
@@ -197,7 +197,7 @@ namespace MBoxMobile.Views
             #region ConsumingPowerEquipments
             var asConsumingPowerEquipment = new AccordionSource()
             {
-                HeaderText = App.CurrentTranslation["ElectricityUsage_ConsumingPowerEquipment"]
+                HeaderText = App.CurrentTranslation["ElectricityUsage_ConsumingPower"]
             };
             result.Add(asConsumingPowerEquipment);
             #endregion
@@ -233,7 +233,7 @@ namespace MBoxMobile.Views
 
             var asArea = new AccordionSource()
             {
-                HeaderText = App.CurrentTranslation["ElectricityUsage_Area"],
+                HeaderText = App.CurrentTranslation["ElectricityUsage_Areas"],
                 ContentItems = wvAreas,
                 ContentHeight = await PopulateWebView("wvAreas")
             };
@@ -278,14 +278,14 @@ namespace MBoxMobile.Views
 
             var asConsumingPowerEquipment = new AccordionSource()
             {
-                HeaderText = App.CurrentTranslation["ElectricityUsage_ConsumingPowerEquipment"],
+                HeaderText = App.CurrentTranslation["ElectricityUsage_ConsumingPower"],
                 ContentItems = wvConsumingPowerEquipments,
-                ContentHeight = await PopulateWebView("wvConsumingPowerEquipments")
+                ContentHeight = await PopulateWebView("wvConsumingPowerEquipments"),
+                HeaderFontSize = 14
             };
             result.Add(asConsumingPowerEquipment);
             #endregion
-
-
+            
             #region Navigating handlers
 
             wvLocations.Navigating += async (s, e) =>
@@ -297,10 +297,10 @@ namespace MBoxMobile.Views
                 e.Cancel = true;
 
                 Resources["IsLoading"] = true;
+                //asArea.ContentHeight = await PopulateWebView("wvAreas");
                 asDepartments.ContentHeight = await PopulateWebView("wvDepartments");
                 asSubDepartments.ContentHeight = await PopulateWebView("wvSubDepartments");
                 asConsumingPowerEquipment.ContentHeight = await PopulateWebView("wvConsumingPowerEquipments");
-                asArea.ContentHeight = await PopulateWebView("wvAreas");
                 Resources["IsLoading"] = false;
             };
 
@@ -322,9 +322,9 @@ namespace MBoxMobile.Views
                 e.Cancel = true;
 
                 Resources["IsLoading"] = true;
+                //asArea.ContentHeight = await PopulateWebView("wvAreas");
                 asSubDepartments.ContentHeight = await PopulateWebView("wvSubDepartments");
                 asConsumingPowerEquipment.ContentHeight = await PopulateWebView("wvConsumingPowerEquipments");
-                asArea.ContentHeight = await PopulateWebView("wvAreas");
                 Resources["IsLoading"] = false;
             };
 
@@ -337,8 +337,8 @@ namespace MBoxMobile.Views
                 e.Cancel = true;
 
                 Resources["IsLoading"] = true;
+                //asArea.ContentHeight = await PopulateWebView("wvAreas");
                 asConsumingPowerEquipment.ContentHeight = await PopulateWebView("wvConsumingPowerEquipments");
-                asArea.ContentHeight = await PopulateWebView("wvAreas");
                 Resources["IsLoading"] = false;
             };
 
