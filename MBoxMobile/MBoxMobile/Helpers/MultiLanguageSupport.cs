@@ -99,6 +99,7 @@ namespace MBoxMobile.Helpers
             translation.Add("Common_ViewDetail", "View Detail");
             translation.Add("Common_Close", "Close");
             translation.Add("Common_OK", "OK");
+            translation.Add("Common_ErrorMsgNoNetwork", "There is no network connection!");
 
             //Menu - Side view
             translation.Add("Menu_Home", "Home");

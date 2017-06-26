@@ -17,9 +17,9 @@ namespace MBoxMobile.Models
         public int SelectedFilterID { get; set; }
     }
 
-    public class PersonalFilterList
+    public class PersonalFilterWrapper
     {
         [JsonProperty("d")]
-        public List<PersonalFilter> PersonalFilters { get; set; }
+        public PersonalFilter MyPersonalFilter { get; set; }
     }
 }

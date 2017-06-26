@@ -1,6 +1,7 @@
 ﻿using MBoxMobile.Models;
 using ModernHttpClient;
 using Newtonsoft.Json;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,39 +19,47 @@ namespace MBoxMobile.Services
 
         public static async Task<TResult> GetObjectOrObjectList<TResult>(string serializedParameters, string requestUri, bool isPostMethod = false)
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.AllowAutoRedirect = true;
-            handler.UseCookies = true;
-            HttpClient client = new HttpClient(handler);
-            client.BaseAddress = BaseUri;
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + AccessToken);
-            var stringContent = serializedParameters != string.Empty ? new StringContent(serializedParameters, Encoding.UTF8, "application/json") : null;
-            HttpResponseMessage response = new HttpResponseMessage();
-            try
+            if (CrossConnectivity.Current.IsConnected)
             {
-                if (isPostMethod)
-                    response = await client.PostAsync(requestUri, stringContent);
-                else
-                    response = await client.GetAsync(requestUri);
-                if (response.IsSuccessStatusCode)
+                HttpClientHandler handler = new HttpClientHandler();
+                handler.AllowAutoRedirect = true;
+                handler.UseCookies = true;
+                HttpClient client = new HttpClient(handler);
+                client.BaseAddress = BaseUri;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + AccessToken);
+                var stringContent = serializedParameters != string.Empty ? new StringContent(serializedParameters, Encoding.UTF8, "application/json") : null;
+                HttpResponseMessage response = new HttpResponseMessage();
+                try
                 {
-                    HttpContent content = response.Content;
-                    string result = await content.ReadAsStringAsync();
-                    TResult returnedObjs = JsonConvert.DeserializeObject<TResult>(result);
-                    App.LastErrorMessage = string.Empty;
-                    return returnedObjs;
+                    if (isPostMethod)
+                        response = await client.PostAsync(requestUri, stringContent);
+                    else
+                        response = await client.GetAsync(requestUri);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        HttpContent content = response.Content;
+                        string result = await content.ReadAsStringAsync();
+                        TResult returnedObjs = JsonConvert.DeserializeObject<TResult>(result);
+                        App.LastErrorMessage = string.Empty;
+                        return returnedObjs;
+                    }
+                    else
+                    {
+                        App.LastErrorMessage = response.StatusCode.ToString();
+                        return default(TResult);
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    App.LastErrorMessage = response.StatusCode.ToString();
+                    App.LastErrorMessage = e.ToString();
                     return default(TResult);
                 }
             }
-            catch (Exception e)
+            else
             {
-                App.LastErrorMessage = e.ToString();
+                App.LastErrorMessage = App.CurrentTranslation["Common_ErrorMsgNoNetwork"];
                 return default(TResult);
             }
         }
@@ -100,14 +109,14 @@ namespace MBoxMobile.Services
         }
 
         #region Filter
-        public static async Task<List<PersonalFilter>> GetPersonalFilter()
+        public static async Task<PersonalFilter> GetPersonalFilter()
         {
-            PersonalFilterList returnedObj =
-                await GetObjectOrObjectList<PersonalFilterList>("", BaseUri + string.Format("MgcApi.svc/GetPersonalFilterList?userid={0}", App.LoggedUser.login.RecordId));
+            PersonalFilterWrapper returnedObj =
+                await GetObjectOrObjectList<PersonalFilterWrapper>("", BaseUri + string.Format("MgcApi.svc/GetPersonalFilterList?userid={0}", App.LoggedUser.login.RecordId));
             if (returnedObj == null)
-                return new List<PersonalFilter>();
+                return new PersonalFilter();
             else
-                return returnedObj.PersonalFilters;
+                return returnedObj.MyPersonalFilter;
         }
 
         public static async Task<bool> SetSelectedPersonalFilter(int filterid)

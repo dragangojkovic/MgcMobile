@@ -92,10 +92,6 @@ namespace MBoxMobile.Views
                 }
                 Application.Current.MainPage = new SideView();
             }
-            else if (status == 0)
-            {
-                await DisplayAlert(App.CurrentTranslation["Login_Title"], App.LastErrorMessage, App.CurrentTranslation["Common_OK"]);
-            }
             else
             {
                 await DisplayAlert(App.CurrentTranslation["Login_Title"], App.LastErrorMessage, App.CurrentTranslation["Common_OK"]);

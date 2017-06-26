@@ -29,7 +29,9 @@ namespace MBoxMobile.Droid
                 try
                 {
                     Bundle apsInfo = Intent.GetBundleExtra("PushPayload");
-                    NotificationPayload payloadObj = JsonConvert.DeserializeObject<NotificationPayload>(apsInfo.GetString("data"));
+                    string wrapper = apsInfo.GetString("aps");
+                    Org.Json.JSONObject jsonObj = new Org.Json.JSONObject(wrapper);
+                    NotificationPayload payloadObj = JsonConvert.DeserializeObject<NotificationPayload>(jsonObj.GetString("data"));
 
                     var selectedNotification = new NotificationModel();
                     selectedNotification.ID = int.Parse(payloadObj.Inputstable_AlterID);
@@ -49,24 +51,6 @@ namespace MBoxMobile.Droid
                     selectedNotification.AlterReply = int.Parse(payloadObj.AlterReply);
                     selectedNotification.NotType = int.Parse(payloadObj.NotType);
                     selectedNotification.AlterEquipmentType = int.Parse(payloadObj.AlterEquipType);
-                    //var selectedNotification = new NotificationModel();
-                    //selectedNotification.ID = 1877108;// int.Parse(apsInfo.GetString("Inputstable_AlterID"));
-                    //selectedNotification.MachineNumber = "5";// apsInfo.GetString("machine_num");
-                    //selectedNotification.MachineName = "5"; //apsInfo.GetString("MachineName");
-                    //selectedNotification.DateTime = @"5\/25\/2017 2:24:44 PM";// apsInfo.GetString("record_date");
-                    //selectedNotification.EquipmentTypeName = "Injection molding machine";// apsInfo.GetString("EquipTypeName");
-                    //selectedNotification.EquipmentGroupName = "120T";// apsInfo.GetString("EquipGroupName");
-                    //selectedNotification.Kwh = "";// apsInfo.GetString("Kwh");
-                    //selectedNotification.Operator = "";// apsInfo.GetString("Operator");
-                    //selectedNotification.Product = "";// apsInfo.GetString("Product");
-                    //selectedNotification.Notification = "Off-Production Card Unknown";// apsInfo.GetString("Notification");
-                    //selectedNotification.Location = "MGC GZ";// apsInfo.GetString("Location");
-                    //selectedNotification.Department = @"注塑 \/ Moulding"; //apsInfo.GetString("Department");
-                    //selectedNotification.SubDepartment = @"3楼 \/ Third floor";// apsInfo.GetString("SubDepartment");
-                    //selectedNotification.AlterType = 6549;// int.Parse(apsInfo.GetString("AlterType"));
-                    //selectedNotification.AlterReply = 6552;// int.Parse(apsInfo.GetString("AlterReply"));
-                    //selectedNotification.NotType = 6727;// int.Parse(apsInfo.GetString("NotType"));
-                    //selectedNotification.AlterEquipmentType = 6571;// int.Parse(apsInfo.GetString("AlterEquipType"));
 
                     if (App.NotificationsForHandling == null)
                         App.NotificationsForHandling = new System.Collections.Generic.List<NotificationModel>();

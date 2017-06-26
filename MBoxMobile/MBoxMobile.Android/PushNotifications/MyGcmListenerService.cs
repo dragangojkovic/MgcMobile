@@ -13,31 +13,15 @@ namespace MBoxMobile.Droid.PushNotifications
     {
         public override void OnMessageReceived(string from, Bundle data)
         {
-            string message = data.GetString("alert");
+            string wrapper = data.GetString("aps");
+            Org.Json.JSONObject jsonObj = new Org.Json.JSONObject(wrapper);
+            string message = jsonObj.GetString("alert");          
 
             Log.Debug("MyGcmListenerService", "From:    " + from);
             Log.Debug("MyGcmListenerService", "Message: " + message);
 
             var intent = new Intent(this, typeof(MainActivity));
-            intent.PutExtra("PushMessage", message);
             intent.PutExtra("PushPayload", data);
-            //intent.PutExtra("Id", data.GetString("Inputstable_AlterID"));
-            //intent.PutExtra("MachineNumber", data.GetString("machine_num"));
-            //intent.PutExtra("MachineName", data.GetString("MachineName"));
-            //intent.PutExtra("DateTime", data.GetString("record_date"));
-            //intent.PutExtra("EquipmentTypeName", data.GetString("EquipTypeName"));
-            //intent.PutExtra("EquipmentGroupName", data.GetString("EquipGroupName"));
-            //intent.PutExtra("Kwh", data.GetString("Kwh"));
-            //intent.PutExtra("Operator", data.GetString("Operator"));
-            //intent.PutExtra("Product", data.GetString("Product"));
-            //intent.PutExtra("Notification", data.GetString("Notification"));
-            //intent.PutExtra("Location", data.GetString("Location"));
-            //intent.PutExtra("Department", data.GetString("Department"));
-            //intent.PutExtra("SubDepartment", data.GetString("SubDepartment"));
-            //intent.PutExtra("AlterType", data.GetString("AlterType)"));
-            //intent.PutExtra("AlterReply", data.GetString("AlterReply)"));
-            //intent.PutExtra("NotType", data.GetString("NotType)"));
-            //intent.PutExtra("AlterEquipmentType", data.GetString("AlterEquipType)"));
 
             intent.AddFlags(ActivityFlags.ClearTop);
             var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);

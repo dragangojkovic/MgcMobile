@@ -19,9 +19,10 @@ namespace MBoxMobile.Views
         double screenHeight = 0.0;
         bool AreTablesPopulated = false;
 
+        PersonalFilter personalFilter = null;
         bool filterOn = false;
-        int? personalFilter = null;
-        int timeFilter = 6274;
+        int? personalFilterId = null;
+        int timeFilterId = 6274;
         bool workingTimeOnly = false;
 
         int? locationId = null;
@@ -54,18 +55,10 @@ namespace MBoxMobile.Views
             Resources["Filter2FontSize"] = FilterSupport.GetFilter2FontSize(screenWidth);
             Resources["FilterWorkingHoursLabelFontSize"] = FilterSupport.GetWorkingHoursLabelFontSize(screenWidth);
 
-            if (filterOn)
-            {
-                Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-                Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-                Resources["FilterIsEnabled"] = true;
-            }
-            else
-            {
-                Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-                Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-                Resources["FilterIsEnabled"] = false;
-            }
+            //filter default values 
+            Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+            Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+            Resources["FilterIsEnabled"] = false;
 
             UptimeAccordion.AccordionWidth = screenWidth - 30;
             UptimeAccordion.AccordionHeight = 55.0;
@@ -77,19 +70,34 @@ namespace MBoxMobile.Views
         {
             base.OnAppearing();
             
-            string currentTimeFilter = FilterSupport.GetTimeFilters()[timeFilter];
+            string currentTimeFilter = FilterSupport.GetTimeFilters()[timeFilterId];
 
             Resources["Uptime_Title"] = App.CurrentTranslation["Uptime_Title"];
             Resources["Common_ViewDetail"] = App.CurrentTranslation["Common_ViewDetail"];
             Resources["Common_FilterFilterOn"] = App.CurrentTranslation["Common_FilterFilterOn"];
             Resources["Common_FilterFilterOff"] = App.CurrentTranslation["Common_FilterFilterOff"];
-            Resources["Common_Filter"] = App.CurrentTranslation["Common_Filter"];                     //this can be any value from GetPersonalFilters()
+            Resources["Common_Filter"] = App.CurrentTranslation["Common_Filter"];
             Resources["Common_FilterTime"] = App.CurrentTranslation[currentTimeFilter];
             Resources["Uptime_WorkingTimeOnly"] = App.CurrentTranslation["Common_WorkingTimeOnly"];
 
             if (!AreTablesPopulated)
             {
                 Resources["IsLoading"] = true;
+                personalFilter = await MBoxApiCalls.GetPersonalFilter();
+                filterOn = personalFilter.FilterOn;
+                if (filterOn)
+                {
+                    Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["FilterIsEnabled"] = true;
+                    Resources["Common_Filter"] = personalFilter.FilterList.Where(x => x.FilterID == personalFilter.SelectedFilterID).FirstOrDefault().FilterName;
+                }
+                else
+                {
+                    Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["FilterIsEnabled"] = false;
+                }
                 UptimeAccordion.AccordionWidth = screenWidth - 30;
                 UptimeAccordion.AccordionHeight = 55.0;
                 UptimeAccordion.DataSource = await GetAccordionData();
@@ -103,28 +111,55 @@ namespace MBoxMobile.Views
         public async void ViewDetailClicked(object sender, EventArgs e)
         {
             if ((bool)Resources["IsLoading"] == false)
-                await Navigation.PushModalAsync(new UptimeDetailsPage(timeFilter, personalFilter, locationId, departmentId, subDepartmentId, equipmentId, equipmentGroupId, auxiliaryEquipmentId));
+                await Navigation.PushModalAsync(new UptimeDetailsPage(timeFilterId, personalFilterId, locationId, departmentId, subDepartmentId, equipmentId, equipmentGroupId, auxiliaryEquipmentId));
         }
 
-        public void FilterOnClicked(object sender, EventArgs e)
+        public async void FilterOnClicked(object sender, EventArgs e)
         {
             Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
             Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
             Resources["FilterIsEnabled"] = true;
             filterOn = true;
+            await MBoxApiCalls.SetPersonalFilterOnOff(true);
         }
 
-        public void FilterOffClicked(object sender, EventArgs e)
+        public async void FilterOffClicked(object sender, EventArgs e)
         {
             Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
             Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
             Resources["FilterIsEnabled"] = false;
             filterOn = false;
+            await MBoxApiCalls.SetPersonalFilterOnOff(false);
         }
 
-        public void FilterClicked(object sender, EventArgs e)
+        public async void FilterClicked(object sender, EventArgs e)
         {
-            
+            List<Filter> filters = personalFilter.FilterList;
+            int itemCount = 0;
+
+            if (filters != null)
+                itemCount = filters.Count;
+
+            string[] items = new string[itemCount];
+            for (int i = 0; i < itemCount; i++)
+            {
+                items[i] = filters[i].FilterName;
+            }
+
+            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterTimeCancel"], null, items);
+            if (action != App.CurrentTranslation["Common_FilterTimeCancel"])
+            {
+                FilterButton.Text = action;
+                personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+
+                // do filtering
+                Resources["IsLoading"] = true;
+                UptimeAccordion.DataSource = await GetAccordionData();
+                UptimeAccordion.DataBind();
+                Resources["IsLoading"] = false;
+
+                await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
+            }
         }
 
         public async void FilterTimeClicked(object sender, EventArgs e)
@@ -140,7 +175,7 @@ namespace MBoxMobile.Views
             {
                 FilterTimeButton.Text = action;
                 string derivedKey = App.CurrentTranslation.FirstOrDefault(x => x.Value == action).Key;
-                timeFilter = FilterSupport.GetTimeFilters().FirstOrDefault(x => x.Value == derivedKey).Key;
+                timeFilterId = FilterSupport.GetTimeFilters().FirstOrDefault(x => x.Value == derivedKey).Key;
 
                 // do filtering
                 Resources["IsLoading"] = true;
@@ -397,7 +432,7 @@ namespace MBoxMobile.Views
             switch (webViewName)
             {
                 case "wvLocations":
-                    IEnumerable<EfficiencyModel> locationList = await MBoxApiCalls.GetEfficiencyPerLocation(personalFilter, timeFilter);
+                    IEnumerable<EfficiencyModel> locationList = await MBoxApiCalls.GetEfficiencyPerLocation(personalFilterId, timeFilterId);
                     string htmlHeaderLocations = HtmlTableSupport.Uptime_Locations_TableHeader();
                     string htmlContentLocations = HtmlTableSupport.Uptime_Medium_TableContent(locationList);
                     string htmlHtmlLocations = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderLocations, htmlContentLocations);
@@ -405,7 +440,7 @@ namespace MBoxMobile.Views
                     wvHeight = (locationList.Count() + 2) * WV_ROW_Height + 7;
                     break;
                 case "wvDepartments":
-                    IEnumerable<EfficiencyModel> departmentsList = await MBoxApiCalls.GetEfficiencyPerDepartment(locationId, personalFilter, timeFilter);
+                    IEnumerable<EfficiencyModel> departmentsList = await MBoxApiCalls.GetEfficiencyPerDepartment(locationId, personalFilterId, timeFilterId);
                     string htmlHeaderDepartments = HtmlTableSupport.Uptime_Medium_TableHeader("Department");
                     string htmlContentDepartments = HtmlTableSupport.Uptime_Medium_TableContent(departmentsList);
                     string htmlHtmlDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDepartments, htmlContentDepartments);
@@ -413,7 +448,7 @@ namespace MBoxMobile.Views
                     wvHeight = (departmentsList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvSubDepartments":
-                    IEnumerable<EfficiencyModel> subDepartmentsList = await MBoxApiCalls.GetEfficiencyPerSubDepartment(locationId, departmentId, personalFilter, timeFilter);
+                    IEnumerable<EfficiencyModel> subDepartmentsList = await MBoxApiCalls.GetEfficiencyPerSubDepartment(locationId, departmentId, personalFilterId, timeFilterId);
                     string htmlHeaderSubDepartments = HtmlTableSupport.Uptime_Medium_TableHeader("SubDepartment");
                     string htmlContentSubDepartments = HtmlTableSupport.Uptime_Medium_TableContent(subDepartmentsList);
                     string htmlHtmlSubDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderSubDepartments, htmlContentSubDepartments);
@@ -421,7 +456,7 @@ namespace MBoxMobile.Views
                     wvHeight = (subDepartmentsList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvEquipments":
-                    IEnumerable<EfficiencyModel> equipmentsList = await MBoxApiCalls.GetEfficiencyPerEquipmentType(locationId, departmentId, subDepartmentId, personalFilter, timeFilter);
+                    IEnumerable<EfficiencyModel> equipmentsList = await MBoxApiCalls.GetEfficiencyPerEquipmentType(locationId, departmentId, subDepartmentId, personalFilterId, timeFilterId);
                     string htmlHeaderEquipments = HtmlTableSupport.Uptime_Medium_TableHeader("Equipment");
                     string htmlContentEquipments = HtmlTableSupport.Uptime_Medium_TableContent(equipmentsList);
                     string htmlHtmlEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipments, htmlContentEquipments);
@@ -429,7 +464,7 @@ namespace MBoxMobile.Views
                     wvHeight = (equipmentsList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvEquipmentGroups":
-                    IEnumerable<EfficiencyModel> equipmentGroupsList = await MBoxApiCalls.GetEfficiencyPerEquipmentGroup(locationId, departmentId, subDepartmentId, personalFilter, timeFilter);
+                    IEnumerable<EfficiencyModel> equipmentGroupsList = await MBoxApiCalls.GetEfficiencyPerEquipmentGroup(locationId, departmentId, subDepartmentId, personalFilterId, timeFilterId);
                     string htmlHeaderEquipmentGroups = HtmlTableSupport.Uptime_Medium_TableHeader("EquipmentGroup");
                     string htmlContentEquipmentGroups = HtmlTableSupport.Uptime_Medium_TableContent(equipmentGroupsList);
                     string htmlHtmlEquipmentGroups = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipmentGroups, htmlContentEquipmentGroups);
@@ -437,7 +472,7 @@ namespace MBoxMobile.Views
                     wvHeight = (equipmentGroupsList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvAuxiliaryEquipments":
-                    IEnumerable<EfficiencyModel> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxiliaryType(locationId, departmentId, subDepartmentId, personalFilter, timeFilter);
+                    IEnumerable<EfficiencyModel> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxiliaryType(locationId, departmentId, subDepartmentId, personalFilterId, timeFilterId);
                     string htmlHeaderAuxiliaryEquipments = HtmlTableSupport.Uptime_Small_TableHeader();
                     string htmlContentAuxiliaryEquipments = HtmlTableSupport.Uptime_Small_TableContent(auxiliaryEquipmentsList);
                     string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlContentAuxiliaryEquipments);
