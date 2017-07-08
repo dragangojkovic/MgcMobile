@@ -21,9 +21,10 @@ namespace MBoxMobile
 
         public static UserInfo LoggedUser { get; set; }
         public static string LastErrorMessage { get; set; }
-
+        public static bool NoConnectivityMsgShown { get; set; }
         public static bool IsNotificationHandling { get; set; }
         public static List<NotificationModel> NotificationsForHandling { get; set; }
+        public static bool ShouldReloadNotifications { get; set; }
 
         public App()
         {
@@ -36,7 +37,9 @@ namespace MBoxMobile
             Servers.Add(1, "s10.monitor-box.com");
             Servers.Add(2, "s12.monitor-box.com");
 
+            NoConnectivityMsgShown = false;
             IsNotificationHandling = false;
+            ShouldReloadNotifications = false;
 
             CheckUserLoginStatus();
         }

@@ -992,6 +992,1019 @@ table th {
 
         #endregion
 
+        #region NotificationPage Headers
+
+        public static string NotificationDataType1_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th><div style=""width:60px;"">{#kWh}</div></th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#kWh}", App.CurrentTranslation["Notification_kWh"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType2_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th><div style=""width:60px;"">{#Acknowledged}</div></th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#Acknowledged}", App.CurrentTranslation["Notification_Acknowledged"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType3_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType4_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th style=""white-space:nowrap"">{#Description}</th>
+<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th style=""white-space:nowrap"">{#Person}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#Description}", App.CurrentTranslation["Notification_Description"]);
+            html = html.Replace("{#TimeToAcknowledge}", App.CurrentTranslation["Notification_TimeToAcknowledge"]);
+            html = html.Replace("{#Person}", App.CurrentTranslation["Notification_Person"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType5_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th><div style=""width:60px;"">{#Approved}</div></th>
+<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th><div style=""width:60px;"">{#kWh}</div></th>
+<th style=""white-space:nowrap"">{#WasteCause}</th>
+<th style=""white-space:nowrap"">{#Description}</th>
+<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th style=""white-space:nowrap"">{#ProblemCause}</th>
+<th style=""white-space:nowrap"">{#Solution}</th>
+<th><div style=""width:60px;"">{#TimeToSolution}</div></th>
+<th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
+<th style=""white-space:nowrap"">{#SolvedBy}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Approved}", App.CurrentTranslation["Notification_Approved"]);
+            html = html.Replace("{#Reported}", App.CurrentTranslation["Notification_Reported"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#kWh}", App.CurrentTranslation["Notification_kWh"]);
+            html = html.Replace("{#WasteCause}", App.CurrentTranslation["Notification_WasteCause"]);
+            html = html.Replace("{#Description}", App.CurrentTranslation["Notification_Description"]);
+            html = html.Replace("{#TimeToAcknowledge}", App.CurrentTranslation["Notification_TimeToAcknowledge"]);
+            html = html.Replace("{#ProblemCause}", App.CurrentTranslation["Notification_ProblemCause"]);
+            html = html.Replace("{#Solution}", App.CurrentTranslation["Notification_Solution"]);
+            html = html.Replace("{#TimeToSolution}", App.CurrentTranslation["Notification_TimeToSolution"]);
+            html = html.Replace("{#AcknowledgedBy}", App.CurrentTranslation["Notification_AcknowledgedBy"]);
+            html = html.Replace("{#SolvedBy}", App.CurrentTranslation["Notification_SolvedBy"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType6_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th><div style=""width:60px;"">{#Approved}</div></th>
+<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th><div style=""width:60px;"">{#kWh}</div></th>
+<th style=""white-space:nowrap"">{#WasteCause}</th>
+<th style=""white-space:nowrap"">{#Description}</th>
+<th style=""white-space:nowrap"">{#ProblemCause}</th>
+<th style=""white-space:nowrap"">{#Solution}</th>
+<th style=""white-space:nowrap"">{#Report}</th>
+<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:60px;"">{#TimeToSolution}</div></th>
+<th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
+<th style=""white-space:nowrap"">{#SolvedBy}</th>
+<th style=""white-space:nowrap"">{#ReportedBy}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Approved}", App.CurrentTranslation["Notification_Approved"]);
+            html = html.Replace("{#Reported}", App.CurrentTranslation["Notification_Reported"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#kWh}", App.CurrentTranslation["Notification_kWh"]);
+            html = html.Replace("{#WasteCause}", App.CurrentTranslation["Notification_WasteCause"]);
+            html = html.Replace("{#Description}", App.CurrentTranslation["Notification_Description"]);
+            html = html.Replace("{#ProblemCause}", App.CurrentTranslation["Notification_ProblemCause"]);
+            html = html.Replace("{#Solution}", App.CurrentTranslation["Notification_Solution"]);
+            html = html.Replace("{#Report}", App.CurrentTranslation["Notification_Report"]);
+            html = html.Replace("{#TimeToAcknowledge}", App.CurrentTranslation["Notification_TimeToAcknowledge"]);
+            html = html.Replace("{#TimeToSolution}", App.CurrentTranslation["Notification_TimeToSolution"]);
+            html = html.Replace("{#AcknowledgedBy}", App.CurrentTranslation["Notification_AcknowledgedBy"]);
+            html = html.Replace("{#SolvedBy}", App.CurrentTranslation["Notification_SolvedBy"]);
+            html = html.Replace("{#ReportedBy}", App.CurrentTranslation["Notification_ReportedBy"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType7_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th><div style=""width:60px;"">{#kWh}</div></th>
+<th style=""white-space:nowrap"">{#WasteCause}</th>
+<th style=""white-space:nowrap"">{#Description}</th>
+<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#Report}</th>
+<th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
+<th style=""white-space:nowrap"">{#ApprovedBy}</th>
+<th style=""white-space:nowrap"">{#ReportedBy}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Reported}", App.CurrentTranslation["Notification_Reported"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#kWh}", App.CurrentTranslation["Notification_kWh"]);
+            html = html.Replace("{#WasteCause}", App.CurrentTranslation["Notification_WasteCause"]);
+            html = html.Replace("{#Description}", App.CurrentTranslation["Notification_Description"]);
+            html = html.Replace("{#TimeToAcknowledge}", App.CurrentTranslation["Notification_TimeToAcknowledge"]);
+            html = html.Replace("{#TimeToApprove}", App.CurrentTranslation["Notification_TimeToApprove"]);
+            html = html.Replace("{#Report}", App.CurrentTranslation["Notification_Report"]);
+            html = html.Replace("{#AcknowledgedBy}", App.CurrentTranslation["Notification_AcknowledgedBy"]);
+            html = html.Replace("{#ApprovedBy}", App.CurrentTranslation["Notification_ApprovedBy"]);
+            html = html.Replace("{#ReportedBy}", App.CurrentTranslation["Notification_ReportedBy"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType8_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th><div style=""width:60px;"">{#Acknowledged}</div></th>
+<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th style=""white-space:nowrap"">{#Description}</th>
+<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#Report}</th>
+<th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
+<th style=""white-space:nowrap"">{#ApprovedBy}</th>
+<th style=""white-space:nowrap"">{#ReportedBy}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Acknowledged}", App.CurrentTranslation["Notification_Acknowledged"]);
+            html = html.Replace("{#Reported}", App.CurrentTranslation["Notification_Reported"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#Description}", App.CurrentTranslation["Notification_Description"]);
+            html = html.Replace("{#TimeToAcknowledge}", App.CurrentTranslation["Notification_TimeToAcknowledge"]);
+            html = html.Replace("{#TimeToApprove}", App.CurrentTranslation["Notification_TimeToApprove"]);
+            html = html.Replace("{#Report}", App.CurrentTranslation["Notification_Report"]);
+            html = html.Replace("{#AcknowledgedBy}", App.CurrentTranslation["Notification_AcknowledgedBy"]);
+            html = html.Replace("{#ApprovedBy}", App.CurrentTranslation["Notification_ApprovedBy"]);
+            html = html.Replace("{#ReportedBy}", App.CurrentTranslation["Notification_ReportedBy"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType9_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th style=""white-space:nowrap"">{#Description}</th>
+<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#Report}</th>
+<th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
+<th style=""white-space:nowrap"">{#ApprovedBy}</th>
+<th style=""white-space:nowrap"">{#ReportedBy}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Reported}", App.CurrentTranslation["Notification_Reported"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#Description}", App.CurrentTranslation["Notification_Description"]);
+            html = html.Replace("{#TimeToAcknowledge}", App.CurrentTranslation["Notification_TimeToAcknowledge"]);
+            html = html.Replace("{#TimeToApprove}", App.CurrentTranslation["Notification_TimeToApprove"]);
+            html = html.Replace("{#Report}", App.CurrentTranslation["Notification_Report"]);
+            html = html.Replace("{#AcknowledgedBy}", App.CurrentTranslation["Notification_AcknowledgedBy"]);
+            html = html.Replace("{#ApprovedBy}", App.CurrentTranslation["Notification_ApprovedBy"]);
+            html = html.Replace("{#ReportedBy}", App.CurrentTranslation["Notification_ReportedBy"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType10_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th style=""white-space:nowrap"">{#Description}</th>
+<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th style=""white-space:nowrap"">{#ProblemCause}</th>
+<th style=""white-space:nowrap"">{#Solution}</th>
+<th><div style=""width:60px;"">{#TimeToSolve}</div></th>
+<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#Report}</th>
+<th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
+<th style=""white-space:nowrap"">{#SolvedBy}</th>
+<th style=""white-space:nowrap"">{#ApprovedBy}</th>
+<th style=""white-space:nowrap"">{#ReportedBy}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Reported}", App.CurrentTranslation["Notification_Reported"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#Description}", App.CurrentTranslation["Notification_Description"]);
+            html = html.Replace("{#TimeToAcknowledge}", App.CurrentTranslation["Notification_TimeToAcknowledge"]);
+            html = html.Replace("{#ProblemCause}", App.CurrentTranslation["Notification_ProblemCause"]);
+            html = html.Replace("{#Solution}", App.CurrentTranslation["Notification_Solution"]);
+            html = html.Replace("{#TimeToSolve}", App.CurrentTranslation["Notification_TimeToSolve"]);
+            html = html.Replace("{#TimeToApprove}", App.CurrentTranslation["Notification_TimeToApprove"]);
+            html = html.Replace("{#Report}", App.CurrentTranslation["Notification_Report"]);
+            html = html.Replace("{#AcknowledgedBy}", App.CurrentTranslation["Notification_AcknowledgedBy"]);
+            html = html.Replace("{#SolvedBy}", App.CurrentTranslation["Notification_SolvedBy"]);
+            html = html.Replace("{#ApprovedBy}", App.CurrentTranslation["Notification_ApprovedBy"]);
+            html = html.Replace("{#ReportedBy}", App.CurrentTranslation["Notification_ReportedBy"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        public static string NotificationDataType11_TableHeader()
+        {
+            string html = @"
+<tr>
+<th style=""display:none"">Id</th>
+<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th><div style=""width:60px;"">M#</div></th>
+<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Notification}</th>
+<th style=""white-space:nowrap"">{#ProblemCause}</th>
+<th style=""white-space:nowrap"">{#Solution}</th>
+<th><div style=""width:60px;"">{#TimeToSolve}</div></th>
+<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#Report}</th>
+<th style=""white-space:nowrap"">{#SolvedBy}</th>
+<th style=""white-space:nowrap"">{#ApprovedBy}</th>
+<th style=""white-space:nowrap"">{#ReportedBy}</th>
+<th style=""white-space:nowrap"">{#Operator}</th>
+<th style=""white-space:nowrap"">{#Product}</th>
+<th style=""white-space:nowrap"">{#Location}</th>
+<th style=""white-space:nowrap"">{#Department}</th>
+<th style=""white-space:nowrap"">{#SubDepartment}</th>
+</tr>
+	";
+
+            html = html.Replace("{#DateTime}", App.CurrentTranslation["Notification_DateTime"]);
+            html = html.Replace("{#Reported}", App.CurrentTranslation["Notification_Reported"]);
+            html = html.Replace("{#Notification}", App.CurrentTranslation["Notification_Notification"]);
+            html = html.Replace("{#ProblemCause}", App.CurrentTranslation["Notification_ProblemCause"]);
+            html = html.Replace("{#Solution}", App.CurrentTranslation["Notification_Solution"]);
+            html = html.Replace("{#TimeToSolve}", App.CurrentTranslation["Notification_TimeToSolve"]);
+            html = html.Replace("{#TimeToApprove}", App.CurrentTranslation["Notification_TimeToApprove"]);
+            html = html.Replace("{#Report}", App.CurrentTranslation["Notification_Report"]);
+            html = html.Replace("{#SolvedBy}", App.CurrentTranslation["Notification_SolvedBy"]);
+            html = html.Replace("{#ApprovedBy}", App.CurrentTranslation["Notification_ApprovedBy"]);
+            html = html.Replace("{#ReportedBy}", App.CurrentTranslation["Notification_ReportedBy"]);
+            html = html.Replace("{#Operator}", App.CurrentTranslation["Notification_Operator"]);
+            html = html.Replace("{#Product}", App.CurrentTranslation["Notification_Product"]);
+            html = html.Replace("{#Location}", App.CurrentTranslation["Notification_Location"]);
+            html = html.Replace("{#Department}", App.CurrentTranslation["Notification_Department"]);
+            html = html.Replace("{#SubDepartment}", App.CurrentTranslation["Notification_SubDepartment"]);
+
+            return html;
+        }
+
+        #endregion
+
+        #region NotificationPage Contents
+
+        public static string NotificationDataType1_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+	<td style=""white-space:nowrap"">{#3}</td>
+	<td class=""center-text"">{#4}</td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td style=""white-space:nowrap"">{#6}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+	<td style=""white-space:nowrap"">{#8}</td>
+	<td style=""white-space:nowrap"">{#9}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.AlterDescription);
+                    float kwh = el.Kwh != null ? (float)el.Kwh : 0;
+                    template = template.Replace("{#4}", kwh != 0 ? kwh.ToString("0.000") : "");
+                    template = template.Replace("{#5}", el.Operator);
+                    template = template.Replace("{#6}", el.Product);
+                    template = template.Replace("{#7}", el.SentToCompany);
+                    template = template.Replace("{#8}", el.Department);
+                    template = template.Replace("{#9}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType2_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+	<td style=""white-space:nowrap"">{#3}</td>
+	<td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+    <td style=""white-space:nowrap"">{#5}</td>
+    <td style=""white-space:nowrap"">{#6}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+	<td style=""white-space:nowrap"">{#8}</td>
+	<td style=""white-space:nowrap"">{#9}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.AlterDescription);
+                    template = template.Replace("{#4}", el.Acknowledge ? "checked" : "");
+                    template = template.Replace("{#5}", el.Operator);
+                    template = template.Replace("{#6}", el.Product);
+                    template = template.Replace("{#7}", el.SentToCompany);
+                    template = template.Replace("{#8}", el.Department);
+                    template = template.Replace("{#9}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType3_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+	<td style=""white-space:nowrap"">{#3}</td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td style=""white-space:nowrap"">{#6}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+	<td style=""white-space:nowrap"">{#8}</td>
+	<td style=""white-space:nowrap"">{#9}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.AlterDescription);
+                    template = template.Replace("{#5}", el.Operator);
+                    template = template.Replace("{#6}", el.Product);
+                    template = template.Replace("{#7}", el.SentToCompany);
+                    template = template.Replace("{#8}", el.Department);
+                    template = template.Replace("{#9}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType4_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+	<td style=""white-space:nowrap"">{#3}</td>
+	<td style=""white-space:nowrap"">{#4}</td>
+    <td class=""center-text"">{#5}</td>
+    <td style=""white-space:nowrap"">{#6}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+	<td style=""white-space:nowrap"">{#8}</td>
+	<td style=""white-space:nowrap"">{#9}</td>
+    <td style=""white-space:nowrap"">{#10}</td>
+    <td style=""white-space:nowrap"">{#11}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.AlterDescription);
+                    template = template.Replace("{#4}", el.Description);
+                    template = template.Replace("{#5}", el.DesDate);
+                    template = template.Replace("{#6}", el.DesPerson);
+                    template = template.Replace("{#7}", el.Operator);
+                    template = template.Replace("{#8}", el.Product);
+                    template = template.Replace("{#9}", el.SentToCompany);
+                    template = template.Replace("{#10}", el.Department);
+                    template = template.Replace("{#11}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType5_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+    <td class=""center-text""><input type=""checkbox"" {#3} disabled/></td>
+    <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td class=""center-text"">{#6}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+    <td style=""white-space:nowrap"">{#8}</td>
+    <td class=""center-text"">{#9}</td>
+	<td style=""white-space:nowrap"">{#10}</td>
+	<td style=""white-space:nowrap"">{#11}</td>
+    <td class=""center-text"">{#12}</td>
+	<td style=""white-space:nowrap"">{#13}</td>
+    <td style=""white-space:nowrap"">{#14}</td>
+    <td style=""white-space:nowrap"">{#15}</td>
+    <td style=""white-space:nowrap"">{#16}</td>
+    <td style=""white-space:nowrap"">{#17}</td>
+    <td style=""white-space:nowrap"">{#18}</td>
+    <td style=""white-space:nowrap"">{#19}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.Approved ? "checked" : "");
+                    template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
+                    template = template.Replace("{#5}", el.AlterDescription);
+                    float kwh = el.Kwh != null ? (float)el.Kwh : 0;
+                    template = template.Replace("{#6}", kwh != 0 ? kwh.ToString("0.000") : "");
+                    template = template.Replace("{#7}", el.ElecCause);
+                    template = template.Replace("{#8}", el.Description);
+                    template = template.Replace("{#9}", el.DesDate);
+                    template = template.Replace("{#10}", el.AlterCause);
+                    template = template.Replace("{#11}", el.Solution);
+                    template = template.Replace("{#12}", el.SolutionDate);
+                    template = template.Replace("{#13}", el.DesPerson);
+                    template = template.Replace("{#14}", el.SoluPerson);
+                    template = template.Replace("{#15}", el.Operator);
+                    template = template.Replace("{#16}", el.Product);
+                    template = template.Replace("{#17}", el.SentToCompany);
+                    template = template.Replace("{#18}", el.Department);
+                    template = template.Replace("{#19}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType6_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+    <td class=""center-text""><input type=""checkbox"" {#3} disabled/></td>
+    <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td class=""center-text"">{#6}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+    <td style=""white-space:nowrap"">{#8}</td>
+    <td style=""white-space:nowrap"">{#9}</td>
+	<td style=""white-space:nowrap"">{#10}</td>
+	<td style=""white-space:nowrap"">{#11}</td>
+    <td class=""center-text"">{#12}</td>
+	<td class=""center-text"">{#13}</td>
+    <td style=""white-space:nowrap"">{#14}</td>
+    <td style=""white-space:nowrap"">{#15}</td>
+    <td style=""white-space:nowrap"">{#16}</td>
+    <td style=""white-space:nowrap"">{#17}</td>
+    <td style=""white-space:nowrap"">{#18}</td>
+    <td style=""white-space:nowrap"">{#19}</td>
+    <td style=""white-space:nowrap"">{#20}</td>
+    <td style=""white-space:nowrap"">{#21}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.Approved ? "checked" : "");
+                    template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
+                    template = template.Replace("{#5}", el.AlterDescription);
+                    float kwh = el.Kwh != null ? (float)el.Kwh : 0;
+                    template = template.Replace("{#6}", kwh != 0 ? kwh.ToString("0.000") : "");
+                    template = template.Replace("{#7}", el.ElecCause);
+                    template = template.Replace("{#8}", el.Description);
+                    template = template.Replace("{#9}", el.AlterCause);
+                    template = template.Replace("{#10}", el.Solution);
+                    template = template.Replace("{#11}", el.Report);
+                    template = template.Replace("{#12}", el.DesDate);
+                    template = template.Replace("{#13}", el.SolutionDate);
+                    template = template.Replace("{#14}", el.DesPerson);
+                    template = template.Replace("{#15}", el.SoluPerson);
+                    template = template.Replace("{#16}", el.ReportPerson);
+                    template = template.Replace("{#17}", el.Operator);
+                    template = template.Replace("{#18}", el.Product);
+                    template = template.Replace("{#19}", el.SentToCompany);
+                    template = template.Replace("{#20}", el.Department);
+                    template = template.Replace("{#21}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType7_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+    <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td class=""center-text"">{#6}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+    <td style=""white-space:nowrap"">{#8}</td>
+    <td class=""center-text"">{#9}</td>
+	<td class=""center-text"">{#10}</td>
+	<td style=""white-space:nowrap"">{#11}</td>
+    <td style=""white-space:nowrap"">{#12}</td>
+	<td style=""white-space:nowrap"">{#13}</td>
+    <td style=""white-space:nowrap"">{#14}</td>
+    <td style=""white-space:nowrap"">{#15}</td>
+    <td style=""white-space:nowrap"">{#16}</td>
+    <td style=""white-space:nowrap"">{#17}</td>
+    <td style=""white-space:nowrap"">{#18}</td>
+    <td style=""white-space:nowrap"">{#19}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
+                    template = template.Replace("{#5}", el.AlterDescription);
+                    float kwh = el.Kwh != null ? (float)el.Kwh : 0;
+                    template = template.Replace("{#6}", kwh != 0 ? kwh.ToString("0.000") : "");
+                    template = template.Replace("{#7}", el.ElecCause);
+                    template = template.Replace("{#8}", el.Description);
+                    template = template.Replace("{#9}", el.DesDate);
+                    template = template.Replace("{#10}", el.ApproveDate);
+                    template = template.Replace("{#11}", el.Report);
+                    template = template.Replace("{#12}", el.DesPerson);
+                    template = template.Replace("{#13}", el.ApprovePerson);
+                    template = template.Replace("{#14}", el.ReportPerson);
+                    template = template.Replace("{#15}", el.Operator);
+                    template = template.Replace("{#16}", el.Product);
+                    template = template.Replace("{#17}", el.SentToCompany);
+                    template = template.Replace("{#18}", el.Department);
+                    template = template.Replace("{#19}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType8_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+    <td class=""center-text""><input type=""checkbox"" {#3} disabled/></td>
+    <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td style=""white-space:nowrap"">{#8}</td>
+    <td class=""center-text"">{#9}</td>
+	<td class=""center-text"">{#10}</td>
+	<td style=""white-space:nowrap"">{#11}</td>
+    <td style=""white-space:nowrap"">{#12}</td>
+	<td style=""white-space:nowrap"">{#13}</td>
+    <td style=""white-space:nowrap"">{#14}</td>
+    <td style=""white-space:nowrap"">{#15}</td>
+    <td style=""white-space:nowrap"">{#16}</td>
+    <td style=""white-space:nowrap"">{#17}</td>
+    <td style=""white-space:nowrap"">{#18}</td>
+    <td style=""white-space:nowrap"">{#19}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.Acknowledge ? "checked" : "");
+                    template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
+                    template = template.Replace("{#5}", el.AlterDescription);
+                    template = template.Replace("{#8}", el.Description);
+                    template = template.Replace("{#9}", el.DesDate);
+                    template = template.Replace("{#10}", el.ApproveDate);
+                    template = template.Replace("{#11}", el.Report);
+                    template = template.Replace("{#12}", el.DesPerson);
+                    template = template.Replace("{#13}", el.ApprovePerson);
+                    template = template.Replace("{#14}", el.ReportPerson);
+                    template = template.Replace("{#15}", el.Operator);
+                    template = template.Replace("{#16}", el.Product);
+                    template = template.Replace("{#17}", el.SentToCompany);
+                    template = template.Replace("{#18}", el.Department);
+                    template = template.Replace("{#19}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType9_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+    <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td style=""white-space:nowrap"">{#8}</td>
+    <td class=""center-text"">{#9}</td>
+	<td class=""center-text"">{#10}</td>
+	<td style=""white-space:nowrap"">{#11}</td>
+    <td style=""white-space:nowrap"">{#12}</td>
+	<td style=""white-space:nowrap"">{#13}</td>
+    <td style=""white-space:nowrap"">{#14}</td>
+    <td style=""white-space:nowrap"">{#15}</td>
+    <td style=""white-space:nowrap"">{#16}</td>
+    <td style=""white-space:nowrap"">{#17}</td>
+    <td style=""white-space:nowrap"">{#18}</td>
+    <td style=""white-space:nowrap"">{#19}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
+                    template = template.Replace("{#5}", el.AlterDescription);
+                    template = template.Replace("{#8}", el.Description);
+                    template = template.Replace("{#9}", el.DesDate);
+                    template = template.Replace("{#10}", el.ApproveDate);
+                    template = template.Replace("{#11}", el.Report);
+                    template = template.Replace("{#12}", el.DesPerson);
+                    template = template.Replace("{#13}", el.ApprovePerson);
+                    template = template.Replace("{#14}", el.ReportPerson);
+                    template = template.Replace("{#15}", el.Operator);
+                    template = template.Replace("{#16}", el.Product);
+                    template = template.Replace("{#17}", el.SentToCompany);
+                    template = template.Replace("{#18}", el.Department);
+                    template = template.Replace("{#19}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType10_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+    <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+	<td style=""white-space:nowrap"">{#5}</td>
+    <td style=""white-space:nowrap"">{#8}</td>
+    <td class=""center-text"">{#9}</td>
+	<td style=""white-space:nowrap"">{#10}</td>
+	<td style=""white-space:nowrap"">{#11}</td>
+    <td class=""center-text"">{#12}</td>
+	<td class=""center-text"">{#13}</td>
+    <td style=""white-space:nowrap"">{#14}</td>
+    <td style=""white-space:nowrap"">{#15}</td>
+    <td style=""white-space:nowrap"">{#16}</td>
+    <td style=""white-space:nowrap"">{#17}</td>
+    <td style=""white-space:nowrap"">{#18}</td>
+    <td style=""white-space:nowrap"">{#19}</td>
+    <td style=""white-space:nowrap"">{#20}</td>
+    <td style=""white-space:nowrap"">{#21}</td>
+    <td style=""white-space:nowrap"">{#22}</td>
+    <td style=""white-space:nowrap"">{#23}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
+                    template = template.Replace("{#5}", el.AlterDescription);
+                    template = template.Replace("{#8}", el.Description);
+                    template = template.Replace("{#9}", el.DesDate);
+                    template = template.Replace("{#10}", el.AlterCause);
+                    template = template.Replace("{#11}", el.Solution);
+                    template = template.Replace("{#12}", el.SolutionDate);
+                    template = template.Replace("{#13}", el.ApproveDate);
+                    template = template.Replace("{#14}", el.Report);
+                    template = template.Replace("{#15}", el.DesPerson);
+                    template = template.Replace("{#16}", el.SoluPerson);
+                    template = template.Replace("{#17}", el.ApprovePerson);
+                    template = template.Replace("{#18}", el.ReportPerson);
+                    template = template.Replace("{#19}", el.Operator);
+                    template = template.Replace("{#20}", el.Product);
+                    template = template.Replace("{#21}", el.SentToCompany);
+                    template = template.Replace("{#22}", el.Department);
+                    template = template.Replace("{#23}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        public static string NotificationDataType11_TableContent(List<NotificationModel> source)
+        {
+            string html = string.Empty;
+            if (source != null)
+            {
+                foreach (NotificationModel el in source)
+                {
+                    string template = @"
+<tr>
+    <td style=""display:none"">{#0}</td>
+    <td style=""white-space:nowrap"">{#1}</td>
+	<td class=""center-text"">{#2}</td>
+    <td class=""center-text""><input type=""checkbox"" {#3} disabled/></td>
+	<td style=""white-space:nowrap"">{#4}</td>
+    <td style=""white-space:nowrap"">{#5}</td>
+    <td style=""white-space:nowrap"">{#6}</td>
+	<td class=""center-text"">{#7}</td>
+	<td class=""center-text"">{#8}</td>
+    <td style=""white-space:nowrap"">{#9}</td>
+    <td style=""white-space:nowrap"">{#10}</td>
+    <td style=""white-space:nowrap"">{#11}</td>
+    <td style=""white-space:nowrap"">{#12}</td>
+    <td style=""white-space:nowrap"">{#13}</td>
+    <td style=""white-space:nowrap"">{#14}</td>
+    <td style=""white-space:nowrap"">{#15}</td>
+    <td style=""white-space:nowrap"">{#16}</td>
+    <td style=""white-space:nowrap"">{#17}</td>
+</tr>";
+                    template = template.Replace("{#0}", el.ID.ToString());
+                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#2}", el.MachineNumber);
+                    template = template.Replace("{#3}", el.NeedReport ? "checked" : "");
+                    template = template.Replace("{#4}", el.AlterDescription);
+                    template = template.Replace("{#5}", el.AlterCause);
+                    template = template.Replace("{#6}", el.Solution);
+                    template = template.Replace("{#7}", el.SolutionDate);
+                    template = template.Replace("{#8}", el.ApproveDate);
+                    template = template.Replace("{#9}", el.Report);
+                    template = template.Replace("{#10}", el.SoluPerson);
+                    template = template.Replace("{#11}", el.ApprovePerson);
+                    template = template.Replace("{#12}", el.ReportPerson);
+                    template = template.Replace("{#13}", el.Operator);
+                    template = template.Replace("{#14}", el.Product);
+                    template = template.Replace("{#15}", el.SentToCompany);
+                    template = template.Replace("{#16}", el.Department);
+                    template = template.Replace("{#17}", el.DepartmentSubName);
+
+                    html += template;
+                }
+
+            }
+            return html;
+        }
+
+        #endregion
+
         #region AuxiliaryEquipmentPage Headers
 
         public static string AuxiliaryEquipment_Type_TableHeader()

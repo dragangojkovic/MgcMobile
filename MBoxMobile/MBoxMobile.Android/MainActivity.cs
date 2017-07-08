@@ -36,21 +36,21 @@ namespace MBoxMobile.Droid
                     var selectedNotification = new NotificationModel();
                     selectedNotification.ID = int.Parse(payloadObj.Inputstable_AlterID);
                     selectedNotification.MachineNumber = payloadObj.machine_num;
-                    selectedNotification.MachineName = payloadObj.MachineName;
-                    selectedNotification.DateTime = payloadObj.record_date;
-                    selectedNotification.EquipmentTypeName = payloadObj.EquipTypeName;
-                    selectedNotification.EquipmentGroupName = payloadObj.EquipGroupName;
-                    selectedNotification.Kwh = payloadObj.Kwh;
+                    selectedNotification.MachineGroupNameID = payloadObj.MachineName != "null" ? int.Parse(payloadObj.MachineName) : (int?)null;
+                    selectedNotification.RecordDate = payloadObj.record_date;
+                    selectedNotification.EquipTypeText = payloadObj.EquipTypeName;
+                    selectedNotification.EquipGroup = payloadObj.EquipGroupName;
+                    selectedNotification.Kwh = payloadObj.Kwh != "null" ? (float)double.Parse(payloadObj.Kwh) : (float?)null;
                     selectedNotification.Operator = payloadObj.Operator;
                     selectedNotification.Product = payloadObj.Product;
-                    selectedNotification.Notification = payloadObj.Notification;
-                    selectedNotification.Location = payloadObj.Location;
+                    selectedNotification.AlterDescription = payloadObj.Notification;
+                    selectedNotification.SentToCompany = payloadObj.Location;
                     selectedNotification.Department = payloadObj.Department;
-                    selectedNotification.SubDepartment = payloadObj.SubDepartment;
+                    selectedNotification.DepartmentSubName = payloadObj.SubDepartment;
                     selectedNotification.AlterType = int.Parse(payloadObj.AlterType);
                     selectedNotification.AlterReply = int.Parse(payloadObj.AlterReply);
-                    selectedNotification.NotType = int.Parse(payloadObj.NotType);
-                    selectedNotification.AlterEquipmentType = int.Parse(payloadObj.AlterEquipType);
+                    selectedNotification.AlterDescriptionID = int.Parse(payloadObj.NotType);
+                    selectedNotification.EquipmentType = int.Parse(payloadObj.AlterEquipType);
 
                     if (App.NotificationsForHandling == null)
                         App.NotificationsForHandling = new System.Collections.Generic.List<NotificationModel>();

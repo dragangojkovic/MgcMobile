@@ -63,6 +63,7 @@ namespace MBoxMobile.CustomControls
                     {
                         Text = vSingleItem.HeaderText,
                         TextColor = vSingleItem.HeaderBackGroundColor,  //intentionally
+                        FontSize = 8, // if text is long better to have small font
                         BackgroundColor = (Color)Application.Current.Resources["BlueMedium"], // vSingleItem.HeaderBackGroundColor,
                         WidthRequest = this.AccordionWidth,
                         HeightRequest = this.AccordionHeight,
@@ -172,11 +173,5 @@ namespace MBoxMobile.CustomControls
         public int HeaderFontSize { get; set; }
         public View ContentItems { get; set; }
         public double ContentHeight { get; set; }
-    }
-
-    public class SimpleObject
-    {
-        public string TextValue { get; set; }
-        public string DataValue { get; set; }
     }
 }

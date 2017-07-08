@@ -88,6 +88,13 @@ namespace MBoxMobile.Helpers
             translation.Add("Common_FilterTimeLastQuarter", "Last Quarter");
             translation.Add("Common_FilterTimeCurrentYear", "Current Year");
             translation.Add("Common_FilterTimeCancel", "Cancel");
+            translation.Add("Common_FilterNotificationLast24Hours", "Last 24 Hours");
+            translation.Add("Common_FilterNotificationYesterday", "Yesterday");
+            translation.Add("Common_FilterNotificationLast48Hours", "Last 48 Hours");
+            translation.Add("Common_FilterNotificationLast72Hours", "Last 72 Hours");
+            translation.Add("Common_FilterNotificationLast7Days", "Last 7 Days");
+            translation.Add("Common_FilterNotificationLast14Days", "Last 14 Days");
+            translation.Add("Common_FilterNotificationLast30Days", "Last 30 Days");
             translation.Add("Common_FilterFilterOn", "Filter On");
             translation.Add("Common_FilterFilterOff", "Filter Off");
             translation.Add("Common_FilterAll", "All");
@@ -99,6 +106,8 @@ namespace MBoxMobile.Helpers
             translation.Add("Common_ViewDetail", "View Detail");
             translation.Add("Common_Close", "Close");
             translation.Add("Common_OK", "OK");
+            translation.Add("Common_ServerStatusCodeMsg", "Server returned status code ");
+            translation.Add("Common_ErrorConnectionFailed", "Connection to the MBox server failed!");
             translation.Add("Common_ErrorMsgNoNetwork", "There is no network connection!");
 
             //Menu - Side view
@@ -225,6 +234,105 @@ namespace MBoxMobile.Helpers
             translation.Add("ProductionDetails_Product", "Product");
             translation.Add("ProductionDetails_WireUseUnit", "Wire use unit");
 
+            //Notification page
+            translation.Add("Notification_Title", "Notifications");
+            translation.Add("Notification_NonConfirmed", "Non confirmed");
+            translation.Add("Notification_Solution", "Solution");
+            translation.Add("Notification_ToBeApproved", "To be approved");
+            translation.Add("Notification_AllReportedNotifications", "All reported notifications");
+            translation.Add("Notification_AllApprovedNotifications", "All approved notifications");
+            translation.Add("Notification_PersonalFilter", "Personal filter:");
+            translation.Add("Notification_NotificationFilter", "Notification filter:");
+            translation.Add("Notification_DateTime", "Date time");
+            translation.Add("Notification_Notification", "Notification");
+            translation.Add("Notification_kWh", "kWh");
+            translation.Add("Notification_Operator", "Operator");
+            translation.Add("Notification_Product", "Product");
+            translation.Add("Notification_Location", "Location");
+            translation.Add("Notification_Department", "Department");
+            translation.Add("Notification_SubDepartment", "Sub-department");
+            translation.Add("Notification_Acknowledged", "Ack.");
+            translation.Add("Notification_Description", "Description");
+            translation.Add("Notification_TimeToAcknowledge", "Time to acknowledge (DD:HH:MM)");
+            translation.Add("Notification_Person", "Person");
+            translation.Add("Notification_Approved", "Approved");
+            translation.Add("Notification_Reported", "Reported");
+            translation.Add("Notification_WasteCause", "Waste cause");
+            translation.Add("Notification_ProblemCause", "Problem cause");
+            translation.Add("Notification_TimeToSolution", "Time to solution (DD:HH:MM)");
+            translation.Add("Notification_AcknowledgedBy", "Acknowledged by");
+            translation.Add("Notification_SolvedBy", "Solved by");
+            translation.Add("Notification_TimeToApprove", "Time to approve (DD:HH:MM)");
+            translation.Add("Notification_Report", "Report");
+            translation.Add("Notification_ApprovedBy", "Approved by");
+            translation.Add("Notification_ReportedBy", "Reported by");
+            translation.Add("Notification_TimeToSolve", "Time to solve (DD:HH:MM)");
+
+            //NotificationReply pages
+            translation.Add("NotificationReplyType1_Title", "Non confirmed electricity");
+            translation.Add("NotificationReplyType2_Title", "Non confirmed acknowledge");
+            translation.Add("NotificationReplyType3_Title", "Non confirmed description");
+            translation.Add("NotificationReplyType4_Title", "Solution");
+            translation.Add("NotificationReplyType5_Title", "To be approved");
+            translation.Add("NotificationReplyType6_Title", "Reported");
+            translation.Add("NotificationReplyType7_07_Title", "Approved electricity");
+            translation.Add("NotificationReplyType7_08_Title", "Approved acknowledge");
+            translation.Add("NotificationReplyType7_09_Title", "Approved description");
+            translation.Add("NotificationReplyType7_10_Title", "Approved description & solution");
+            translation.Add("NotificationReplyType7_11_Title", "Approved solution");
+            translation.Add("NotificationReply_CauseButtonText", "Tap to choose a cause");
+            translation.Add("NotificationReply_NotificationButtonText", "Tap to choose a notification");
+            translation.Add("NotificationReply_DescriptionPlaceholder", "Description");
+            translation.Add("NotificationReply_SolutionPlaceholder", "Please describe your solution");
+            translation.Add("NotificationReply_SubmitButtonText", "Submit");
+            translation.Add("NotificationReply_AcknowledgeButtonText", "Acknowledge");
+            translation.Add("NotificationReply_SaveButtonText", "Save");
+            translation.Add("NotificationReply_SaveAndCloseButtonText", "Save & close");
+            translation.Add("NotificationReply_ApproveButtonText", "Approve");
+            translation.Add("NotificationReply_ApproveReportButtonText", "Approve & report");
+            translation.Add("NotificationReply_ReportButtonText", "Report");
+            translation.Add("NotificationReply_CancelButtonText", "Cancel");
+            //translation.Add("NotificationReply_CloseButtonText", "Close");
+            translation.Add("NotificationReply_DateTimeTitle", "Date time");
+            translation.Add("NotificationReply_MachineNumberTitle", "M#");          ///fixed???
+            translation.Add("NotificationReply_OperatorTitle", "Operator");
+            translation.Add("NotificationReply_ProductTitle", "Product");
+            translation.Add("NotificationReply_LocationTitle", "Location");
+            translation.Add("NotificationReply_DepartmentTitle", "Department");
+            translation.Add("NotificationReply_SubDepartmentTitle", "Subdepartment");
+            translation.Add("NotificationReply_TypeTitle", "Type");
+            translation.Add("NotificationReply_RemarkTitle", "Remark");
+            translation.Add("NotificationReply_KwhTitle", "kWh");
+            translation.Add("NotificationReply_NotificationTitle", "Notification");
+            translation.Add("NotificationReply_WasteCauseTitle", "Waste cause");
+            translation.Add("NotificationReply_CauseTitle", "Cause");
+            translation.Add("NotificationReply_SolutionTitle", "Solution");
+            translation.Add("NotificationReply_DescriptionTitle", "Description");
+            translation.Add("NotificationReply_ReportedTitle", "Reported");
+            translation.Add("NotificationReply_AknowledgeTimeTitle", "Aknowledge time");
+            translation.Add("NotificationReply_AknowledgedByTitle", "Aknowledged by");
+            translation.Add("NotificationReply_SolutionTimeTitle", "Solution time");
+            translation.Add("NotificationReply_SolutionByTitle", "Solution by");
+            translation.Add("NotificationReply_ApprovalTimeTitle", "Approval time");
+            translation.Add("NotificationReply_ApprovalByTitle", "Approval by");
+            translation.Add("NotificationReply_ReportTimeTitle", "Report time");
+            translation.Add("NotificationReply_ReportedByTitle", "Reported by");
+            translation.Add("NotificationReply_ReportTitle", "Report");
+            //
+            translation.Add("NotificationReply_CauseASTitle", "Cause");
+            translation.Add("NotificationReply_CauseASDescription", "Tap to choose a cause");
+            translation.Add("NotificationReply_CauseASCancel", "Cancel");
+            //
+            translation.Add("NotificationReply_NotificationASTitle", "Notification");
+            translation.Add("NotificationReply_NotificationASDescription", "Tap to choose a notification");
+            translation.Add("NotificationReply_NotificationASCancel", "Cancel");
+            //
+            translation.Add("NotificationReply_ErrorMsgChooseCause", "Please choose a cause!");
+            translation.Add("NotificationReply_ErrorMsgChooseNotification", "Please input a notification!");
+            translation.Add("NotificationReply_ErrorMsgInputDescription", "Please input a description!");
+            translation.Add("NotificationReply_ErrorMsgInputSolution", "Please input a solution!");
+            translation.Add("NotificationReply_ErrorMsgSubmitFailed", "Sending data to server is failed!");
+
             //Auxiliary equipment page
             translation.Add("AuxiliaryEquipment_Title", "Auxiliary equipment");
             translation.Add("AuxiliaryEquipment_Equipment", "Equipment");
@@ -235,39 +343,6 @@ namespace MBoxMobile.Helpers
             translation.Add("AuxiliaryEquipmentDetails_Department", "Department");
             translation.Add("AuxiliaryEquipmentDetails_SubDepartment", "Sub department");
             translation.Add("AuxiliaryEquipmentDetails_SystemData", "System data");
-
-            //InputNotifications pages
-            translation.Add("InputNotificationsKWH_Title", "KWH");
-            translation.Add("InputNotificationsDescription_Title", "Description");
-            translation.Add("InputNotificationsSolution_Title", "Solution");
-            translation.Add("InputNotificationsAcknowledge_Title", "Acknowledge");
-            translation.Add("InputNotifications_CauseButtonText", "Tap to choose a cause");
-            translation.Add("InputNotifications_OpinionPlaceholder", "Please describe your opinion");
-            translation.Add("InputNotifications_SolutionPlaceholder", "Please describe your solution");
-            translation.Add("InputNotifications_SubmitButtonText", "Submit");
-            translation.Add("InputNotificationsAcknowledge_SubmitButtonText", "Acknowledge");
-            translation.Add("InputNotifications_CancelButtonText", "Cancel");
-            translation.Add("InputNotifications_CloseButtonText", "Close");
-            translation.Add("InputNotifications_MachineNumberTitle", "M#");          ///fixed???
-            translation.Add("InputNotifications_MachineNameTitle", "Machine name");
-            translation.Add("InputNotifications_EquipTypeNameTitle", "Equipment type");
-            translation.Add("InputNotifications_EquipGroupNameTitle", "Equipment group");
-            translation.Add("InputNotifications_KwhTitle", "kWh");
-            translation.Add("InputNotifications_OperatorTitle", "Operator");
-            translation.Add("InputNotifications_ProductTitle", "Product");
-            translation.Add("InputNotifications_DateTimeTitle", "Date time");
-            translation.Add("InputNotifications_NotificationTitle", "Notification");
-            translation.Add("InputNotifications_LocationTitle", "Location");
-            translation.Add("InputNotifications_DepartmentTitle", "Department");
-            translation.Add("InputNotifications_SubDepartmentTitle", "Subdepartment");
-            //
-            translation.Add("InputNotifications_CauseASTitle", "Cause");
-            translation.Add("InputNotifications_CauseASDescription", "Tap to choose a cause");
-            translation.Add("InputNotifications_CauseASCancel", "Cancel");
-            //
-            translation.Add("InputNotifications_ErrorMsgChooseCause", "Please choose a cause!");
-            translation.Add("InputNotifications_ErrorMsgChooseOpinion", "Please input an description!");
-            translation.Add("InputNotifications_ErrorMsgSubmitFailed", "Sending data to server is failed!");
 
             //testing
             translation.Add("TestMultiLanguage_Title", "TestMultiLanguage");

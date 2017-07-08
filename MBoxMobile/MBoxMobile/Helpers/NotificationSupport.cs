@@ -1,46 +1,48 @@
-﻿using MBoxMobile.Models;
-using System;
+﻿using System.Collections.Generic;
 
 namespace MBoxMobile.Helpers
 {
     public static class NotificationSupport
     {
-        public static string HandleNotification(NotificationModel selectedNotification)
+        public static List<string> GetAlterTypeDisplayNames()
         {
-            string notificationHandlerPageName = string.Empty;
-            if (!App.IsNotificationHandling)
-            {
-                if (selectedNotification.AlterType == 6436)
-                {
-                    notificationHandlerPageName = "InputNotificationsKWhPage";
-                }
-                else
-                {
-                    switch (selectedNotification.AlterReply)
-                    {
-                        case 6551:
-                            notificationHandlerPageName = "InputNotificationsAcknowledgePage";
-                            break;
-                        case 6552:
-                            notificationHandlerPageName = "InputNotificationsDescriptionPage";
-                            break;
-                        case 6553:
-                            if (string.IsNullOrEmpty(selectedNotification.Description))
-                                notificationHandlerPageName = "InputNotificationsDescriptionPage";
-                            else
-                                notificationHandlerPageName = "InputNotificationsSolutionPage";
-                            break;
-                        case 6559:
-                            notificationHandlerPageName = "InputNotificationsSolutionPage";
-                            break;
-                        default:
-                            notificationHandlerPageName = string.Empty;
-                            break;
-                    }
-                }
-            }
+            List<string> list = new List<string>();
 
-            return notificationHandlerPageName;
+            list.Add("Electricity waste");
+            list.Add("Equipment problem");
+            list.Add("Operational");
+            list.Add("Quality control");
+            list.Add("Quality problem");
+            list.Add("Planning");
+            list.Add("System notification");
+
+            return list;
         }
+    }
+
+    public class NotificationGroupInfo
+    {
+        public string GroupName { get; set; }
+        public int GroupItemCount { get; set; }
+    }
+
+    public enum NotificationType
+    {
+        NonConfirmed = 1,
+        Solution,
+        ToBeApproved,
+        AllReported,
+        AllApproved
+    }
+
+    public enum NotificationAlterType
+    {
+        ElectricityWaste,
+        EquipmentProblem,
+        Operational,
+        QualityControl,
+        QualityProblem,
+        Planning,
+        SystemNotification
     }
 }

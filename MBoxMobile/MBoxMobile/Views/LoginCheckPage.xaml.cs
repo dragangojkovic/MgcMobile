@@ -42,6 +42,9 @@ namespace MBoxMobile.Views
             customer.Platform = "Android";
             customer.DeviceToken = CrossSettings.Current.GetValueOrDefault("DEVICE_TOKEN", string.Empty);
 
+            //TODO: remove after testing
+            customer.DeviceToken = "TestToken12345";
+
             int status = await LoginCustomer.GetLoginStatus(customer);
 
             if (status == 10000)

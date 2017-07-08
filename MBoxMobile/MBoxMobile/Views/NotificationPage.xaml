@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:MBoxMobile.CustomControls;assembly=MBoxMobile"
+             x:Class="MBoxMobile.Views.NotificationPage"
+             Title="{DynamicResource Notification_Title}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="Filter2ButtonWidth">0</x:Double>
+      <x:Double x:Key="Filter2ButtonHeight">0</x:Double>
+      <x:Double x:Key="FilterButtonWidth">0</x:Double>
+      <x:Double x:Key="FilterButtonHeight">0</x:Double>
+      <x:Double x:Key="FilterTimePickerWidth">0</x:Double>
+      <x:Double x:Key="FilterTimePickerHeight">0</x:Double>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
+    <Grid VerticalOptions="FillAndExpand">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="{DynamicResource ContentMinHeight}" />
+      </Grid.RowDefinitions>
+      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}" Grid.Row="0" Grid.Column="0">
+        <ScrollView>
+          <StackLayout VerticalOptions="FillAndExpand" Padding="5">
+            <StackLayout>
+              <!-- Filter area -->
+              <StackLayout Orientation="Horizontal" Margin="0,0,0,2">
+                <Label Text="{DynamicResource Notification_PersonalFilter}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Margin="-2, 10, 0, 0" />
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterOn}" Style="{DynamicResource PersonalFilterOnStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="PersonalFilterOnClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterOff}" Style="{DynamicResource PersonalFilterOffStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="PersonalFilterOffClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" Margin="-6,0,0,0"/>
+                <ctrl:RoundedButton x:Name="PersonalFilterButton" Text="{DynamicResource Common_Filter}" IsEnabled="{DynamicResource PersonalFilterIsEnabled}" Style="{StaticResource FilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="PersonalFilterClicked" WidthRequest="{DynamicResource PersonalFilterButtonWidth}" HeightRequest="{DynamicResource FilterButtonHeight}" />
+              </StackLayout>
+              <StackLayout Orientation="Horizontal" Margin="0,0,0,2">
+                <Label Text="{DynamicResource Notification_NotificationFilter}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Margin="-2, 10, 0, 0" />
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterOn}" Style="{DynamicResource NotificationFilterOnStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="NotificationFilterOnClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" />
+                <ctrl:RoundedButton Text="{DynamicResource Common_FilterOff}" Style="{DynamicResource NotificationFilterOffStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="NotificationFilterOffClicked" WidthRequest="{DynamicResource Filter2ButtonWidth}" HeightRequest="{DynamicResource Filter2ButtonHeight}" Margin="-6,0,0,0"/>
+                <ctrl:RoundedButton x:Name="NotificationFilterButton" Text="{DynamicResource Common_Filter}" IsEnabled="{DynamicResource NotificationFilterIsEnabled}" Style="{StaticResource FilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="NotificationFilterClicked" WidthRequest="{DynamicResource NotificationFilterButtonWidth}" HeightRequest="{DynamicResource FilterButtonHeight}" />
+              </StackLayout>
+              <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
+                <ctrl:RoundedButton x:Name="FilterTimeButton" Text="{DynamicResource Common_FilterTime}" Style="{StaticResource FilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="FilterTimeClicked" WidthRequest="{DynamicResource FilterTimeButtonWidth}" HeightRequest="{DynamicResource FilterTimeButtonHeight}" />
+              </StackLayout>
+            </StackLayout>
+            <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
+            <StackLayout>
+              <!-- Content (tables) area -->
+              <StackLayout HorizontalOptions="CenterAndExpand">
+                <ctrl:Accordion x:Name="NotificationAccordion" />
+              </StackLayout>
+            </StackLayout>
+          </StackLayout>
+        </ScrollView>
+      </StackLayout>
+      <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
+      <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
+        <StackLayout>
+          <ActivityIndicator BackgroundColor="Transparent" IsRunning="{DynamicResource IsLoading}" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand" Color="#000000" />
+        </StackLayout>
+      </Frame>
+    </Grid>
+  </StackLayout>
+</ContentPage>

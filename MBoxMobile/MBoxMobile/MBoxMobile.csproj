@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\Accordion.cs" />
+    <Compile Include="CustomControls\NotificationGroupButton.cs" />
     <Compile Include="CustomControls\RectangularEntry.cs" />
     <Compile Include="CustomControls\RectangularPicker.cs" />
     <Compile Include="CustomControls\RoundedButton.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Interfaces\ISecureStorage.cs" />
     <Compile Include="Models\Auxiliary.cs" />
+    <Compile Include="Models\Common.cs" />
     <Compile Include="Models\CustomerDetail.cs" />
     <Compile Include="Models\Efficiency.cs" />
     <Compile Include="Models\Electricity.cs" />
@@ -82,20 +84,35 @@
     <Compile Include="Views\ElectricityUsagePage.xaml.cs">
       <DependentUpon>ElectricityUsagePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InputNotificationsAcknowledgePage.xaml.cs">
-      <DependentUpon>InputNotificationsAcknowledgePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\InputNotificationsDescriptionPage.xaml.cs">
-      <DependentUpon>InputNotificationsDescriptionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\InputNotificationsKWhPage.xaml.cs">
-      <DependentUpon>InputNotificationsKWhPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\InputNotificationsSolutionPage.xaml.cs">
-      <DependentUpon>InputNotificationsSolutionPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\LoginCheckPage.xaml.cs">
       <DependentUpon>LoginCheckPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationGroupPage.xaml.cs">
+      <DependentUpon>NotificationGroupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationPage.xaml.cs">
+      <DependentUpon>NotificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationReplyType1Page.xaml.cs">
+      <DependentUpon>NotificationReplyType1Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationReplyType2Page.xaml.cs">
+      <DependentUpon>NotificationReplyType2Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationReplyType3Page.xaml.cs">
+      <DependentUpon>NotificationReplyType3Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationReplyType4Page.xaml.cs">
+      <DependentUpon>NotificationReplyType4Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationReplyType5Page.xaml.cs">
+      <DependentUpon>NotificationReplyType5Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationReplyType6Page.xaml.cs">
+      <DependentUpon>NotificationReplyType6Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NotificationReplyType7Page.xaml.cs">
+      <DependentUpon>NotificationReplyType7Page.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProductionDetailsPage.xaml.cs">
       <DependentUpon>ProductionDetailsPage.xaml</DependentUpon>
@@ -126,9 +143,6 @@
     </Compile>
     <Compile Include="Views\SideView.xaml.cs">
       <DependentUpon>SideView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TestAccordionPage.xaml.cs">
-      <DependentUpon>TestAccordionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TestMainPage.xaml.cs">
       <DependentUpon>TestMainPage.xaml</DependentUpon>
@@ -297,12 +311,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\TestAccordionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Views\TestMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -316,30 +324,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\UptimeDetailsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\InputNotificationsKWhPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\InputNotificationsAcknowledgePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\InputNotificationsDescriptionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\InputNotificationsSolutionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -382,6 +366,60 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\LoginCheckPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationGroupPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationReplyType1Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationReplyType2Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationReplyType3Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationReplyType5Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationReplyType7Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationReplyType4Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NotificationReplyType6Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

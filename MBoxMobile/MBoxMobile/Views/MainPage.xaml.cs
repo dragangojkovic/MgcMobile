@@ -72,6 +72,16 @@ namespace MBoxMobile.Views
 
                 HandleReceivedNotifications();
             });
+
+            MessagingCenter.Subscribe<string>(this, "ErrorOccured", async (sender) =>
+            {
+                if (!App.NoConnectivityMsgShown)
+                {
+                    App.NoConnectivityMsgShown = true;
+                    await DisplayAlert("MBox", App.LastErrorMessage, App.CurrentTranslation["Common_OK"]);
+                    App.NoConnectivityMsgShown = false;
+                }
+            });
         }
 
         protected override void OnAppearing()
@@ -98,7 +108,7 @@ namespace MBoxMobile.Views
 
         private async void Button4_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Alert", "You have clicked Notifications", "OK");
+            await Navigation.PushAsync(new NotificationPage());
         }
 
         private async void Button5_Clicked(object sender, EventArgs e)
@@ -110,27 +120,36 @@ namespace MBoxMobile.Views
         {
             if (App.NotificationsForHandling != null && App.NotificationsForHandling.Count > 0 && !App.IsNotificationHandling)
             {
-                NotificationModel currentNotification = App.NotificationsForHandling[0];
-                string notificationHandlerPageName = NotificationSupport.HandleNotification(currentNotification);
-
-                if (notificationHandlerPageName != string.Empty)
-                {
-                    switch (notificationHandlerPageName)
-                    {
-                        case "InputNotificationsAcknowledgePage":
-                            Navigation.PushModalAsync(new InputNotificationsAcknowledgePage(currentNotification));
-                            break;
-                        case "InputNotificationsDescriptionPage":
-                            Navigation.PushModalAsync(new InputNotificationsDescriptionPage(currentNotification));
-                            break;
-                        case "InputNotificationsKWhPage":
-                            Navigation.PushModalAsync(new InputNotificationsKWhPage(currentNotification));
-                            break;
-                        case "InputNotificationsSolutionPage":
-                            Navigation.PushModalAsync(new InputNotificationsSolutionPage(currentNotification));
-                            break;
-                    }
-                }
+                //NotificationModel currentNotification = App.NotificationsForHandling[0];
+                //if (currentNotification.Popup >= 1 && currentNotification.Popup <= 7)
+                //{
+                //    switch (currentNotification.Popup)
+                //    {
+                //        case 1:
+                //            Navigation.PushModalAsync(new NotificationReplyType1Page(currentNotification, true));
+                //            break;
+                //        case 2:
+                //            Navigation.PushModalAsync(new NotificationReplyType2Page(currentNotification, true));
+                //            break;
+                //        case 3:
+                //            Navigation.PushModalAsync(new NotificationReplyType3Page(currentNotification, true));
+                //            break;
+                //        case 4:
+                //            Navigation.PushModalAsync(new NotificationReplyType4Page(currentNotification, true));
+                //            break;
+                //        case 5:
+                //            Navigation.PushModalAsync(new NotificationReplyType5Page(currentNotification, true));
+                //            break;
+                //        case 6:
+                //            Navigation.PushModalAsync(new NotificationReplyType6Page(currentNotification, true));
+                //            break;
+                //        case 7:
+                //            Navigation.PushModalAsync(new NotificationReplyType7Page(currentNotification, true));
+                //            break;
+                //    }
+                //}
+                App.NotificationsForHandling.Remove(App.NotificationsForHandling[0]);
+                Navigation.PushAsync(new NotificationPage());
             }
         }
 

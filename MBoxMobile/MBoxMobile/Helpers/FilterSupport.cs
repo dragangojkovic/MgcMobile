@@ -4,24 +4,6 @@ namespace MBoxMobile.Helpers
 {
     public static class FilterSupport
     {
-        public static Dictionary<int, string> GetPersonalFilters()
-        {
-            Dictionary<int, string> dict = new Dictionary<int, string>();
-
-            //dict.Add(1, "Common_FilterTimeToday");
-            //dict.Add(2, "Common_FilterTimeLast24Hours");
-            //dict.Add(3, "Common_FilterTimeYesterday");
-            //dict.Add(4, "Common_FilterTimeCurrentWeek");
-            //dict.Add(5, "Common_FilterTimeLastWeek");
-            //dict.Add(6, "Common_FilterTimeCurrentMonth");
-            //dict.Add(7, "Common_FilterTimeLastMonth");
-            //dict.Add(8, "Common_FilterTimeCurrentQuarter");
-            //dict.Add(9, "Common_FilterTimeLastQuarter");
-            //dict.Add(10, "Common_FilterTimeCurrentYear");
-
-            return dict;
-        }
-
         public static Dictionary<int, string> GetTimeFilters()
         {
             Dictionary<int, string> dict = new Dictionary<int, string>();
@@ -40,6 +22,21 @@ namespace MBoxMobile.Helpers
             return dict;
         }
 
+        public static Dictionary<int, string> GetNotificationFilters()
+        {
+            Dictionary<int, string> dict = new Dictionary<int, string>();
+
+            dict.Add(6566, "Common_FilterNotificationLast24Hours");
+            dict.Add(6653, "Common_FilterNotificationYesterday");
+            dict.Add(6560, "Common_FilterNotificationLast48Hours");
+            dict.Add(6562, "Common_FilterNotificationLast72Hours");
+            dict.Add(6563, "Common_FilterNotificationLast7Days");
+            dict.Add(6564, "Common_FilterNotificationLast14Days");
+            dict.Add(6565, "Common_FilterNotificationLast30Days");
+
+            return dict;
+        }
+
         public static double GetFilter4FontSize(double screenWidth)
         {
             if (screenWidth <= 360)
@@ -54,6 +51,14 @@ namespace MBoxMobile.Helpers
                 return 12;
             else
                 return 14;
+        }
+
+        public static double GetFilter2FontSizeNotificationPage(double screenWidth)
+        {
+            if (screenWidth <= 360)
+                return 10;
+            else
+                return 12;
         }
 
         public static double GetWorkingHoursLabelFontSize(double screenWidth)

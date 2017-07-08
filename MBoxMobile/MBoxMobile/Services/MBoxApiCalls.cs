@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MBoxMobile.Services
 {
@@ -17,7 +17,7 @@ namespace MBoxMobile.Services
         static Uri BaseUri = new Uri("http://121.33.199.84:200/");
         static string AccessToken = "";
 
-        public static async Task<TResult> GetObjectOrObjectList<TResult>(string serializedParameters, string requestUri, bool isPostMethod = false)
+        public static async Task<TResult> GetObjectOrObjectList<TResult>(string serializedParameters, string requestUri, bool isLogin = false, bool isPostMethod = false)
         {
             if (CrossConnectivity.Current.IsConnected)
             {
@@ -47,27 +47,27 @@ namespace MBoxMobile.Services
                     }
                     else
                     {
-                        App.LastErrorMessage = response.StatusCode.ToString();
-                        return default(TResult);
+                        App.LastErrorMessage = App.CurrentTranslation["Common_ServerStatusCodeMsg"] + response.StatusCode.ToString();
                     }
                 }
-                catch (Exception e)
+                catch
                 {
-                    App.LastErrorMessage = e.ToString();
-                    return default(TResult);
+                    App.LastErrorMessage = App.CurrentTranslation["Common_ErrorConnectionFailed"];
                 }
             }
             else
             {
                 App.LastErrorMessage = App.CurrentTranslation["Common_ErrorMsgNoNetwork"];
-                return default(TResult);
             }
+
+            if (!isLogin) MessagingCenter.Send<string>("ApiCallsHandler", "ErrorOccured");
+            return default(TResult);
         }
 
         public static async Task Authenticate(CustomerDetail customer)
         {
             UserInfoWrapper returnedObj =
-                await GetObjectOrObjectList<UserInfoWrapper>("", BaseUri + string.Format("MgcApi.svc/Login?serverid={0}&username={1}&password={2}&platform={3}&devicetoken={4}", customer.ServerId, customer.Username, customer.Password, customer.Platform, customer.DeviceToken));
+                await GetObjectOrObjectList<UserInfoWrapper>("", BaseUri + string.Format("MgcApi.svc/Login?serverid={0}&username={1}&password={2}&platform={3}&devicetoken={4}", customer.ServerId, customer.Username, customer.Password, customer.Platform, customer.DeviceToken), true);
             if (returnedObj == null)
                 App.LoggedUser = new UserInfo();
             else
@@ -138,7 +138,38 @@ namespace MBoxMobile.Services
             else
                 return true;
         }
+        #endregion
 
+        #region NotificationFilter
+        public static async Task<NotificationFilter> GetNotificationFilter()
+        {
+            NotificationFilterWrapper returnedObj =
+                await GetObjectOrObjectList<NotificationFilterWrapper>("", BaseUri + string.Format("MgcApi.svc/GetNotificationFilterList?userid={0}", App.LoggedUser.login.RecordId));
+            if (returnedObj == null)
+                return new NotificationFilter();
+            else
+                return returnedObj.MyNotificationFilter;
+        }
+
+        public static async Task<bool> SetSelectedNotificationFilter(int filterid)
+        {
+            int returnedObj =
+                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetSelectedNotificationFilter?userid={0}&filterid={1}", App.LoggedUser.login.RecordId, filterid));
+            if (returnedObj == 0)
+                return false;
+            else
+                return true;
+        }
+
+        public static async Task<bool> SetNotificationFilterOnOff(bool bOnOff)
+        {
+            int returnedObj =
+                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetNotificationFilterOnOff?userid={0}&bOn={1}", App.LoggedUser.login.RecordId, bOnOff));
+            if (returnedObj == 0)
+                return false;
+            else
+                return true;
+        }
         #endregion
 
         #region Uptime
@@ -396,235 +427,193 @@ namespace MBoxMobile.Services
         }
         #endregion
 
-        #region InputNotification
-        public static async Task<List<MaterialModel>> GetElectricityWasteCauseList()
+        #region Notification
+
+        public static async Task<List<NotificationModel>> GetNotifications(int? mainFilterId, int? notificationFilterId, int periodId)
         {
-            MaterialModelList returnedObj = await GetObjectOrObjectList<MaterialModelList>("", BaseUri + "MgcApi.svc/GetElectricityWasteCauseList");
+            string sMainFilterId = (mainFilterId == null) ? "" : mainFilterId.ToString();
+            string sNotificationFilterId = (notificationFilterId == null) ? "" : notificationFilterId.ToString();
+
+            NotificationModelList returnedObj =
+                await GetObjectOrObjectList<NotificationModelList>("", BaseUri + string.Format("MgcApi.svc/GetNotifications?mainFilterID={0}&notFilterID={1}&periodID={2}&belongToLocationID={3}", sMainFilterId, sNotificationFilterId, periodId, App.LoggedUser.login.BelongToLocationID));
             if (returnedObj == null)
-                return new List<MaterialModel>();
+                return new List<NotificationModel>();
             else
-                return returnedObj.Materials;
+                return returnedObj.Notifications;
         }
 
-        public static async Task<List<MaterialModel>> GetNotificationTypeList(int alterEquipmentType)
+        public static async Task<List<WasteCauseModel>> GetElectricityWasteCauseList()
         {
-            MaterialModelList returnedObj = await GetObjectOrObjectList<MaterialModelList>("", BaseUri + string.Format("MgcApi.svc/GetNotificationTypeList?alterEquipmentType={0}", alterEquipmentType));
+            WasteCauseModelList returnedObj = await GetObjectOrObjectList<WasteCauseModelList>("", BaseUri + "MgcApi.svc/GetElectricityWasteCauseList");
             if (returnedObj == null)
-                return new List<MaterialModel>();
+                return new List<WasteCauseModel>();
             else
-                return returnedObj.Materials;
+                return returnedObj.WasteCauses;
         }
 
-        public static async Task<List<MaterialModel>> GetSolutionCauseList(int notificationId)
+        public static async Task<List<AlterDescriptionModel>> GetAlterDescriptionList()
         {
-            MaterialModelList returnedObj = await GetObjectOrObjectList<MaterialModelList>("", BaseUri + string.Format("MgcApi.svc/GetSolutionCauseList?notificationID={0}", notificationId));
+            AlterDescriptionModelList returnedObj = await GetObjectOrObjectList<AlterDescriptionModelList>("", BaseUri + "MgcApi.svc/GetAlterDescriptionList");
             if (returnedObj == null)
-                return new List<MaterialModel>();
+                return new List<AlterDescriptionModel>();
             else
-                return returnedObj.Materials;
+                return returnedObj.AlterDescriptions;
         }
 
-        public static async Task<bool> InputAcknowledge(int notificationId, string description)
+        public static async Task<List<SolutionCauseModel>> GetSolutionCauseList()
         {
-            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputAcknowledge?notificationID={0}&userID={1}&description={2}", notificationId, App.LoggedUser.login.RecordId, description));
-            if (returnedObj == 10000)
-                return true;
+            SolutionCauseModelList returnedObj = await GetObjectOrObjectList<SolutionCauseModelList>("", BaseUri + "MgcApi.svc/GetSolutionCauseList");
+            if (returnedObj == null)
+                return new List<SolutionCauseModel>();
             else
-                return false;
+                return returnedObj.SolutionCauseModels;
         }
 
-        public static async Task<bool> InputKwh(int notificationId, string description, int causeId)
+        public static async Task<bool> ReplyElectricity(int notificationID, int? notificationParentID, string description, int electricityCauseID)
         {
-            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputKwh?notificationID={0}&userID={1}&description={2}&causeID={3}", notificationId, App.LoggedUser.login.RecordId, description, causeId));
-            if (returnedObj == 10000)
-                return true;
-            else
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyElectricity?userid={0}&notID={1}&notParentID={2}&description={3}&elecCauseID={4}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, description, electricityCauseID));
+            if (returnedObj == null)
                 return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
 
-        public static async Task<bool> InputDescription(int notificationId, string description, int alterDescription, int alterEquipType)
+        public static async Task<bool> ReplyAcknowledge(int notificationID, int? notificationParentID, string description)
         {
-            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputDescription?notificationID={0}&userID={1}&description={2}&alterDescription={3}&alterEquipType={4}", notificationId, App.LoggedUser.login.RecordId, description, alterDescription, alterEquipType));
-            if (returnedObj == 10000)
-                return true;
-            else
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyAcknowledge?userid={0}&notID={1}&notParentID={2}&description={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, description));
+            if (returnedObj == null)
                 return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
 
-        public static async Task<bool> InputSolution(int notificationId, string solution, int? solutionCauseId)
+        public static async Task<bool> ReplyDescription(int notificationID, int? notificationParentID, string description, int? newAlterDescriptionID, int popup)
         {
-            string sSolutionCauseId = (solutionCauseId == null) ? "" : solutionCauseId.ToString();
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
+            string sNewAlterDescriptionID = (newAlterDescriptionID == null) ? "" : newAlterDescriptionID.ToString();
 
-            int returnedObj = await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/InputSolution?notificationID={0}&userID={1}&solution={2}&solutionCauseID={3}", notificationId, App.LoggedUser.login.RecordId, solution, sSolutionCauseId));
-            if (returnedObj == 10000)
-                return true;
-            else
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyDescription?userid={0}&notID={1}&notParentID={2}&description={3}&newAlterDescID={4}&popup={5}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, description, sNewAlterDescriptionID, popup));
+            if (returnedObj == null)
                 return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
 
-        //public async void InputAcknowledge(int notificationID, string desc, StatusResponse status)
-        //{
-        //    string url = "MgcApi.svc/InputAcknowledge?notificationID={notificationID}&userID={userID}&description={description}";
-        //    var request = new RestRequest(url, Method.GET);
+        public static async Task<bool> ReplySolution(int notificationID, int? notificationParentID, string solution, int alterCauseID)
+        {
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-        //    request.AddHeader("Content-Type", "application/json");
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplySolution?userid={0}&notID={1}&notParentID={2}&solution={3}&alterCauseID={4}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, solution, alterCauseID));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
-        //    try
-        //    {
-        //        var authInfo = LocalDataStore.authInfo;
-        //        if (authInfo != null)
-        //        {
-        //            request.AddUrlSegment("notificationID", notificationID);
-        //            request.AddUrlSegment("userID", authInfo.RecordId);
-        //            request.AddUrlSegment("description", desc);
+        public static async Task<bool> ReplyApprove(int notificationID, int? notificationParentID, int datatype)
+        {
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-        //            IRestResponse response = await restClient.Execute(request);
-        //            var result = response.Content;
-        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyApprove?userid={0}&notID={1}&notParentID={2}&datatype={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, datatype));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
-        //            if (res.d == 10000)
-        //            {
-        //                status(true, "success");
-        //            }
-        //            else
-        //            {
-        //                status(false, "failed");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            status(false, "User not found");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        status(false, ex.Message);
-        //    }
-        //}
+        public static async Task<bool> ReplyApproveAndReport(int notificationID, int? notificationParentID, int datatype)
+        {
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-        //public async void InputKwh(int notificationID, string desc, int causeID, StatusResponse status)
-        //{
-        //    string url = "MgcApi.svc/InputKwh?notificationID={notificationID}&userID={userID}&description={description}&causeID={causeID}";
-        //    var request = new RestRequest(url, Method.GET);
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyApproveAndReport?userid={0}&notID={1}&notParentID={2}&datatype={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, datatype));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
-        //    request.AddHeader("Content-Type", "application/json");
+        public static async Task<bool> ReplyNeedReport(int notificationID, int? notificationParentID)
+        {
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-        //    try
-        //    {
-        //        var authInfo = LocalDataStore.authInfo;
-        //        if (authInfo != null)
-        //        {
-        //            request.AddUrlSegment("notificationID", notificationID);
-        //            request.AddUrlSegment("userID", authInfo.RecordId);
-        //            request.AddUrlSegment("description", desc);
-        //            request.AddUrlSegment("causeID", causeID);
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyNeedReport?userid={0}&notID={1}&notParentID={2}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
-        //            IRestResponse response = await restClient.Execute(request);
-        //            var result = response.Content;
-        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
+        public static async Task<bool> ReplyReport(int notificationID, int? notificationParentID, string report)
+        {
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-        //            if (res.d == 10000)
-        //            {
-        //                status(true, "success");
-        //            }
-        //            else
-        //            {
-        //                status(false, "failed");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            status(false, "User not found");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        status(false, ex.Message);
-        //    }
-        //}
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyReport?userid={0}&notID={1}&notParentID={2}&report={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, report));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
-        //public async void InputDescription(int notificationID, string desc, int alterDesc, int equiptype, StatusResponse status)
-        //{
-        //    string url = "MgcApi.svc/InputDescription?notificationID={notificationID}&userID={userID}&description={description}&alterDescription={alterDescription}&alterEquipType={alterEquipType}";
-        //    var request = new RestRequest(url, Method.GET);
+        public static async Task<bool> ReplyReportAndRemove(int notificationID, int? notificationParentID, string report)
+        {
+            string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-        //    request.AddHeader("Content-Type", "application/json");
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyReportAndRemove?userid={0}&notID={1}&notParentID={2}&report={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, report));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
-        //    try
-        //    {
-        //        var authInfo = LocalDataStore.authInfo;
-        //        if (authInfo != null)
-        //        {
-        //            request.AddUrlSegment("notificationID", notificationID);
-        //            request.AddUrlSegment("userID", authInfo.RecordId);
-        //            request.AddUrlSegment("description", desc);
-        //            request.AddUrlSegment("alterDescription", alterDesc);
-        //            request.AddUrlSegment("alterEquipType", equiptype);
-
-        //            IRestResponse response = await restClient.Execute(request);
-        //            var result = response.Content;
-        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
-
-        //            if (res.d == 10000)
-        //            {
-        //                status(true, "success");
-        //            }
-        //            else
-        //            {
-        //                status(false, "failed");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            status(false, "User not found");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        status(false, ex.Message);
-        //    }
-        //}
-
-        //public async void InputSolution(int notificationID, string solution, int? solutionCauseID, StatusResponse status)
-        //{
-        //    string url = "MgcApi.svc/InputSolution?notificationID={notificationID}&userID={userID}&solution={solution}&solutionCauseID={solutionCauseID}";
-        //    var request = new RestRequest(url, Method.GET);
-
-        //    request.AddHeader("Content-Type", "application/json");
-
-        //    try
-        //    {
-        //        var authInfo = LocalDataStore.authInfo;
-        //        if (authInfo != null)
-        //        {
-        //            request.AddUrlSegment("notificationID", notificationID);
-        //            request.AddUrlSegment("userID", authInfo.RecordId);
-        //            request.AddUrlSegment("solution", solution);
-        //            request.AddUrlSegment("solutionCauseID", solutionCauseID);
-
-        //            IRestResponse response = await restClient.Execute(request);
-        //            var result = response.Content;
-        //            ResponseResult<int> res = JsonConvert.DeserializeObject<ResponseResult<int>>(result);
-
-        //            if (res.d == 10000)
-        //            {
-        //                status(true, "success");
-        //            }
-        //            else
-        //            {
-        //                status(false, "failed");
-        //            }
-        //        }
-        //        else
-        //        {
-        //            status(false, "User not found");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        status(false, ex.Message);
-        //    }
-        //}
         #endregion
     }
 }
