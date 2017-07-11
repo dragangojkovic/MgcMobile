@@ -133,11 +133,12 @@ namespace MBoxMobile.Views
 
         private async Task PopulateWebView()
         {
-            IEnumerable<ElectricityMachine> detailList = await MBoxApiCalls.GetElectricityUsagePerMachine((int)mode, locationId, departmentId, subDepartmentId, filterId);
+            List<ElectricityMachine> detailList = await MBoxApiCalls.GetElectricityUsagePerMachine((int)mode, locationId, departmentId, subDepartmentId, filterId);
             string htmlHeaderDetails = HtmlTableSupport.ElectricityUsage_Large_TableHeader();
             string htmlContentDetails = HtmlTableSupport.ElectricityUsage_Large_TableContent(detailList);
             string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDetails, htmlContentDetails);
             ElectricityUsageDetailsWebView.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
+            ElectricityUsageDetailsWebView.HeightRequest = (detailList.Count + 1) * 31 + 10;
         }
     }
 }

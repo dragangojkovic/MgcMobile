@@ -83,7 +83,7 @@ namespace MBoxMobile.Views
                 {
                     HeaderText = string.Format("{0} ({1})", ngi.GroupName, ngi.GroupItemCount), // App.CurrentTranslation["????"],
                     ContentItems = content,
-                    ContentHeight = contentHeight
+                    ContentHeight = contentHeight + 20
                 };
                 if (screenWidth <= 360) asCurrent.HeaderFontSize = 14;
                 result.Add(asCurrent);
@@ -99,53 +99,57 @@ namespace MBoxMobile.Views
             StackLayout result = new StackLayout();
             List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroup.GroupName).ToList();
 
+            // 0. create new table (vw)
+            WebView wv = new WebView();
+            wv.WidthRequest = screenWidth - 35;
+            wv.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+            wv.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+            wv.Margin = new Thickness(0, 0, 0, 5);
+            wv.Navigating += (s, e) =>
+            {
+                if (e.Url != string.Empty)
+                {
+                    selectedNotificationID = int.Parse(e.Url.Split('=').LastOrDefault());
+                    // call pop-up regarding notification type
+                    NotificationModel currentNotification = NotificationList.Where(x => x.ID == selectedNotificationID).FirstOrDefault();
+                    if (currentNotification.Popup >= 1 && currentNotification.Popup <= 7)
+                    {
+                        switch (currentNotification.Popup)
+                        {
+                            case 1:
+                                Navigation.PushModalAsync(new NotificationReplyType1Page(currentNotification));
+                                break;
+                            case 2:
+                                Navigation.PushModalAsync(new NotificationReplyType2Page(currentNotification));
+                                break;
+                            case 3:
+                                Navigation.PushModalAsync(new NotificationReplyType3Page(currentNotification));
+                                break;
+                            case 4:
+                                Navigation.PushModalAsync(new NotificationReplyType4Page(currentNotification));
+                                break;
+                            case 5:
+                                Navigation.PushModalAsync(new NotificationReplyType5Page(currentNotification));
+                                break;
+                            case 6:
+                                Navigation.PushModalAsync(new NotificationReplyType6Page(currentNotification));
+                                break;
+                            case 7:
+                                Navigation.PushModalAsync(new NotificationReplyType7Page(currentNotification));
+                                break;
+                        }
+                    }
+                }
+                e.Cancel = true;
+            };
+            string htmlHtmlDetails = string.Empty;
+            int subTableCount = 0;
+
             //4th level of grouping - there can be more than one table in sub-group
             List<int> subSubGroups = notifs.Select(x => x.DataType).Distinct().ToList();
             foreach(int tableType in subSubGroups)
             {
-                // 0. create new table (vw)
-                WebView wv = new WebView();
-                wv.WidthRequest = screenWidth - 35;
-                wv.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
-                wv.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
-                wv.Margin = new Thickness(0, 0, 0, 5);
-                wv.Navigating += (s, e) =>
-                {
-                    if (e.Url != string.Empty)
-                    {
-                        selectedNotificationID = int.Parse(e.Url.Split('=').LastOrDefault());
-                        // call pop-up regarding notification type
-                        NotificationModel currentNotification = NotificationList.Where(x => x.ID == selectedNotificationID).FirstOrDefault();
-                        if (currentNotification.Popup >= 1 && currentNotification.Popup <= 7)
-                        {
-                            switch (currentNotification.Popup)
-                            {
-                                case 1:
-                                    Navigation.PushModalAsync(new NotificationReplyType1Page(currentNotification));
-                                    break;
-                                case 2:
-                                    Navigation.PushModalAsync(new NotificationReplyType2Page(currentNotification));
-                                    break;
-                                case 3:
-                                    Navigation.PushModalAsync(new NotificationReplyType3Page(currentNotification));
-                                    break;
-                                case 4:
-                                    Navigation.PushModalAsync(new NotificationReplyType4Page(currentNotification));
-                                    break;
-                                case 5:
-                                    Navigation.PushModalAsync(new NotificationReplyType5Page(currentNotification));
-                                    break;
-                                case 6:
-                                    Navigation.PushModalAsync(new NotificationReplyType6Page(currentNotification));
-                                    break;
-                                case 7:
-                                    Navigation.PushModalAsync(new NotificationReplyType7Page(currentNotification));
-                                    break;
-                            }
-                        }
-                    }
-                    e.Cancel = true;
-                };
+                subTableCount++;
 
                 // 1. get notifs for this table
                 List<NotificationModel> data = notifs.Where(x => x.DataType == tableType).ToList();
@@ -201,14 +205,21 @@ namespace MBoxMobile.Views
                         break;
                 }
 
-                string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeader, htmlContent);
-                wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
+                htmlHtmlDetails += HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeader, htmlContent) + "";
+                //wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
                 viewHeight += (data.Count() + 1) * WV_ROW_Height + 10;
-                wv.HeightRequest = viewHeight;
+                //wv.HeightRequest = viewHeight;
 
-                // 3. add to View
-                result.Children.Add(wv);
+                //// 3. add to View
+                //result.Children.Add(wv);
             }
+
+            wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
+            if (subTableCount == 1) viewHeight += 10;
+            wv.HeightRequest = viewHeight;
+
+            // 3. add to View
+            result.Children.Add(wv);
 
             return result;
         }

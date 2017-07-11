@@ -15,7 +15,14 @@ namespace MBoxMobile.Helpers
     onload = function()
     {
         if(!document.getElementsByTagName || !document.createTextNode) return;
-        var rows = document.getElementById('mbox').getElementsByTagName('tr');
+        var tables = document.getElementsByClassName('mbox');
+		var rows = [];
+        for(var i = 0; i < tables.length; i++)
+	    {
+			var currRows = tables[i].getElementsByTagName('tr');
+			var arr = Array.prototype.slice.call(currRows);
+		    rows = rows.concat(arr);
+	    }
         for(i = 0; i < rows.length; i++)
         {
             rows[i].onclick = function() {
@@ -58,6 +65,7 @@ table, th, td {
 }
 table {
     margin-right: 20px;
+    margin-bottom: 10px;
 }
 th {
     padding: 5px;
@@ -84,7 +92,7 @@ table th {
     <thead>
         {#TableHeader}
     </thead>
-    <tbody id='mbox'>
+    <tbody class='mbox'>
         {#TableBody}
     </tbody>
 </table>
