@@ -79,7 +79,10 @@ namespace MBoxMobile.Views
             customer.ServerId = serverId;
             customer.Username = loginViewModel.Username != null ? loginViewModel.Username.Trim() : string.Empty;
             customer.Password = loginViewModel.Password != null ? loginViewModel.Password.Trim() : string.Empty;
-            customer.Platform = "Android";
+            if (Device.OS == TargetPlatform.Android)
+                customer.Platform = "Android";
+            if (Device.OS == TargetPlatform.iOS)
+                customer.Platform = "iOS";
             customer.DeviceToken = CrossSettings.Current.GetValueOrDefault("DEVICE_TOKEN", string.Empty);
 
             //TODO: remove after testing

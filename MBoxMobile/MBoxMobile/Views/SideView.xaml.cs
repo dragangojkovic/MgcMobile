@@ -47,20 +47,21 @@ namespace MBoxMobile.Views
             }
 
             isPresented = false;
+            MasterBehavior = MasterBehavior.Popover;
 
-            if (Device.Idiom == TargetIdiom.Phone)
-            {
-                MasterBehavior = MasterBehavior.Popover;
-            }
-            else if (Device.Idiom == TargetIdiom.Tablet)
-            {
-                MasterBehavior = MasterBehavior.SplitOnLandscape;
-                isPresented = true;
-            }
-            else
-            {
-                MasterBehavior = MasterBehavior.Popover;
-            }
+            //if (Device.Idiom == TargetIdiom.Phone)
+            //{
+            //    MasterBehavior = MasterBehavior.Popover;
+            //}
+            //else if (Device.Idiom == TargetIdiom.Tablet)
+            //{
+            //    MasterBehavior = MasterBehavior.SplitOnLandscape;
+            //    isPresented = true;
+            //}
+            //else
+            //{
+            //    MasterBehavior = MasterBehavior.Popover;
+            //}
 
             double screenWidth = DependencyService.Get<IDisplay>().Width;
             double screenHeight = DependencyService.Get<IDisplay>().Height;

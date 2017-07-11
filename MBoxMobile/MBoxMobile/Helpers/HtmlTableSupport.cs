@@ -999,7 +999,7 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th><div style=""width:60px;"">{#kWh}</div></th>
@@ -1028,7 +1028,7 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th><div style=""width:60px;"">{#Acknowledged}</div></th>
@@ -1057,7 +1057,7 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Operator}</th>
@@ -1084,7 +1084,7 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
@@ -1117,7 +1117,7 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th><div style=""width:60px;"">{#Approved}</div></th>
 <th><div style=""width:60px;"">{#Reported}</div></th>
@@ -1125,10 +1125,10 @@ table th {
 <th><div style=""width:60px;"">{#kWh}</div></th>
 <th style=""white-space:nowrap"">{#WasteCause}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
-<th><div style=""width:60px;"">{#TimeToSolution}</div></th>
+<th style=""white-space:nowrap"">{#TimeToSolution}</div></th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
 <th style=""white-space:nowrap"">{#Operator}</th>
@@ -1166,7 +1166,7 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th><div style=""width:60px;"">{#Approved}</div></th>
 <th><div style=""width:60px;"">{#Reported}</div></th>
@@ -1177,8 +1177,8 @@ table th {
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
 <th style=""white-space:nowrap"">{#Report}</th>
-<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
-<th><div style=""width:60px;"">{#TimeToSolution}</div></th>
+<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
+<th style=""white-space:nowrap"">{#TimeToSolution}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
 <th style=""white-space:nowrap"">{#ReportedBy}</th>
@@ -1219,15 +1219,15 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th><div style=""width:60px;"">{#Reported}</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th><div style=""width:60px;"">{#kWh}</div></th>
 <th style=""white-space:nowrap"">{#WasteCause}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
-<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
+<th style=""white-space:nowrap"">{#TimeToApprove}</th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>
@@ -1266,14 +1266,14 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th><div style=""width:60px;"">{#Acknowledged}</div></th>
 <th><div style=""width:60px;"">{#Reported}</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
-<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
+<th style=""white-space:nowrap"">{#TimeToApprove}</th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>
@@ -1311,13 +1311,13 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th><div style=""width:60px;"">{#Reported}</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
-<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
+<th style=""white-space:nowrap"">{#TimeToApprove}</th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>
@@ -1354,16 +1354,16 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th><div style=""width:60px;"">{#Reported}</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
-<th><div style=""width:60px;"">{#TimeToSolve}</div></th>
-<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#TimeToSolve}</th>
+<th style=""white-space:nowrap"">{#TimeToApprove}</th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
@@ -1405,14 +1405,14 @@ table th {
             string html = @"
 <tr>
 <th style=""display:none"">Id</th>
-<th style=""white-space:nowrap"">{#DateTime}</div></th>
+<th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th><div style=""width:60px;"">{#Reported}</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
-<th><div style=""width:60px;"">{#TimeToSolve}</div></th>
-<th><div style=""width:60px;"">{#TimeToApprove}</div></th>
+<th style=""white-space:nowrap"">{#TimeToSolve}</th>
+<th style=""white-space:nowrap"">{#TimeToApprove}</th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>

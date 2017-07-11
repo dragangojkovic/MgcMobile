@@ -79,10 +79,20 @@ namespace MBoxMobile.Views
                 Resources["NotificationReply_KwhTitle"] = App.CurrentTranslation["NotificationReply_KwhTitle"];
                 Resources["NotificationReply_KwhValue"] = NotificationModel.Kwh;
             }
+            else
+            {
+                KwhTitle.IsVisible = false;
+                KwhValue.IsVisible = false;
+            }
             if (!string.IsNullOrEmpty(NotificationModel.ElecCause))
             {
                 Resources["NotificationReply_WasteCauseTitle"] = App.CurrentTranslation["NotificationReply_WasteCauseTitle"];
                 Resources["NotificationReply_WasteCauseValue"] = NotificationModel.ElecCause;
+            }
+            else
+            {
+                WasteCauseTitle.IsVisible = false;
+                WasteCauseValue.IsVisible = false;
             }
             Resources["NotificationReply_ReportedTitle"] = App.CurrentTranslation["NotificationReply_ReportedTitle"];
             Resources["NotificationReply_ReportedValue"] = NotificationModel.NeedReport.ToString();
@@ -93,15 +103,30 @@ namespace MBoxMobile.Views
                 Resources["NotificationReply_CauseTitle"] = App.CurrentTranslation["NotificationReply_CauseTitle"];
                 Resources["NotificationReply_CauseValue"] = NotificationModel.AlterCause;
             }
+            else
+            {
+                CauseTitle.IsVisible = false;
+                CauseValue.IsVisible = false;
+            }
             if (!string.IsNullOrEmpty(NotificationModel.Solution))
             {
                 Resources["NotificationReply_SolutionTitle"] = App.CurrentTranslation["NotificationReply_SolutionTitle"];
                 Resources["NotificationReply_SolutionValue"] = NotificationModel.Solution;
             }
+            else
+            {
+                SolutionTitle.IsVisible = false;
+                SolutionValue.IsVisible = false;
+            }
             if (!string.IsNullOrEmpty(NotificationModel.Description))
             {
                 Resources["NotificationReply_DescriptionTitle"] = App.CurrentTranslation["NotificationReply_DescriptionTitle"];
                 Resources["NotificationReply_DescriptionValue"] = NotificationModel.Description;
+            }
+            else
+            {
+                DescriptionTitle.IsVisible = false;
+                DescriptionValue.IsVisible = false;
             }
 
             Resources["NotificationReply_AknowledgeTimeTitle"] = App.CurrentTranslation["NotificationReply_AknowledgeTimeTitle"];
@@ -124,6 +149,11 @@ namespace MBoxMobile.Views
             {
                 Resources["NotificationReply_ReportTitle"] = App.CurrentTranslation["NotificationReply_ReportTitle"];
                 Resources["NotificationReply_ReportValue"] = NotificationModel.Report;
+            }
+            else
+            {
+                ReportTitle.IsVisible = false;
+                ReportValue.IsVisible = false;
             }
 
             Resources["NotificationReply_CancelButtonText"] = App.CurrentTranslation["NotificationReply_CancelButtonText"];

@@ -54,18 +54,18 @@
                     <Label Text="{DynamicResource NotificationReply_TypeValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
                     <Label Text="{DynamicResource NotificationReply_RemarkTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
                     <Label Text="{DynamicResource NotificationReply_RemarkValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_KwhTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_KwhValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_WasteCauseTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_WasteCauseValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_NotificationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_NotificationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_CauseTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_CauseValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_SolutionTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_SolutionValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_DescriptionTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_DescriptionValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label x:Name="KwhTitle" Text="{DynamicResource NotificationReply_KwhTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label x:Name="KwhValue" Text="{DynamicResource NotificationReply_KwhValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label x:Name="WasteCauseTitle" Text="{DynamicResource NotificationReply_WasteCauseTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label x:Name="WasteCauseValue" Text="{DynamicResource NotificationReply_WasteCauseValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label x:Name="NotificationTitle" Text="{DynamicResource NotificationReply_NotificationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label x:Name="NotificationValue" Text="{DynamicResource NotificationReply_NotificationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label x:Name="CauseTitle" Text="{DynamicResource NotificationReply_CauseTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label x:Name="CauseValue" Text="{DynamicResource NotificationReply_CauseValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label x:Name="SolutionTitle" Text="{DynamicResource NotificationReply_SolutionTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label x:Name="SolutionValue" Text="{DynamicResource NotificationReply_SolutionValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    <Label x:Name="DescriptionTitle" Text="{DynamicResource NotificationReply_DescriptionTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                    <Label x:Name="DescriptionValue" Text="{DynamicResource NotificationReply_DescriptionValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
                   </StackLayout>
                 </ScrollView>
               </StackLayout>

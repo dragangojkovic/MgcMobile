@@ -76,13 +76,14 @@ namespace MBoxMobile.Views
 
             foreach(NotificationGroupInfo ngi in SubGroupsInfoList)
             {
-                View content = CreateAndPopulateWebViews(ngi);
+                double contentHeight;
+                View content = CreateAndPopulateWebViews(ngi, out contentHeight);
 
                 var asCurrent = new AccordionSource()
                 {
                     HeaderText = string.Format("{0} ({1})", ngi.GroupName, ngi.GroupItemCount), // App.CurrentTranslation["????"],
                     ContentItems = content,
-                    ContentHeight = content.Height
+                    ContentHeight = contentHeight
                 };
                 if (screenWidth <= 360) asCurrent.HeaderFontSize = 14;
                 result.Add(asCurrent);
@@ -91,8 +92,10 @@ namespace MBoxMobile.Views
             return result;
         }
 
-        private View CreateAndPopulateWebViews(NotificationGroupInfo subGroup)
+        private View CreateAndPopulateWebViews(NotificationGroupInfo subGroup, out double viewHeight)
         {
+            viewHeight = 0;
+            const double WV_ROW_Height = 32.75;
             StackLayout result = new StackLayout();
             List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroup.GroupName).ToList();
 
@@ -105,6 +108,7 @@ namespace MBoxMobile.Views
                 wv.WidthRequest = screenWidth - 35;
                 wv.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
                 wv.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
+                wv.Margin = new Thickness(0, 0, 0, 5);
                 wv.Navigating += (s, e) =>
                 {
                     if (e.Url != string.Empty)
@@ -199,6 +203,8 @@ namespace MBoxMobile.Views
 
                 string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeader, htmlContent);
                 wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
+                viewHeight += (data.Count() + 1) * WV_ROW_Height + 10;
+                wv.HeightRequest = viewHeight;
 
                 // 3. add to View
                 result.Children.Add(wv);
