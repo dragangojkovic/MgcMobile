@@ -23,9 +23,11 @@ namespace MBoxMobile.Views
         PersonalFilter personalFilter = null;
         bool personalFilterOn = false;
         int? personalFilterId = null;
+        int? resultedPersonalFilterId = null;
         NotificationFilter notificationFilter = null;
         bool notificationFilterOn = false;
         int? notificationFilterId = null;
+        int? resultedNotificationFilterId = null;
         int timeFilterId = 6566;
 
         List<NotificationModel> AllNotifications = new List<NotificationModel>();
@@ -76,7 +78,7 @@ namespace MBoxMobile.Views
                 App.ShouldReloadNotifications = false;
             }
 
-            string currentTimeFilter = FilterSupport.GetNotificationFilters()[timeFilterId];
+            string currentTimeFilter = FilterSupport.GetNotificationTimeFilters()[timeFilterId];
 
             Resources["Notification_Title"] = App.CurrentTranslation["Notification_Title"];
             Resources["Notification_PersonalFilter"] = App.CurrentTranslation["Notification_PersonalFilter"];
@@ -84,6 +86,7 @@ namespace MBoxMobile.Views
             Resources["Common_FilterOn"] = App.CurrentTranslation["Common_FilterOn"];
             Resources["Common_FilterOff"] = App.CurrentTranslation["Common_FilterOff"];
             Resources["Common_Filter"] = App.CurrentTranslation["Common_Filter"];
+            Resources["Notification_Filter"] = App.CurrentTranslation["Common_Filter"];
             Resources["Common_FilterTime"] = App.CurrentTranslation[currentTimeFilter];
 
             if (!AreTablesPopulated)
@@ -97,6 +100,8 @@ namespace MBoxMobile.Views
                     Resources["PersonalFilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
                     Resources["PersonalFilterIsEnabled"] = true;
                     Resources["Common_Filter"] = personalFilter.FilterList.Where(x => x.FilterID == personalFilter.SelectedFilterID).FirstOrDefault().FilterName;
+                    personalFilterId = personalFilter.SelectedFilterID > 0 ? personalFilter.SelectedFilterID : (int?)null;
+                    resultedPersonalFilterId = personalFilterId;
                 }
                 else
                 {
@@ -113,6 +118,8 @@ namespace MBoxMobile.Views
                     Resources["NotificationFilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
                     Resources["NotificationFilterIsEnabled"] = true;
                     Resources["Notification_Filter"] = notificationFilter.FilterList.Where(x => x.FilterID == notificationFilter.SelectedFilterID).FirstOrDefault().FilterName;
+                    notificationFilterId = notificationFilter.SelectedFilterID > 0 ? notificationFilter.SelectedFilterID : (int?)null;
+                    resultedNotificationFilterId = notificationFilterId;
                 }
                 else
                 {
@@ -131,22 +138,56 @@ namespace MBoxMobile.Views
             }
         }
 
+        private async void DoFiltering()
+        {
+            Resources["IsLoading"] = true;
+            NotificationAccordion.DataSource = await GetAccordionData();
+            NotificationAccordion.DataBind();
+            Resources["IsLoading"] = false;
+        }
+
         public async void PersonalFilterOnClicked(object sender, EventArgs e)
         {
-            Resources["PersonalFilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["PersonalFilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["PersonalFilterIsEnabled"] = true;
-            personalFilterOn = true;
-            await MBoxApiCalls.SetPersonalFilterOnOff(true);
+            if (!personalFilterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetPersonalFilterOnOff(true);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["PersonalFilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["PersonalFilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["PersonalFilterIsEnabled"] = true;
+                    personalFilterOn = true;
+                    resultedPersonalFilterId = personalFilterId;
+
+                    if (resultedPersonalFilterId != null)
+                        DoFiltering();
+                }
+            }                    
         }
 
         public async void PersonalFilterOffClicked(object sender, EventArgs e)
         {
-            Resources["PersonalFilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["PersonalFilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["PersonalFilterIsEnabled"] = false;
-            personalFilterOn = false;
-            await MBoxApiCalls.SetPersonalFilterOnOff(false);
+            if (personalFilterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetPersonalFilterOnOff(false);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["PersonalFilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["PersonalFilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["PersonalFilterIsEnabled"] = false;
+                    personalFilterOn = false;
+                    resultedPersonalFilterId = null;
+
+                    if (personalFilterId != null)
+                        DoFiltering();
+                }
+            }
         }
 
         public async void PersonalFilterClicked(object sender, EventArgs e)
@@ -163,38 +204,63 @@ namespace MBoxMobile.Views
                 items[i] = filters[i].FilterName;
             }
 
-            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterTimeCancel"], null, items);
-            if (action != App.CurrentTranslation["Common_FilterTimeCancel"])
+            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterPersonalDescription"], App.CurrentTranslation["Common_FilterCancel"], null, items);
+            if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
-                PersonalFilterButton.Text = action;
-                personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                bool result = await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
+                if (result)
+                {
+                    PersonalFilterButton.Text = action;
+                    personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                    resultedPersonalFilterId = personalFilterId;
 
-                // do filtering
-                Resources["IsLoading"] = true;
-                NotificationAccordion.DataSource = await GetAccordionData();
-                NotificationAccordion.DataBind();
-                Resources["IsLoading"] = false;
-
-                await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
+                    DoFiltering();
+                }                
             }
         }
 
         public async void NotificationFilterOnClicked(object sender, EventArgs e)
         {
-            Resources["NotificationFilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["NotificationFilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["NotificationFilterIsEnabled"] = true;
-            notificationFilterOn = true;
-            await MBoxApiCalls.SetNotificationFilterOnOff(true);
+            if (!notificationFilterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetNotificationFilterOnOff(true);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["NotificationFilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["NotificationFilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["NotificationFilterIsEnabled"] = true;
+                    notificationFilterOn = true;
+                    resultedNotificationFilterId = notificationFilterId;
+
+                    if (resultedNotificationFilterId != null)
+                        DoFiltering();
+                }
+            }
         }
 
         public async void NotificationFilterOffClicked(object sender, EventArgs e)
         {
-            Resources["NotificationFilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["NotificationFilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["NotificationFilterIsEnabled"] = false;
-            notificationFilterOn = false;
-            await MBoxApiCalls.SetNotificationFilterOnOff(false);
+            if (notificationFilterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetNotificationFilterOnOff(false);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["NotificationFilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["NotificationFilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["NotificationFilterIsEnabled"] = false;
+                    notificationFilterOn = false;
+                    resultedNotificationFilterId = null;
+
+                    if (notificationFilterId != null)
+                        DoFiltering();
+                }
+            }
         }
 
         public async void NotificationFilterClicked(object sender, EventArgs e)
@@ -211,41 +277,36 @@ namespace MBoxMobile.Views
                 items[i] = filters[i].FilterName;
             }
 
-            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterTimeCancel"], null, items);
-            if (action != App.CurrentTranslation["Common_FilterTimeCancel"])
+            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterNotificationDescription"], App.CurrentTranslation["Common_FilterCancel"], null, items);
+            if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
-                NotificationFilterButton.Text = action;
-                notificationFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                bool result = await MBoxApiCalls.SetSelectedNotificationFilter((int)notificationFilterId);
+                if (result)
+                {
+                    NotificationFilterButton.Text = action;
+                    notificationFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                    resultedNotificationFilterId = notificationFilterId;
 
-                // do filtering
-                Resources["IsLoading"] = true;
-                NotificationAccordion.DataSource = await GetAccordionData();
-                NotificationAccordion.DataBind();
-                Resources["IsLoading"] = false;
-
-                await MBoxApiCalls.SetSelectedNotificationFilter((int)notificationFilterId);
+                    DoFiltering();
+                }
             }
         }
 
         public async void FilterTimeClicked(object sender, EventArgs e)
         {
-            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterTimeCancel"], null,
-                App.CurrentTranslation["Common_FilterNotificationLast24Hours"], App.CurrentTranslation["Common_FilterNotificationYesterday"],
-                App.CurrentTranslation["Common_FilterNotificationLast48Hours"], App.CurrentTranslation["Common_FilterNotificationLast72Hours"],
-                App.CurrentTranslation["Common_FilterNotificationLast7Days"], App.CurrentTranslation["Common_FilterNotificationLast14Days"],
-                App.CurrentTranslation["Common_FilterNotificationLast30Days"]);
+            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterCancel"], null,
+                App.CurrentTranslation["Common_FilterTimeLast24Hours"], App.CurrentTranslation["Common_FilterTimeYesterday"],
+                App.CurrentTranslation["Common_FilterTimeLast48Hours"], App.CurrentTranslation["Common_FilterTimeLast72Hours"],
+                App.CurrentTranslation["Common_FilterTimeLast7Days"], App.CurrentTranslation["Common_FilterTimeLast14Days"],
+                App.CurrentTranslation["Common_FilterTimeLast30Days"]);
 
-            if (action != App.CurrentTranslation["Common_FilterTimeCancel"])
+            if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
                 FilterTimeButton.Text = action;
                 string derivedKey = App.CurrentTranslation.FirstOrDefault(x => x.Value == action).Key;
-                timeFilterId = FilterSupport.GetNotificationFilters().FirstOrDefault(x => x.Value == derivedKey).Key;
+                timeFilterId = FilterSupport.GetNotificationTimeFilters().FirstOrDefault(x => x.Value == derivedKey).Key;
 
-                // do filtering
-                Resources["IsLoading"] = true;
-                NotificationAccordion.DataSource = await GetAccordionData();
-                NotificationAccordion.DataBind();
-                Resources["IsLoading"] = false;
+                DoFiltering();
             }
         }
 
@@ -343,7 +404,7 @@ namespace MBoxMobile.Views
             vAllReported = new StackLayout();
             vAllApproved = new StackLayout();
 
-            AllNotifications = await MBoxApiCalls.GetNotifications(personalFilterId, notificationFilterId, timeFilterId);
+            AllNotifications = await MBoxApiCalls.GetNotifications(resultedPersonalFilterId, resultedNotificationFilterId, timeFilterId);
             NonConfirmedNotifications = AllNotifications.Where(x => x.DataType == 1 || x.DataType == 2 || x.DataType == 3).ToList();
             SolutionNotifications = AllNotifications.Where(x => x.DataType == 4).ToList();
             ToBeApprovedNotifications = AllNotifications.Where(x => x.DataType == 5).ToList();

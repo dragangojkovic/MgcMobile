@@ -1096,7 +1096,7 @@ table th {
 <th><div style=""width:60px;"">M#</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th><div style=""width:60px;"">{#TimeToAcknowledge}</div></th>
+<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
 <th style=""white-space:nowrap"">{#Person}</th>
 <th style=""white-space:nowrap"">{#Operator}</th>
 <th style=""white-space:nowrap"">{#Product}</th>
@@ -1584,7 +1584,7 @@ table th {
 	<td class=""center-text"">{#2}</td>
 	<td style=""white-space:nowrap"">{#3}</td>
 	<td style=""white-space:nowrap"">{#4}</td>
-    <td class=""center-text"">{#5}</td>
+    <td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
 	<td style=""white-space:nowrap"">{#8}</td>
@@ -1630,10 +1630,10 @@ table th {
     <td class=""center-text"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td class=""center-text"">{#9}</td>
+    <td style=""white-space:nowrap"">{#9}</td>
 	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
-    <td class=""center-text"">{#12}</td>
+    <td style=""white-space:nowrap"">{#12}</td>
 	<td style=""white-space:nowrap"">{#13}</td>
     <td style=""white-space:nowrap"">{#14}</td>
     <td style=""white-space:nowrap"">{#15}</td>
@@ -1692,7 +1692,7 @@ table th {
     <td style=""white-space:nowrap"">{#9}</td>
 	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
-    <td class=""center-text"">{#12}</td>
+    <td style=""white-space:nowrap"">{#12}</td>
 	<td class=""center-text"">{#13}</td>
     <td style=""white-space:nowrap"">{#14}</td>
     <td style=""white-space:nowrap"">{#15}</td>
@@ -1751,7 +1751,7 @@ table th {
     <td class=""center-text"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td class=""center-text"">{#9}</td>
+    <td style=""white-space:nowrap"">{#9}</td>
 	<td class=""center-text"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
     <td style=""white-space:nowrap"">{#12}</td>
@@ -1807,8 +1807,8 @@ table th {
     <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td class=""center-text"">{#9}</td>
-	<td class=""center-text"">{#10}</td>
+    <td style=""white-space:nowrap"">{#9}</td>
+	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
     <td style=""white-space:nowrap"">{#12}</td>
 	<td style=""white-space:nowrap"">{#13}</td>
@@ -1860,8 +1860,8 @@ table th {
     <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td class=""center-text"">{#9}</td>
-	<td class=""center-text"">{#10}</td>
+    <td style=""white-space:nowrap"">{#9}</td>
+	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
     <td style=""white-space:nowrap"">{#12}</td>
 	<td style=""white-space:nowrap"">{#13}</td>
@@ -1912,11 +1912,11 @@ table th {
     <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td class=""center-text"">{#9}</td>
+    <td style=""white-space:nowrap"">{#9}</td>
 	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
-    <td class=""center-text"">{#12}</td>
-	<td class=""center-text"">{#13}</td>
+    <td style=""white-space:nowrap"">{#12}</td>
+	<td style=""white-space:nowrap"">{#13}</td>
     <td style=""white-space:nowrap"">{#14}</td>
     <td style=""white-space:nowrap"">{#15}</td>
     <td style=""white-space:nowrap"">{#16}</td>
@@ -1973,8 +1973,8 @@ table th {
 	<td style=""white-space:nowrap"">{#4}</td>
     <td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#6}</td>
-	<td class=""center-text"">{#7}</td>
-	<td class=""center-text"">{#8}</td>
+	<td style=""white-space:nowrap"">{#7}</td>
+	<td style=""white-space:nowrap"">{#8}</td>
     <td style=""white-space:nowrap"">{#9}</td>
     <td style=""white-space:nowrap"">{#10}</td>
     <td style=""white-space:nowrap"">{#11}</td>

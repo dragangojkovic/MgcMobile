@@ -22,17 +22,17 @@ namespace MBoxMobile.Helpers
             return dict;
         }
 
-        public static Dictionary<int, string> GetNotificationFilters()
+        public static Dictionary<int, string> GetNotificationTimeFilters()
         {
             Dictionary<int, string> dict = new Dictionary<int, string>();
 
-            dict.Add(6566, "Common_FilterNotificationLast24Hours");
-            dict.Add(6653, "Common_FilterNotificationYesterday");
-            dict.Add(6560, "Common_FilterNotificationLast48Hours");
-            dict.Add(6562, "Common_FilterNotificationLast72Hours");
-            dict.Add(6563, "Common_FilterNotificationLast7Days");
-            dict.Add(6564, "Common_FilterNotificationLast14Days");
-            dict.Add(6565, "Common_FilterNotificationLast30Days");
+            dict.Add(6566, "Common_FilterTimeLast24Hours");
+            dict.Add(6653, "Common_FilterTimeYesterday");
+            dict.Add(6560, "Common_FilterTimeLast48Hours");
+            dict.Add(6562, "Common_FilterTimeLast72Hours");
+            dict.Add(6563, "Common_FilterTimeLast7Days");
+            dict.Add(6564, "Common_FilterTimeLast14Days");
+            dict.Add(6565, "Common_FilterTimeLast30Days");
 
             return dict;
         }

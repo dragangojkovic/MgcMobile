@@ -22,6 +22,7 @@ namespace MBoxMobile.Views
         PersonalFilter personalFilter = null;
         bool filterOn = false;
         int? personalFilterId = null;
+        int? resultedPersonalFilterId = null;
         int timeFilterId = 6274;
         bool workingTimeOnly = false;
 
@@ -90,6 +91,8 @@ namespace MBoxMobile.Views
                     Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
                     Resources["FilterIsEnabled"] = true;
                     Resources["Common_Filter"] = personalFilter.FilterList.Where(x => x.FilterID == personalFilter.SelectedFilterID).FirstOrDefault().FilterName;
+                    personalFilterId = personalFilter.SelectedFilterID > 0 ? personalFilter.SelectedFilterID : (int?)null;
+                    resultedPersonalFilterId = personalFilterId;
                 }
                 else
                 {
@@ -107,6 +110,14 @@ namespace MBoxMobile.Views
             }
         }
 
+        private async void DoFiltering()
+        {
+            Resources["IsLoading"] = true;
+            ElectricityUsageAccordion.DataSource = await GetAccordionData();
+            ElectricityUsageAccordion.DataBind();
+            Resources["IsLoading"] = false;
+        }
+
         public async void ViewDetailClicked(object sender, EventArgs e)
         {
             if ((bool)Resources["IsLoading"] == false)
@@ -115,20 +126,46 @@ namespace MBoxMobile.Views
 
         public async void FilterOnClicked(object sender, EventArgs e)
         {
-            Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["FilterIsEnabled"] = true;
-            filterOn = true;
-            await MBoxApiCalls.SetPersonalFilterOnOff(true);
+            if (!filterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetPersonalFilterOnOff(true);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["FilterIsEnabled"] = true;
+                    filterOn = true;
+                    resultedPersonalFilterId = personalFilterId;
+
+                    if (resultedPersonalFilterId != null)
+                        DoFiltering();
+                }
+            }
         }
 
         public async void FilterOffClicked(object sender, EventArgs e)
         {
-            Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["FilterIsEnabled"] = false;
-            filterOn = false;
-            await MBoxApiCalls.SetPersonalFilterOnOff(false);
+            if (filterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetPersonalFilterOnOff(false);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["FilterIsEnabled"] = false;
+                    filterOn = false;
+                    resultedPersonalFilterId = null;
+
+                    if (personalFilterId != null)
+                        DoFiltering();
+                }
+            }
         }
 
         public async void FilterClicked(object sender, EventArgs e)
@@ -145,42 +182,37 @@ namespace MBoxMobile.Views
                 items[i] = filters[i].FilterName;
             }
 
-            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterTimeCancel"], null, items);
-            if (action != App.CurrentTranslation["Common_FilterTimeCancel"])
+            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterPersonalDescription"], App.CurrentTranslation["Common_FilterCancel"], null, items);
+            if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
-                FilterButton.Text = action;
-                personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                bool result = await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
+                if (result)
+                {
+                    FilterButton.Text = action;
+                    personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                    resultedPersonalFilterId = personalFilterId;
 
-                // do filtering
-                Resources["IsLoading"] = true;
-                ElectricityUsageAccordion.DataSource = await GetAccordionData();
-                ElectricityUsageAccordion.DataBind();
-                Resources["IsLoading"] = false;
-
-                await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
+                    DoFiltering();
+                }
             }
         }
 
         public async void FilterTimeClicked(object sender, EventArgs e)
         {
-            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterTimeCancel"], null,
+            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterCancel"], null,
                 App.CurrentTranslation["Common_FilterTimeToday"], App.CurrentTranslation["Common_FilterTimeLast24Hours"],
                 App.CurrentTranslation["Common_FilterTimeYesterday"], App.CurrentTranslation["Common_FilterTimeCurrentWeek"],
                 App.CurrentTranslation["Common_FilterTimeLastWeek"], App.CurrentTranslation["Common_FilterTimeCurrentMonth"],
                 App.CurrentTranslation["Common_FilterTimeLastMonth"], App.CurrentTranslation["Common_FilterTimeCurrentQuarter"],
                 App.CurrentTranslation["Common_FilterTimeLastQuarter"], App.CurrentTranslation["Common_FilterTimeCurrentYear"]);
 
-            if (action != App.CurrentTranslation["Common_FilterTimeCancel"])
+            if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
                 FilterTimeButton.Text = action;
                 string derivedKey = App.CurrentTranslation.FirstOrDefault(x => x.Value == action).Key;
                 timeFilterId = FilterSupport.GetTimeFilters().FirstOrDefault(x => x.Value == derivedKey).Key;
 
-                // do filtering
-                Resources["IsLoading"] = true;
-                ElectricityUsageAccordion.DataSource = await GetAccordionData();
-                ElectricityUsageAccordion.DataBind();
-                Resources["IsLoading"] = false;
+                DoFiltering();
             }
         }
 
@@ -399,7 +431,7 @@ namespace MBoxMobile.Views
             switch (webViewName)
             {
                 case "wvLocations":
-                    IEnumerable<ElectricityModel> locationList = await MBoxApiCalls.GetElectricityUsagePerLocation(personalFilterId);
+                    IEnumerable<ElectricityModel> locationList = await MBoxApiCalls.GetElectricityUsagePerLocation(resultedPersonalFilterId);
                     string htmlHeaderLocations = HtmlTableSupport.ElectricityUsage_Medium_TableHeader("Location");
                     string htmlContentLocations = HtmlTableSupport.ElectricityUsage_Medium_TableContent(locationList, "Location");
                     string htmlHtmlLocations = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderLocations, htmlContentLocations);
@@ -407,7 +439,7 @@ namespace MBoxMobile.Views
                     wvHeight = (locationList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvAreas":
-                    IEnumerable<ElectricityModel> areasList = await MBoxApiCalls.GetElectricityUsagePerArea(locationId, personalFilterId);
+                    IEnumerable<ElectricityModel> areasList = await MBoxApiCalls.GetElectricityUsagePerArea(locationId, resultedPersonalFilterId);
                     string htmlHeaderAreas = HtmlTableSupport.ElectricityUsage_Medium_TableHeader("Area");
                     string htmlContentAreas = HtmlTableSupport.ElectricityUsage_Medium_TableContent(areasList, "Area");
                     string htmlHtmlAreas = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAreas, htmlContentAreas);
@@ -415,7 +447,7 @@ namespace MBoxMobile.Views
                     wvHeight = (areasList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvDepartments":
-                    IEnumerable<ElectricityModel> departmentsList = await MBoxApiCalls.GetElectricityUsagePerDepartment(locationId, personalFilterId);
+                    IEnumerable<ElectricityModel> departmentsList = await MBoxApiCalls.GetElectricityUsagePerDepartment(locationId, resultedPersonalFilterId);
                     string htmlHeaderDepartments = HtmlTableSupport.ElectricityUsage_Medium_TableHeader("Department");
                     string htmlContentDepartments = HtmlTableSupport.ElectricityUsage_Medium_TableContent(departmentsList, "Department");
                     string htmlHtmlDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDepartments, htmlContentDepartments);
@@ -423,7 +455,7 @@ namespace MBoxMobile.Views
                     wvHeight = (departmentsList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvSubDepartments":
-                    IEnumerable<ElectricityModel> subDepartmentsList = await MBoxApiCalls.GetElectricityUsagePerSubDepartment(locationId, departmentId, personalFilterId);
+                    IEnumerable<ElectricityModel> subDepartmentsList = await MBoxApiCalls.GetElectricityUsagePerSubDepartment(locationId, departmentId, resultedPersonalFilterId);
                     string htmlHeaderSubDepartments = HtmlTableSupport.ElectricityUsage_Medium_TableHeader("SubDepartment");
                     string htmlContentSubDepartments = HtmlTableSupport.ElectricityUsage_Medium_TableContent(subDepartmentsList, "SubDepartment");
                     string htmlHtmlSubDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderSubDepartments, htmlContentSubDepartments);
@@ -431,7 +463,7 @@ namespace MBoxMobile.Views
                     wvHeight = (subDepartmentsList.Count() + 1) * WV_ROW_Height + 7;
                     break;
                 case "wvConsumingPowerEquipments":
-                    IEnumerable<ElectricityMachine> ConsumingPowerEquipmentsList = await MBoxApiCalls.GetElectricityUsagePerWasting(locationId, departmentId, subDepartmentId, personalFilterId);
+                    IEnumerable<ElectricityMachine> ConsumingPowerEquipmentsList = await MBoxApiCalls.GetElectricityUsagePerWasting(locationId, departmentId, subDepartmentId, resultedPersonalFilterId);
                     string htmlHeaderConsumingPowerEquipments = HtmlTableSupport.ElectricityUsage_Large_TableHeader();
                     string htmlContentConsumingPowerEquipments = HtmlTableSupport.ElectricityUsage_Large_TableContent(ConsumingPowerEquipmentsList);
                     string htmlHtmlConsumingPowerEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderConsumingPowerEquipments, htmlContentConsumingPowerEquipments);

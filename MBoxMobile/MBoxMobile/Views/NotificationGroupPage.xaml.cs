@@ -21,7 +21,8 @@ namespace MBoxMobile.Views
         List<NotificationModel> NotificationList;
         List<NotificationGroupInfo> SubGroupsInfoList;
 
-        int selectedNotificationID = -1;
+        int selectedNotificationID = 0;
+        int removedNotificationID = 0;
 
         public NotificationGroupPage(string notificationGroup, List<NotificationModel> notifications)
         {
@@ -34,15 +35,15 @@ namespace MBoxMobile.Views
             Resources["NotificationGroup_Title"] = notificationGroup;
             NotificationList = notifications;
 
-            SubGroupsInfoList = GetSubGroupsInfoList();
-
-            MessagingCenter.Subscribe<string>(this, "NotificationPopupClosedWithAction", async (sender) =>
+            MessagingCenter.Subscribe<string>(this, "NotificationPopupClosedWithAction", (sender) =>
             {
                 App.IsNotificationHandling = false;
                 App.ShouldReloadNotifications = true;
 
-                if (Navigation.ModalStack.Count > 0)
-                    await Navigation.PopModalAsync();
+                AreTablesPopulated = false;
+                removedNotificationID = selectedNotificationID;
+                //if (Navigation.ModalStack.Count > 0)
+                //    await Navigation.PopModalAsync();
             });
         }
 
@@ -55,6 +56,7 @@ namespace MBoxMobile.Views
             if (!AreTablesPopulated)
             {
                 Resources["IsLoading"] = true;
+                SubGroupsInfoList = GetSubGroupsInfoList();
                 NotificationGroupsAccordion.AccordionWidth = screenWidth - 30;
                 NotificationGroupsAccordion.AccordionHeight = 55.0;
                 NotificationGroupsAccordion.DataSource = GetAccordionData();
@@ -227,8 +229,16 @@ namespace MBoxMobile.Views
         private List<NotificationGroupInfo> GetSubGroupsInfoList()
         {
             List<NotificationGroupInfo> descriptions = new List<NotificationGroupInfo>();
-            
-            foreach(NotificationModel nm in NotificationList)
+
+            // remove handled notification, if exists such
+            if (removedNotificationID > 0)
+            {
+                var item = NotificationList.FirstOrDefault(x => x.ID == removedNotificationID);
+                if (item != null) NotificationList.Remove(item);
+                removedNotificationID = 0;
+            }
+
+            foreach (NotificationModel nm in NotificationList)
             {
                 string description = nm.AlterDescription;
                 if (descriptions.Count == 0 || descriptions.Where(d => d.GroupName == description).Count() == 0)

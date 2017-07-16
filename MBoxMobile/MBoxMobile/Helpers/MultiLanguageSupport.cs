@@ -75,8 +75,10 @@ namespace MBoxMobile.Helpers
 
             //Common elements
             translation.Add("Common_Filter", "Select Filter");
-            translation.Add("Common_FilterTimeTitle", "Personal Filter");
-            translation.Add("Common_FilterTimeDescription", "Please choose a personal filter");
+            translation.Add("Common_FilterPersonalTitle", "Personal Filter");
+            translation.Add("Common_FilterPersonalDescription", "Please choose a personal filter");
+            translation.Add("Common_FilterTimeTitle", "Period Filter");
+            translation.Add("Common_FilterTimeDescription", "Please choose a period filter");
             translation.Add("Common_FilterTimeToday", "Today");
             translation.Add("Common_FilterTimeLast24Hours", "Last 24 Hours");
             translation.Add("Common_FilterTimeYesterday", "Yesterday");
@@ -87,14 +89,14 @@ namespace MBoxMobile.Helpers
             translation.Add("Common_FilterTimeCurrentQuarter", "Current Quarter");
             translation.Add("Common_FilterTimeLastQuarter", "Last Quarter");
             translation.Add("Common_FilterTimeCurrentYear", "Current Year");
-            translation.Add("Common_FilterTimeCancel", "Cancel");
-            translation.Add("Common_FilterNotificationLast24Hours", "Last 24 Hours");
-            translation.Add("Common_FilterNotificationYesterday", "Yesterday");
-            translation.Add("Common_FilterNotificationLast48Hours", "Last 48 Hours");
-            translation.Add("Common_FilterNotificationLast72Hours", "Last 72 Hours");
-            translation.Add("Common_FilterNotificationLast7Days", "Last 7 Days");
-            translation.Add("Common_FilterNotificationLast14Days", "Last 14 Days");
-            translation.Add("Common_FilterNotificationLast30Days", "Last 30 Days");
+            translation.Add("Common_FilterCancel", "Cancel");
+            translation.Add("Common_FilterNotificationTitle", "Notification Filter");
+            translation.Add("Common_FilterNotificationDescription", "Please choose a notification filter");
+            translation.Add("Common_FilterTimeLast48Hours", "Last 48 Hours");
+            translation.Add("Common_FilterTimeLast72Hours", "Last 72 Hours");
+            translation.Add("Common_FilterTimeLast7Days", "Last 7 Days");
+            translation.Add("Common_FilterTimeLast14Days", "Last 14 Days");
+            translation.Add("Common_FilterTimeLast30Days", "Last 30 Days");
             translation.Add("Common_FilterFilterOn", "Filter On");
             translation.Add("Common_FilterFilterOff", "Filter Off");
             translation.Add("Common_FilterAll", "All");

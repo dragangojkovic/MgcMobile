@@ -121,22 +121,32 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> SetSelectedPersonalFilter(int filterid)
         {
-            int returnedObj =
-                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetSelectedPersonalFilter?userid={0}&filterid={1}", App.LoggedUser.login.RecordId, filterid));
-            if (returnedObj == 0)
+            IntWrapper returnedObj =
+                await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/SetSelectedPersonalFilter?userid={0}&filterid={1}", App.LoggedUser.login.RecordId, filterid));
+            if (returnedObj == null)
                 return false;
             else
-                return true;
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
                 
         public static async Task<bool> SetPersonalFilterOnOff(bool bOnOff)
         {
-            int returnedObj =
-                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetPersonalFilterOnOff?userid={0}&bOn={1}", App.LoggedUser.login.RecordId, bOnOff));
-            if (returnedObj == 0)
+            IntWrapper returnedObj =
+                await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/SetPersonalFilterOnOff?userid={0}&bOn={1}", App.LoggedUser.login.RecordId, bOnOff));
+            if (returnedObj == null)
                 return false;
             else
-                return true;
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
         #endregion
 
@@ -153,22 +163,32 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> SetSelectedNotificationFilter(int filterid)
         {
-            int returnedObj =
-                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetSelectedNotificationFilter?userid={0}&filterid={1}", App.LoggedUser.login.RecordId, filterid));
-            if (returnedObj == 0)
+            IntWrapper returnedObj =
+                await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/SetSelectedNotificationFilter?userid={0}&filterid={1}", App.LoggedUser.login.RecordId, filterid));
+            if (returnedObj == null)
                 return false;
             else
-                return true;
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         public static async Task<bool> SetNotificationFilterOnOff(bool bOnOff)
         {
-            int returnedObj =
-                await GetObjectOrObjectList<int>("", BaseUri + string.Format("MgcApi.svc/SetNotificationFilterOnOff?userid={0}&bOn={1}", App.LoggedUser.login.RecordId, bOnOff));
-            if (returnedObj == 0)
+            IntWrapper returnedObj =
+                await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/SetNotificationFilterOnOff?userid={0}&bOn={1}", App.LoggedUser.login.RecordId, bOnOff));
+            if (returnedObj == null)
                 return false;
             else
-                return true;
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
         #endregion
 
@@ -471,9 +491,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyElectricity(int notificationID, int? notificationParentID, string description, int electricityCauseID)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyElectricity?userid={0}&notID={1}&notParentID={2}&description={3}&elecCauseID={4}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, description, electricityCauseID));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyElectricity?userid={0}&notID={1}&notParentID={2}&description={3}&elecCauseID={4}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, description, electricityCauseID));
             if (returnedObj == null)
                 return false;
             else
@@ -487,9 +511,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyAcknowledge(int notificationID, int? notificationParentID, string description)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyAcknowledge?userid={0}&notID={1}&notParentID={2}&description={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, description));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyAcknowledge?userid={0}&notID={1}&notParentID={2}&description={3}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, description));
             if (returnedObj == null)
                 return false;
             else
@@ -503,10 +531,14 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyDescription(int notificationID, int? notificationParentID, string description, int? newAlterDescriptionID, int popup)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
             string sNewAlterDescriptionID = (newAlterDescriptionID == null) ? "" : newAlterDescriptionID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyDescription?userid={0}&notID={1}&notParentID={2}&description={3}&newAlterDescID={4}&popup={5}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, description, sNewAlterDescriptionID, popup));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyDescription?userid={0}&notID={1}&notParentID={2}&description={3}&newAlterDescID={4}&popup={5}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, description, sNewAlterDescriptionID, popup));
             if (returnedObj == null)
                 return false;
             else
@@ -520,9 +552,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplySolution(int notificationID, int? notificationParentID, string solution, int alterCauseID)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplySolution?userid={0}&notID={1}&notParentID={2}&solution={3}&alterCauseID={4}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, solution, alterCauseID));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplySolution?userid={0}&notID={1}&notParentID={2}&solution={3}&alterCauseID={4}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, solution, alterCauseID));
             if (returnedObj == null)
                 return false;
             else
@@ -536,9 +572,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyApprove(int notificationID, int? notificationParentID, int datatype)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyApprove?userid={0}&notID={1}&notParentID={2}&datatype={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, datatype));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyApprove?userid={0}&notID={1}&notParentID={2}&datatype={3}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, datatype));
             if (returnedObj == null)
                 return false;
             else
@@ -552,9 +592,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyApproveAndReport(int notificationID, int? notificationParentID, int datatype)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyApproveAndReport?userid={0}&notID={1}&notParentID={2}&datatype={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, datatype));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyApproveAndReport?userid={0}&notID={1}&notParentID={2}&datatype={3}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, datatype));
             if (returnedObj == null)
                 return false;
             else
@@ -568,9 +612,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyNeedReport(int notificationID, int? notificationParentID)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyNeedReport?userid={0}&notID={1}&notParentID={2}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyNeedReport?userid={0}&notID={1}&notParentID={2}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID));
             if (returnedObj == null)
                 return false;
             else
@@ -584,9 +632,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyReport(int notificationID, int? notificationParentID, string report)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyReport?userid={0}&notID={1}&notParentID={2}&report={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, report));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyReport?userid={0}&notID={1}&notParentID={2}&report={3}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, report));
             if (returnedObj == null)
                 return false;
             else
@@ -600,9 +652,13 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyReportAndRemove(int notificationID, int? notificationParentID, string report)
         {
+            string sNotificationID = "";
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
-            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyReportAndRemove?userid={0}&notID={1}&notParentID={2}&report={3}", App.LoggedUser.login.RecordId, notificationID, sNotificationParentID, report));
+            if (notificationID > 0 && sNotificationParentID != "")
+                sNotificationID = "";
+
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/ReplyReportAndRemove?userid={0}&notID={1}&notParentID={2}&report={3}", App.LoggedUser.login.RecordId, sNotificationID, sNotificationParentID, report));
             if (returnedObj == null)
                 return false;
             else

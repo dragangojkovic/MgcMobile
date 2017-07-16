@@ -126,8 +126,11 @@ namespace MBoxMobile.Views
                 int popup = 5;
                 if (NotificationModel.AlterReply == 6553)
                     popup = 4;
+                int? newAlterDescriptionID = null;
+                if (AlterDescriptionID > 0)
+                    newAlterDescriptionID = AlterDescriptionID;
                 Resources["IsLoading"] = true;
-                bool result = await MBoxApiCalls.ReplyDescription(NotificationModel.ID, NotificationModel.ParentID, Description.Text.Trim(), AlterDescriptionID, popup);
+                bool result = await MBoxApiCalls.ReplyDescription(NotificationModel.ID, NotificationModel.ParentID, Description.Text.Trim(), newAlterDescriptionID, popup);
                 Resources["IsLoading"] = false;
 
                 if (result)

@@ -85,7 +85,7 @@ namespace MBoxMobile.Views
                 customer.Platform = "iOS";
             customer.DeviceToken = CrossSettings.Current.GetValueOrDefault("DEVICE_TOKEN", string.Empty);
 
-            //customer.DeviceToken = "TestToken12345"; - for testing
+            customer.DeviceToken = "TestToken12345"; //- for testing
 
             int status = await LoginCustomer.GetLoginStatus(customer);
 

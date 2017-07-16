@@ -22,7 +22,8 @@ namespace MBoxMobile.Views
         PersonalFilter personalFilter = null;
         bool filterOn = false;
         int? personalFilterId = null;
-        
+        int? resultedPersonalFilterId = null;
+
         int auxiliaryEquipmentId = 0;
 
         public AuxiliaryEquipmentPage()
@@ -80,6 +81,8 @@ namespace MBoxMobile.Views
                     Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
                     Resources["FilterIsEnabled"] = true;
                     Resources["Common_Filter"] = personalFilter.FilterList.Where(x => x.FilterID == personalFilter.SelectedFilterID).FirstOrDefault().FilterName;
+                    personalFilterId = personalFilter.SelectedFilterID > 0 ? personalFilter.SelectedFilterID : (int?)null;
+                    resultedPersonalFilterId = personalFilterId;
                 }
                 else
                 {
@@ -94,22 +97,55 @@ namespace MBoxMobile.Views
             }
         }
 
+        private async void DoFiltering()
+        {
+            Resources["IsLoading"] = true;
+            await PopulateWebView();
+            Resources["IsLoading"] = false;
+        }
+
         public async void FilterOnClicked(object sender, EventArgs e)
         {
-            Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["FilterIsEnabled"] = true;
-            filterOn = true;
-            await MBoxApiCalls.SetPersonalFilterOnOff(true);
+            if (!filterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetPersonalFilterOnOff(true);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["FilterIsEnabled"] = true;
+                    filterOn = true;
+                    resultedPersonalFilterId = personalFilterId;
+
+                    if (resultedPersonalFilterId != null)
+                        DoFiltering();
+                }
+            }
         }
 
         public async void FilterOffClicked(object sender, EventArgs e)
         {
-            Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
-            Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
-            Resources["FilterIsEnabled"] = false;
-            filterOn = false;
-            await MBoxApiCalls.SetPersonalFilterOnOff(false);
+            if (filterOn)
+            {
+                Resources["IsLoading"] = true;
+                bool result = await MBoxApiCalls.SetPersonalFilterOnOff(false);
+                Resources["IsLoading"] = false;
+
+                if (result)
+                {
+                    Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
+                    Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
+                    Resources["FilterIsEnabled"] = false;
+                    filterOn = false;
+                    resultedPersonalFilterId = null;
+
+                    if (personalFilterId != null)
+                        DoFiltering();
+                }
+            }
         }
 
         public async void FilterClicked(object sender, EventArgs e)
@@ -126,24 +162,24 @@ namespace MBoxMobile.Views
                 items[i] = filters[i].FilterName;
             }
 
-            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterTimeDescription"], App.CurrentTranslation["Common_FilterTimeCancel"], null, items);
-            if (action != App.CurrentTranslation["Common_FilterTimeCancel"])
+            var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterPersonalDescription"], App.CurrentTranslation["Common_FilterCancel"], null, items);
+            if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
-                FilterButton.Text = action;
-                personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                bool result = await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
+                if (result)
+                {
+                    FilterButton.Text = action;
+                    personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
+                    resultedPersonalFilterId = personalFilterId;
 
-                // do filtering
-                Resources["IsLoading"] = true;
-                await PopulateWebView();
-                Resources["IsLoading"] = false;
-
-                await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
+                    DoFiltering();
+                }
             }
         }
 
         private async Task PopulateWebView()
         {
-            IEnumerable<AuxiliaryType> auxiliaryTypesList = await MBoxApiCalls.GetAuxiliaryTypes(personalFilterId);
+            IEnumerable<AuxiliaryType> auxiliaryTypesList = await MBoxApiCalls.GetAuxiliaryTypes(resultedPersonalFilterId);
             string htmlHeaderAuxiliaryTypes = HtmlTableSupport.AuxiliaryEquipment_Type_TableHeader();
             string htmlContentAuxiliaryTypes = HtmlTableSupport.AuxiliaryEquipment_Type_TableContent(auxiliaryTypesList);
             string htmlHtmlAuxiliaryTypes = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryTypes, htmlContentAuxiliaryTypes);
