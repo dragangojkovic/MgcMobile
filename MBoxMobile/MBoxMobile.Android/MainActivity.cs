@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace MBoxMobile.Droid
 {
-    [Activity(Label = "MBoxMobile", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "M-Box", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         //private FirebaseApp firebaseApp = null;
@@ -40,7 +40,7 @@ namespace MBoxMobile.Droid
                     selectedNotification.RecordDate = payloadObj.record_date;
                     selectedNotification.EquipTypeText = payloadObj.EquipTypeName;
                     selectedNotification.EquipGroup = payloadObj.EquipGroupName;
-                    selectedNotification.Kwh = payloadObj.Kwh != "null" ? (float)double.Parse(payloadObj.Kwh) : (float?)null;
+                    selectedNotification.Kwh = payloadObj.Kwh != "null" && payloadObj.Kwh != "" ? (float)double.Parse(payloadObj.Kwh) : (float?)null;
                     selectedNotification.Operator = payloadObj.Operator;
                     selectedNotification.Product = payloadObj.Product;
                     selectedNotification.AlterDescription = payloadObj.Notification;
@@ -99,16 +99,21 @@ namespace MBoxMobile.Droid
             if (resultCode != ConnectionResult.Success)
             {
                 if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
+                {
                     Log.Info("Main Activity", GoogleApiAvailability.Instance.GetErrorString(resultCode));
+                    App.PlayServiceStatus = GoogleApiAvailability.Instance.GetErrorString(resultCode);
+                }
                 else
                 {
                     Log.Info("Main Activity", "This device is not supported");
+                    App.PlayServiceStatus = "This device is not supported";
                 }
                 return false;
             }
             else
             {
                 Log.Info("Main Activity", "Google Play Services is available.");
+                App.PlayServiceStatus = "Google Play Services is available.";
                 return true;
             }
         }

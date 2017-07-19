@@ -486,7 +486,7 @@ namespace MBoxMobile.Services
             if (returnedObj == null)
                 return new List<SolutionCauseModel>();
             else
-                return returnedObj.SolutionCauseModels;
+                return returnedObj.SolutionCauses;
         }
 
         public static async Task<bool> ReplyElectricity(int notificationID, int? notificationParentID, string description, int electricityCauseID)

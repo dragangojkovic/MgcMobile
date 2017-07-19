@@ -26,10 +26,10 @@ namespace MBoxMobile.Helpers
             {
                 case 1:
                     dict.Add(1, BUTTON_1);
-                    dict.Add(2, BUTTON_2);
-                    dict.Add(3, BUTTON_3);
+                    //dict.Add(2, BUTTON_2);
+                    //dict.Add(3, BUTTON_3);
                     dict.Add(4, BUTTON_4);
-                    dict.Add(5, BUTTON_5);
+                    //dict.Add(5, BUTTON_5);
                     break;
                 case 2: //testing
                     dict.Add(2, BUTTON_2);

@@ -207,11 +207,11 @@ namespace MBoxMobile.Views
             var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterPersonalDescription"], App.CurrentTranslation["Common_FilterCancel"], null, items);
             if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
+                personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
                 bool result = await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
                 if (result)
                 {
                     PersonalFilterButton.Text = action;
-                    personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
                     resultedPersonalFilterId = personalFilterId;
 
                     DoFiltering();
@@ -280,11 +280,11 @@ namespace MBoxMobile.Views
             var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterNotificationDescription"], App.CurrentTranslation["Common_FilterCancel"], null, items);
             if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
+                notificationFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
                 bool result = await MBoxApiCalls.SetSelectedNotificationFilter((int)notificationFilterId);
                 if (result)
                 {
                     NotificationFilterButton.Text = action;
-                    notificationFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
                     resultedNotificationFilterId = notificationFilterId;
 
                     DoFiltering();
@@ -405,11 +405,14 @@ namespace MBoxMobile.Views
             vAllApproved = new StackLayout();
 
             AllNotifications = await MBoxApiCalls.GetNotifications(resultedPersonalFilterId, resultedNotificationFilterId, timeFilterId);
-            NonConfirmedNotifications = AllNotifications.Where(x => x.DataType == 1 || x.DataType == 2 || x.DataType == 3).ToList();
-            SolutionNotifications = AllNotifications.Where(x => x.DataType == 4).ToList();
-            ToBeApprovedNotifications = AllNotifications.Where(x => x.DataType == 5).ToList();
-            AllReportedNotifications = AllNotifications.Where(x => x.NeedReport == true).ToList();
-            AllApprovedNotifications = AllNotifications.Where(x => x.DataType == 7 || x.DataType == 8 || x.DataType == 9 || x.DataType == 10 || x.DataType == 11).ToList();
+            if (AllNotifications != null)
+            {
+                NonConfirmedNotifications = AllNotifications.Where(x => x.DataType == 1 || x.DataType == 2 || x.DataType == 3).ToList();
+                SolutionNotifications = AllNotifications.Where(x => x.DataType == 4).ToList();
+                ToBeApprovedNotifications = AllNotifications.Where(x => x.DataType == 5).ToList();
+                AllReportedNotifications = AllNotifications.Where(x => x.NeedReport == true).ToList();
+                AllApprovedNotifications = AllNotifications.Where(x => x.DataType == 7 || x.DataType == 8 || x.DataType == 9 || x.DataType == 10 || x.DataType == 11).ToList();
+            }
 
             NonConfirmedCount = NonConfirmedNotifications.Count();
             SolutionCount = SolutionNotifications.Count();
@@ -442,7 +445,7 @@ namespace MBoxMobile.Views
                 AddNotificationGroupButtons(ref AllApprovedNotifications, ref vAllApproved);
             }
 
-            AllNotifications.Clear();
+            if (AllNotifications != null) AllNotifications.Clear();
         }
 
         private void AddNotificationGroupButtons(ref List<NotificationModel> notifications, ref StackLayout layout)

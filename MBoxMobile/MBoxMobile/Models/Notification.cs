@@ -111,7 +111,7 @@ namespace MBoxMobile.Models
     public class SolutionCauseModelList
     {
         [JsonProperty("d")]
-        public List<SolutionCauseModel> SolutionCauseModels { get; set; }
+        public List<SolutionCauseModel> SolutionCauses { get; set; }
     }
     #endregion
 

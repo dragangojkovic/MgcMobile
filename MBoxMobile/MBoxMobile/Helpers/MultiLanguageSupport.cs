@@ -170,8 +170,8 @@ namespace MBoxMobile.Helpers
             translation.Add("Uptime_Off", "Off");
             translation.Add("Uptime_Errors", "Errors");
             translation.Add("UptimeDetails_FilterLabel", "Filter:");
-            translation.Add("UptimeDetails_Detail", "Detail");
-            translation.Add("UptimeDetails_AuxiliaryEquipment", "Auxiliary equipment");
+            translation.Add("UptimeDetails_Detail", "Equipment detail");
+            translation.Add("UptimeDetails_AuxiliaryEquipment", "Auxiliary equipment detail");
             translation.Add("UptimeDetails_Name", "Name");
             translation.Add("UptimeDetails_Current", "Current");
             translation.Add("UptimeDetails_OffTime", "Off Time");

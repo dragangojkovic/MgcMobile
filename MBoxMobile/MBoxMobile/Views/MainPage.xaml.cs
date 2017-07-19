@@ -23,9 +23,10 @@ namespace MBoxMobile.Views
             screenWidth = DependencyService.Get<IDisplay>().Width;
             screenHeight = DependencyService.Get<IDisplay>().Height;
 
-            Resources["LogoWidth"] = screenWidth * 0.5;
-            Resources["LogoHeight"] = screenHeight * 0.22;
+            Resources["LogoWidth"] = screenWidth * 0.6;
+            Resources["LogoHeight"] = screenHeight * 0.264;
             Resources["ButtonWidth"] = (screenWidth - 26) / 2.0;
+            Resources["AppPlayServiceStatus"] = App.PlayServiceStatus;
 
             Dictionary<int, string> dictButtons = UserTypesSupport.GetButtons(App.UserType);
 

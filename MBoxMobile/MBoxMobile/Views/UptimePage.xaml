@@ -35,12 +35,12 @@
               </StackLayout>
               <StackLayout Orientation="Horizontal" Margin="0,0,0,5">
                 <ctrl:RoundedButton x:Name="FilterTimeButton" Text="{DynamicResource Common_FilterTime}" Style="{StaticResource FilterStyle}" FontSize="{DynamicResource Filter2FontSize}" Clicked="FilterTimeClicked" WidthRequest="{DynamicResource FilterTimeButtonWidth}" HeightRequest="{DynamicResource FilterTimeButtonHeight}" />
-                <Image Source="{DynamicResource CheckboxSource}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="{DynamicResource CheckboxAreaWidth}" Margin="3, 5, 0, 0">
+                <!--<Image Source="{DynamicResource CheckboxSource}" Aspect="AspectFit" HorizontalOptions="Center" VerticalOptions="Start" WidthRequest="{DynamicResource CheckboxAreaWidth}" Margin="3, 5, 0, 0">
                   <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="WorkingTimeTapped" />
                   </Image.GestureRecognizers>
                 </Image>
-                <Label Text="{DynamicResource Uptime_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource FilterWorkingHoursLabelFontSize}" Margin="-2, 10, 0, 0" />
+                <Label Text="{DynamicResource Uptime_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource FilterWorkingHoursLabelFontSize}" Margin="-2, 10, 0, 0" />-->
               </StackLayout>
             </StackLayout>
             <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>

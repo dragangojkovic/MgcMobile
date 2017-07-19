@@ -25,6 +25,7 @@ namespace MBoxMobile
         public static bool IsNotificationHandling { get; set; }
         public static List<NotificationModel> NotificationsForHandling { get; set; }
         public static bool ShouldReloadNotifications { get; set; }
+        public static string PlayServiceStatus { get; set; }
 
         public App()
         {

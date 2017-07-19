@@ -49,7 +49,7 @@ namespace MBoxMobile.Views
             Resources["Filter2ButtonHeight"] = screenWidth * 0.12;
             Resources["FilterButtonWidth"] = screenWidth * 0.4;
             Resources["FilterButtonHeight"] = screenWidth * 0.12;
-            Resources["FilterTimeButtonWidth"] = screenWidth * 0.38;
+            Resources["FilterTimeButtonWidth"] = screenWidth - 30; // screenWidth * 0.38;
             Resources["FilterTimeButtonHeight"] = screenWidth * 0.1;
             Resources["ContentMinHeight"] = screenHeight - 60.0;
 
@@ -114,7 +114,7 @@ namespace MBoxMobile.Views
         public async void ViewDetailClicked(object sender, EventArgs e)
         {
             if ((bool)Resources["IsLoading"] == false)
-                await Navigation.PushModalAsync(new UptimeDetailsPage(timeFilterId, personalFilterId, locationId, departmentId, subDepartmentId, equipmentId, equipmentGroupId, auxiliaryEquipmentId));
+                await Navigation.PushModalAsync(new UptimeDetailsPage(timeFilterId, resultedPersonalFilterId, locationId, departmentId, subDepartmentId, equipmentId, equipmentGroupId, auxiliaryEquipmentId));
         }
 
         private async void DoFiltering()
@@ -186,11 +186,11 @@ namespace MBoxMobile.Views
             var action = await DisplayActionSheet(App.CurrentTranslation["Common_FilterPersonalDescription"], App.CurrentTranslation["Common_FilterCancel"], null, items);
             if (action != App.CurrentTranslation["Common_FilterCancel"])
             {
+                personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
                 bool result = await MBoxApiCalls.SetSelectedPersonalFilter((int)personalFilterId);
                 if (result)
                 {
                     FilterButton.Text = action;
-                    personalFilterId = filters.Where(x => x.FilterName == action).FirstOrDefault().FilterID;
                     resultedPersonalFilterId = personalFilterId;
 
                     DoFiltering();

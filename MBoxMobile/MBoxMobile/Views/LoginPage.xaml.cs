@@ -20,7 +20,7 @@ namespace MBoxMobile.Views
         double screenWidth = 0.0;
         double screenHeight = 0.0;
         int serverId = -1;
-        bool rememberMe = false;
+        bool rememberMe = true;
 
         LoginPageViewModel loginViewModel = new LoginPageViewModel();
 
@@ -37,7 +37,7 @@ namespace MBoxMobile.Views
             Resources["CheckboxAreaWidth"] = screenWidth * 0.18;
             Resources["IconAreaWidth"] = 32;
 
-            Resources["CheckboxSource"] = "emptycheck.png";
+            Resources["CheckboxSource"] = "fullcheck.png";
             Resources["IsLoading"] = false;
             Resources["IsFormVisible"] = true;
 
@@ -48,7 +48,24 @@ namespace MBoxMobile.Views
                     ServerPicker.Items.Add(pair.Value);
                 }
             }
+
+            ServerPicker.SelectedIndexChanged += (s, e) =>
+            {
+                if (ServerPicker.SelectedIndex > -1)
+                    Username.Focus();
+            };
+
+            Username.Completed += (s, e) =>
+            {
+                Username.Unfocus();
+                Password.Focus();
+            };
         }
+
+        //private void ServerPicker_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         protected override void OnAppearing()
         {
@@ -84,8 +101,8 @@ namespace MBoxMobile.Views
             if (Device.OS == TargetPlatform.iOS)
                 customer.Platform = "iOS";
             customer.DeviceToken = CrossSettings.Current.GetValueOrDefault("DEVICE_TOKEN", string.Empty);
-
-            customer.DeviceToken = "TestToken12345"; //- for testing
+            if (customer.DeviceToken == "")
+                customer.DeviceToken = "default_device_token";
 
             int status = await LoginCustomer.GetLoginStatus(customer);
 

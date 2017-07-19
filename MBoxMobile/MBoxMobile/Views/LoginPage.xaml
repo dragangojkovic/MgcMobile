@@ -47,7 +47,7 @@
           <Label Text="{DynamicResource Login_RememberMe}" Style="{StaticResource LabelMediumStyle}" Margin="-7, 3, 0, 10" />
         </StackLayout>
         <local:RoundedButton Text="{DynamicResource Login_Login}" Style="{StaticResource ButtonBlackStyle}" Clicked="LoginClicked" Margin="0, -5, 0, 10" />
-        <StackLayout HorizontalOptions="Start" Padding="0">
+        <StackLayout HorizontalOptions="Start" Padding="0" IsVisible="False">
           <Label Text="{DynamicResource Login_ForgotPassword}" Style="{StaticResource LabelMediumStyle}" >
             <Label.GestureRecognizers>
               <TapGestureRecognizer Tapped="ForgotTapped"/>
