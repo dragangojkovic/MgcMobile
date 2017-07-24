@@ -10,70 +10,72 @@
       <x:Double x:Key="NotificationContentMinHeight">0</x:Double>
     </ResourceDictionary>
   </ContentPage.Resources>
-  <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
-    <Grid VerticalOptions="FillAndExpand">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*" />
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="{DynamicResource PageContentMinHeight}" />
-        <RowDefinition Height="60" />
-      </Grid.RowDefinitions>
-      <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}" Grid.Row="0" Grid.Column="0">
-        <StackLayout VerticalOptions="FillAndExpand" Padding="5">
-          <Label Text="{DynamicResource NotificationReplyType2_Title}" FontAttributes="Bold" Style="{StaticResource LabelMediumStyle}" TextColor="{StaticResource BlueMedium}" HorizontalOptions="CenterAndExpand" Margin="0, 10, 0, 10" />
-          <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
-          <StackLayout>
-            <Grid VerticalOptions="FillAndExpand">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-              </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="{DynamicResource NotificationContentMinHeight}" />
-                <RowDefinition Height="80" />
-              </Grid.RowDefinitions>
-              <StackLayout VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource BlueMedium}">
-                <ScrollView>
-                  <StackLayout Padding="5">
-                    <Label Text="{DynamicResource NotificationReply_DateTimeTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" Margin="0, 5, 0, 0"/>
-                    <Label Text="{DynamicResource NotificationReply_DateTimeValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_MachineNumberTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_MachineNumberValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_OperatorTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_OperatorValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_ProductTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_ProductValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_LocationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_LocationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_DepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_DepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_SubDepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_SubDepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+  <ScrollView>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}" VerticalOptions="FillAndExpand">
+      <Grid VerticalOptions="FillAndExpand">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="{DynamicResource PageContentMinHeight}" />
+          <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource BlueVeryLight}" Grid.Row="0" Grid.Column="0">
+          <StackLayout VerticalOptions="FillAndExpand" Padding="5">
+            <Label Text="{DynamicResource NotificationReplyType2_Title}" FontAttributes="Bold" Style="{StaticResource LabelMediumStyle}" TextColor="{StaticResource BlueMedium}" HorizontalOptions="CenterAndExpand" Margin="0, 10, 0, 10" />
+            <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
+            <StackLayout>
+              <Grid VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="{DynamicResource NotificationContentMinHeight}" />
+                  <RowDefinition Height="80" />
+                </Grid.RowDefinitions>
+                <StackLayout VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource BlueMedium}">
+                  <!--<ScrollView>-->
+                    <StackLayout Padding="5">
+                      <Label Text="{DynamicResource NotificationReply_DateTimeTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" Margin="0, 5, 0, 0"/>
+                      <Label Text="{DynamicResource NotificationReply_DateTimeValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_MachineNumberTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_MachineNumberValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_OperatorTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_OperatorValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_ProductTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_ProductValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_LocationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_LocationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_DepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_DepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_SubDepartmentTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_SubDepartmentValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
 
-                    <Label Text="{DynamicResource NotificationReply_TypeTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_TypeValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_RemarkTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_RemarkValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                    <Label Text="{DynamicResource NotificationReply_NotificationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
-                    <Label Text="{DynamicResource NotificationReply_NotificationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
-                  </StackLayout>
-                </ScrollView>
-              </StackLayout>
-              <ctrl:RoundedEditor x:Name="Description" Text="{Binding Description}" Placeholder="{DynamicResource NotificationReply_DescriptionPlaceholder}" Grid.Row="1" Grid.Column="0" />
-            </Grid>
+                      <Label Text="{DynamicResource NotificationReply_TypeTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_TypeValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_RemarkTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_RemarkValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                      <Label Text="{DynamicResource NotificationReply_NotificationTitle}" Style="{StaticResource LabelSmallStyle}" HorizontalOptions="StartAndExpand" />
+                      <Label Text="{DynamicResource NotificationReply_NotificationValue}" Style="{StaticResource LabelMediumStyle}" HorizontalOptions="StartAndExpand" Margin="0, -5, 0, 8" />
+                    </StackLayout>
+                  <!--</ScrollView>-->
+                </StackLayout>
+                <ctrl:RoundedEditor x:Name="Description" Text="{Binding Description}" Placeholder="{DynamicResource NotificationReply_DescriptionPlaceholder}" Grid.Row="1" Grid.Column="0" />
+              </Grid>
+            </StackLayout>
           </StackLayout>
         </StackLayout>
-      </StackLayout>
-      <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-        <ctrl:RoundedButton x:Name="SubmitButton" Text="{DynamicResource NotificationReply_SubmitButtonText}" Style="{StaticResource ButtonBlueStyle}" BackgroundColor="Green" Clicked="SubmitClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
-        <ctrl:RoundedButton x:Name="CancelButton" Text="{DynamicResource NotificationReply_CancelButtonText}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
-      </StackLayout>
-      <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
-      <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
-        <StackLayout>
-          <ActivityIndicator BackgroundColor="Transparent" IsRunning="{DynamicResource IsLoading}" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand" Color="#000000" />
+        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+          <ctrl:RoundedButton x:Name="SubmitButton" Text="{DynamicResource NotificationReply_SubmitButtonText}" Style="{StaticResource ButtonBlueStyle}" BackgroundColor="Green" Clicked="SubmitClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
+          <ctrl:RoundedButton x:Name="CancelButton" Text="{DynamicResource NotificationReply_CancelButtonText}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" VerticalOptions="End" WidthRequest="{DynamicResource ButtonWidth}" />
         </StackLayout>
-      </Frame>
-    </Grid>
-  </StackLayout>
+        <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
+        <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">
+          <StackLayout>
+            <ActivityIndicator BackgroundColor="Transparent" IsRunning="{DynamicResource IsLoading}" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand" Color="#000000" />
+          </StackLayout>
+        </Frame>
+      </Grid>
+    </StackLayout>
+  </ScrollView>
 </ContentPage>

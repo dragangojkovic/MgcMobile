@@ -15,8 +15,8 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UptimePage : ContentPage
     {
-        double screenWidth = 0.0;
-        double screenHeight = 0.0;
+        double ScreenWidth = 0.0;
+        double ScreenHeight = 0.0;
         bool AreTablesPopulated = false;
 
         PersonalFilter personalFilter = null;
@@ -39,29 +39,30 @@ namespace MBoxMobile.Views
         {
             InitializeComponent();
 
-            screenWidth = DependencyService.Get<IDisplay>().Width;
-            screenHeight = DependencyService.Get<IDisplay>().Height;
+            ScreenWidth = DependencyService.Get<IDisplay>().Width;
+            ScreenHeight = DependencyService.Get<IDisplay>().Height;
 
-            Resources["CheckboxAreaWidth"] = screenWidth * 0.08;
+            Resources["CheckboxAreaWidth"] = ScreenWidth * 0.08;
             Resources["CheckboxSource"] = "emptyroundcheck50.png";
 
-            Resources["Filter2ButtonWidth"] = screenWidth * 0.25;
-            Resources["Filter2ButtonHeight"] = screenWidth * 0.12;
-            Resources["FilterButtonWidth"] = screenWidth * 0.4;
-            Resources["FilterButtonHeight"] = screenWidth * 0.12;
-            Resources["FilterTimeButtonWidth"] = screenWidth - 30; // screenWidth * 0.38;
-            Resources["FilterTimeButtonHeight"] = screenWidth * 0.1;
-            Resources["ContentMinHeight"] = screenHeight - 60.0;
-
-            Resources["Filter2FontSize"] = FilterSupport.GetFilter2FontSize(screenWidth);
-            Resources["FilterWorkingHoursLabelFontSize"] = FilterSupport.GetWorkingHoursLabelFontSize(screenWidth);
+            SetUpLayout();
 
             //filter default values 
             Resources["FilterOnStyle"] = (Style)Application.Current.Resources["FilterNotSelectedStyle"];
             Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
             Resources["FilterIsEnabled"] = false;
 
-            UptimeAccordion.AccordionWidth = screenWidth - 30;
+            //Resources["LabelFilterLocationsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterSubDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterEquipmentGroupStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterAuxiliaryEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["Uptime_IsClearEnabled"] = false;
+            Resources["Uptime_FilterInfo"] = string.Empty;
+            Resources["Uptime_IsFilterInfoVisible"] = false;
+
+            UptimeAccordion.AccordionWidth = ScreenWidth - 30;
             UptimeAccordion.AccordionHeight = 55.0;
             UptimeAccordion.DataSource = GetEmptyAccordion();
             UptimeAccordion.DataBind();
@@ -80,6 +81,14 @@ namespace MBoxMobile.Views
             Resources["Common_Filter"] = App.CurrentTranslation["Common_Filter"];
             Resources["Common_FilterTime"] = App.CurrentTranslation[currentTimeFilter];
             Resources["Uptime_WorkingTimeOnly"] = App.CurrentTranslation["Common_WorkingTimeOnly"];
+
+            Resources["Uptime_Locations"] = App.CurrentTranslation["Uptime_Locations"];
+            Resources["Uptime_Departments"] = App.CurrentTranslation["Uptime_Departments"];
+            Resources["Uptime_SubDepartments"] = App.CurrentTranslation["Uptime_SubDepartments"];
+            Resources["Uptime_Equipment"] = App.CurrentTranslation["Uptime_Equipment"];
+            Resources["Uptime_EquipmentGroup"] = App.CurrentTranslation["Uptime_EquipmentGroup"];
+            Resources["Uptime_AuxiliaryEquipment"] = App.CurrentTranslation["Uptime_AuxiliaryEquipment"];
+            Resources["Common_FilterClear"] = App.CurrentTranslation["Common_FilterClear"];
 
             if (!AreTablesPopulated)
             {
@@ -101,7 +110,7 @@ namespace MBoxMobile.Views
                     Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
                     Resources["FilterIsEnabled"] = false;
                 }
-                UptimeAccordion.AccordionWidth = screenWidth - 30;
+                UptimeAccordion.AccordionWidth = ScreenWidth - 30;
                 UptimeAccordion.AccordionHeight = 55.0;
                 UptimeAccordion.DataSource = await GetAccordionData();
                 UptimeAccordion.DataBind();
@@ -109,6 +118,21 @@ namespace MBoxMobile.Views
 
                 AreTablesPopulated = true;
             }
+        }
+
+        private void SetUpLayout()
+        {
+            Resources["Filter2ButtonWidth"] = ScreenWidth * 0.25;
+            Resources["Filter2ButtonHeight"] = 42; // screenWidth * 0.12;
+            Resources["FilterButtonWidth"] = ScreenWidth * 0.4;
+            Resources["FilterButtonHeight"] = 42; // screenWidth * 0.12;
+            Resources["FilterTimeButtonWidth"] = ScreenWidth - 30; // screenWidth * 0.38;
+            Resources["FilterTimeButtonHeight"] = 36; // screenWidth * 0.1;
+            Resources["ContentMinHeight"] = ScreenHeight - 60.0;
+            Resources["FilterInfoWidth"] = (ScreenWidth - 30) * 0.5;
+
+            Resources["Filter2FontSize"] = FilterSupport.GetFilter2FontSize(ScreenWidth);
+            Resources["FilterWorkingHoursLabelFontSize"] = FilterSupport.GetWorkingHoursLabelFontSize(ScreenWidth);
         }
 
         public async void ViewDetailClicked(object sender, EventArgs e)
@@ -226,6 +250,28 @@ namespace MBoxMobile.Views
                 Resources["CheckboxSource"] = "emptyroundcheck50.png";
         }
 
+        public void FilterClearClicked(object sender, EventArgs e)
+        {
+            locationId = null;
+            departmentId = null;
+            subDepartmentId = null;
+            equipmentId = null;
+            equipmentGroupId = null;
+            auxiliaryEquipmentId = null;
+
+            //Resources["LabelFilterLocationsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterSubDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterEquipmentGroupStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["LabelFilterAuxiliaryEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
+            //Resources["Uptime_IsClearEnabled"] = false;
+            Resources["Uptime_FilterInfo"] = string.Empty;
+            Resources["Uptime_IsFilterInfoVisible"] = false;
+
+            DoFiltering();
+        }
+
         private List<AccordionSource> GetEmptyAccordion()
         {
             var result = new List<AccordionSource>();
@@ -287,7 +333,7 @@ namespace MBoxMobile.Views
 
             #region Locations
             wvLocations = new WebView();
-            wvLocations.WidthRequest = screenWidth - 35;
+            wvLocations.WidthRequest = ScreenWidth - 35;
             wvLocations.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvLocations.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
                         
@@ -302,7 +348,7 @@ namespace MBoxMobile.Views
 
             #region Departments
             wvDepartments = new WebView();
-            wvDepartments.WidthRequest = screenWidth - 35;
+            wvDepartments.WidthRequest = ScreenWidth - 35;
             wvDepartments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvDepartments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
@@ -317,7 +363,7 @@ namespace MBoxMobile.Views
 
             #region SubDepartments
             wvSubDepartments = new WebView();
-            wvSubDepartments.WidthRequest = screenWidth - 35;
+            wvSubDepartments.WidthRequest = ScreenWidth - 35;
             wvSubDepartments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvSubDepartments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
@@ -332,7 +378,7 @@ namespace MBoxMobile.Views
 
             #region Equipments
             wvEquipments = new WebView();
-            wvEquipments.WidthRequest = screenWidth - 35;
+            wvEquipments.WidthRequest = ScreenWidth - 35;
             wvEquipments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvEquipments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
@@ -347,7 +393,7 @@ namespace MBoxMobile.Views
 
             #region EquipmentGroups
             wvEquipmentGroups = new WebView();
-            wvEquipmentGroups.WidthRequest = screenWidth - 35;
+            wvEquipmentGroups.WidthRequest = ScreenWidth - 35;
             wvEquipmentGroups.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvEquipmentGroups.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
@@ -362,7 +408,7 @@ namespace MBoxMobile.Views
 
             #region AuxiliaryEquipments
             wvAuxiliaryEquipments = new WebView();
-            wvAuxiliaryEquipments.WidthRequest = screenWidth - 35;
+            wvAuxiliaryEquipments.WidthRequest = ScreenWidth - 35;
             wvAuxiliaryEquipments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvAuxiliaryEquipments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
@@ -382,6 +428,14 @@ namespace MBoxMobile.Views
                 if (e.Url != string.Empty)
                 {
                     locationId = int.Parse(e.Url.Split('=').LastOrDefault());
+                    departmentId = null;
+                    subDepartmentId = null;
+                    equipmentId = null;
+                    equipmentGroupId = null;
+                    auxiliaryEquipmentId = null;
+                    //Resources["LabelFilterLocationsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
+                    //Resources["Uptime_IsClearEnabled"] = true;
+                    Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
 
@@ -399,6 +453,13 @@ namespace MBoxMobile.Views
                 if (e.Url != string.Empty)
                 {
                     departmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                    subDepartmentId = null;
+                    equipmentId = null;
+                    equipmentGroupId = null;
+                    auxiliaryEquipmentId = null;
+                    //Resources["LabelFilterDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
+                    //Resources["Uptime_IsClearEnabled"] = true;
+                    Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
 
@@ -415,6 +476,12 @@ namespace MBoxMobile.Views
                 if (e.Url != string.Empty)
                 {
                     subDepartmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                    equipmentId = null;
+                    equipmentGroupId = null;
+                    auxiliaryEquipmentId = null;
+                    //Resources["LabelFilterSubDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
+                    //Resources["Uptime_IsClearEnabled"] = true;
+                    Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
 
@@ -430,6 +497,11 @@ namespace MBoxMobile.Views
                 if (e.Url != string.Empty)
                 {
                     equipmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                    equipmentGroupId = null;
+                    auxiliaryEquipmentId = null;
+                    //Resources["LabelFilterEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
+                    //Resources["Uptime_IsClearEnabled"] = true;
+                    Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
             };
@@ -439,6 +511,10 @@ namespace MBoxMobile.Views
                 if (e.Url != string.Empty)
                 {
                     equipmentGroupId = int.Parse(e.Url.Split('=').LastOrDefault());
+                    auxiliaryEquipmentId = null;
+                    //Resources["LabelFilterEquipmentGroupStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
+                    //Resources["Uptime_IsClearEnabled"] = true;
+                    Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
             };
@@ -448,6 +524,9 @@ namespace MBoxMobile.Views
                 if (e.Url != string.Empty)
                 {
                     auxiliaryEquipmentId = int.Parse(e.Url.Split('=').LastOrDefault());
+                    //Resources["LabelFilterAuxiliaryEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
+                    //Resources["Uptime_IsClearEnabled"] = true;
+                    Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
             };
@@ -458,8 +537,8 @@ namespace MBoxMobile.Views
 
         private async Task<double> PopulateWebView(string webViewName)
         {
-            double wvHeight = 0;
-            const double WV_ROW_Height = 31.75;
+            double wvHeight = -1;
+            const double WV_ROW_Height = 31.0;
 
             switch (webViewName)
             {
@@ -469,7 +548,7 @@ namespace MBoxMobile.Views
                     string htmlContentLocations = HtmlTableSupport.Uptime_Medium_TableContent(locationList);
                     string htmlHtmlLocations = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderLocations, htmlContentLocations);
                     wvLocations.Source = new HtmlWebViewSource { Html = htmlHtmlLocations };
-                    wvHeight = (locationList.Count() + 2) * WV_ROW_Height + 7;
+                    //wvHeight = (locationList.Count() + 2) * WV_ROW_Height + 10;
                     break;
                 case "wvDepartments":
                     IEnumerable<EfficiencyModel> departmentsList = await MBoxApiCalls.GetEfficiencyPerDepartment(locationId, resultedPersonalFilterId, timeFilterId);
@@ -477,7 +556,7 @@ namespace MBoxMobile.Views
                     string htmlContentDepartments = HtmlTableSupport.Uptime_Medium_TableContent(departmentsList);
                     string htmlHtmlDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDepartments, htmlContentDepartments);
                     wvDepartments.Source = new HtmlWebViewSource { Html = htmlHtmlDepartments };
-                    wvHeight = (departmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    //wvHeight = (departmentsList.Count() + 1) * WV_ROW_Height + 10;
                     break;
                 case "wvSubDepartments":
                     IEnumerable<EfficiencyModel> subDepartmentsList = await MBoxApiCalls.GetEfficiencyPerSubDepartment(locationId, departmentId, resultedPersonalFilterId, timeFilterId);
@@ -485,7 +564,7 @@ namespace MBoxMobile.Views
                     string htmlContentSubDepartments = HtmlTableSupport.Uptime_Medium_TableContent(subDepartmentsList);
                     string htmlHtmlSubDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderSubDepartments, htmlContentSubDepartments);
                     wvSubDepartments.Source = new HtmlWebViewSource { Html = htmlHtmlSubDepartments };
-                    wvHeight = (subDepartmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    //wvHeight = (subDepartmentsList.Count() + 1) * WV_ROW_Height + 10;
                     break;
                 case "wvEquipments":
                     IEnumerable<EfficiencyModel> equipmentsList = await MBoxApiCalls.GetEfficiencyPerEquipmentType(locationId, departmentId, subDepartmentId, resultedPersonalFilterId, timeFilterId);
@@ -493,7 +572,7 @@ namespace MBoxMobile.Views
                     string htmlContentEquipments = HtmlTableSupport.Uptime_Medium_TableContent(equipmentsList);
                     string htmlHtmlEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipments, htmlContentEquipments);
                     wvEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlEquipments };
-                    wvHeight = (equipmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    //wvHeight = (equipmentsList.Count() + 1) * WV_ROW_Height + 10;
                     break;
                 case "wvEquipmentGroups":
                     IEnumerable<EfficiencyModel> equipmentGroupsList = await MBoxApiCalls.GetEfficiencyPerEquipmentGroup(locationId, departmentId, subDepartmentId, resultedPersonalFilterId, timeFilterId);
@@ -501,7 +580,7 @@ namespace MBoxMobile.Views
                     string htmlContentEquipmentGroups = HtmlTableSupport.Uptime_Medium_TableContent(equipmentGroupsList);
                     string htmlHtmlEquipmentGroups = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipmentGroups, htmlContentEquipmentGroups);
                     wvEquipmentGroups.Source = new HtmlWebViewSource { Html = htmlHtmlEquipmentGroups };
-                    wvHeight = (equipmentGroupsList.Count() + 1) * WV_ROW_Height + 7;
+                    //wvHeight = (equipmentGroupsList.Count() + 1) * WV_ROW_Height + 10;
                     break;
                 case "wvAuxiliaryEquipments":
                     IEnumerable<EfficiencyModel> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxiliaryType(locationId, departmentId, subDepartmentId, resultedPersonalFilterId, timeFilterId);
@@ -509,11 +588,42 @@ namespace MBoxMobile.Views
                     string htmlContentAuxiliaryEquipments = HtmlTableSupport.Uptime_Small_TableContent(auxiliaryEquipmentsList);
                     string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlContentAuxiliaryEquipments);
                     wvAuxiliaryEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlAuxiliaryEquipments };
-                    wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 7;
+                    //wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 10;
                     break;
             }
 
             return wvHeight;
+        }
+
+        private string SetFilterInfoText()
+        {
+            Resources["Uptime_IsFilterInfoVisible"] = true;
+            string text = App.CurrentTranslation["Common_FilteredBy"];
+
+            if (locationId != null && locationId > 0) text += App.CurrentTranslation["Uptime_Locations"] + ", ";
+            if (departmentId != null && departmentId > 0) text += App.CurrentTranslation["Uptime_Departments"] + ", ";
+            if (subDepartmentId != null && subDepartmentId > 0) text += App.CurrentTranslation["Uptime_SubDepartments"] + ", ";
+            if (equipmentId != null && equipmentId > 0) text += App.CurrentTranslation["Uptime_Equipment"] + ", ";
+            if (equipmentGroupId != null && equipmentGroupId > 0) text += App.CurrentTranslation["Uptime_EquipmentGroup"] + ", ";
+            if (auxiliaryEquipmentId != null && auxiliaryEquipmentId > 0) text += App.CurrentTranslation["Uptime_AuxiliaryEquipment"] + ", ";
+            if (text.EndsWith(", ")) text = text.Substring(0, text.Length - 2);
+
+            return text;
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (ScreenWidth != width || ScreenHeight != height)
+            {
+                ScreenWidth = width;
+                ScreenHeight = height;
+                SetUpLayout();
+
+                UptimeAccordion.AccordionWidth = width - 30;
+                UptimeAccordion.UpdateLayout();
+            }
         }
     }
 }

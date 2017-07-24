@@ -39,6 +39,21 @@
         <Setter Property="FontSize" Value="Small"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
       </Style>
+      <Style x:Key="LabelSmallStyleBlack" TargetType="Label">
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
+      <Style x:Key="LabelSmallStyleGray" TargetType="Label">
+        <Setter Property="TextColor" Value="Gray"/>
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
+      <Style x:Key="LabelSmallStyleGrayDark" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource GrayDark}"/>
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyOpenSans}" />
+      </Style>
       <Style x:Key="LabelFilterStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource BlueMedium}"/>
         <Setter Property="FontSize" Value="16"/>

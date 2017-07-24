@@ -16,8 +16,8 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationPage : ContentPage
     {
-        double screenWidth = 0.0;
-        double screenHeight = 0.0;
+        double ScreenWidth = 0.0;
+        double ScreenHeight = 0.0;
         bool AreTablesPopulated = false;
 
         PersonalFilter personalFilter = null;
@@ -48,21 +48,12 @@ namespace MBoxMobile.Views
         {
             InitializeComponent();
 
-            screenWidth = DependencyService.Get<IDisplay>().Width;
-            screenHeight = DependencyService.Get<IDisplay>().Height;
+            ScreenWidth = DependencyService.Get<IDisplay>().Width;
+            ScreenHeight = DependencyService.Get<IDisplay>().Height;
 
-            Resources["Filter2ButtonWidth"] = screenWidth * 0.14;
-            Resources["Filter2ButtonHeight"] = screenWidth * 0.09;
-            Resources["PersonalFilterButtonWidth"] = screenWidth * 0.4;
-            Resources["NotificationFilterButtonWidth"] = screenWidth * 0.37;
-            Resources["FilterButtonHeight"] = screenWidth * 0.09;
-            Resources["FilterTimeButtonWidth"] = screenWidth - 30;
-            Resources["FilterTimeButtonHeight"] = screenWidth * 0.1;
-            Resources["ContentMinHeight"] = screenHeight; // - 60.0;
+            SetUpLayout();
 
-            Resources["Filter2FontSize"] = FilterSupport.GetFilter2FontSizeNotificationPage(screenWidth);
-
-            NotificationAccordion.AccordionWidth = screenWidth - 30;
+            NotificationAccordion.AccordionWidth = ScreenWidth - 30;
             NotificationAccordion.AccordionHeight = 55.0;
             NotificationAccordion.DataSource = GetEmptyAccordion();
             NotificationAccordion.DataBind();
@@ -128,7 +119,7 @@ namespace MBoxMobile.Views
                     Resources["NotificationFilterIsEnabled"] = false;
                 }
 
-                NotificationAccordion.AccordionWidth = screenWidth - 30;
+                NotificationAccordion.AccordionWidth = ScreenWidth - 30;
                 NotificationAccordion.AccordionHeight = 55.0;
                 NotificationAccordion.DataSource = await GetAccordionData();
                 NotificationAccordion.DataBind();
@@ -136,6 +127,20 @@ namespace MBoxMobile.Views
 
                 AreTablesPopulated = true;
             }
+        }
+
+        private void SetUpLayout()
+        {
+            Resources["Filter2ButtonWidth"] = ScreenWidth * 0.14;
+            Resources["Filter2ButtonHeight"] = 34;
+            Resources["PersonalFilterButtonWidth"] = ScreenWidth * 0.4;
+            Resources["NotificationFilterButtonWidth"] = ScreenWidth * 0.37;
+            Resources["FilterButtonHeight"] = 34;
+            Resources["FilterTimeButtonWidth"] = ScreenWidth - 30;
+            Resources["FilterTimeButtonHeight"] = 36;
+            Resources["ContentMinHeight"] = ScreenHeight;
+
+            Resources["Filter2FontSize"] = FilterSupport.GetFilter2FontSizeNotificationPage(ScreenWidth);
         }
 
         private async void DoFiltering()
@@ -456,9 +461,31 @@ namespace MBoxMobile.Views
                 int subGroupNotifCount = notifications.Where(x => x.AlterTypeText == subGroupName).Count();
                 if (subGroupNotifCount > 0)
                 {
-                    NotificationGroupButton ngButton = new NotificationGroupButton(subGroupName, subGroupNotifCount, screenWidth, 60);
+                    NotificationGroupButton ngButton = new NotificationGroupButton(subGroupName, subGroupNotifCount, ScreenWidth, 60);
                     ngButton.RelatedNotifications = notifications.Where(x => x.AlterTypeText == subGroupName).ToList();
                     layout.Children.Add(ngButton);
+                }
+            }
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (ScreenWidth != width || ScreenHeight != height)
+            {
+                ScreenWidth = width;
+                ScreenHeight = height;
+                SetUpLayout();
+
+                NotificationAccordion.AccordionWidth = width - 30;
+                NotificationAccordion.UpdateLayout();
+
+                foreach (var control in vNonConfirmed.Children)
+                {
+                    NotificationGroupButton ngButton = control as NotificationGroupButton;
+                    ngButton.NotificationGroupButtonWidth = ScreenWidth;
+                    ngButton.UpdateLayout();
                 }
             }
         }

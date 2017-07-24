@@ -1,7 +1,6 @@
 ﻿using MBoxMobile.CustomControls;
 using MBoxMobile.Helpers;
 using MBoxMobile.Interfaces;
-using MBoxMobile.Models;
 using System;
 using System.Collections.Generic;
 
@@ -26,7 +25,28 @@ namespace MBoxMobile.Views
             Resources["LogoWidth"] = screenWidth * 0.6;
             Resources["LogoHeight"] = screenHeight * 0.264;
             Resources["ButtonWidth"] = (screenWidth - 26) / 2.0;
-            Resources["AppPlayServiceStatus"] = App.PlayServiceStatus;
+                        
+            MessagingCenter.Subscribe<string>(this, "NotificationPopupClosed", (sender) => {
+                App.IsNotificationHandling = false;
+                App.NotificationsForHandling.Remove(App.NotificationsForHandling[0]);
+
+                HandleReceivedNotifications();
+            });
+
+            MessagingCenter.Subscribe<string>(this, "ErrorOccured", async (sender) =>
+            {
+                if (!App.NoConnectivityMsgShown)
+                {
+                    App.NoConnectivityMsgShown = true;
+                    await DisplayAlert("M-Box", App.LastErrorMessage, App.CurrentTranslation["Common_OK"]);
+                    App.NoConnectivityMsgShown = false;
+                }
+            });
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
             Dictionary<int, string> dictButtons = UserTypesSupport.GetButtons(App.UserType);
 
@@ -66,28 +86,6 @@ namespace MBoxMobile.Views
                 GridButtons.Children.Add(b, left, rowOrdinal);
                 dictOrdinal++;
             }
-                        
-            MessagingCenter.Subscribe<string>(this, "NotificationPopupClosed", (sender) => {
-                App.IsNotificationHandling = false;
-                App.NotificationsForHandling.Remove(App.NotificationsForHandling[0]);
-
-                HandleReceivedNotifications();
-            });
-
-            MessagingCenter.Subscribe<string>(this, "ErrorOccured", async (sender) =>
-            {
-                if (!App.NoConnectivityMsgShown)
-                {
-                    App.NoConnectivityMsgShown = true;
-                    await DisplayAlert("MBox", App.LastErrorMessage, App.CurrentTranslation["Common_OK"]);
-                    App.NoConnectivityMsgShown = false;
-                }
-            });
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
 
             HandleReceivedNotifications();
         }

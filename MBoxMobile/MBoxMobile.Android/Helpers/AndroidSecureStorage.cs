@@ -4,7 +4,7 @@ using MBoxMobile.Droid.Helpers;
 using Xamarin.Auth;
 using Xamarin.Forms;
 
-[assembly: Xamarin.Forms.Dependency(typeof(AndroidSecureStorage))]
+[assembly: Dependency(typeof(AndroidSecureStorage))]
 namespace MBoxMobile.Droid.Helpers
 {
     public class AndroidSecureStorage : ISecureStorage

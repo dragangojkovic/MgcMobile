@@ -1,5 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using MBoxMobile.Interfaces;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace MBoxMobile.Models
 {
@@ -7,18 +10,58 @@ namespace MBoxMobile.Models
     {
         public int ID { get; set; }
         public string RecordDate { get; set; }
+        public string RecordDateLocal
+        {
+            get
+            {
+                DateTime dt = Convert.ToDateTime(RecordDate);
+                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+            }
+        }
         public string MachineNumber { get; set; }
         public string AlterDescription { get; set; }
         public string Description { get; set; }
         public bool NeedReport { get; set; }
         public string DesDate { get; set; }
+        public string DesDateLocal
+        {
+            get
+            {
+                DateTime dt = Convert.ToDateTime(DesDate);
+                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+            }
+        }
         public string ApproveDate { get; set; }
+        public string ApproveDateLocal
+        {
+            get
+            {
+                DateTime dt = Convert.ToDateTime(ApproveDate);
+                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+            }
+        }
         public string Report { get; set; }
         public bool Acknowledge { get; set; }
         public int? AlterCauseID { get; set; }
         public int Popup { get; set; }
         public string SolutionDate { get; set; }
+        public string SolutionDateLocal
+        {
+            get
+            {
+                DateTime dt = Convert.ToDateTime(SolutionDate);
+                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+            }
+        }
         public string ReportDate { get; set; }
+        public string ReportDateLocal
+        {
+            get
+            {
+                DateTime dt = Convert.ToDateTime(ReportDate);
+                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+            }
+        }
         public string SoluPerson { get; set; }
         public string DesPerson { get; set; }
         public int LocalTimeZone { get; set; }

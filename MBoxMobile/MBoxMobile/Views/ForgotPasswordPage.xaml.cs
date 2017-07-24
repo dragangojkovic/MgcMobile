@@ -32,7 +32,7 @@ namespace MBoxMobile.Views
 
         public async void SendClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("MBox", "Not implemented yet!", "OK");
+            await DisplayAlert("M-Box", "Not implemented yet!", "OK");
         }
     }
 }

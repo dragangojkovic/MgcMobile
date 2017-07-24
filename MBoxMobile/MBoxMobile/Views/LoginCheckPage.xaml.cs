@@ -2,7 +2,6 @@
 using MBoxMobile.Interfaces;
 using MBoxMobile.Models;
 using Plugin.Settings;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -47,7 +46,7 @@ namespace MBoxMobile.Views
             if (customer.DeviceToken == "")
                 customer.DeviceToken = "default_device_token";
 
-                int status = await LoginCustomer.GetLoginStatus(customer);
+            int status = await LoginCustomer.GetLoginStatus(customer);
 
             if (status == 10000)
             {

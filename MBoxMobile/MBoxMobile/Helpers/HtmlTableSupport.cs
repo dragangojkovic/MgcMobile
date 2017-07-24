@@ -11,6 +11,7 @@ namespace MBoxMobile.Helpers
 <!DOCTYPE html>
 <html>
 <head>
+<meta name='viewport' content='width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0;'>
 <script type='text/javascript'>
     onload = function()
     {
@@ -1478,7 +1479,7 @@ table th {
 	<td style=""white-space:nowrap"">{#9}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.AlterDescription);
                     float kwh = el.Kwh != null ? (float)el.Kwh : 0;
@@ -1517,7 +1518,7 @@ table th {
 	<td style=""white-space:nowrap"">{#9}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.AlterDescription);
                     template = template.Replace("{#4}", el.Acknowledge ? "checked" : "");
@@ -1554,7 +1555,7 @@ table th {
 	<td style=""white-space:nowrap"">{#9}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.AlterDescription);
                     template = template.Replace("{#5}", el.Operator);
@@ -1593,11 +1594,11 @@ table th {
     <td style=""white-space:nowrap"">{#11}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.AlterDescription);
                     template = template.Replace("{#4}", el.Description);
-                    template = template.Replace("{#5}", el.DesDate);
+                    template = template.Replace("{#5}", el.DesDateLocal);
                     template = template.Replace("{#6}", el.DesPerson);
                     template = template.Replace("{#7}", el.Operator);
                     template = template.Replace("{#8}", el.Product);
@@ -1643,7 +1644,7 @@ table th {
     <td style=""white-space:nowrap"">{#19}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.Approved ? "checked" : "");
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
@@ -1652,10 +1653,10 @@ table th {
                     template = template.Replace("{#6}", kwh != 0 ? kwh.ToString("0.000") : "");
                     template = template.Replace("{#7}", el.ElecCause);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDate);
+                    template = template.Replace("{#9}", el.DesDateLocal);
                     template = template.Replace("{#10}", el.AlterCause);
                     template = template.Replace("{#11}", el.Solution);
-                    template = template.Replace("{#12}", el.SolutionDate);
+                    template = template.Replace("{#12}", el.SolutionDateLocal);
                     template = template.Replace("{#13}", el.DesPerson);
                     template = template.Replace("{#14}", el.SoluPerson);
                     template = template.Replace("{#15}", el.Operator);
@@ -1704,7 +1705,7 @@ table th {
     <td style=""white-space:nowrap"">{#21}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.Approved ? "checked" : "");
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
@@ -1716,8 +1717,8 @@ table th {
                     template = template.Replace("{#9}", el.AlterCause);
                     template = template.Replace("{#10}", el.Solution);
                     template = template.Replace("{#11}", el.Report);
-                    template = template.Replace("{#12}", el.DesDate);
-                    template = template.Replace("{#13}", el.SolutionDate);
+                    template = template.Replace("{#12}", el.DesDateLocal);
+                    template = template.Replace("{#13}", el.SolutionDateLocal);
                     template = template.Replace("{#14}", el.DesPerson);
                     template = template.Replace("{#15}", el.SoluPerson);
                     template = template.Replace("{#16}", el.ReportPerson);
@@ -1764,7 +1765,7 @@ table th {
     <td style=""white-space:nowrap"">{#19}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#5}", el.AlterDescription);
@@ -1772,8 +1773,8 @@ table th {
                     template = template.Replace("{#6}", kwh != 0 ? kwh.ToString("0.000") : "");
                     template = template.Replace("{#7}", el.ElecCause);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDate);
-                    template = template.Replace("{#10}", el.ApproveDate);
+                    template = template.Replace("{#9}", el.DesDateLocal);
+                    template = template.Replace("{#10}", el.ApproveDateLocal);
                     template = template.Replace("{#11}", el.Report);
                     template = template.Replace("{#12}", el.DesPerson);
                     template = template.Replace("{#13}", el.ApprovePerson);
@@ -1820,14 +1821,14 @@ table th {
     <td style=""white-space:nowrap"">{#19}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.Acknowledge ? "checked" : "");
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#5}", el.AlterDescription);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDate);
-                    template = template.Replace("{#10}", el.ApproveDate);
+                    template = template.Replace("{#9}", el.DesDateLocal);
+                    template = template.Replace("{#10}", el.ApproveDateLocal);
                     template = template.Replace("{#11}", el.Report);
                     template = template.Replace("{#12}", el.DesPerson);
                     template = template.Replace("{#13}", el.ApprovePerson);
@@ -1873,13 +1874,13 @@ table th {
     <td style=""white-space:nowrap"">{#19}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#5}", el.AlterDescription);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDate);
-                    template = template.Replace("{#10}", el.ApproveDate);
+                    template = template.Replace("{#9}", el.DesDateLocal);
+                    template = template.Replace("{#10}", el.ApproveDateLocal);
                     template = template.Replace("{#11}", el.Report);
                     template = template.Replace("{#12}", el.DesPerson);
                     template = template.Replace("{#13}", el.ApprovePerson);
@@ -1929,16 +1930,16 @@ table th {
     <td style=""white-space:nowrap"">{#23}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#5}", el.AlterDescription);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDate);
+                    template = template.Replace("{#9}", el.DesDateLocal);
                     template = template.Replace("{#10}", el.AlterCause);
                     template = template.Replace("{#11}", el.Solution);
-                    template = template.Replace("{#12}", el.SolutionDate);
-                    template = template.Replace("{#13}", el.ApproveDate);
+                    template = template.Replace("{#12}", el.SolutionDateLocal);
+                    template = template.Replace("{#13}", el.ApproveDateLocal);
                     template = template.Replace("{#14}", el.Report);
                     template = template.Replace("{#15}", el.DesPerson);
                     template = template.Replace("{#16}", el.SoluPerson);
@@ -1986,14 +1987,14 @@ table th {
     <td style=""white-space:nowrap"">{#17}</td>
 </tr>";
                     template = template.Replace("{#0}", el.ID.ToString());
-                    template = template.Replace("{#1}", el.RecordDate);
+                    template = template.Replace("{#1}", el.RecordDateLocal);
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#4}", el.AlterDescription);
                     template = template.Replace("{#5}", el.AlterCause);
                     template = template.Replace("{#6}", el.Solution);
-                    template = template.Replace("{#7}", el.SolutionDate);
-                    template = template.Replace("{#8}", el.ApproveDate);
+                    template = template.Replace("{#7}", el.SolutionDateLocal);
+                    template = template.Replace("{#8}", el.ApproveDateLocal);
                     template = template.Replace("{#9}", el.Report);
                     template = template.Replace("{#10}", el.SoluPerson);
                     template = template.Replace("{#11}", el.ApprovePerson);

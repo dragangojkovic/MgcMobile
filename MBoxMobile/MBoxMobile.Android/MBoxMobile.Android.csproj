@@ -277,8 +277,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\CloseApplication.cs" />
+    <Compile Include="Helpers\DeviceDateTimeFormat.cs" />
     <Compile Include="Helpers\Display.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\Version.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="PushNotifications\InstanceIdListenerService.cs" />
@@ -390,6 +392,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\fullroundcheck50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\about50.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

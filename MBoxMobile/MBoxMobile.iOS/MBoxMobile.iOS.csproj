@@ -90,9 +90,11 @@
   <ItemGroup>
     <Compile Include="CustomRenderers\RoundedButtonRenderer.cs" />
     <Compile Include="Helpers\CloseApplication.cs" />
+    <Compile Include="Helpers\DeviceTimeFormat.cs" />
     <Compile Include="Helpers\Display.cs" />
     <Compile Include="Helpers\IosSecureStorage.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\Version.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="app.config" />

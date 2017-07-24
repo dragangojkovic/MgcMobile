@@ -14,8 +14,8 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationGroupPage : ContentPage
     {
-        double screenWidth = 0.0;
-        double screenHeight = 0.0;
+        double ScreenWidth = 0.0;
+        double ScreenHeight = 0.0;
         bool AreTablesPopulated = false;
 
         List<NotificationModel> NotificationList;
@@ -28,10 +28,11 @@ namespace MBoxMobile.Views
         {
             InitializeComponent();
 
-            screenWidth = DependencyService.Get<IDisplay>().Width;
-            screenHeight = DependencyService.Get<IDisplay>().Height;
+            ScreenWidth = DependencyService.Get<IDisplay>().Width;
+            ScreenHeight = DependencyService.Get<IDisplay>().Height;
 
-            Resources["ContentMinHeight"] = screenHeight - 60.0;
+            SetUpLayout();
+
             Resources["NotificationGroup_Title"] = notificationGroup;
             NotificationList = notifications;
 
@@ -57,7 +58,7 @@ namespace MBoxMobile.Views
             {
                 Resources["IsLoading"] = true;
                 SubGroupsInfoList = GetSubGroupsInfoList();
-                NotificationGroupsAccordion.AccordionWidth = screenWidth - 30;
+                NotificationGroupsAccordion.AccordionWidth = ScreenWidth - 30;
                 NotificationGroupsAccordion.AccordionHeight = 55.0;
                 NotificationGroupsAccordion.DataSource = GetAccordionData();
                 NotificationGroupsAccordion.DataBind();
@@ -65,6 +66,11 @@ namespace MBoxMobile.Views
 
                 AreTablesPopulated = true;
             }
+        }
+
+        private void SetUpLayout()
+        {
+            Resources["ContentMinHeight"] = ScreenHeight - 60.0;
         }
 
         public async void CloseClicked(object sender, EventArgs e)
@@ -85,9 +91,9 @@ namespace MBoxMobile.Views
                 {
                     HeaderText = string.Format("{0} ({1})", ngi.GroupName, ngi.GroupItemCount), // App.CurrentTranslation["????"],
                     ContentItems = content,
-                    ContentHeight = contentHeight + 20
+                    ContentHeight = -1 // contentHeight + 20
                 };
-                if (screenWidth <= 360) asCurrent.HeaderFontSize = 14;
+                if (ScreenWidth <= 360) asCurrent.HeaderFontSize = 14;
                 result.Add(asCurrent);
             }
 
@@ -103,7 +109,7 @@ namespace MBoxMobile.Views
 
             // 0. create new table (vw)
             WebView wv = new WebView();
-            wv.WidthRequest = screenWidth - 35;
+            wv.WidthRequest = ScreenWidth - 35;
             wv.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wv.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wv.Margin = new Thickness(0, 0, 0, 5);
@@ -249,6 +255,21 @@ namespace MBoxMobile.Views
             }
             
             return descriptions;
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (ScreenWidth != width || ScreenHeight != height)
+            {
+                ScreenWidth = width;
+                ScreenHeight = height;
+                SetUpLayout();
+
+                NotificationGroupsAccordion.AccordionWidth = width - 30;
+                NotificationGroupsAccordion.UpdateLayout();
+            }
         }
     }
 }

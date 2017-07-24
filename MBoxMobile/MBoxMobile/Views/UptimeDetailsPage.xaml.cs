@@ -16,8 +16,8 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UptimeDetailsPage : ContentPage
     {
-        double screenWidth = 0.0;
-        double screenHeight = 0.0;
+        double ScreenWidth = 0.0;
+        double ScreenHeight = 0.0;
         bool AreTablesPopulated = false;
 
         int periodId;
@@ -45,15 +45,10 @@ namespace MBoxMobile.Views
             equipmentGroupId = equipgroupid;
             auxiliaryTypeId = auxid;
 
-            screenWidth = DependencyService.Get<IDisplay>().Width;
-            screenHeight = DependencyService.Get<IDisplay>().Height;
+            ScreenWidth = DependencyService.Get<IDisplay>().Width;
+            ScreenHeight = DependencyService.Get<IDisplay>().Height;
 
-            Resources["Filter4ButtonWidth"] = screenWidth * 0.18;
-            Resources["Filter4ButtonHeight"] = screenWidth * 0.10;
-            Resources["ContentMinHeight"] = screenHeight - 60.0;
-
-            Resources["FilterLabelMargin"] = new Thickness(5, FilterSupport.GetFilterLabelMarginTop(screenWidth), 0, 0);
-            Resources["Filter4FontSize"] = FilterSupport.GetFilter4FontSize(screenWidth);
+            SetUpLayout();
 
             switch (mode)
             {
@@ -83,19 +78,10 @@ namespace MBoxMobile.Views
                     break;
             }
             
-            UptimeDetailsAccordion.AccordionWidth = screenWidth - 30;
+            UptimeDetailsAccordion.AccordionWidth = ScreenWidth - 30;
             UptimeDetailsAccordion.AccordionHeight = 55.0;
             UptimeDetailsAccordion.DataSource = GetEmptyAccordion();
             UptimeDetailsAccordion.DataBind();
-
-            wvDetails.Navigating += (s, e) =>
-            {
-                e.Cancel = true;
-            };
-            wvAuxiliaryEquipments.Navigating += (s, e) =>
-            {
-                e.Cancel = true;
-            };
         }
 
         protected async override void OnAppearing()
@@ -114,7 +100,7 @@ namespace MBoxMobile.Views
             if (!AreTablesPopulated)
             {
                 Resources["IsLoading"] = true;
-                UptimeDetailsAccordion.AccordionWidth = screenWidth - 30;
+                UptimeDetailsAccordion.AccordionWidth = ScreenWidth - 30;
                 UptimeDetailsAccordion.AccordionHeight = 55.0;
                 UptimeDetailsAccordion.DataSource = await GetAccordionData();
                 UptimeDetailsAccordion.DataBind();
@@ -122,6 +108,31 @@ namespace MBoxMobile.Views
 
                 AreTablesPopulated = true;
             }
+        }
+
+        private void SetUpLayout()
+        {
+            Resources["Filter4ButtonWidth"] = ScreenWidth * 0.18;
+            Resources["Filter4ButtonHeight"] = 36;
+            Resources["ContentMinHeight"] = ScreenHeight - 60.0;
+
+            Resources["FilterLabelMargin"] = new Thickness(5, FilterSupport.GetFilterLabelMarginTop(ScreenWidth), 0, 0);
+            Resources["Filter4FontSize"] = FilterSupport.GetFilter4FontSize(ScreenWidth);
+        }
+
+        private void InitializeWebViews()
+        {
+            wvDetails = new WebView();
+            wvAuxiliaryEquipments = new WebView();
+
+            wvDetails.Navigating += (s, e) =>
+            {
+                e.Cancel = true;
+            };
+            wvAuxiliaryEquipments.Navigating += (s, e) =>
+            {
+                e.Cancel = true;
+            };
         }
 
         public async void DetailCloseClicked(object sender, EventArgs e)
@@ -185,9 +196,6 @@ namespace MBoxMobile.Views
         {
             var result = new List<AccordionSource>();
 
-            wvDetails = new WebView();
-            wvAuxiliaryEquipments = new WebView();
-
             var asDetails = new AccordionSource()
             {
                 HeaderText = App.CurrentTranslation["UptimeDetails_Detail"]
@@ -206,9 +214,10 @@ namespace MBoxMobile.Views
         private async Task<List<AccordionSource>> GetAccordionData()
         {
             var result = new List<AccordionSource>();
+            InitializeWebViews();
 
             #region Details
-            wvDetails.WidthRequest = screenWidth - 35;
+            wvDetails.WidthRequest = ScreenWidth - 35;
             wvDetails.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvDetails.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
@@ -222,7 +231,7 @@ namespace MBoxMobile.Views
             #endregion
 
             #region AuxiliaryEquipment
-            wvAuxiliaryEquipments.WidthRequest = screenWidth - 35;
+            wvAuxiliaryEquipments.WidthRequest = ScreenWidth - 35;
             wvAuxiliaryEquipments.HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
             wvAuxiliaryEquipments.VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true);
 
@@ -240,7 +249,7 @@ namespace MBoxMobile.Views
 
         private async Task<double> PopulateWebView(string webViewName)
         {
-            double wvHeight = 0;
+            double wvHeight = -1;
             const double WV_ROW_Height = 31.75;
 
             switch (webViewName)
@@ -251,7 +260,7 @@ namespace MBoxMobile.Views
                     string htmlContentDetails = HtmlTableSupport.Uptime_Details_TableContent(detailList);
                     string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDetails, htmlContentDetails);
                     wvDetails.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
-                    wvHeight = (detailList.Count() + 2) * WV_ROW_Height + 7;
+                    //wvHeight = (detailList.Count() + 2) * WV_ROW_Height + 7;
                     break;
                 case "wvAuxiliaryEquipments":
                     IEnumerable<EfficiencyAuxiliaryEquipment> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxMachine(locationId, departmentId, subDepartmentId, filterId, periodId, auxiliaryTypeId);
@@ -259,11 +268,26 @@ namespace MBoxMobile.Views
                     string htmlContentAuxiliaryEquipments = HtmlTableSupport.Uptime_AuxiliaryEquipments_TableContent(auxiliaryEquipmentsList);
                     string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlContentAuxiliaryEquipments);
                     wvAuxiliaryEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlAuxiliaryEquipments };
-                    wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 10;
+                    //wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 10;
                     break;
             }
 
             return wvHeight;
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (ScreenWidth != width || ScreenHeight != height)
+            {
+                ScreenWidth = width;
+                ScreenHeight = height;
+                SetUpLayout();
+
+                UptimeDetailsAccordion.AccordionWidth = width - 30;
+                UptimeDetailsAccordion.UpdateLayout();
+            }
         }
     }
 }

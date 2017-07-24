@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MBoxMobile.Views.AboutPage"
+             Title="{DynamicResource About_Title}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <x:Double x:Key="LogoWidth">0</x:Double>
+      <x:Double x:Key="LogoHeight">0</x:Double>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout Padding="10" BackgroundColor="{StaticResource PageBackground}">
+      <Image Source="logo.png" HorizontalOptions="CenterAndExpand" WidthRequest="{DynamicResource LogoWidth}" HeightRequest="{DynamicResource LogoHeight}" Margin="0, 30, 0, 50"/>
+      <StackLayout Padding="20, 0, 20, 0">
+        <Label Text="{DynamicResource About_Version}" Style="{StaticResource LabelMediumStyleBlack}" />
+        <Label Text="{DynamicResource AppVersion}" Style="{StaticResource LabelSmallStyleGrayDark}" Margin="0, 0, 0, 5"/>
+        <Label Text="{DynamicResource About_Token}" Style="{StaticResource LabelMediumStyleBlack}" />
+        <Label Text="{DynamicResource AppToken}" Style="{StaticResource LabelSmallStyleGrayDark}" />
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

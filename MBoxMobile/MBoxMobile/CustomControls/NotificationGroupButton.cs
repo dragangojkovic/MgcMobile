@@ -1,16 +1,16 @@
-﻿using MBoxMobile.Helpers;
-using MBoxMobile.Models;
+﻿using MBoxMobile.Models;
 using MBoxMobile.Views;
 using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace MBoxMobile.CustomControls
 {
     public class NotificationGroupButton : ContentView
     {
+        public double NotificationGroupButtonWidth { get; set; }
         public List<NotificationModel> RelatedNotifications { get; set; }
         private string GroupName { get; set; }
+        StackLayout vMainLayout = new StackLayout();
 
         public NotificationGroupButton(string groupName, int count, double buttonWidth, double buttonHeight)
         {
@@ -49,7 +49,6 @@ namespace MBoxMobile.CustomControls
                 Style = (Style)Application.Current.Resources["LabelMediumStyle"]
             };
 
-            var vMainLayout = new StackLayout();
             RelativeLayout relativeLayout = new RelativeLayout();
             relativeLayout.Children.Add(vButton, Constraint.RelativeToParent((parent) => { return 0; }));
             relativeLayout.Children.Add(vNameLabel,
@@ -65,6 +64,24 @@ namespace MBoxMobile.CustomControls
 
             vMainLayout.Children.Add(relativeLayout);
             Content = vMainLayout;
+        }
+
+        public void UpdateLayout()
+        {
+            foreach (var control in vMainLayout.Children)
+            {
+                if (control.GetType() == typeof(RelativeLayout))
+                {
+                    RelativeLayout rl = control as RelativeLayout;
+                    foreach (var innerControl in rl.Children)
+                    {
+                        if (innerControl.GetType() == typeof(Button))
+                        {
+                            innerControl.WidthRequest = NotificationGroupButtonWidth - 40;
+                        }
+                    }
+                }
+            }
         }
 
         private async void Button_Clicked(object sender, System.EventArgs e)

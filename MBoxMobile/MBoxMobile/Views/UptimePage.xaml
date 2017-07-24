@@ -42,6 +42,23 @@
                 </Image>
                 <Label Text="{DynamicResource Uptime_WorkingTimeOnly}" Style="{StaticResource LabelFilterStyle}" FontSize="{DynamicResource FilterWorkingHoursLabelFontSize}" Margin="-2, 10, 0, 0" />-->
               </StackLayout>
+              <StackLayout IsVisible="{DynamicResource Uptime_IsFilterInfoVisible}">
+                <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
+                <!--<StackLayout Orientation="Horizontal">
+                  <Label Text="{DynamicResource Uptime_Locations}" Style="{DynamicResource LabelFilterLocationsStyle}" WidthRequest="{DynamicResource FilterInfoWidth}" />
+                  <Label Text="{DynamicResource Uptime_Departments}" Style="{DynamicResource LabelFilterDepartmentsStyle}" WidthRequest="{DynamicResource FilterInfoWidth}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                  <Label Text="{DynamicResource Uptime_SubDepartments}" Style="{DynamicResource LabelFilterSubDepartmentsStyle}" WidthRequest="{DynamicResource FilterInfoWidth}" />
+                  <Label Text="{DynamicResource Uptime_Equipment}" Style="{DynamicResource LabelFilterEquipmentStyle}" WidthRequest="{DynamicResource FilterInfoWidth}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                  <Label Text="{DynamicResource Uptime_EquipmentGroup}" Style="{DynamicResource LabelFilterEquipmentGroupStyle}" WidthRequest="{DynamicResource FilterInfoWidth}" />
+                  <Label Text="{DynamicResource Uptime_AuxiliaryEquipment}" Style="{DynamicResource LabelFilterAuxiliaryEquipmentStyle}" WidthRequest="{DynamicResource FilterInfoWidth}" />
+                </StackLayout>-->
+                <Label Text="{DynamicResource Uptime_FilterInfo}" Style="{DynamicResource LabelSmallStyleBlack}" />
+                <ctrl:RoundedButton x:Name="FilterClearButton" Text="{DynamicResource Common_FilterClear}" IsEnabled="{DynamicResource Uptime_IsClearEnabled}" Style="{StaticResource FilterStyle}" Clicked="FilterClearClicked" WidthRequest="{DynamicResource FilterTimeButtonWidth}" HeightRequest="{DynamicResource FilterTimeButtonHeight}" />
+              </StackLayout>
             </StackLayout>
             <StackLayout BackgroundColor="{StaticResource GrayColor}" HeightRequest="1"></StackLayout>
             <StackLayout>

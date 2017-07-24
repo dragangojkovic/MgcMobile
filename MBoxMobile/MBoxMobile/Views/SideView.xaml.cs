@@ -2,7 +2,6 @@
 using MBoxMobile.Interfaces;
 using System;
 using System.Collections.Generic;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,8 +10,6 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SideView : MasterDetailPage
     {
-        // helper field for switching IsPresented property on phone/tablet devices
-        // we don't want side bar be always open on phones, but we do for tablets
         bool isPresented;
 
         public SideView()
@@ -21,26 +18,22 @@ namespace MBoxMobile.Views
             InitializeComponent();
 
             Resources["UserFullName"] = App.LoggedUser.login.FirstName;
-                        
+
             Dictionary<int, string> dictMenuItems = UserTypesSupport.GetMenuItems(App.UserType);
             foreach (KeyValuePair<int, string> pair in dictMenuItems)
             {
                 switch (pair.Key)
                 {
                     case 1:
-                        Resources["Menu_Home"] = App.CurrentTranslation["Menu_Home"];
                         Resources["ItemHomeVisible"] = true;
                         break;
                     case 2:
-                        Resources["Menu_Language"] = App.CurrentTranslation["Menu_Language"];
                         Resources["ItemLanguageVisible"] = true;
                         break;
                     case 3:
-                        Resources["Menu_Logout"] = App.CurrentTranslation["Menu_Logout"];
                         Resources["ItemLogoutVisible"] = true;
                         break;
                     case 4:
-                        Resources["Menu_Exit"] = App.CurrentTranslation["Menu_Exit"];
                         Resources["ItemExitVisible"] = true;
                         break;
                 }
@@ -49,27 +42,35 @@ namespace MBoxMobile.Views
             isPresented = false;
             MasterBehavior = MasterBehavior.Popover;
 
-            //if (Device.Idiom == TargetIdiom.Phone)
-            //{
-            //    MasterBehavior = MasterBehavior.Popover;
-            //}
-            //else if (Device.Idiom == TargetIdiom.Tablet)
-            //{
-            //    MasterBehavior = MasterBehavior.SplitOnLandscape;
-            //    isPresented = true;
-            //}
-            //else
-            //{
-            //    MasterBehavior = MasterBehavior.Popover;
-            //}
-
             double screenWidth = DependencyService.Get<IDisplay>().Width;
             double screenHeight = DependencyService.Get<IDisplay>().Height;
-            Resources["HeaderHeight"] = (int)(screenHeight / 5);
-            Resources["LabelNameMargin"] = new Thickness(0, screenHeight / 10, 0, 0);
+            Resources["HeaderHeight"] = (int)(screenHeight * 0.17);
+            Resources["LabelNameMargin"] = new Thickness(0, screenHeight * 0.08, 0, 0);
             Resources["IconWidthHeight"] = 28;
 
             Detail = new NavigationPage(new MainPage()) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueMedium"] };
+
+            this.IsPresentedChanged += SideView_IsPresentedChanged;
+        }
+
+        private void SideView_IsPresentedChanged(object sender, EventArgs e)
+        {
+            Resources["Menu_Home"] = App.CurrentTranslation["Menu_Home"];
+            Resources["Menu_Language"] = App.CurrentTranslation["Menu_Language"];
+            Resources["Menu_Logout"] = App.CurrentTranslation["Menu_Logout"];
+            Resources["Menu_Exit"] = App.CurrentTranslation["Menu_Exit"];
+            Resources["Menu_About"] = App.CurrentTranslation["Menu_About"];
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            Resources["Menu_Home"] = App.CurrentTranslation["Menu_Home"];
+            Resources["Menu_Language"] = App.CurrentTranslation["Menu_Language"];
+            Resources["Menu_Logout"] = App.CurrentTranslation["Menu_Logout"];
+            Resources["Menu_Exit"] = App.CurrentTranslation["Menu_Exit"];
+            Resources["Menu_About"] = App.CurrentTranslation["Menu_About"];
         }
 
         public void HomeTapped(object sender, EventArgs e)
@@ -105,6 +106,14 @@ namespace MBoxMobile.Views
             var closer = DependencyService.Get<ICloseApplication>();
             if (closer != null)
                 closer.CloseApplicationHandler();
+        }
+
+        public void AboutTapped(object sender, EventArgs e)
+        {
+            if (!(MasterBehavior == MasterBehavior.SplitOnLandscape) && Device.Idiom != TargetIdiom.Tablet)
+                IsPresented = isPresented;
+
+            Detail = new NavigationPage(new AboutPage()) { BarTextColor = Color.White, BarBackgroundColor = (Color)Application.Current.Resources["BlueMedium"] };
         }
     }
 }

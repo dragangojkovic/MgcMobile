@@ -51,10 +51,13 @@
     <Compile Include="Helpers\MultiLanguageSupport.cs" />
     <Compile Include="Helpers\NotificationSupport.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\DateTimeSupport.cs" />
     <Compile Include="Helpers\UserTypesSupport.cs" />
     <Compile Include="Interfaces\ICloseApplication.cs" />
+    <Compile Include="Interfaces\IDeviceDateTimeFormat.cs" />
     <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Interfaces\ISecureStorage.cs" />
+    <Compile Include="Interfaces\IVersion.cs" />
     <Compile Include="Models\Auxiliary.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\CustomerDetail.cs" />
@@ -69,6 +72,9 @@
       <DependentUpon>TestAppPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AuxiliaryEquipmentDetailsPage.xaml.cs">
       <DependentUpon>AuxiliaryEquipmentDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -420,6 +426,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\NotificationReplyType6Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\AboutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

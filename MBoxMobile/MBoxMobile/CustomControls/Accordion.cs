@@ -103,9 +103,22 @@ namespace MBoxMobile.CustomControls
             Content = mMainLayout;
         }
 
-        public void DataUpdate()
+        public void UpdateLayout()
         {
-
+            foreach(var control in mMainLayout.Children)
+            {
+                if (control.GetType() == typeof(RelativeLayout))
+                {
+                    RelativeLayout rl = control as RelativeLayout;
+                    foreach (var innerControl in rl.Children)
+                    {
+                        if (innerControl.GetType() == typeof(AccordionButton))
+                        {
+                            innerControl.WidthRequest = AccordionWidth;
+                        }
+                    }
+                }
+            }
         }
 
         void OnAccordionButtonClicked(object sender, EventArgs args)

@@ -59,7 +59,7 @@ namespace MBoxMobile.Views
             }
             else
             {
-                await DisplayAlert("MBox", App.CurrentTranslation["Language_AlertMessage"], "OK");
+                await DisplayAlert("M-Box", App.CurrentTranslation["Language_AlertMessage"], "OK");
             }
         }
 

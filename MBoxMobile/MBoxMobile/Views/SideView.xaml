@@ -60,6 +60,15 @@
                   <Label Text="{DynamicResource Menu_Exit}" Style="{StaticResource LabelMediumStyleBlack}" Margin="0,2,0,0" />
                 </StackLayout>
               </StackLayout>
+              <StackLayout x:Name="itemAbout" Padding="10">
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="AboutTapped"/>
+                </StackLayout.GestureRecognizers>
+                <StackLayout Orientation="Horizontal">
+                  <Image Source="about50.png" WidthRequest="{DynamicResource IconWidthHeight}" HeightRequest="{DynamicResource IconWidthHeight}" Margin="0, 0, 10, 0"/>
+                  <Label Text="{DynamicResource Menu_About}" Style="{StaticResource LabelMediumStyleBlack}" Margin="0,2,0,0" />
+                </StackLayout>
+              </StackLayout>
             </StackLayout>
 
           </StackLayout>

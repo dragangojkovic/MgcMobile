@@ -36,7 +36,7 @@ namespace MBoxMobile.Droid
                     var selectedNotification = new NotificationModel();
                     selectedNotification.ID = int.Parse(payloadObj.Inputstable_AlterID);
                     selectedNotification.MachineNumber = payloadObj.machine_num;
-                    selectedNotification.MachineGroupNameID = payloadObj.MachineName != "null" ? int.Parse(payloadObj.MachineName) : (int?)null;
+                    selectedNotification.MachineGroupNameID = payloadObj.MachineName != "null" && payloadObj.MachineName != "" ? int.Parse(payloadObj.MachineName) : (int?)null;
                     selectedNotification.RecordDate = payloadObj.record_date;
                     selectedNotification.EquipTypeText = payloadObj.EquipTypeName;
                     selectedNotification.EquipGroup = payloadObj.EquipGroupName;
@@ -58,7 +58,7 @@ namespace MBoxMobile.Droid
                 }
                 catch
                 {
-                    Android.Widget.Toast.MakeText(this, "Error in parsing payload!", Android.Widget.ToastLength.Long).Show();
+                    //Android.Widget.Toast.MakeText(this, "Error in parsing payload!", Android.Widget.ToastLength.Long).Show();
                 }
             }
 
@@ -101,19 +101,16 @@ namespace MBoxMobile.Droid
                 if (GoogleApiAvailability.Instance.IsUserResolvableError(resultCode))
                 {
                     Log.Info("Main Activity", GoogleApiAvailability.Instance.GetErrorString(resultCode));
-                    App.PlayServiceStatus = GoogleApiAvailability.Instance.GetErrorString(resultCode);
                 }
                 else
                 {
                     Log.Info("Main Activity", "This device is not supported");
-                    App.PlayServiceStatus = "This device is not supported";
                 }
                 return false;
             }
             else
             {
                 Log.Info("Main Activity", "Google Play Services is available.");
-                App.PlayServiceStatus = "Google Play Services is available.";
                 return true;
             }
         }
