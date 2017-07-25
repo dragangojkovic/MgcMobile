@@ -1040,7 +1040,7 @@ table th {
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
-<th><div style=""width:60px;"">{#Acknowledged}</div></th>
+<th style=""white-space:nowrap"">{#Acknowledged}</th>
 <th style=""white-space:nowrap"">{#Operator}</th>
 <th style=""white-space:nowrap"">{#Product}</th>
 <th style=""white-space:nowrap"">{#Location}</th>
@@ -1097,7 +1097,7 @@ table th {
 <th><div style=""width:60px;"">M#</div></th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
+<th><div style=""width:160px;"">{#TimeToAcknowledge}</div></th>
 <th style=""white-space:nowrap"">{#Person}</th>
 <th style=""white-space:nowrap"">{#Operator}</th>
 <th style=""white-space:nowrap"">{#Product}</th>
@@ -1128,16 +1128,16 @@ table th {
 <th style=""display:none"">Id</th>
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
-<th><div style=""width:60px;"">{#Approved}</div></th>
-<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Approved}</th>
+<th style=""white-space:nowrap"">{#Reported}</th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th><div style=""width:60px;"">{#kWh}</div></th>
 <th style=""white-space:nowrap"">{#WasteCause}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
+<th><div style=""width:160px;"">{#TimeToAcknowledge}</div></th>
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
-<th style=""white-space:nowrap"">{#TimeToSolution}</div></th>
+<th><div style=""width:160px;"">{#TimeToSolution}</div></th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
 <th style=""white-space:nowrap"">{#Operator}</th>
@@ -1177,8 +1177,8 @@ table th {
 <th style=""display:none"">Id</th>
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
-<th><div style=""width:60px;"">{#Approved}</div></th>
-<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Approved}</th>
+<th style=""white-space:nowrap"">{#Reported}</th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th><div style=""width:60px;"">{#kWh}</div></th>
 <th style=""white-space:nowrap"">{#WasteCause}</th>
@@ -1186,8 +1186,8 @@ table th {
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
 <th style=""white-space:nowrap"">{#Report}</th>
-<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
-<th style=""white-space:nowrap"">{#TimeToSolution}</th>
+<th><div style=""width:160px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:160px;"">{#TimeToSolution}</div></th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
 <th style=""white-space:nowrap"">{#ReportedBy}</th>
@@ -1230,13 +1230,13 @@ table th {
 <th style=""display:none"">Id</th>
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
-<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Reported}</th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th><div style=""width:60px;"">{#kWh}</div></th>
 <th style=""white-space:nowrap"">{#WasteCause}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
-<th style=""white-space:nowrap"">{#TimeToApprove}</th>
+<th><div style=""width:160px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:160px;"">{#TimeToApprove}</div></th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>
@@ -1277,12 +1277,12 @@ table th {
 <th style=""display:none"">Id</th>
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
-<th><div style=""width:60px;"">{#Acknowledged}</div></th>
-<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Acknowledged}</th>
+<th style=""white-space:nowrap"">{#Reported}</th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
-<th style=""white-space:nowrap"">{#TimeToApprove}</th>
+<th><div style=""width:160px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:160px;"">{#TimeToApprove}</div></th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>
@@ -1322,11 +1322,11 @@ table th {
 <th style=""display:none"">Id</th>
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
-<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Reported}</th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
-<th style=""white-space:nowrap"">{#TimeToApprove}</th>
+<th><div style=""width:160px;"">{#TimeToAcknowledge}</div></th>
+<th><div style=""width:160px;"">{#TimeToApprove}</div></th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>
@@ -1365,14 +1365,14 @@ table th {
 <th style=""display:none"">Id</th>
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
-<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Reported}</th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#Description}</th>
-<th style=""white-space:nowrap"">{#TimeToAcknowledge}</th>
+<th><div style=""width:160px;"">{#TimeToAcknowledge}</div></th>
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
-<th style=""white-space:nowrap"">{#TimeToSolve}</th>
-<th style=""white-space:nowrap"">{#TimeToApprove}</th>
+<th><div style=""width:160px;"">{#TimeToSolve}</div></th>
+<th><div style=""width:160px;"">{#TimeToApprove}</div></th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#AcknowledgedBy}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
@@ -1416,12 +1416,12 @@ table th {
 <th style=""display:none"">Id</th>
 <th style=""white-space:nowrap"">{#DateTime}</th>
 <th><div style=""width:60px;"">M#</div></th>
-<th><div style=""width:60px;"">{#Reported}</div></th>
+<th style=""white-space:nowrap"">{#Reported}</th>
 <th style=""white-space:nowrap"">{#Notification}</th>
 <th style=""white-space:nowrap"">{#ProblemCause}</th>
 <th style=""white-space:nowrap"">{#Solution}</th>
-<th style=""white-space:nowrap"">{#TimeToSolve}</th>
-<th style=""white-space:nowrap"">{#TimeToApprove}</th>
+<th><div style=""width:160px;"">{#TimeToSolve}</div></th>
+<th><div style=""width:160px;"">{#TimeToApprove}</div></th>
 <th style=""white-space:nowrap"">{#Report}</th>
 <th style=""white-space:nowrap"">{#SolvedBy}</th>
 <th style=""white-space:nowrap"">{#ApprovedBy}</th>
@@ -1510,7 +1510,7 @@ table th {
     <td style=""white-space:nowrap"">{#1}</td>
 	<td class=""center-text"">{#2}</td>
 	<td style=""white-space:nowrap"">{#3}</td>
-	<td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+	<td class=""center-text""><input type=""checkbox"" {#4}/></td>
     <td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
@@ -1585,7 +1585,7 @@ table th {
 	<td class=""center-text"">{#2}</td>
 	<td style=""white-space:nowrap"">{#3}</td>
 	<td style=""white-space:nowrap"">{#4}</td>
-    <td style=""white-space:nowrap"">{#5}</td>
+    <td class=""center-text"">{#5}</td>
     <td style=""white-space:nowrap"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
 	<td style=""white-space:nowrap"">{#8}</td>
@@ -1598,7 +1598,7 @@ table th {
                     template = template.Replace("{#2}", el.MachineNumber);
                     template = template.Replace("{#3}", el.AlterDescription);
                     template = template.Replace("{#4}", el.Description);
-                    template = template.Replace("{#5}", el.DesDateLocal);
+                    template = template.Replace("{#5}", el.CalculateDateTime(el.RecordDate, el.DesDate));
                     template = template.Replace("{#6}", el.DesPerson);
                     template = template.Replace("{#7}", el.Operator);
                     template = template.Replace("{#8}", el.Product);
@@ -1625,16 +1625,16 @@ table th {
     <td style=""display:none"">{#0}</td>
     <td style=""white-space:nowrap"">{#1}</td>
 	<td class=""center-text"">{#2}</td>
-    <td class=""center-text""><input type=""checkbox"" {#3} disabled/></td>
-    <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
+    <td class=""center-text""><input type=""checkbox"" {#3}/></td>
+    <td class=""center-text""><input type=""checkbox"" {#4}/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td class=""center-text"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td style=""white-space:nowrap"">{#9}</td>
+    <td class=""center-text"">{#9}</td>
 	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
-    <td style=""white-space:nowrap"">{#12}</td>
+    <td class=""center-text"">{#12}</td>
 	<td style=""white-space:nowrap"">{#13}</td>
     <td style=""white-space:nowrap"">{#14}</td>
     <td style=""white-space:nowrap"">{#15}</td>
@@ -1653,10 +1653,10 @@ table th {
                     template = template.Replace("{#6}", kwh != 0 ? kwh.ToString("0.000") : "");
                     template = template.Replace("{#7}", el.ElecCause);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDateLocal);
+                    template = template.Replace("{#9}", el.CalculateDateTime(el.RecordDate, el.DesDate));
                     template = template.Replace("{#10}", el.AlterCause);
                     template = template.Replace("{#11}", el.Solution);
-                    template = template.Replace("{#12}", el.SolutionDateLocal);
+                    template = template.Replace("{#12}", el.CalculateDateTime(el.DesDate, el.SolutionDate));
                     template = template.Replace("{#13}", el.DesPerson);
                     template = template.Replace("{#14}", el.SoluPerson);
                     template = template.Replace("{#15}", el.Operator);
@@ -1693,7 +1693,7 @@ table th {
     <td style=""white-space:nowrap"">{#9}</td>
 	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
-    <td style=""white-space:nowrap"">{#12}</td>
+    <td class=""center-text"">{#12}</td>
 	<td class=""center-text"">{#13}</td>
     <td style=""white-space:nowrap"">{#14}</td>
     <td style=""white-space:nowrap"">{#15}</td>
@@ -1717,8 +1717,8 @@ table th {
                     template = template.Replace("{#9}", el.AlterCause);
                     template = template.Replace("{#10}", el.Solution);
                     template = template.Replace("{#11}", el.Report);
-                    template = template.Replace("{#12}", el.DesDateLocal);
-                    template = template.Replace("{#13}", el.SolutionDateLocal);
+                    template = template.Replace("{#12}", el.CalculateDateTime(el.RecordDate, el.DesDate));
+                    template = template.Replace("{#13}", el.CalculateDateTime(el.DesDate, el.SolutionDate));
                     template = template.Replace("{#14}", el.DesPerson);
                     template = template.Replace("{#15}", el.SoluPerson);
                     template = template.Replace("{#16}", el.ReportPerson);
@@ -1752,7 +1752,7 @@ table th {
     <td class=""center-text"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td style=""white-space:nowrap"">{#9}</td>
+    <td class=""center-text"">{#9}</td>
 	<td class=""center-text"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
     <td style=""white-space:nowrap"">{#12}</td>
@@ -1773,8 +1773,8 @@ table th {
                     template = template.Replace("{#6}", kwh != 0 ? kwh.ToString("0.000") : "");
                     template = template.Replace("{#7}", el.ElecCause);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDateLocal);
-                    template = template.Replace("{#10}", el.ApproveDateLocal);
+                    template = template.Replace("{#9}", el.CalculateDateTime(el.RecordDate, el.DesDate));
+                    template = template.Replace("{#10}", el.CalculateDateTime(el.DesDate, el.ApproveDate));
                     template = template.Replace("{#11}", el.Report);
                     template = template.Replace("{#12}", el.DesPerson);
                     template = template.Replace("{#13}", el.ApprovePerson);
@@ -1808,8 +1808,8 @@ table th {
     <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td style=""white-space:nowrap"">{#9}</td>
-	<td style=""white-space:nowrap"">{#10}</td>
+    <td class=""center-text"">{#9}</td>
+	<td class=""center-text"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
     <td style=""white-space:nowrap"">{#12}</td>
 	<td style=""white-space:nowrap"">{#13}</td>
@@ -1827,8 +1827,8 @@ table th {
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#5}", el.AlterDescription);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDateLocal);
-                    template = template.Replace("{#10}", el.ApproveDateLocal);
+                    template = template.Replace("{#9}", el.CalculateDateTime(el.RecordDate, el.DesDate));
+                    template = template.Replace("{#10}", el.CalculateDateTime(el.DesDate, el.ApproveDate));
                     template = template.Replace("{#11}", el.Report);
                     template = template.Replace("{#12}", el.DesPerson);
                     template = template.Replace("{#13}", el.ApprovePerson);
@@ -1861,8 +1861,8 @@ table th {
     <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td style=""white-space:nowrap"">{#9}</td>
-	<td style=""white-space:nowrap"">{#10}</td>
+    <td class=""center-text"">{#9}</td>
+	<td class=""center-text"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
     <td style=""white-space:nowrap"">{#12}</td>
 	<td style=""white-space:nowrap"">{#13}</td>
@@ -1879,8 +1879,8 @@ table th {
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#5}", el.AlterDescription);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDateLocal);
-                    template = template.Replace("{#10}", el.ApproveDateLocal);
+                    template = template.Replace("{#9}", el.CalculateDateTime(el.RecordDate, el.DesDate));
+                    template = template.Replace("{#10}", el.CalculateDateTime(el.DesDate, el.ApproveDate));
                     template = template.Replace("{#11}", el.Report);
                     template = template.Replace("{#12}", el.DesPerson);
                     template = template.Replace("{#13}", el.ApprovePerson);
@@ -1913,11 +1913,11 @@ table th {
     <td class=""center-text""><input type=""checkbox"" {#4} disabled/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#8}</td>
-    <td style=""white-space:nowrap"">{#9}</td>
+    <td class=""center-text"">{#9}</td>
 	<td style=""white-space:nowrap"">{#10}</td>
 	<td style=""white-space:nowrap"">{#11}</td>
-    <td style=""white-space:nowrap"">{#12}</td>
-	<td style=""white-space:nowrap"">{#13}</td>
+    <td class=""center-text"">{#12}</td>
+	<td class=""center-text"">{#13}</td>
     <td style=""white-space:nowrap"">{#14}</td>
     <td style=""white-space:nowrap"">{#15}</td>
     <td style=""white-space:nowrap"">{#16}</td>
@@ -1935,11 +1935,11 @@ table th {
                     template = template.Replace("{#4}", el.NeedReport ? "checked" : "");
                     template = template.Replace("{#5}", el.AlterDescription);
                     template = template.Replace("{#8}", el.Description);
-                    template = template.Replace("{#9}", el.DesDateLocal);
+                    template = template.Replace("{#9}", el.CalculateDateTime(el.RecordDate, el.DesDate));
                     template = template.Replace("{#10}", el.AlterCause);
                     template = template.Replace("{#11}", el.Solution);
-                    template = template.Replace("{#12}", el.SolutionDateLocal);
-                    template = template.Replace("{#13}", el.ApproveDateLocal);
+                    template = template.Replace("{#12}", el.CalculateDateTime(el.DesDate, el.SolutionDate));
+                    template = template.Replace("{#13}", el.CalculateDateTime(el.SolutionDate, el.ApproveDate));
                     template = template.Replace("{#14}", el.Report);
                     template = template.Replace("{#15}", el.DesPerson);
                     template = template.Replace("{#16}", el.SoluPerson);
@@ -1974,8 +1974,8 @@ table th {
 	<td style=""white-space:nowrap"">{#4}</td>
     <td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#6}</td>
-	<td style=""white-space:nowrap"">{#7}</td>
-	<td style=""white-space:nowrap"">{#8}</td>
+	<td class=""center-text"">{#7}</td>
+	<td class=""center-text"">{#8}</td>
     <td style=""white-space:nowrap"">{#9}</td>
     <td style=""white-space:nowrap"">{#10}</td>
     <td style=""white-space:nowrap"">{#11}</td>
@@ -1993,8 +1993,8 @@ table th {
                     template = template.Replace("{#4}", el.AlterDescription);
                     template = template.Replace("{#5}", el.AlterCause);
                     template = template.Replace("{#6}", el.Solution);
-                    template = template.Replace("{#7}", el.SolutionDateLocal);
-                    template = template.Replace("{#8}", el.ApproveDateLocal);
+                    template = template.Replace("{#7}", el.CalculateDateTime(el.RecordDate, el.SolutionDate));
+                    template = template.Replace("{#8}", el.CalculateDateTime(el.SolutionDate, el.ApproveDate));
                     template = template.Replace("{#9}", el.Report);
                     template = template.Replace("{#10}", el.SoluPerson);
                     template = template.Replace("{#11}", el.ApprovePerson);
@@ -2011,6 +2011,31 @@ table th {
             }
             return html;
         }
+
+//        public static string SelectDeselectSaveAllButtons(bool isAcknowledge)
+//        {
+//            string template = @"
+//<div>
+//	<input type=""button"" name=""SelectAll"" value=""{#0}"" id=""btnSelectAll"" onclick=""SelectAll()"">
+//	<input type=""button"" name=""DeselectAll"" value=""{#1}"" id=""btnDeselectAll"" onclick=""DeselectAll()"">
+//	<input type=""button"" name=""Save"" value=""{#2}"" id=""btnSave"" onclick=""{#3}"">
+//</div>";
+
+//            template = template.Replace("{#0}", App.CurrentTranslation["Notification_SelectAll"]);
+//            template = template.Replace("{#1}", App.CurrentTranslation["Notification_DeselectAll"]);
+//            if (isAcknowledge)
+//            {
+//                template = template.Replace("{#2}", App.CurrentTranslation["Notification_AcknowledgeAll"]);
+//                template = template.Replace("{#3}", "AcknowledgeAll()");
+//            }
+//            else
+//            {
+//                template = template.Replace("{#2}", App.CurrentTranslation["Notification_SaveAll"]);
+//                template = template.Replace("{#3}", "SaveAll()");
+//            }
+
+//            return template;
+//        }
 
         #endregion
 

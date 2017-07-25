@@ -260,7 +260,7 @@ namespace MBoxMobile.Helpers
             translation.Add("Notification_Location", "Location");
             translation.Add("Notification_Department", "Department");
             translation.Add("Notification_SubDepartment", "Sub-department");
-            translation.Add("Notification_Acknowledged", "Ack.");
+            translation.Add("Notification_Acknowledged", "Acknowledged");
             translation.Add("Notification_Description", "Description");
             translation.Add("Notification_TimeToAcknowledge", "Time to acknowledge (DD:HH:MM)");
             translation.Add("Notification_Person", "Person");
@@ -276,6 +276,10 @@ namespace MBoxMobile.Helpers
             translation.Add("Notification_ApprovedBy", "Approved by");
             translation.Add("Notification_ReportedBy", "Reported by");
             translation.Add("Notification_TimeToSolve", "Time to solve (DD:HH:MM)");
+            translation.Add("Notification_SelectAll", "Select all");
+            translation.Add("Notification_DeselectAll", "Deselect all");
+            translation.Add("Notification_AcknowledgeAll", "Acknowledge");
+            translation.Add("Notification_SaveAll", "Save");
 
             //NotificationReply pages
             translation.Add("NotificationReplyType1_Title", "Non confirmed electricity");
@@ -570,6 +574,10 @@ namespace MBoxMobile.Helpers
             translation.Add("Notification_ApprovedBy", "经审核");
             translation.Add("Notification_ReportedBy", "经报告");
             translation.Add("Notification_TimeToSolve", "解决时间（DD：mm）");
+            translation.Add("Notification_SelectAll", "Select_all_CH");         ////////////
+            translation.Add("Notification_DeselectAll", "Deselect all_CH");     ////////////
+            translation.Add("Notification_AcknowledgeAll", "AcknowledgeCH");    ////////////
+            translation.Add("Notification_SaveAll", "SaveCH");                  ////////////
 
             //NotificationReply pages
             translation.Add("NotificationReplyType1_Title", "未确认电量");

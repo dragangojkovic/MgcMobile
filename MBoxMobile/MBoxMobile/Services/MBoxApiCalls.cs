@@ -491,7 +491,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyElectricity(int notificationID, int? notificationParentID, string description, int electricityCauseID)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")
@@ -511,7 +511,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyAcknowledge(int notificationID, int? notificationParentID, string description)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")
@@ -531,7 +531,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyDescription(int notificationID, int? notificationParentID, string description, int? newAlterDescriptionID, int popup)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
             string sNewAlterDescriptionID = (newAlterDescriptionID == null) ? "" : newAlterDescriptionID.ToString();
 
@@ -552,7 +552,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplySolution(int notificationID, int? notificationParentID, string solution, int alterCauseID)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")
@@ -572,7 +572,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyApprove(int notificationID, int? notificationParentID, int datatype)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")
@@ -592,7 +592,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyApproveAndReport(int notificationID, int? notificationParentID, int datatype)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")
@@ -612,7 +612,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyNeedReport(int notificationID, int? notificationParentID)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")
@@ -632,7 +632,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyReport(int notificationID, int? notificationParentID, string report)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")
@@ -652,7 +652,7 @@ namespace MBoxMobile.Services
 
         public static async Task<bool> ReplyReportAndRemove(int notificationID, int? notificationParentID, string report)
         {
-            string sNotificationID = "";
+            string sNotificationID = notificationID.ToString();
             string sNotificationParentID = (notificationParentID == null) ? "" : notificationParentID.ToString();
 
             if (notificationID > 0 && sNotificationParentID != "")

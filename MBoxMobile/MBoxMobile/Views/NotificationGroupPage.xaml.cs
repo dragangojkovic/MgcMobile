@@ -163,6 +163,7 @@ namespace MBoxMobile.Views
                 List<NotificationModel> data = notifs.Where(x => x.DataType == tableType).ToList();
 
                 // 2. check what table look we should use here and populate
+                string htmlButtons = string.Empty;
                 string htmlHeader = string.Empty;
                 string htmlContent = string.Empty;
                 switch (tableType.ToString())
@@ -224,7 +225,7 @@ namespace MBoxMobile.Views
 
             wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
             if (subTableCount == 1) viewHeight += 10;
-            wv.HeightRequest = viewHeight;
+            //wv.HeightRequest = viewHeight;
 
             // 3. add to View
             result.Children.Add(wv);

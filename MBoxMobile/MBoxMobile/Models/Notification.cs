@@ -14,8 +14,13 @@ namespace MBoxMobile.Models
         {
             get
             {
+                if (RecordDate != string.Empty)
+                {
                 DateTime dt = Convert.ToDateTime(RecordDate);
                 return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                }
+                else
+                    return string.Empty;
             }
         }
         public string MachineNumber { get; set; }
@@ -27,8 +32,13 @@ namespace MBoxMobile.Models
         {
             get
             {
-                DateTime dt = Convert.ToDateTime(DesDate);
-                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                if (DesDate != string.Empty)
+                {
+                    DateTime dt = Convert.ToDateTime(DesDate);
+                    return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                }
+                else
+                    return string.Empty;
             }
         }
         public string ApproveDate { get; set; }
@@ -36,8 +46,13 @@ namespace MBoxMobile.Models
         {
             get
             {
+                if (ApproveDate != string.Empty)
+                {
                 DateTime dt = Convert.ToDateTime(ApproveDate);
                 return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                }
+                else
+                    return string.Empty;
             }
         }
         public string Report { get; set; }
@@ -49,8 +64,13 @@ namespace MBoxMobile.Models
         {
             get
             {
-                DateTime dt = Convert.ToDateTime(SolutionDate);
-                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                if (SolutionDate != string.Empty)
+                {
+                    DateTime dt = Convert.ToDateTime(SolutionDate);
+                    return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                }
+                else
+                    return string.Empty;
             }
         }
         public string ReportDate { get; set; }
@@ -58,8 +78,13 @@ namespace MBoxMobile.Models
         {
             get
             {
+                if (ReportDate != string.Empty)
+                {
                 DateTime dt = Convert.ToDateTime(ReportDate);
                 return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                }
+                else
+                    return string.Empty;
             }
         }
         public string SoluPerson { get; set; }
@@ -95,6 +120,11 @@ namespace MBoxMobile.Models
         public int? CardType { get; set; }
         public int? EquipmentType { get; set; }
         public int? ParentID { get; set; }
+
+        public string CalculateDateTime(string firstDT, string secondDT)
+        {
+            return "";
+        }
     }   
 
     public class NotificationFilter
