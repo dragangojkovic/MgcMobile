@@ -41,7 +41,7 @@ namespace MBoxMobile.Views
             Resources["NotificationReplyType6_Title"] = App.CurrentTranslation["NotificationReplyType6_Title"];
 
             Resources["NotificationReply_DateTimeTitle"] = App.CurrentTranslation["NotificationReply_DateTimeTitle"];
-            Resources["NotificationReply_DateTimeValue"] = NotificationModel.RecordDate;
+            Resources["NotificationReply_DateTimeValue"] = NotificationModel.RecordDateLocal;
             Resources["NotificationReply_MachineNumberTitle"] = App.CurrentTranslation["NotificationReply_MachineNumberTitle"];
             Resources["NotificationReply_MachineNumberValue"] = NotificationModel.MachineNumber;
             Resources["NotificationReply_OperatorTitle"] = App.CurrentTranslation["NotificationReply_OperatorTitle"];

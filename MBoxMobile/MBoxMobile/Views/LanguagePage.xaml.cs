@@ -53,7 +53,9 @@ namespace MBoxMobile.Views
             if (LanguagePicker.SelectedIndex != -1)
             {
                 string selectedLanguage = LanguagePicker.Items[LanguagePicker.SelectedIndex];
-                App.CurrentLanguage = (Languages)languages.FirstOrDefault(x => x.Value == selectedLanguage).Key;
+                int languageId = languages.FirstOrDefault(x => x.Value == selectedLanguage).Key;
+                App.CurrentLanguage = (Languages)languageId;
+                Plugin.Settings.CrossSettings.Current.AddOrUpdateValue("LANGUAGE", languageId.ToString());
 
                 pageMaster.Detail = pageToReturn;
             }

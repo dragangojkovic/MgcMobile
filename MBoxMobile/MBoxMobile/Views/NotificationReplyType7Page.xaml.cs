@@ -56,7 +56,7 @@ namespace MBoxMobile.Views
             }            
 
             Resources["NotificationReply_DateTimeTitle"] = App.CurrentTranslation["NotificationReply_DateTimeTitle"];
-            Resources["NotificationReply_DateTimeValue"] = NotificationModel.RecordDate;
+            Resources["NotificationReply_DateTimeValue"] = NotificationModel.RecordDateLocal;
             Resources["NotificationReply_MachineNumberTitle"] = App.CurrentTranslation["NotificationReply_MachineNumberTitle"];
             Resources["NotificationReply_MachineNumberValue"] = NotificationModel.MachineNumber;
             Resources["NotificationReply_OperatorTitle"] = App.CurrentTranslation["NotificationReply_OperatorTitle"];
@@ -130,19 +130,19 @@ namespace MBoxMobile.Views
             }
 
             Resources["NotificationReply_AknowledgeTimeTitle"] = App.CurrentTranslation["NotificationReply_AknowledgeTimeTitle"];
-            Resources["NotificationReply_AknowledgeTimeValue"] = NotificationModel.DesDate;
+            Resources["NotificationReply_AknowledgeTimeValue"] = NotificationModel.DesDateLocal;
             Resources["NotificationReply_AknowledgedByTitle"] = App.CurrentTranslation["NotificationReply_AknowledgedByTitle"];
             Resources["NotificationReply_AknowledgedByValue"] = NotificationModel.DesPerson;
             Resources["NotificationReply_SolutionTimeTitle"] = App.CurrentTranslation["NotificationReply_SolutionTimeTitle"];
-            Resources["NotificationReply_SolutionTimeValue"] = NotificationModel.SolutionDate;
+            Resources["NotificationReply_SolutionTimeValue"] = NotificationModel.SolutionDateLocal;
             Resources["NotificationReply_SolutionByTitle"] = App.CurrentTranslation["NotificationReply_SolutionByTitle"];
             Resources["NotificationReply_SolutionByValue"] = NotificationModel.SoluPerson;
             Resources["NotificationReply_ApprovalTimeTitle"] = App.CurrentTranslation["NotificationReply_ApprovalTimeTitle"];
-            Resources["NotificationReply_ApprovalTimeValue"] = NotificationModel.ApproveDate;
+            Resources["NotificationReply_ApprovalTimeValue"] = NotificationModel.ApproveDateLocal;
             Resources["NotificationReply_ApprovalByTitle"] = App.CurrentTranslation["NotificationReply_ApprovalByTitle"];
             Resources["NotificationReply_ApprovalByValue"] = NotificationModel.ApprovePerson;
             Resources["NotificationReply_ReportTimeTitle"] = App.CurrentTranslation["NotificationReply_ReportTimeTitle"];
-            Resources["NotificationReply_ReportTimeValue"] = NotificationModel.ReportDate;
+            Resources["NotificationReply_ReportTimeValue"] = NotificationModel.ReportDateLocal;
             Resources["NotificationReply_ReportedByTitle"] = App.CurrentTranslation["NotificationReply_ReportedByTitle"];
             Resources["NotificationReply_ReportedByValue"] = NotificationModel.ReportPerson;
             if (!string.IsNullOrEmpty(NotificationModel.Report))

@@ -12,19 +12,19 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        double screenWidth = 0.0;
-        double screenHeight = 0.0;
+        double ScreenWidth = 0.0;
+        double ScreenHeight = 0.0;
 
         public MainPage()
         {
             InitializeComponent();
 
-            screenWidth = DependencyService.Get<IDisplay>().Width;
-            screenHeight = DependencyService.Get<IDisplay>().Height;
+            ScreenWidth = DependencyService.Get<IDisplay>().Width;
+            ScreenHeight = DependencyService.Get<IDisplay>().Height;
 
-            Resources["LogoWidth"] = screenWidth * 0.6;
-            Resources["LogoHeight"] = screenHeight * 0.264;
-            Resources["ButtonWidth"] = (screenWidth - 26) / 2.0;
+            Resources["LogoWidth"] = ScreenWidth * 0.6;
+            Resources["LogoHeight"] = ScreenHeight * 0.264;
+            Resources["ButtonWidth"] = (ScreenWidth - 26) / 2.0;
                         
             MessagingCenter.Subscribe<string>(this, "NotificationPopupClosed", (sender) => {
                 App.IsNotificationHandling = false;
@@ -150,6 +150,16 @@ namespace MBoxMobile.Views
                 App.NotificationsForHandling.Remove(App.NotificationsForHandling[0]);
                 Navigation.PushAsync(new NotificationPage());
             }
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (width > height)
+                ImgLogo.Margin = new Thickness(0, 30, 0, 30);
+            else
+                ImgLogo.Margin = new Thickness(0, 30, 0, 40);
         }
 
     }

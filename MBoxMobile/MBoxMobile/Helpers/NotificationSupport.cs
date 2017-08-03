@@ -24,6 +24,7 @@ namespace MBoxMobile.Helpers
     {
         public string GroupName { get; set; }
         public int GroupItemCount { get; set; }
+        public TableLayoutType TableType { get; set; }
     }
 
     public enum NotificationType
@@ -44,5 +45,19 @@ namespace MBoxMobile.Helpers
         QualityProblem,
         Planning,
         SystemNotification
+    }
+
+    public enum TableLayoutType
+    {
+        NoCheckboxes = 1,
+        AcknowledgeCheckboxes,
+        SaveCheckboxes
+    }
+
+    public class SelectedCheckboxes
+    {
+        public string Id { get; set; }
+        public bool Acknowledge { get; set; }
+        public bool Report { get; set; }
     }
 }

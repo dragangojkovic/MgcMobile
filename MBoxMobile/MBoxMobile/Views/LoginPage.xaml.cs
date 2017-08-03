@@ -62,11 +62,6 @@ namespace MBoxMobile.Views
             };
         }
 
-        //private void ServerPicker_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

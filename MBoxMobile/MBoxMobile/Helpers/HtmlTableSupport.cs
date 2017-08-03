@@ -11,7 +11,7 @@ namespace MBoxMobile.Helpers
 <!DOCTYPE html>
 <html>
 <head>
-<meta name='viewport' content='width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0;'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0'>
 <script type='text/javascript'>
     onload = function()
     {
@@ -26,10 +26,16 @@ namespace MBoxMobile.Helpers
 	    }
         for(i = 0; i < rows.length; i++)
         {
-            rows[i].onclick = function() {
-                HighLightTR(this,'#30a0ff','#ffffff');
-                var id = this.cells[0].innerText;
-			    window.open('http://localhost?id='+id);
+            rows[i].onclick = function(e) {
+                var j = 0;
+                var td = e.target;
+                while((td = td.previousElementSibling)!= null) 
+                    j++;
+                if(j==1) {
+                    HighLightTR(this,'#30a0ff','#ffffff');
+                    var id = this.cells[0].innerText;
+			        window.open('http://localhost?id='+id);
+                }
             }
         }
         for(var i = 0; i < rows.length; i++)
@@ -58,6 +64,21 @@ namespace MBoxMobile.Helpers
        for (i=0;i<a_obj.cells.length;i++)
         a_obj.cells(i).style.color=a_color;
     }
+    function Acknowledge(el) {
+        var id = el.name;
+        var ch = el.checked;
+	    window.open('http://localhost?id='+id+'&ack&'+ch);
+    }
+    function Approve(el) {
+        var id = el.name;
+        var ch = el.checked;
+	    window.open('http://localhost?id='+id+'&app&'+ch);
+    }
+    function Report(el) {
+        var id = el.name;
+        var ch = el.checked;
+	    window.open('http://localhost?id='+id+'&rpt&'+ch);
+    }
 </script>
 <style>
 table, th, td {
@@ -74,6 +95,9 @@ th {
 }
 td {
     padding: 5px;
+}
+td:nth-child(2) {
+    color: #50c0a0; 
 }
 table th {
     background-color: white;
@@ -1510,7 +1534,7 @@ table th {
     <td style=""white-space:nowrap"">{#1}</td>
 	<td class=""center-text"">{#2}</td>
 	<td style=""white-space:nowrap"">{#3}</td>
-	<td class=""center-text""><input type=""checkbox"" {#4}/></td>
+	<td class=""center-text""><input name=""{#0}"" type=""checkbox"" {#4} onchange='Acknowledge(this)'/></td>
     <td style=""white-space:nowrap"">{#5}</td>
     <td style=""white-space:nowrap"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
@@ -1625,8 +1649,8 @@ table th {
     <td style=""display:none"">{#0}</td>
     <td style=""white-space:nowrap"">{#1}</td>
 	<td class=""center-text"">{#2}</td>
-    <td class=""center-text""><input type=""checkbox"" {#3}/></td>
-    <td class=""center-text""><input type=""checkbox"" {#4}/></td>
+    <td class=""center-text""><input name=""{#0}"" type=""checkbox"" {#3} onchange='Approve(this)'/></td>
+    <td class=""center-text""><input name=""{#0}"" type=""checkbox"" {#4} onchange='Report(this)'/></td>
 	<td style=""white-space:nowrap"">{#5}</td>
     <td class=""center-text"">{#6}</td>
 	<td style=""white-space:nowrap"">{#7}</td>
@@ -2011,32 +2035,7 @@ table th {
             }
             return html;
         }
-
-//        public static string SelectDeselectSaveAllButtons(bool isAcknowledge)
-//        {
-//            string template = @"
-//<div>
-//	<input type=""button"" name=""SelectAll"" value=""{#0}"" id=""btnSelectAll"" onclick=""SelectAll()"">
-//	<input type=""button"" name=""DeselectAll"" value=""{#1}"" id=""btnDeselectAll"" onclick=""DeselectAll()"">
-//	<input type=""button"" name=""Save"" value=""{#2}"" id=""btnSave"" onclick=""{#3}"">
-//</div>";
-
-//            template = template.Replace("{#0}", App.CurrentTranslation["Notification_SelectAll"]);
-//            template = template.Replace("{#1}", App.CurrentTranslation["Notification_DeselectAll"]);
-//            if (isAcknowledge)
-//            {
-//                template = template.Replace("{#2}", App.CurrentTranslation["Notification_AcknowledgeAll"]);
-//                template = template.Replace("{#3}", "AcknowledgeAll()");
-//            }
-//            else
-//            {
-//                template = template.Replace("{#2}", App.CurrentTranslation["Notification_SaveAll"]);
-//                template = template.Replace("{#3}", "SaveAll()");
-//            }
-
-//            return template;
-//        }
-
+        
         #endregion
 
         #region AuxiliaryEquipmentPage Headers

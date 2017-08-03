@@ -2,6 +2,7 @@
 using MBoxMobile.Helpers;
 using MBoxMobile.Interfaces;
 using MBoxMobile.Models;
+using MBoxMobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,11 @@ namespace MBoxMobile.Views
 
         List<NotificationModel> NotificationList;
         List<NotificationGroupInfo> SubGroupsInfoList;
+        List<SelectedCheckboxes> SelectedCheckBoxList;
 
         int selectedNotificationID = 0;
         int removedNotificationID = 0;
+        List<int> removedBatchNotificationIds = new List<int>();
 
         public NotificationGroupPage(string notificationGroup, List<NotificationModel> notifications)
         {
@@ -85,7 +88,9 @@ namespace MBoxMobile.Views
             foreach(NotificationGroupInfo ngi in SubGroupsInfoList)
             {
                 double contentHeight;
-                View content = CreateAndPopulateWebViews(ngi, out contentHeight);
+                StackLayout content = new StackLayout();
+                content.Children.Add(CreateThreeButtons(ngi));
+                content.Children.Add(CreateAndPopulateWebViews(ngi.GroupName, out contentHeight));
 
                 var asCurrent = new AccordionSource()
                 {
@@ -100,12 +105,336 @@ namespace MBoxMobile.Views
             return result;
         }
 
-        private View CreateAndPopulateWebViews(NotificationGroupInfo subGroup, out double viewHeight)
+        private View CreateThreeButtons(NotificationGroupInfo ngi)
+        {
+            StackLayout result = new StackLayout();
+
+            if (ngi.TableType != TableLayoutType.NoCheckboxes)
+            {
+                result.Orientation = StackOrientation.Horizontal;
+
+                var buttonSelectAll = new Button()
+                {
+                    ClassId = ngi.GroupName,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    BackgroundColor = (Color)Application.Current.Resources["BlueMedium"],
+                    BorderColor = Color.Black,
+                    BorderWidth = 1,
+                    WidthRequest = 60,
+                    HeightRequest = 40,
+                    Text = App.CurrentTranslation["Notification_SelectAll"],
+                    FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Button))
+                };
+                buttonSelectAll.Clicked += SelectAllButton_Clicked;
+
+                var buttonDeselectAll = new Button()
+                {
+                    ClassId = ngi.GroupName,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    BackgroundColor = (Color)Application.Current.Resources["BlueMedium"],
+                    BorderColor = Color.Black,
+                    BorderWidth = 1,
+                    WidthRequest = 60,
+                    HeightRequest = 40,
+                    Text = App.CurrentTranslation["Notification_DeselectAll"],
+                    FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Button))
+                };
+                buttonDeselectAll.Clicked += DeselectAllButton_Clicked;
+
+                var buttonSaveAll = new Button()
+                {
+                    ClassId = ngi.GroupName,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    BackgroundColor = (Color)Application.Current.Resources["BlueMedium"],
+                    BorderColor = Color.Black,
+                    BorderWidth = 1,
+                    WidthRequest = 60,
+                    HeightRequest = 40,
+                    FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Button))
+                };
+
+                if (ngi.TableType == TableLayoutType.AcknowledgeCheckboxes)
+                {
+                    buttonSaveAll.Text = App.CurrentTranslation["Notification_AcknowledgeAll"];
+                    buttonSaveAll.Clicked += AcknowledgeAllButton_Clicked;
+                }
+                else
+                {
+                    buttonSaveAll.Text = App.CurrentTranslation["Notification_SaveAll"];
+                    buttonSaveAll.Clicked += SaveAllButton_Clicked;
+                }
+
+                result.Children.Add(buttonSelectAll);
+                result.Children.Add(buttonDeselectAll);
+                result.Children.Add(buttonSaveAll);
+            }
+
+            return result;
+        }
+
+        private void SelectAllButton_Clicked(object sender, EventArgs e)
+        {
+            Button bt = (Button)sender;
+            UpdateWebView(bt.ClassId, true);
+        }
+
+        private void DeselectAllButton_Clicked(object sender, EventArgs e)
+        {
+            Button bt = (Button)sender;
+            UpdateWebView(bt.ClassId, false);
+        }
+
+        private void AcknowledgeAllButton_Clicked(object sender, EventArgs e)
+        {
+            Button bt = (Button)sender;
+            PrepareSelectedCheckboxList(bt.ClassId, TableLayoutType.AcknowledgeCheckboxes);
+            PrepareAndCallBatchApi(bt.ClassId, TableLayoutType.AcknowledgeCheckboxes);
+        }
+
+        private void SaveAllButton_Clicked(object sender, EventArgs e)
+        {
+            Button bt = (Button)sender;
+            PrepareSelectedCheckboxList(bt.ClassId, TableLayoutType.SaveCheckboxes);
+            PrepareAndCallBatchApi(bt.ClassId, TableLayoutType.SaveCheckboxes);
+        }
+
+        private void UpdateWebView(string subGroupName, bool? selectedAll, int notificationId = 0, string option = "", bool? state = null)
+        {
+            AccordionSource asource = NotificationGroupsAccordion.DataSource.Where(x => x.HeaderText.Contains(subGroupName)).FirstOrDefault();
+            StackLayout stack = asource.ContentItems as StackLayout;
+            WebView wv = (stack.Children[1] as StackLayout).Children[0] as WebView;
+
+            List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroupName).ToList();
+
+            if (selectedAll != null)
+            {
+                foreach (NotificationModel nm in notifs)
+                {
+                    nm.Acknowledge = (bool)selectedAll;
+                }
+            }
+
+            if (notificationId > 0)
+            {
+                NotificationModel nm = notifs.Where(x => x.ID == notificationId).FirstOrDefault();
+                switch (option)
+                {
+                    case "ack":
+                        nm.Acknowledge = (bool)state;
+                        break;
+                    case "app":
+                        nm.Approved = (bool)state;
+                        break;
+                    case "rpt":
+                        nm.NeedReport = (bool)state;
+                        break;
+                }
+            }
+                        
+            string htmlHtmlDetails = string.Empty;
+            int subTableCount = 0;
+
+            //4th level of grouping - there can be more than one table in sub-group
+            List<int> subSubGroups = notifs.Select(x => x.DataType).Distinct().ToList();
+            foreach (int tableType in subSubGroups)
+            {
+                subTableCount++;
+
+                // 1. get notifs for this table
+                List<NotificationModel> data = notifs.Where(x => x.DataType == tableType).ToList();
+
+                // 2. check what table look we should use here and populate
+                string htmlButtons = string.Empty;
+                string htmlHeader = string.Empty;
+                string htmlContent = string.Empty;
+                switch (tableType.ToString())
+                {
+                    case "2":
+                        htmlHeader = HtmlTableSupport.NotificationDataType2_TableHeader();
+                        htmlContent = HtmlTableSupport.NotificationDataType2_TableContent(data);
+                        break;
+                    case "3":   // can be found with type 2 in the same subgroup
+                        htmlHeader = HtmlTableSupport.NotificationDataType3_TableHeader();
+                        htmlContent = HtmlTableSupport.NotificationDataType3_TableContent(data);
+                        break;
+                    case "5":
+                        htmlHeader = HtmlTableSupport.NotificationDataType5_TableHeader();
+                        htmlContent = HtmlTableSupport.NotificationDataType5_TableContent(data);
+                        break;
+                }
+
+                htmlHtmlDetails += HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeader, htmlContent) + "";
+            }
+
+            wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
+        }
+
+        private void PrepareSelectedCheckboxList(string subGroupName, TableLayoutType type)
+        {
+            SelectedCheckBoxList = new List<SelectedCheckboxes>();
+
+            AccordionSource asource = NotificationGroupsAccordion.DataSource.Where(x => x.HeaderText.Contains(subGroupName)).FirstOrDefault();
+            StackLayout stack = asource.ContentItems as StackLayout;
+            WebView wv = (stack.Children[1] as StackLayout).Children[0] as WebView;
+
+            HtmlWebViewSource currentSource = wv.Source as HtmlWebViewSource;
+            string fullHtml = currentSource.Html;
+            fullHtml = fullHtml.Replace("\r\n", "");
+            fullHtml = fullHtml.Replace("\t", "");
+            fullHtml = fullHtml.Trim();
+            int start = fullHtml.IndexOf("<tbody class='mbox'>") + "<tbody class='mbox'>".Length;
+            int end = fullHtml.IndexOf("</tbody>");
+            string htmlForParse = fullHtml.Substring(start, end - start);
+            htmlForParse = htmlForParse.Trim();
+
+            string[] tableRows = htmlForParse.Split(new string[] { "</tr>" }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string row in tableRows)
+            {
+                string[] tableData = row.Split(new string[] { "</td>" }, StringSplitOptions.RemoveEmptyEntries);
+                SelectedCheckboxes scbox = new SelectedCheckboxes();
+                string currentTD = tableData[0];
+                string[] idHtml = currentTD.Split(new string[] { ">" }, StringSplitOptions.None);
+                scbox.Id = idHtml[2];
+
+                if (type == TableLayoutType.AcknowledgeCheckboxes)
+                {
+                    scbox.Acknowledge = tableData[4].Contains("checked");
+                    scbox.Report = false;
+                }
+
+                if (type == TableLayoutType.SaveCheckboxes)
+                {
+                    scbox.Acknowledge = tableData[3].Contains("checked");
+                    scbox.Report = tableData[4].Contains("checked");
+                }
+
+                SelectedCheckBoxList.Add(scbox);
+            }
+        }
+
+        private async void PrepareAndCallBatchApi(string subGroupName, TableLayoutType type)
+        {
+            bool result = false;
+            if (type == TableLayoutType.AcknowledgeCheckboxes)
+            {
+                string notificationIDList = string.Empty;
+                string notificationParentIDList = string.Empty;
+
+                Resources["IsLoading"] = true;
+                foreach (SelectedCheckboxes scbox in SelectedCheckBoxList)
+                {
+                    if (scbox.Acknowledge)
+                    {
+                        int notifID = 0;
+                        int.TryParse(scbox.Id, out notifID);
+
+                        notificationIDList += "," + scbox.Id;
+                        removedBatchNotificationIds.Add(int.Parse(scbox.Id));
+                        string sParentId = NotificationList.Where(x => x.ID == notifID).FirstOrDefault().ParentID.ToString();
+                        if (sParentId != "") notificationParentIDList += "," + sParentId;
+                    }
+                }
+                if (notificationIDList != string.Empty) notificationIDList = notificationIDList.Substring(1);
+                if (notificationParentIDList != string.Empty) notificationParentIDList = notificationParentIDList.Substring(1);
+
+                if (notificationIDList != string.Empty && notificationParentIDList != string.Empty) notificationIDList = string.Empty;
+
+                if (!(notificationIDList == string.Empty && notificationParentIDList == string.Empty))
+                {
+                    result = await MBoxApiCalls.BatchAcknowledge(notificationIDList, notificationParentIDList);
+                    Resources["IsLoading"] = false;
+
+                    if (!result)
+                        await DisplayAlert(App.CurrentTranslation["NotificationReply_AcknowledgeButtonText"], App.CurrentTranslation["NotificationReply_ErrorMsgSubmitFailed"], App.CurrentTranslation["Common_OK"]);
+                }
+                else
+                    Resources["IsLoading"] = false;
+            }
+
+            if (type == TableLayoutType.SaveCheckboxes)
+            {
+                string notificationIDListApprove = string.Empty;
+                string notificationParentIDListApprove = string.Empty;
+                string notificationIDListReport = string.Empty;
+                string notificationParentIDListReport = string.Empty;
+
+                Resources["IsLoading"] = true;
+                foreach (SelectedCheckboxes scbox in SelectedCheckBoxList)
+                {
+                    int notifID = 0;
+                    int.TryParse(scbox.Id, out notifID);
+
+                    if (scbox.Acknowledge)
+                    {                     
+                        notificationIDListApprove += "," + scbox.Id;
+                        removedBatchNotificationIds.Add(int.Parse(scbox.Id));
+                        string sParentIdApprove = NotificationList.Where(x => x.ID == notifID).FirstOrDefault().ParentID.ToString();
+                        if (sParentIdApprove != "") notificationParentIDListApprove += "," + sParentIdApprove;
+                    }
+                    if (scbox.Report)
+                    {
+                        notificationIDListReport += "," + scbox.Id;
+                        string sParentIdReport = NotificationList.Where(x => x.ID == notifID).FirstOrDefault().ParentID.ToString();
+                        if (sParentIdReport != "") notificationParentIDListReport += "," + sParentIdReport;
+                    }
+                }
+                if (notificationIDListApprove != string.Empty) notificationIDListApprove = notificationIDListApprove.Substring(1);
+                if (notificationParentIDListApprove != string.Empty) notificationParentIDListApprove = notificationParentIDListApprove.Substring(1);
+                if (notificationIDListReport != string.Empty) notificationIDListReport = notificationIDListReport.Substring(1);
+                if (notificationParentIDListReport != string.Empty) notificationParentIDListReport = notificationParentIDListReport.Substring(1);
+
+                if (notificationIDListApprove != string.Empty && notificationParentIDListApprove != string.Empty) notificationIDListApprove = string.Empty;
+                if (notificationIDListReport != string.Empty && notificationParentIDListReport != string.Empty) notificationIDListReport = string.Empty;
+
+                result = true;
+                if (!(notificationIDListApprove == string.Empty && notificationParentIDListApprove == string.Empty))
+                {
+                    result = await MBoxApiCalls.BatchApprove(notificationIDListApprove, notificationParentIDListApprove);
+                }
+                if (!result)
+                {
+                    Resources["IsLoading"] = false;
+                    await DisplayAlert(App.CurrentTranslation["NotificationReply_ApproveButtonText"], App.CurrentTranslation["NotificationReply_ErrorMsgSubmitFailed"], App.CurrentTranslation["Common_OK"]);
+                }
+                else
+                {
+                    if (!(notificationIDListReport == string.Empty && notificationParentIDListReport == string.Empty))
+                    {
+                        result = await MBoxApiCalls.BatchNeedReport(notificationIDListApprove, notificationParentIDListApprove);
+                    }
+                    Resources["IsLoading"] = false;
+                    if (!result)
+                    {
+                        await DisplayAlert(App.CurrentTranslation["NotificationReply_ReportButtonText"], App.CurrentTranslation["NotificationReply_ErrorMsgSubmitFailed"], App.CurrentTranslation["Common_OK"]);
+                    }
+                }   
+            }
+
+            if (result)
+            {
+                if (removedBatchNotificationIds.Count > 0)
+                {
+                    foreach (int id in removedBatchNotificationIds)
+                    {
+                        var item = NotificationList.FirstOrDefault(x => x.ID == id);
+                        if (item != null) NotificationList.Remove(item);
+                    }
+
+                    removedBatchNotificationIds = new List<int>();
+
+                    UpdateWebView(subGroupName, null);
+                }
+
+                MessagingCenter.Send<string>("NotificationHandler", "NotificationPopupClosedWithAction");
+            }
+        }
+
+        private View CreateAndPopulateWebViews(string subGroupName, out double viewHeight)
         {
             viewHeight = 0;
             const double WV_ROW_Height = 32.75;
             StackLayout result = new StackLayout();
-            List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroup.GroupName).ToList();
+            List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroupName).ToList();
 
             // 0. create new table (vw)
             WebView wv = new WebView();
@@ -117,34 +446,47 @@ namespace MBoxMobile.Views
             {
                 if (e.Url != string.Empty)
                 {
-                    selectedNotificationID = int.Parse(e.Url.Split('=').LastOrDefault());
-                    // call pop-up regarding notification type
-                    NotificationModel currentNotification = NotificationList.Where(x => x.ID == selectedNotificationID).FirstOrDefault();
-                    if (currentNotification.Popup >= 1 && currentNotification.Popup <= 7)
+                    //selectedNotificationID = int.Parse(e.Url.Split('=').LastOrDefault());
+                    string sParameters = e.Url.Split('=')[1];
+                    string[] parameterArray = sParameters.Split('&');
+                    selectedNotificationID = int.Parse(parameterArray[0]);
+                    if (parameterArray.Count() == 3)
                     {
-                        switch (currentNotification.Popup)
+                        string option = parameterArray[1];
+                        bool state = bool.Parse(parameterArray[2]);
+
+                        UpdateWebView(subGroupName, null, selectedNotificationID, option, state);
+                    }
+                    else
+                    {
+                        // call pop-up regarding notification type
+                        NotificationModel currentNotification = NotificationList.Where(x => x.ID == selectedNotificationID).FirstOrDefault();
+                        if (currentNotification.Popup >= 1 && currentNotification.Popup <= 7)
                         {
-                            case 1:
-                                Navigation.PushModalAsync(new NotificationReplyType1Page(currentNotification));
-                                break;
-                            case 2:
-                                Navigation.PushModalAsync(new NotificationReplyType2Page(currentNotification));
-                                break;
-                            case 3:
-                                Navigation.PushModalAsync(new NotificationReplyType3Page(currentNotification));
-                                break;
-                            case 4:
-                                Navigation.PushModalAsync(new NotificationReplyType4Page(currentNotification));
-                                break;
-                            case 5:
-                                Navigation.PushModalAsync(new NotificationReplyType5Page(currentNotification));
-                                break;
-                            case 6:
-                                Navigation.PushModalAsync(new NotificationReplyType6Page(currentNotification));
-                                break;
-                            case 7:
-                                Navigation.PushModalAsync(new NotificationReplyType7Page(currentNotification));
-                                break;
+                            switch (currentNotification.Popup)
+                            {
+                                case 1:
+                                    Navigation.PushModalAsync(new NotificationReplyType1Page(currentNotification));
+                                    break;
+                                case 2:
+                                    Navigation.PushModalAsync(new NotificationReplyType2Page(currentNotification));
+                                    break;
+                                case 3:
+                                    Navigation.PushModalAsync(new NotificationReplyType3Page(currentNotification));
+                                    break;
+                                case 4:
+                                    Navigation.PushModalAsync(new NotificationReplyType4Page(currentNotification));
+                                    break;
+                                case 5:
+                                    Navigation.PushModalAsync(new NotificationReplyType5Page(currentNotification));
+                                    break;
+                                case 6:
+                                    Navigation.PushModalAsync(new NotificationReplyType6Page(currentNotification));
+                                    break;
+                                case 7:
+                                    Navigation.PushModalAsync(new NotificationReplyType7Page(currentNotification));
+                                    break;
+                            }
                         }
                     }
                 }
@@ -250,8 +592,12 @@ namespace MBoxMobile.Views
                 string description = nm.AlterDescription;
                 if (descriptions.Count == 0 || descriptions.Where(d => d.GroupName == description).Count() == 0)
                 {
+                    TableLayoutType tableType = TableLayoutType.NoCheckboxes;
+                    if (nm.DataType == 2) tableType = TableLayoutType.AcknowledgeCheckboxes;
+                    if (nm.DataType == 5) tableType = TableLayoutType.SaveCheckboxes;
+
                     int notifCount = NotificationList.Where(x => x.AlterDescription == description).Count();
-                    descriptions.Add(new NotificationGroupInfo() { GroupName = description, GroupItemCount = notifCount });
+                    descriptions.Add(new NotificationGroupInfo() { GroupName = description, GroupItemCount = notifCount, TableType = tableType });
                 }
             }
             

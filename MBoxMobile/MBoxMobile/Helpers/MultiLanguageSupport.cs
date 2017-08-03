@@ -576,8 +576,8 @@ namespace MBoxMobile.Helpers
             translation.Add("Notification_TimeToSolve", "解决时间（DD：mm）");
             translation.Add("Notification_SelectAll", "Select_all_CH");         ////////////
             translation.Add("Notification_DeselectAll", "Deselect all_CH");     ////////////
-            translation.Add("Notification_AcknowledgeAll", "AcknowledgeCH");    ////////////
-            translation.Add("Notification_SaveAll", "SaveCH");                  ////////////
+            translation.Add("Notification_AcknowledgeAll", "审核");
+            translation.Add("Notification_SaveAll", "保存");
 
             //NotificationReply pages
             translation.Add("NotificationReplyType1_Title", "未确认电量");

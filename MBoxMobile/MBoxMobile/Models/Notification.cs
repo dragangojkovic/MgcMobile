@@ -16,8 +16,11 @@ namespace MBoxMobile.Models
             {
                 if (RecordDate != string.Empty)
                 {
-                DateTime dt = Convert.ToDateTime(RecordDate);
-                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    DateTime dt;
+                    if (DateTime.TryParse(RecordDate, out dt))
+                        return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    else
+                        return string.Empty;
                 }
                 else
                     return string.Empty;
@@ -34,8 +37,11 @@ namespace MBoxMobile.Models
             {
                 if (DesDate != string.Empty)
                 {
-                    DateTime dt = Convert.ToDateTime(DesDate);
-                    return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    DateTime dt;
+                    if (DateTime.TryParse(DesDate, out dt))
+                        return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    else
+                        return string.Empty;
                 }
                 else
                     return string.Empty;
@@ -48,8 +54,11 @@ namespace MBoxMobile.Models
             {
                 if (ApproveDate != string.Empty)
                 {
-                DateTime dt = Convert.ToDateTime(ApproveDate);
-                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    DateTime dt;
+                    if (DateTime.TryParse(ApproveDate, out dt))
+                        return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    else
+                        return string.Empty;
                 }
                 else
                     return string.Empty;
@@ -66,8 +75,11 @@ namespace MBoxMobile.Models
             {
                 if (SolutionDate != string.Empty)
                 {
-                    DateTime dt = Convert.ToDateTime(SolutionDate);
-                    return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    DateTime dt;
+                    if (DateTime.TryParse(SolutionDate, out dt))
+                        return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    else
+                        return string.Empty;
                 }
                 else
                     return string.Empty;
@@ -80,8 +92,11 @@ namespace MBoxMobile.Models
             {
                 if (ReportDate != string.Empty)
                 {
-                DateTime dt = Convert.ToDateTime(ReportDate);
-                return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    DateTime dt;
+                    if (DateTime.TryParse(ReportDate, out dt))
+                        return string.Format("{0} {1}", DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceShortDateFormat(dt), DependencyService.Get<IDeviceDateTimeFormat>().ConvertToDeviceTimeFormat(dt));
+                    else
+                        return string.Empty;
                 }
                 else
                     return string.Empty;
@@ -123,7 +138,22 @@ namespace MBoxMobile.Models
 
         public string CalculateDateTime(string firstDT, string secondDT)
         {
-            return "";
+            if (firstDT != string.Empty && secondDT != string.Empty)
+            {
+                DateTime dtFirst, dtSecond;
+                if (DateTime.TryParse(firstDT, out dtFirst) && DateTime.TryParse(secondDT, out dtSecond))
+                {
+                    int days = (dtSecond - dtFirst).Days;
+                    int hours = (dtSecond - dtFirst).Hours;
+                    int minutes = (dtSecond - dtFirst).Minutes;
+
+                    return string.Format("{0:00}:{1:00}:{2:00}", days, hours, minutes);
+                }
+                else
+                    return string.Empty;
+            }
+            else
+                return string.Empty;
         }
     }   
 

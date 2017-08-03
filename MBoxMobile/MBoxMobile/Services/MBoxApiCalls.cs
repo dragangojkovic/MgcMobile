@@ -14,7 +14,7 @@ namespace MBoxMobile.Services
 {
     public static class MBoxApiCalls
     {
-        static Uri BaseUri = new Uri("http://121.33.199.84:200/");
+        static Uri BaseUri = new Uri("http://gzmgc.chinacloudapp.cn:5110"); //new Uri("http://121.33.199.84:200/");
         static string AccessToken = "";
 
         public static async Task<TResult> GetObjectOrObjectList<TResult>(string serializedParameters, string requestUri, bool isLogin = false, bool isPostMethod = false)
@@ -487,6 +487,48 @@ namespace MBoxMobile.Services
                 return new List<SolutionCauseModel>();
             else
                 return returnedObj.SolutionCauses;
+        }
+
+        public static async Task<bool> BatchAcknowledge(string notificationIDList, string notificationParentIDList)
+        {
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/BatchAcknowledge?userid={0}&notIDs={1}&notParentIDs={2}", App.LoggedUser.login.RecordId, notificationIDList, notificationParentIDList));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public static async Task<bool> BatchApprove(string notificationIDList, string notificationParentIDList)
+        {
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/BatchApprove?userid={0}&notIDs={1}&notParentIDs={2}", App.LoggedUser.login.RecordId, notificationIDList, notificationParentIDList));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public static async Task<bool> BatchNeedReport(string notificationIDList, string notificationParentIDList)
+        {
+            IntWrapper returnedObj = await GetObjectOrObjectList<IntWrapper>("", BaseUri + string.Format("MgcApi.svc/BatchNeedReport?userid={0}&notIDs={1}&notParentIDs={2}", App.LoggedUser.login.RecordId, notificationIDList, notificationParentIDList));
+            if (returnedObj == null)
+                return false;
+            else
+            {
+                if (returnedObj.IntValue == 10000)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         public static async Task<bool> ReplyElectricity(int notificationID, int? notificationParentID, string description, int electricityCauseID)

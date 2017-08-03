@@ -30,7 +30,12 @@ namespace MBoxMobile
         {
             InitializeComponent();
 
-            CurrentLanguage = Languages.English;
+            string sCurrentLanguageId = Plugin.Settings.CrossSettings.Current.GetValueOrDefault("LANGUAGE", string.Empty);
+            if (sCurrentLanguageId == string.Empty)
+                CurrentLanguage = Languages.English;
+            else
+                CurrentLanguage = (Languages)int.Parse(sCurrentLanguageId);
+            
             UserType = 1;
 
             Servers = new Dictionary<int, string>();

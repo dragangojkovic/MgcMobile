@@ -54,7 +54,7 @@ namespace MBoxMobile.Views
             Resources["NotificationReplyType1_Title"] = App.CurrentTranslation["NotificationReplyType1_Title"];
 
             Resources["NotificationReply_DateTimeTitle"] = App.CurrentTranslation["NotificationReply_DateTimeTitle"];
-            Resources["NotificationReply_DateTimeValue"] = NotificationModel.RecordDate;
+            Resources["NotificationReply_DateTimeValue"] = NotificationModel.RecordDateLocal;
             Resources["NotificationReply_MachineNumberTitle"] = App.CurrentTranslation["NotificationReply_MachineNumberTitle"];
             Resources["NotificationReply_MachineNumberValue"] = NotificationModel.MachineNumber;
             Resources["NotificationReply_OperatorTitle"] = App.CurrentTranslation["NotificationReply_OperatorTitle"];
@@ -99,6 +99,11 @@ namespace MBoxMobile.Views
                 {
                     CauseButton.Text = action;
                     CauseID = WasteCauses.Where(x => x.Material == action).FirstOrDefault().MID;
+
+                    string wcDescription = string.Empty;
+                    if (CauseID != 0) wcDescription = WasteCauses.Where(x => x.MID == CauseID).FirstOrDefault().DescCH;
+                    if (string.IsNullOrEmpty(wcDescription))
+                        Description.Focus();
                 }
             }
         }
