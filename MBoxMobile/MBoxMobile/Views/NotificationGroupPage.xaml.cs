@@ -206,14 +206,6 @@ namespace MBoxMobile.Views
 
             List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroupName).ToList();
 
-            if (selectedAll != null)
-            {
-                foreach (NotificationModel nm in notifs)
-                {
-                    nm.Acknowledge = (bool)selectedAll;
-                }
-            }
-
             if (notificationId > 0)
             {
                 NotificationModel nm = notifs.Where(x => x.ID == notificationId).FirstOrDefault();
@@ -238,6 +230,24 @@ namespace MBoxMobile.Views
             List<int> subSubGroups = notifs.Select(x => x.DataType).Distinct().ToList();
             foreach (int tableType in subSubGroups)
             {
+                if (selectedAll != null)
+                {
+                    if (tableType == 2 || tableType == 3)
+                    {
+                        foreach (NotificationModel nm in notifs)
+                        {
+                            nm.Acknowledge = (bool)selectedAll;
+                        }
+                    }
+                    if (tableType == 5)
+                    {
+                        foreach (NotificationModel nm in notifs)
+                        {
+                            nm.Approved = (bool)selectedAll;
+                        }
+                    }
+                }
+
                 subTableCount++;
 
                 // 1. get notifs for this table
@@ -431,8 +441,11 @@ namespace MBoxMobile.Views
 
         private View CreateAndPopulateWebViews(string subGroupName, out double viewHeight)
         {
-            viewHeight = 0;
-            const double WV_ROW_Height = 32.75;
+            viewHeight = 8;
+            const double WV_ROW_Height = 32;
+            const double WV_ROW_Checkbox_Height = 34;
+            const double WV_HEADER_Height = 30;
+            const double WV_BIG_HEADER_Height = 49;
             StackLayout result = new StackLayout();
             List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroupName).ToList();
 
@@ -446,7 +459,6 @@ namespace MBoxMobile.Views
             {
                 if (e.Url != string.Empty)
                 {
-                    //selectedNotificationID = int.Parse(e.Url.Split('=').LastOrDefault());
                     string sParameters = e.Url.Split('=')[1];
                     string[] parameterArray = sParameters.Split('&');
                     selectedNotificationID = int.Parse(parameterArray[0]);
@@ -557,17 +569,19 @@ namespace MBoxMobile.Views
                 }
 
                 htmlHtmlDetails += HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeader, htmlContent) + "";
-                //wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
-                viewHeight += (data.Count() + 1) * WV_ROW_Height + 10;
-                //wv.HeightRequest = viewHeight;
+                if (tableType > 3)
+                    viewHeight += WV_BIG_HEADER_Height;
+                else
+                    viewHeight += WV_HEADER_Height;
 
-                //// 3. add to View
-                //result.Children.Add(wv);
+                if (tableType == 2 || tableType > 5)
+                    viewHeight += data.Count() * WV_ROW_Checkbox_Height + 11;
+                else
+                    viewHeight += data.Count() * WV_ROW_Height + 11;
             }
 
             wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
-            if (subTableCount == 1) viewHeight += 10;
-            //wv.HeightRequest = viewHeight;
+            wv.HeightRequest = viewHeight;
 
             // 3. add to View
             result.Children.Add(wv);

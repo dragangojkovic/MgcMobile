@@ -249,8 +249,9 @@ namespace MBoxMobile.Views
 
         private async Task<double> PopulateWebView(string webViewName)
         {
-            double wvHeight = -1;
-            const double WV_ROW_Height = 31.75;
+            double wvHeight = 0;
+            const double WV_ROW_Height = 32;
+            const double WV_HEADER_Height = 30;
 
             switch (webViewName)
             {
@@ -260,7 +261,7 @@ namespace MBoxMobile.Views
                     string htmlContentDetails = HtmlTableSupport.Uptime_Details_TableContent(detailList);
                     string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDetails, htmlContentDetails);
                     wvDetails.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
-                    //wvHeight = (detailList.Count() + 2) * WV_ROW_Height + 7;
+                    wvHeight = 2 * WV_HEADER_Height + detailList.Count() * WV_ROW_Height + 19;
                     break;
                 case "wvAuxiliaryEquipments":
                     IEnumerable<EfficiencyAuxiliaryEquipment> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxMachine(locationId, departmentId, subDepartmentId, filterId, periodId, auxiliaryTypeId);
@@ -268,7 +269,7 @@ namespace MBoxMobile.Views
                     string htmlContentAuxiliaryEquipments = HtmlTableSupport.Uptime_AuxiliaryEquipments_TableContent(auxiliaryEquipmentsList);
                     string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlContentAuxiliaryEquipments);
                     wvAuxiliaryEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlAuxiliaryEquipments };
-                    //wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 10;
+                    wvHeight = WV_HEADER_Height + auxiliaryEquipmentsList.Count() * WV_ROW_Height + 19;
                     break;
             }
 

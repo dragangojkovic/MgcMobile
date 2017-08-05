@@ -537,8 +537,9 @@ namespace MBoxMobile.Views
 
         private async Task<double> PopulateWebView(string webViewName)
         {
-            double wvHeight = -1;
-            const double WV_ROW_Height = 31.0;
+            double wvHeight = 0;
+            const double WV_ROW_Height = 32;
+            const double WV_HEADER_Height = 30;
 
             switch (webViewName)
             {
@@ -548,7 +549,7 @@ namespace MBoxMobile.Views
                     string htmlContentLocations = HtmlTableSupport.Uptime_Medium_TableContent(locationList);
                     string htmlHtmlLocations = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderLocations, htmlContentLocations);
                     wvLocations.Source = new HtmlWebViewSource { Html = htmlHtmlLocations };
-                    //wvHeight = (locationList.Count() + 2) * WV_ROW_Height + 10;
+                    wvHeight = 2 * WV_HEADER_Height + locationList.Count() * WV_ROW_Height + 19;
                     break;
                 case "wvDepartments":
                     IEnumerable<EfficiencyModel> departmentsList = await MBoxApiCalls.GetEfficiencyPerDepartment(locationId, resultedPersonalFilterId, timeFilterId);
@@ -556,7 +557,7 @@ namespace MBoxMobile.Views
                     string htmlContentDepartments = HtmlTableSupport.Uptime_Medium_TableContent(departmentsList);
                     string htmlHtmlDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDepartments, htmlContentDepartments);
                     wvDepartments.Source = new HtmlWebViewSource { Html = htmlHtmlDepartments };
-                    //wvHeight = (departmentsList.Count() + 1) * WV_ROW_Height + 10;
+                    wvHeight = WV_HEADER_Height + departmentsList.Count() * WV_ROW_Height + 19;
                     break;
                 case "wvSubDepartments":
                     IEnumerable<EfficiencyModel> subDepartmentsList = await MBoxApiCalls.GetEfficiencyPerSubDepartment(locationId, departmentId, resultedPersonalFilterId, timeFilterId);
@@ -564,7 +565,7 @@ namespace MBoxMobile.Views
                     string htmlContentSubDepartments = HtmlTableSupport.Uptime_Medium_TableContent(subDepartmentsList);
                     string htmlHtmlSubDepartments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderSubDepartments, htmlContentSubDepartments);
                     wvSubDepartments.Source = new HtmlWebViewSource { Html = htmlHtmlSubDepartments };
-                    //wvHeight = (subDepartmentsList.Count() + 1) * WV_ROW_Height + 10;
+                    wvHeight = WV_HEADER_Height + subDepartmentsList.Count() * WV_ROW_Height + 19;
                     break;
                 case "wvEquipments":
                     IEnumerable<EfficiencyModel> equipmentsList = await MBoxApiCalls.GetEfficiencyPerEquipmentType(locationId, departmentId, subDepartmentId, resultedPersonalFilterId, timeFilterId);
@@ -572,7 +573,7 @@ namespace MBoxMobile.Views
                     string htmlContentEquipments = HtmlTableSupport.Uptime_Medium_TableContent(equipmentsList);
                     string htmlHtmlEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipments, htmlContentEquipments);
                     wvEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlEquipments };
-                    //wvHeight = (equipmentsList.Count() + 1) * WV_ROW_Height + 10;
+                    wvHeight = WV_HEADER_Height + equipmentsList.Count() * WV_ROW_Height + 19;
                     break;
                 case "wvEquipmentGroups":
                     IEnumerable<EfficiencyModel> equipmentGroupsList = await MBoxApiCalls.GetEfficiencyPerEquipmentGroup(locationId, departmentId, subDepartmentId, resultedPersonalFilterId, timeFilterId);
@@ -580,7 +581,7 @@ namespace MBoxMobile.Views
                     string htmlContentEquipmentGroups = HtmlTableSupport.Uptime_Medium_TableContent(equipmentGroupsList);
                     string htmlHtmlEquipmentGroups = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderEquipmentGroups, htmlContentEquipmentGroups);
                     wvEquipmentGroups.Source = new HtmlWebViewSource { Html = htmlHtmlEquipmentGroups };
-                    //wvHeight = (equipmentGroupsList.Count() + 1) * WV_ROW_Height + 10;
+                    wvHeight = WV_HEADER_Height + equipmentGroupsList.Count() * WV_ROW_Height + 19;
                     break;
                 case "wvAuxiliaryEquipments":
                     IEnumerable<EfficiencyModel> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxiliaryType(locationId, departmentId, subDepartmentId, resultedPersonalFilterId, timeFilterId);
@@ -588,7 +589,7 @@ namespace MBoxMobile.Views
                     string htmlContentAuxiliaryEquipments = HtmlTableSupport.Uptime_Small_TableContent(auxiliaryEquipmentsList);
                     string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlContentAuxiliaryEquipments);
                     wvAuxiliaryEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlAuxiliaryEquipments };
-                    //wvHeight = (auxiliaryEquipmentsList.Count() + 1) * WV_ROW_Height + 10;
+                    wvHeight = WV_HEADER_Height + auxiliaryEquipmentsList.Count() * WV_ROW_Height + 19;
                     break;
             }
 

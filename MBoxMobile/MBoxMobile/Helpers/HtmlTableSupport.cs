@@ -79,6 +79,13 @@ namespace MBoxMobile.Helpers
         var ch = el.checked;
 	    window.open('http://localhost?id='+id+'&rpt&'+ch);
     }
+    window.addEventListener('load', function() { 
+        var body = document.body, html = document.documentElement;
+        var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        var x = document.getElementsByTagName('TR')[0];
+        var y = document.getElementsByTagName('TR')[1];
+        alert(x.clientHeight+' / '+x.offsetHeight+' - '+y.clientHeight+' / '+y.offsetHeight+' = '+height);
+	});
 </script>
 <style>
 table, th, td {
@@ -95,6 +102,7 @@ th {
 }
 td {
     padding: 5px;
+    height: 21px;
 }
 td:nth-child(2) {
     color: #50c0a0; 
@@ -216,6 +224,7 @@ table th {
     <th colspan=""7""></th>
 </tr>
 <tr>
+    <th style=""display:none"">Id</th>
     <th><div style=""width:60px;"">M#</div></th>
     <th><div style=""width:60px;"">{#Uptime}</div></th>
     <th><div style=""width:60px;"">{#Status}</div></th>
@@ -254,6 +263,7 @@ table th {
         {
             string html = @"
 <tr>
+    <th style=""display:none"">Id</th>
     <th><div style=""width:60px;"">M#</div></th>
     <th style=""white-space:nowrap"">{#Name}</th>
     <th><div style=""width:60px;"">{#Type}</div></th>
@@ -345,6 +355,7 @@ table th {
                 {
                     string template = @"
 <tr>
+    <td style=""display:none""></td>
     <td class=""right-text"">{#0}</td>
 	<td class=""right-text"">{#1}</td>
 	<td class=""center-text"">{#2}</td>
@@ -389,6 +400,7 @@ table th {
                 {
                     string template = @"
 <tr>
+    <td style=""display:none""></td>
     <td class=""right-text"">{#0}</td>
 	<td style=""white-space:nowrap"">{#1}</td>
 	<td class=""right-text"">{#2}</td>
