@@ -79,13 +79,6 @@ namespace MBoxMobile.Helpers
         var ch = el.checked;
 	    window.open('http://localhost?id='+id+'&rpt&'+ch);
     }
-    window.addEventListener('load', function() { 
-        var body = document.body, html = document.documentElement;
-        var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-        var x = document.getElementsByTagName('TR')[0];
-        var y = document.getElementsByTagName('TR')[1];
-        alert(x.clientHeight+' / '+x.offsetHeight+' - '+y.clientHeight+' / '+y.offsetHeight+' = '+height);
-	});
 </script>
 <style>
 table, th, td {

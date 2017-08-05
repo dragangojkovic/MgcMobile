@@ -52,13 +52,6 @@ namespace MBoxMobile.Views
             Resources["FilterOffStyle"] = (Style)Application.Current.Resources["FilterSelectedStyle"];
             Resources["FilterIsEnabled"] = false;
 
-            //Resources["LabelFilterLocationsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
-            //Resources["LabelFilterDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
-            //Resources["LabelFilterSubDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
-            //Resources["LabelFilterEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
-            //Resources["LabelFilterEquipmentGroupStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
-            //Resources["LabelFilterAuxiliaryEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleGray"];
-            //Resources["Uptime_IsClearEnabled"] = false;
             Resources["Uptime_FilterInfo"] = string.Empty;
             Resources["Uptime_IsFilterInfoVisible"] = false;
 
@@ -433,8 +426,6 @@ namespace MBoxMobile.Views
                     equipmentId = null;
                     equipmentGroupId = null;
                     auxiliaryEquipmentId = null;
-                    //Resources["LabelFilterLocationsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
-                    //Resources["Uptime_IsClearEnabled"] = true;
                     Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
@@ -457,8 +448,6 @@ namespace MBoxMobile.Views
                     equipmentId = null;
                     equipmentGroupId = null;
                     auxiliaryEquipmentId = null;
-                    //Resources["LabelFilterDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
-                    //Resources["Uptime_IsClearEnabled"] = true;
                     Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
@@ -479,8 +468,6 @@ namespace MBoxMobile.Views
                     equipmentId = null;
                     equipmentGroupId = null;
                     auxiliaryEquipmentId = null;
-                    //Resources["LabelFilterSubDepartmentsStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
-                    //Resources["Uptime_IsClearEnabled"] = true;
                     Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
@@ -499,8 +486,6 @@ namespace MBoxMobile.Views
                     equipmentId = int.Parse(e.Url.Split('=').LastOrDefault());
                     equipmentGroupId = null;
                     auxiliaryEquipmentId = null;
-                    //Resources["LabelFilterEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
-                    //Resources["Uptime_IsClearEnabled"] = true;
                     Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
@@ -512,8 +497,6 @@ namespace MBoxMobile.Views
                 {
                     equipmentGroupId = int.Parse(e.Url.Split('=').LastOrDefault());
                     auxiliaryEquipmentId = null;
-                    //Resources["LabelFilterEquipmentGroupStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
-                    //Resources["Uptime_IsClearEnabled"] = true;
                     Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
@@ -524,12 +507,11 @@ namespace MBoxMobile.Views
                 if (e.Url != string.Empty)
                 {
                     auxiliaryEquipmentId = int.Parse(e.Url.Split('=').LastOrDefault());
-                    //Resources["LabelFilterAuxiliaryEquipmentStyle"] = (Style)Application.Current.Resources["LabelSmallStyleBlack"];
-                    //Resources["Uptime_IsClearEnabled"] = true;
                     Resources["Uptime_FilterInfo"] = SetFilterInfoText();
                 }
                 e.Cancel = true;
             };
+
             #endregion
 
             return result;
