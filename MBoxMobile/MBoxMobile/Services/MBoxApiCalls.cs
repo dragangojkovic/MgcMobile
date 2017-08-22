@@ -14,7 +14,7 @@ namespace MBoxMobile.Services
 {
     public static class MBoxApiCalls
     {
-        static Uri BaseUri = new Uri("http://gzmgc.chinacloudapp.cn:5110"); //new Uri("http://121.33.199.84:200/");
+        static Uri BaseUri = new Uri("http://121.33.199.84:200/");
         static string AccessToken = "";
 
         public static async Task<TResult> GetObjectOrObjectList<TResult>(string serializedParameters, string requestUri, bool isLogin = false, bool isPostMethod = false)

@@ -4,7 +4,7 @@ using MBoxMobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,8 +36,25 @@ namespace MBoxMobile.Views
             Resources["NotificationContentMinHeight"] = ScreenHeight - 200.0;
             Resources["ButtonWidth"] = (ScreenWidth - 24) / 2.0;
             Resources["ButtonLargeWidth"] = ScreenWidth - 20;
+            
+            SendButton.IsVisible = false;
+            Resources["DescriptionWidth"] = ScreenWidth - 20;
+            Description.Focused += Description_Focused;
+            Description.Unfocused += Description_Unfocused;
 
             InitActionSheet();
+        }
+
+        private void Description_Unfocused(object sender, FocusEventArgs e)
+        {
+            SendButton.IsVisible = false;
+            Resources["DescriptionWidth"] = ScreenWidth - 30;
+        }
+
+        private void Description_Focused(object sender, FocusEventArgs e)
+        {
+            SendButton.IsVisible = true;
+            Resources["DescriptionWidth"] = ScreenWidth - 95;
         }
 
         private async void InitActionSheet()
@@ -79,6 +96,7 @@ namespace MBoxMobile.Views
 
             Resources["NotificationReply_CauseButtonText"] = App.CurrentTranslation["NotificationReply_CauseButtonText"];
             Resources["NotificationReply_DescriptionPlaceholder"] = App.CurrentTranslation["NotificationReply_DescriptionPlaceholder"];
+            Resources["NotificationReply_SendButtonText"] = App.CurrentTranslation["NotificationReply_SendButtonText"];
             Resources["NotificationReply_SubmitButtonText"] = App.CurrentTranslation["NotificationReply_AcknowledgeButtonText"];
             Resources["NotificationReply_CancelButtonText"] = App.CurrentTranslation["NotificationReply_CancelButtonText"];
         }
@@ -108,7 +126,17 @@ namespace MBoxMobile.Views
             }
         }
 
+        public async void SendClicked(object sender, EventArgs e)
+        {
+            await HandlingSubmit();
+        }
+
         public async void SubmitClicked(object sender, EventArgs e)
+        {
+            await HandlingSubmit();
+        }
+
+        private async Task HandlingSubmit()
         {
             string wcDescription = string.Empty;
             if (CauseID != 0) wcDescription = WasteCauses.Where(x => x.MID == CauseID).FirstOrDefault().DescCH;
@@ -156,6 +184,9 @@ namespace MBoxMobile.Views
         {
             base.OnSizeAllocated(width, height);
 
+            if (Description.IsFocused)
+                Description.Unfocus();
+
             if (ScreenWidth != width || ScreenHeight != height)
             {
                 ScreenWidth = width;
@@ -163,6 +194,11 @@ namespace MBoxMobile.Views
 
                 Resources["ButtonWidth"] = (ScreenWidth - 24) / 2.0;
                 Resources["ButtonLargeWidth"] = ScreenWidth - 20;
+
+                if (SendButton.IsVisible)
+                    Resources["DescriptionWidth"] = ScreenWidth - 95;
+                else
+                    Resources["DescriptionWidth"] = ScreenWidth - 30;
             }
         }
     }

@@ -204,6 +204,12 @@ namespace MBoxMobile.Views
             StackLayout stack = asource.ContentItems as StackLayout;
             WebView wv = (stack.Children[1] as StackLayout).Children[0] as WebView;
 
+            double viewHeight = 10;
+            const double WV_ROW_Height = 32;
+            const double WV_ROW_Checkbox_Height = 34;
+            const double WV_HEADER_Height = 30;
+            const double WV_BIG_HEADER_Height = 49;
+
             List<NotificationModel> notifs = NotificationList.Where(x => x.AlterDescription == subGroupName).ToList();
 
             if (notificationId > 0)
@@ -228,6 +234,15 @@ namespace MBoxMobile.Views
 
             //4th level of grouping - there can be more than one table in sub-group
             List<int> subSubGroups = notifs.Select(x => x.DataType).Distinct().ToList();
+
+            // if DataType 2 exist, move it on first position, because of select / deselect buttons
+            bool type2Exists = subSubGroups.Contains(2);
+            if (type2Exists)
+            {
+                subSubGroups.Remove(2);
+                subSubGroups.Insert(0, 2);
+            }
+
             foreach (int tableType in subSubGroups)
             {
                 if (selectedAll != null)
@@ -274,9 +289,19 @@ namespace MBoxMobile.Views
                 }
 
                 htmlHtmlDetails += HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeader, htmlContent) + "";
+                if (tableType > 3)
+                    viewHeight += WV_BIG_HEADER_Height;
+                else
+                    viewHeight += WV_HEADER_Height;
+
+                if (tableType == 2 || tableType > 5)
+                    viewHeight += data.Count() * WV_ROW_Checkbox_Height + 11;
+                else
+                    viewHeight += data.Count() * WV_ROW_Height + 11;
             }
 
             wv.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
+            wv.HeightRequest = viewHeight;
         }
 
         private void PrepareSelectedCheckboxList(string subGroupName, TableLayoutType type)
@@ -337,17 +362,18 @@ namespace MBoxMobile.Views
                     {
                         int notifID = 0;
                         int.TryParse(scbox.Id, out notifID);
-
-                        notificationIDList += "," + scbox.Id;
-                        removedBatchNotificationIds.Add(int.Parse(scbox.Id));
                         string sParentId = NotificationList.Where(x => x.ID == notifID).FirstOrDefault().ParentID.ToString();
-                        if (sParentId != "") notificationParentIDList += "," + sParentId;
+
+                        if (scbox.Id != string.Empty && sParentId != string.Empty)
+                            notificationParentIDList += "," + sParentId;
+                        else
+                            notificationIDList += "," + scbox.Id;
+
+                        removedBatchNotificationIds.Add(notifID);
                     }
                 }
                 if (notificationIDList != string.Empty) notificationIDList = notificationIDList.Substring(1);
                 if (notificationParentIDList != string.Empty) notificationParentIDList = notificationParentIDList.Substring(1);
-
-                if (notificationIDList != string.Empty && notificationParentIDList != string.Empty) notificationIDList = string.Empty;
 
                 if (!(notificationIDList == string.Empty && notificationParentIDList == string.Empty))
                 {
@@ -373,28 +399,29 @@ namespace MBoxMobile.Views
                 {
                     int notifID = 0;
                     int.TryParse(scbox.Id, out notifID);
+                    string sParentId = NotificationList.Where(x => x.ID == notifID).FirstOrDefault().ParentID.ToString();
 
                     if (scbox.Acknowledge)
-                    {                     
-                        notificationIDListApprove += "," + scbox.Id;
-                        removedBatchNotificationIds.Add(int.Parse(scbox.Id));
-                        string sParentIdApprove = NotificationList.Where(x => x.ID == notifID).FirstOrDefault().ParentID.ToString();
-                        if (sParentIdApprove != "") notificationParentIDListApprove += "," + sParentIdApprove;
+                    {
+                        if (scbox.Id != string.Empty && sParentId != string.Empty)
+                            notificationParentIDListApprove += "," + sParentId;
+                        else
+                            notificationIDListApprove += "," + scbox.Id;
+
+                        removedBatchNotificationIds.Add(notifID);
                     }
                     if (scbox.Report)
                     {
-                        notificationIDListReport += "," + scbox.Id;
-                        string sParentIdReport = NotificationList.Where(x => x.ID == notifID).FirstOrDefault().ParentID.ToString();
-                        if (sParentIdReport != "") notificationParentIDListReport += "," + sParentIdReport;
+                        if (scbox.Id != string.Empty && sParentId != string.Empty)
+                            notificationParentIDListReport += "," + sParentId;
+                        else
+                            notificationIDListReport += "," + scbox.Id;
                     }
                 }
                 if (notificationIDListApprove != string.Empty) notificationIDListApprove = notificationIDListApprove.Substring(1);
                 if (notificationParentIDListApprove != string.Empty) notificationParentIDListApprove = notificationParentIDListApprove.Substring(1);
                 if (notificationIDListReport != string.Empty) notificationIDListReport = notificationIDListReport.Substring(1);
                 if (notificationParentIDListReport != string.Empty) notificationParentIDListReport = notificationParentIDListReport.Substring(1);
-
-                if (notificationIDListApprove != string.Empty && notificationParentIDListApprove != string.Empty) notificationIDListApprove = string.Empty;
-                if (notificationIDListReport != string.Empty && notificationParentIDListReport != string.Empty) notificationIDListReport = string.Empty;
 
                 result = true;
                 if (!(notificationIDListApprove == string.Empty && notificationParentIDListApprove == string.Empty))
@@ -441,7 +468,7 @@ namespace MBoxMobile.Views
 
         private View CreateAndPopulateWebViews(string subGroupName, out double viewHeight)
         {
-            viewHeight = 8;
+            viewHeight = 10;
             const double WV_ROW_Height = 32;
             const double WV_ROW_Checkbox_Height = 34;
             const double WV_HEADER_Height = 30;
@@ -509,7 +536,16 @@ namespace MBoxMobile.Views
 
             //4th level of grouping - there can be more than one table in sub-group
             List<int> subSubGroups = notifs.Select(x => x.DataType).Distinct().ToList();
-            foreach(int tableType in subSubGroups)
+
+            // if DataType 2 exist, move it on first position, because of select / deselect buttons
+            bool type2Exists = subSubGroups.Contains(2);
+            if (type2Exists)
+            {
+                subSubGroups.Remove(2);
+                subSubGroups.Insert(0, 2);
+            }
+
+            foreach (int tableType in subSubGroups)
             {
                 subTableCount++;
 
@@ -612,6 +648,16 @@ namespace MBoxMobile.Views
 
                     int notifCount = NotificationList.Where(x => x.AlterDescription == description).Count();
                     descriptions.Add(new NotificationGroupInfo() { GroupName = description, GroupItemCount = notifCount, TableType = tableType });
+                }
+            }
+
+            // for the case when one sub-group have elements with same AlterDescription but different DataType and one DataType == 2
+            foreach (NotificationGroupInfo ngi in descriptions)
+            {
+                if (ngi.TableType == TableLayoutType.NoCheckboxes)
+                {
+                    int type2Count = NotificationList.Where(x => x.AlterDescription == ngi.GroupName && x.DataType == 2).Count();
+                    if (type2Count > 0) ngi.TableType = TableLayoutType.AcknowledgeCheckboxes;
                 }
             }
             

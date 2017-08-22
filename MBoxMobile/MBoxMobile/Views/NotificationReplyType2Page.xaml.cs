@@ -2,7 +2,7 @@
 using MBoxMobile.Models;
 using MBoxMobile.Services;
 using System;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,8 +11,8 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationReplyType2Page : ContentPage
     {
-        double screenWidth = 0.0;
-        double screenHeight = 0.0;
+        double ScreenWidth = 0.0;
+        double ScreenHeight = 0.0;
         NotificationModel NotificationModel;
         bool ShowReceivedNotification = false;
 
@@ -24,14 +24,31 @@ namespace MBoxMobile.Views
             NotificationModel = notificationModel;
             ShowReceivedNotification = showReceived;
 
-            screenWidth = DependencyService.Get<IDisplay>().Width;
-            screenHeight = DependencyService.Get<IDisplay>().Height;
+            ScreenWidth = DependencyService.Get<IDisplay>().Width;
+            ScreenHeight = DependencyService.Get<IDisplay>().Height;
 
             Resources["IsLoading"] = false;
-            Resources["PageContentMinHeight"] = screenHeight - 60.0;
-            Resources["NotificationContentMinHeight"] = screenHeight - 200.0;
-            Resources["ButtonWidth"] = (screenWidth - 24) / 2.0;
-            Resources["ButtonLargeWidth"] = screenWidth - 20;
+            Resources["PageContentMinHeight"] = ScreenHeight - 60.0;
+            Resources["NotificationContentMinHeight"] = ScreenHeight - 200.0;
+            Resources["ButtonWidth"] = (ScreenWidth - 24) / 2.0;
+            Resources["ButtonLargeWidth"] = ScreenWidth - 20;
+
+            SendButton.IsVisible = false;
+            Resources["DescriptionWidth"] = ScreenWidth - 20;
+            Description.Focused += Description_Focused;
+            Description.Unfocused += Description_Unfocused;
+        }
+
+        private void Description_Unfocused(object sender, FocusEventArgs e)
+        {
+            SendButton.IsVisible = false;
+            Resources["DescriptionWidth"] = ScreenWidth - 30;
+        }
+
+        private void Description_Focused(object sender, FocusEventArgs e)
+        {
+            SendButton.IsVisible = true;
+            Resources["DescriptionWidth"] = ScreenWidth - 95;
         }
 
         protected override void OnAppearing()
@@ -63,11 +80,22 @@ namespace MBoxMobile.Views
             Resources["NotificationReply_NotificationValue"] = NotificationModel.AlterDescription;
 
             Resources["NotificationReply_DescriptionPlaceholder"] = App.CurrentTranslation["NotificationReply_DescriptionPlaceholder"];
+            Resources["NotificationReply_SendButtonText"] = App.CurrentTranslation["NotificationReply_SendButtonText"];
             Resources["NotificationReply_SubmitButtonText"] = App.CurrentTranslation["NotificationReply_AcknowledgeButtonText"];
             Resources["NotificationReply_CancelButtonText"] = App.CurrentTranslation["NotificationReply_CancelButtonText"];
         }
 
+        public async void SendClicked(object sender, EventArgs e)
+        {
+            await HandlingSubmit();
+        }
+
         public async void SubmitClicked(object sender, EventArgs e)
+        {
+            await HandlingSubmit();
+        }
+
+        private async Task HandlingSubmit()
         {
             if (Description.Text == null) Description.Text = string.Empty;
 
@@ -103,6 +131,28 @@ namespace MBoxMobile.Views
                 App.IsNotificationHandling = false;
 
             await Navigation.PopModalAsync();
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (Description.IsFocused)
+                Description.Unfocus();
+
+            if (ScreenWidth != width || ScreenHeight != height)
+            {
+                ScreenWidth = width;
+                ScreenHeight = height;
+
+                Resources["ButtonWidth"] = (ScreenWidth - 24) / 2.0;
+                Resources["ButtonLargeWidth"] = ScreenWidth - 20;
+
+                if (SendButton.IsVisible)
+                    Resources["DescriptionWidth"] = ScreenWidth - 95;
+                else
+                    Resources["DescriptionWidth"] = ScreenWidth - 30;
+            }
         }
     }
 }

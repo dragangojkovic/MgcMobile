@@ -95,7 +95,7 @@
           </StackLayout>
         </StackLayout>
         <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-          <ctrl:RoundedButton x:Name="CancelButton" Text="{DynamicResource NotificationReply_CancelButtonText}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" VerticalOptions="CenterAndExpand" />
+          <ctrl:RoundedButton x:Name="CancelButton" Text="{DynamicResource NotificationReply_CancelButtonText}" Style="{StaticResource ButtonBlueStyle}" Clicked="CancelClicked" VerticalOptions="CenterAndExpand" WidthRequest="{DynamicResource ButtonWidth}" />
         </StackLayout>
         <ContentView IsVisible="{DynamicResource IsLoading}" BackgroundColor="#222222" Opacity="0.5" />
         <Frame BackgroundColor="#909090" HorizontalOptions="CenterAndExpand" IsVisible="{DynamicResource IsLoading}" VerticalOptions="CenterAndExpand">

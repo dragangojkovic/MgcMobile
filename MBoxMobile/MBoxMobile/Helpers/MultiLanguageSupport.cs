@@ -21,6 +21,46 @@ namespace MBoxMobile.Helpers
             return languages;
         }
 
+        public static int GetLanguageIdByTwoLetterISOLanguageName(string twoLetterISOName)
+        {
+            int returnedId;
+            switch (twoLetterISOName)
+            {
+                case "en":
+                    returnedId = 1;
+                    break;
+                case "zh":
+                    returnedId = 2;
+                    break;
+                //case "de":
+                //    returnedId = 3;
+                //    break;
+                //case "nl":
+                //    returnedId = 4;
+                //    break;
+                //case "fr":
+                //    returnedId = 5;
+                //    break;
+                //case "es":
+                //    returnedId = 6;
+                //    break;
+                //case "km":
+                //    returnedId = 7;
+                //    break;
+                //case "id":
+                //    returnedId = 8;
+                //    break;
+                //case "pt":
+                //    returnedId = 9;
+                //    break;
+                default:
+                    returnedId = 1;
+                    break;
+            }
+            
+            return returnedId;
+        }
+
         public static Dictionary<string, string> GetTranslations(Languages language)
         {
             Dictionary<string, string> dict;
@@ -140,6 +180,12 @@ namespace MBoxMobile.Helpers
             translation.Add("Login_ErrorInvalidLogin", "Invalid login!");
             translation.Add("Login_ErrorServer", "Server is required!");
             translation.Add("Login_ErrorInvalidServer", "Invalid server!");
+            translation.Add("LoginNotification_InfoText1", "Do you want to register this device for receiving push notifications?");
+            translation.Add("LoginNotification_InfoText2", "If so, enter device name!");
+            translation.Add("LoginNotification_YesText", "Yes");
+            translation.Add("LoginNotification_NoText", "No");
+            translation.Add("LoginNotification_DeviceName", "Your device name");
+            translation.Add("LoginNotification_Submit", "Submit");
 
             //ForgotPassword page
             translation.Add("Forgot_Title", "Forgot password?");
@@ -297,6 +343,7 @@ namespace MBoxMobile.Helpers
             translation.Add("NotificationReply_NotificationButtonText", "Tap to choose a notification");
             translation.Add("NotificationReply_DescriptionPlaceholder", "Description");
             translation.Add("NotificationReply_SolutionPlaceholder", "Please describe your solution");
+            translation.Add("NotificationReply_SendButtonText", "Send");
             translation.Add("NotificationReply_SubmitButtonText", "Submit");
             translation.Add("NotificationReply_AcknowledgeButtonText", "Acknowledge");
             translation.Add("NotificationReply_SaveButtonText", "Save");
@@ -307,7 +354,7 @@ namespace MBoxMobile.Helpers
             translation.Add("NotificationReply_CancelButtonText", "Cancel");
             //translation.Add("NotificationReply_CloseButtonText", "Close");
             translation.Add("NotificationReply_DateTimeTitle", "Date time");
-            translation.Add("NotificationReply_MachineNumberTitle", "M#");          ///fixed???
+            translation.Add("NotificationReply_MachineNumberTitle", "M#");
             translation.Add("NotificationReply_OperatorTitle", "Operator");
             translation.Add("NotificationReply_ProductTitle", "Product");
             translation.Add("NotificationReply_LocationTitle", "Location");
@@ -403,8 +450,8 @@ namespace MBoxMobile.Helpers
             translation.Add("Common_FilterErrors", "错误");
             translation.Add("Common_FilterHasWaste", "己浪费");
             translation.Add("Common_WorkingTimeOnly", "只有工作日");
-            translation.Add("Common_FilteredBy", "Filtered byCH: ");  /////////////////
-            translation.Add("Common_FilterClear", "ClearCH");         /////////////////
+            translation.Add("Common_FilteredBy", "被过滤 ");
+            translation.Add("Common_FilterClear", "明确");
             translation.Add("Common_ViewDetail", "查看细节");
             translation.Add("Common_Close", "关闭");
             translation.Add("Common_OK", "可以");
@@ -417,11 +464,11 @@ namespace MBoxMobile.Helpers
             translation.Add("Menu_Language", "语言");
             translation.Add("Menu_Logout", "退出账户");
             translation.Add("Menu_Exit", "退出");
-            translation.Add("Menu_About", "AboutCH");             /////////////////
+            translation.Add("Menu_About", "关于");
             
             //About
-            translation.Add("About_Version", "VersionCH:");       /////////////////
-            translation.Add("About_Token", "Device tokenCH:");    /////////////////
+            translation.Add("About_Version", "版本");
+            translation.Add("About_Token", "设备令牌");
 
             //Login page
             translation.Add("Login_Title", "登陆");
@@ -438,6 +485,12 @@ namespace MBoxMobile.Helpers
             translation.Add("Login_ErrorInvalidLogin", "无效登陆");
             translation.Add("Login_ErrorServer", "服务器必填");
             translation.Add("Login_ErrorInvalidServer", "无效服务器");
+            translation.Add("LoginNotification_InfoText1", "NoTranslation");    ////////////
+            translation.Add("LoginNotification_InfoText2", "NoTranslation");    ////////////
+            translation.Add("LoginNotification_YesText", "NoTranslation");      ////////////
+            translation.Add("LoginNotification_NoText", "NoTranslation");       ////////////
+            translation.Add("LoginNotification_DeviceName", "NoTranslation");   ////////////
+            translation.Add("LoginNotification_Submit", "提交");
 
             //ForgotPassword page
             translation.Add("Forgot_Title", "忘记密码");
@@ -492,54 +545,54 @@ namespace MBoxMobile.Helpers
             translation.Add("UptimeDetails_SystemData", "系统数据");
 
             //Electricity Usage
-            translation.Add("ElectricityUsage_Title", "Electricity usage");
-            translation.Add("ElectricityUsage_Locations", "Locations");
-            translation.Add("ElectricityUsage_Areas", "Areas");
-            translation.Add("ElectricityUsage_Departments", "Departments");
-            translation.Add("ElectricityUsage_SubDepartments", "Sub departments");
-            translation.Add("ElectricityUsage_ConsumingPower", "Equipment off but consuming power");
-            translation.Add("ElectricityUsage_Current", "Current");
-            translation.Add("ElectricityUsage_Total", "Total");
-            translation.Add("ElectricityUsage_NoDetails", "No details");
-            translation.Add("ElectricityUsage_Waste", "Waste");
-            translation.Add("ElectricityUsage_Eff", "Eff.");
-            translation.Add("ElectricityUsage_On", "On");
-            translation.Add("ElectricityUsage_Off", "Off");
-            translation.Add("ElectricityUsage_Errors", "Errors");
-            translation.Add("ElectricityUsage_Group", "Group");
-            translation.Add("ElectricityUsage_Status", "Status");
-            translation.Add("ElectricityUsage_Location", "Location");
-            translation.Add("ElectricityUsage_Department", "Department");
-            translation.Add("ElectricityUsage_SubDepartment", "Sub Department");
-            translation.Add("ElectricityUsage_SystemData", "System Data");
+            translation.Add("ElectricityUsage_Title", "耗电量");
+            translation.Add("ElectricityUsage_Locations", "位置");
+            translation.Add("ElectricityUsage_Areas", "地区");
+            translation.Add("ElectricityUsage_Departments", "部门");
+            translation.Add("ElectricityUsage_SubDepartments", "子部门");
+            translation.Add("ElectricityUsage_ConsumingPower", "设备关闭但耗电大");
+            translation.Add("ElectricityUsage_Current", "电流");
+            translation.Add("ElectricityUsage_Total", "总");
+            translation.Add("ElectricityUsage_NoDetails", "没有细节");
+            translation.Add("ElectricityUsage_Waste", "废物");
+            translation.Add("ElectricityUsage_Eff", "效率");
+            translation.Add("ElectricityUsage_On", "打开");
+            translation.Add("ElectricityUsage_Off", "关闭");
+            translation.Add("ElectricityUsage_Errors", "错误");
+            translation.Add("ElectricityUsage_Group", "组");
+            translation.Add("ElectricityUsage_Status", "现状");
+            translation.Add("ElectricityUsage_Location", "位置");
+            translation.Add("ElectricityUsage_Department", "部");
+            translation.Add("ElectricityUsage_SubDepartment", "子部分");
+            translation.Add("ElectricityUsage_SystemData", "系统数据");
 
             //Production page
-            translation.Add("Production_Title", "Production");
-            translation.Add("Production_Equipment", "Equipment");
-            translation.Add("Production_Eff", "Eff.");
-            translation.Add("Production_On", "On");
-            translation.Add("Production_Off", "Off");
-            translation.Add("ProductionDetails_Current", "Current");
-            translation.Add("ProductionDetails_OffTime", "Off time");
-            translation.Add("ProductionDetails_EqGroup", "Equipment group");
-            translation.Add("ProductionDetails_ProductionType", "Production type");
-            translation.Add("ProductionDetails_Eff", "Eff.");
-            translation.Add("ProductionDetails_Mould", "Mould");
-            translation.Add("ProductionDetails_CycleTime", "Cycle time(s)");
-            translation.Add("ProductionDetails_Status", "Status");
-            translation.Add("ProductionDetails_RunTime", "Time (DD:HH:MM)");
-            translation.Add("ProductionDetails_Stops", "Stops");
-            translation.Add("ProductionDetails_StopTime", "Time (DD:HH:MM)");
-            translation.Add("ProductionDetails_kWH", "kWH");
-            translation.Add("ProductionDetails_Operator", "Operator");
-            translation.Add("ProductionDetails_Location", "Location");
-            translation.Add("ProductionDetails_Department", "Department");
-            translation.Add("ProductionDetails_SubDepartment", "Sub department");
-            translation.Add("ProductionDetails_SystemData", "System data");
-            translation.Add("ProductionDetails_AverageWelds", "Average welds per hour");
-            translation.Add("ProductionDetails_AverageTime", "Average time of weld(s)");
-            translation.Add("ProductionDetails_Product", "Product");
-            translation.Add("ProductionDetails_WireUseUnit", "Wire use unit");
+            translation.Add("Production_Title", "生产");
+            translation.Add("Production_Equipment", "设备");
+            translation.Add("Production_Eff", "效率");
+            translation.Add("Production_On", "打开");
+            translation.Add("Production_Off", "关闭");
+            translation.Add("ProductionDetails_Current", "电流");
+            translation.Add("ProductionDetails_OffTime", "关闭时间");
+            translation.Add("ProductionDetails_EqGroup", "设备组");
+            translation.Add("ProductionDetails_ProductionType", "生产类型");
+            translation.Add("ProductionDetails_Eff", "效率");
+            translation.Add("ProductionDetails_Mould", "模具");
+            translation.Add("ProductionDetails_CycleTime", "周期时间(s)");
+            translation.Add("ProductionDetails_Status", "现状");
+            translation.Add("ProductionDetails_RunTime", "时间");
+            translation.Add("ProductionDetails_Stops", "停止");
+            translation.Add("ProductionDetails_StopTime", "时间");
+            translation.Add("ProductionDetails_kWH", "千瓦时");
+            translation.Add("ProductionDetails_Operator", "操作员");
+            translation.Add("ProductionDetails_Location", "位置");
+            translation.Add("ProductionDetails_Department", "部");
+            translation.Add("ProductionDetails_SubDepartment", "子部门");
+            translation.Add("ProductionDetails_SystemData", "系统数据");
+            translation.Add("ProductionDetails_AverageWelds", "每小时平均焊接数");
+            translation.Add("ProductionDetails_AverageTime", "焊接平均时间(s)");
+            translation.Add("ProductionDetails_Product", "产品");
+            translation.Add("ProductionDetails_WireUseUnit", "线使用单位");
 
             //Notification page
             translation.Add("Notification_Title", "通知");
@@ -574,8 +627,8 @@ namespace MBoxMobile.Helpers
             translation.Add("Notification_ApprovedBy", "经审核");
             translation.Add("Notification_ReportedBy", "经报告");
             translation.Add("Notification_TimeToSolve", "解决时间（DD：mm）");
-            translation.Add("Notification_SelectAll", "Select_all_CH");         ////////////
-            translation.Add("Notification_DeselectAll", "Deselect all_CH");     ////////////
+            translation.Add("Notification_SelectAll", "全选");
+            translation.Add("Notification_DeselectAll", "全部取消选择");
             translation.Add("Notification_AcknowledgeAll", "审核");
             translation.Add("Notification_SaveAll", "保存");
 
@@ -595,6 +648,7 @@ namespace MBoxMobile.Helpers
             translation.Add("NotificationReply_NotificationButtonText", "点击选择通知");
             translation.Add("NotificationReply_DescriptionPlaceholder", "描述");
             translation.Add("NotificationReply_SolutionPlaceholder", "请描述一下你的解决方案。");
+            translation.Add("NotificationReply_SendButtonText", "提交");
             translation.Add("NotificationReply_SubmitButtonText", "提交");
             translation.Add("NotificationReply_AcknowledgeButtonText", "审核");
             translation.Add("NotificationReply_SaveButtonText", "保存");
@@ -645,15 +699,15 @@ namespace MBoxMobile.Helpers
             translation.Add("NotificationReply_ErrorMsgSubmitFailed", "将数据发送到服务器失败！");
 
             //Auxiliary equipment page
-            translation.Add("AuxiliaryEquipment_Title", "Auxiliary equipment");
-            translation.Add("AuxiliaryEquipment_Equipment", "Equipment");
-            translation.Add("AuxiliaryEquipment_On", "On");
-            translation.Add("AuxiliaryEquipment_QTY", "QTY");
-            translation.Add("AuxiliaryEquipmentDetails_Group", "Equipment group");
-            translation.Add("AuxiliaryEquipmentDetails_Location", "Location");
-            translation.Add("AuxiliaryEquipmentDetails_Department", "Department");
-            translation.Add("AuxiliaryEquipmentDetails_SubDepartment", "Sub department");
-            translation.Add("AuxiliaryEquipmentDetails_SystemData", "System data");
+            translation.Add("AuxiliaryEquipment_Title", "辅助设备");
+            translation.Add("AuxiliaryEquipment_Equipment", "设备");
+            translation.Add("AuxiliaryEquipment_On", "打开");
+            translation.Add("AuxiliaryEquipment_QTY", "数量");
+            translation.Add("AuxiliaryEquipmentDetails_Group", "设备组");
+            translation.Add("AuxiliaryEquipmentDetails_Location", "位置");
+            translation.Add("AuxiliaryEquipmentDetails_Department", "部");
+            translation.Add("AuxiliaryEquipmentDetails_SubDepartment", "子部门");
+            translation.Add("AuxiliaryEquipmentDetails_SystemData", "系统数据");
 
             return translation;
         }
@@ -675,6 +729,22 @@ namespace MBoxMobile.Helpers
         private static Dictionary<string, string> GetTranslation_French()
         {
             Dictionary<string, string> translation = new Dictionary<string, string>();
+
+            //Login page
+            translation.Add("Login_Title", "FR_Login");
+            translation.Add("Login_SelectServer", "FR_Select server");
+            translation.Add("Login_Username", "FR_Please input username");
+            translation.Add("Login_Password", "FR_Please input password");
+            translation.Add("Login_RememberMe", "FR_Remember me");
+            translation.Add("Login_Login", "FR_Login");
+            translation.Add("Login_ForgotPassword", "FR_Forgot password?");
+            translation.Add("Login_ErrorUsername", "FR_Username is required!");
+            translation.Add("Login_ErrorPassword", "FR_Password is required!");
+            translation.Add("Login_ErrorPlatform", "FR_Platform is required!");
+            translation.Add("Login_ErrorDeviceToken", "FR_Device token is required!");
+            translation.Add("Login_ErrorInvalidLogin", "FR_Invalid login!");
+            translation.Add("Login_ErrorServer", "FR_Server is required!");
+            translation.Add("Login_ErrorInvalidServer", "FR_Invalid server!");
 
             return translation;
         }

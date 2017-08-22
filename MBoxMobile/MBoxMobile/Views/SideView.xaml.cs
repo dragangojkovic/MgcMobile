@@ -19,6 +19,13 @@ namespace MBoxMobile.Views
 
             Resources["UserFullName"] = App.LoggedUser.login.FirstName;
 
+            // set application language
+            string sCurrentLanguageId = Plugin.Settings.CrossSettings.Current.GetValueOrDefault("LANGUAGE", string.Empty);
+            if (sCurrentLanguageId == string.Empty)
+                App.CurrentLanguage = Languages.English;
+            else
+                App.CurrentLanguage = (Languages)int.Parse(sCurrentLanguageId);
+
             Dictionary<int, string> dictMenuItems = UserTypesSupport.GetMenuItems(App.UserType);
             foreach (KeyValuePair<int, string> pair in dictMenuItems)
             {

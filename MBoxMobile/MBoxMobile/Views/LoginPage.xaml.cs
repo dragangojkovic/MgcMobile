@@ -107,7 +107,8 @@ namespace MBoxMobile.Views
                 {
                     DependencyService.Get<ISecureStorage>().Save(serverId.ToString(), customer.Username, customer.Password);
                 }
-                Application.Current.MainPage = new SideView();
+                //Application.Current.MainPage = new SideView();
+                Application.Current.MainPage = new LoginNotificationPage();
             }
             else
             {

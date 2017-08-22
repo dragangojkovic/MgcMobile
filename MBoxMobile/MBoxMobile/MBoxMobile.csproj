@@ -93,6 +93,9 @@
     <Compile Include="Views\LoginCheckPage.xaml.cs">
       <DependentUpon>LoginCheckPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginNotificationPage.xaml.cs">
+      <DependentUpon>LoginNotificationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NotificationGroupPage.xaml.cs">
       <DependentUpon>NotificationGroupPage.xaml</DependentUpon>
     </Compile>
@@ -433,6 +436,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\AboutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\LoginNotificationPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

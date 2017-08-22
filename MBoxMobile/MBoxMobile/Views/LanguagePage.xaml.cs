@@ -46,6 +46,22 @@ namespace MBoxMobile.Views
                     LanguagePicker.Items.Add(pair.Value);
                 }
             }
+
+            LanguagePicker.SelectedIndexChanged += LanguagePicker_SelectedIndexChanged;
+        }
+
+        private void LanguagePicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (LanguagePicker.SelectedIndex != -1)
+            {
+                string selectedLanguage = LanguagePicker.Items[LanguagePicker.SelectedIndex];
+                int languageId = languages.FirstOrDefault(x => x.Value == selectedLanguage).Key;
+
+                Dictionary<string, string> currentTranslation = MultiLanguageSupport.GetTranslations((Languages)languageId);
+                Resources["Language_InfoText"] = currentTranslation["Language_InfoText"];
+                Resources["Language_Update"] = currentTranslation["Language_Update"];
+                Resources["Language_Cancel"] = currentTranslation["Language_Cancel"];
+            }
         }
 
         public async void UpdateClicked(object sender, EventArgs e)

@@ -252,6 +252,10 @@ namespace MBoxMobile.Views
             double wvHeight = 0;
             const double WV_ROW_Height = 32;
             const double WV_HEADER_Height = 30;
+            double languageCorrection = 0;
+
+            if (App.CurrentLanguage == Languages.Chinese)
+                languageCorrection = 19;
 
             switch (webViewName)
             {
@@ -261,7 +265,7 @@ namespace MBoxMobile.Views
                     string htmlContentDetails = HtmlTableSupport.Uptime_Details_TableContent(detailList);
                     string htmlHtmlDetails = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderDetails, htmlContentDetails);
                     wvDetails.Source = new HtmlWebViewSource { Html = htmlHtmlDetails };
-                    wvHeight = 2 * WV_HEADER_Height + detailList.Count() * WV_ROW_Height + 19;
+                    wvHeight = 2 * WV_HEADER_Height + detailList.Count() * WV_ROW_Height + 21 + languageCorrection;
                     break;
                 case "wvAuxiliaryEquipments":
                     IEnumerable<EfficiencyAuxiliaryEquipment> auxiliaryEquipmentsList = await MBoxApiCalls.GetEfficiencyPerAuxMachine(locationId, departmentId, subDepartmentId, filterId, periodId, auxiliaryTypeId);
@@ -269,7 +273,7 @@ namespace MBoxMobile.Views
                     string htmlContentAuxiliaryEquipments = HtmlTableSupport.Uptime_AuxiliaryEquipments_TableContent(auxiliaryEquipmentsList);
                     string htmlHtmlAuxiliaryEquipments = HtmlTableSupport.InsertHeaderAndBodyToHtmlTable(htmlHeaderAuxiliaryEquipments, htmlContentAuxiliaryEquipments);
                     wvAuxiliaryEquipments.Source = new HtmlWebViewSource { Html = htmlHtmlAuxiliaryEquipments };
-                    wvHeight = WV_HEADER_Height + auxiliaryEquipmentsList.Count() * WV_ROW_Height + 19;
+                    wvHeight = WV_HEADER_Height + auxiliaryEquipmentsList.Count() * WV_ROW_Height + 21;
                     break;
             }
 

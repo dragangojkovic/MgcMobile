@@ -64,7 +64,11 @@
                   <!--</ScrollView>-->
                 </StackLayout>
                 <ctrl:RoundedButton x:Name="CauseButton" Text="{DynamicResource NotificationReply_CauseButtonText}" Style="{StaticResource ButtonBlueStyle}" TextColor="{StaticResource BlueMedium}" BackgroundColor="{StaticResource BlueVeryLight}" Clicked="CauseClicked" VerticalOptions="End" Grid.Row="1" Grid.Column="0" />
-                <ctrl:RoundedEditor x:Name="Solution" Text="{Binding Solution}" Placeholder="{DynamicResource NotificationReply_SolutionPlaceholder}" Grid.Row="2" Grid.Column="0" />
+                <!--<ctrl:RoundedEditor x:Name="Solution" Text="{Binding Solution}" Placeholder="{DynamicResource NotificationReply_SolutionPlaceholder}" Grid.Row="2" Grid.Column="0" />-->
+                <StackLayout Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+                  <ctrl:RoundedEditor x:Name="Solution" Text="{Binding Solution}" Placeholder="{DynamicResource NotificationReply_SolutionPlaceholder}" WidthRequest="{DynamicResource SolutionWidth}" />
+                  <ctrl:RoundedButton x:Name="SendButton" Text="{DynamicResource NotificationReply_SendButtonText}" Style="{StaticResource ButtonBlueStyle}" BackgroundColor="Green" Clicked="SendClicked" VerticalOptions="Start" WidthRequest="60" HeightRequest="45" />
+                </StackLayout>
               </Grid>
             </StackLayout>
           </StackLayout>

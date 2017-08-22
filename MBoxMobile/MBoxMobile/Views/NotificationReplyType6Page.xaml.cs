@@ -11,8 +11,8 @@ namespace MBoxMobile.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationReplyType6Page : ContentPage
     {
-        double screenWidth = 0.0;
-        double screenHeight = 0.0;
+        double ScreenWidth = 0.0;
+        double ScreenHeight = 0.0;
         NotificationModel NotificationModel;
         bool ShowReceivedNotification = false;
 
@@ -24,14 +24,14 @@ namespace MBoxMobile.Views
             NotificationModel = notificationModel;
             ShowReceivedNotification = showReceived;
 
-            screenWidth = DependencyService.Get<IDisplay>().Width;
-            screenHeight = DependencyService.Get<IDisplay>().Height;
+            ScreenWidth = DependencyService.Get<IDisplay>().Width;
+            ScreenHeight = DependencyService.Get<IDisplay>().Height;
 
             Resources["IsLoading"] = false;
-            Resources["PageContentMinHeight"] = screenHeight - 120.0;
-            Resources["NotificationContentMinHeight"] = screenHeight - 200.0;
-            Resources["ButtonWidth"] = (screenWidth - 24) / 2.0;
-            Resources["ButtonLargeWidth"] = screenWidth - 20;
+            Resources["PageContentMinHeight"] = ScreenHeight - 120.0;
+            Resources["NotificationContentMinHeight"] = ScreenHeight - 200.0;
+            Resources["ButtonWidth"] = (ScreenWidth - 24) / 2.0;
+            Resources["ButtonLargeWidth"] = ScreenWidth - 20;
         }
 
         protected override void OnAppearing()
@@ -166,6 +166,20 @@ namespace MBoxMobile.Views
                 App.IsNotificationHandling = false;
 
             await Navigation.PopModalAsync();
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+
+            if (ScreenWidth != width || ScreenHeight != height)
+            {
+                ScreenWidth = width;
+                ScreenHeight = height;
+
+                Resources["ButtonWidth"] = (ScreenWidth - 24) / 2.0;
+                Resources["ButtonLargeWidth"] = ScreenWidth - 20;
+            }
         }
     }
 }
